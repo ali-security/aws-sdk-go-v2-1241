@@ -166,7 +166,7 @@ gen-mod-replace-smithy-%:
 	@# e.g. gen-mod-replace-smithy-service_ssooidc
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst gen-mod-replace-smithy-,,$@)) ${EACHMODULE_FLAGS} \
-			"go mod edit -replace github.com/aws/smithy-go=${SMITHY_GO_SRC} -replace github.com/aws/smithy-go/aws-protocols=${SMITHY_GO_SRC}/aws-protocols"
+			"go mod edit -replace github.com/aws/smithy-go=${SMITHY_GO_SRC} -replace github.com/aws/smithy-go/aws-protocols=${SMITHY_GO_SRC}/aws-protocols -replace github.com/aws/smithy-go/smithy-http-protocols=${SMITHY_GO_SRC}/smithy-http-protocols"
 
 gen-mod-dropreplace-smithy-%:
 	@# See suffix-to-path pattern. Defines build filter for modules to add `-dropreplace` to
@@ -174,7 +174,7 @@ gen-mod-dropreplace-smithy-%:
 	@# e.g. gen-mod-dropreplace-smithy-service_ssooidc
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst gen-mod-dropreplace-smithy-,,$@)) ${EACHMODULE_FLAGS} \
-			"go mod edit -dropreplace github.com/aws/smithy-go -dropreplace github.com/aws/smithy-go/aws-protocols"
+			"go mod edit -dropreplace github.com/aws/smithy-go -dropreplace github.com/aws/smithy-go/aws-protocols -dropreplace github.com/aws/smithy-go/smithy-http-protocols"
 
 gen-aws-ptrs:
 	cd aws && go generate
