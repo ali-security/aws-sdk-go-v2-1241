@@ -34,7 +34,8 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.json#JsonProtocol",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc"
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc",
+          "useExperimentalSerde": true
         }
       }
     },
@@ -144,7 +145,8 @@
       "plugins": {
         "go-codegen": {
           "service": "smithy.protocoltests.rpcv2Cbor#RpcV2Protocol",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor"
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor",
+          "useExperimentalSerde": true
         }
       }
     },
