@@ -182,7 +182,8 @@
       "plugins": {
         "go-codegen": {
           "service": "smithy.protocoltests.rpcv2Cbor#RpcV2CborQueryCompatible",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cborquerycompatible"
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cborquerycompatible",
+          "useExperimentalSerde": true
         }
       }
     },
@@ -219,7 +220,8 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.rpcv2cbor#QueryCompatibleRpcV2Protocol",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/querycompatiblerpcv2protocol"
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/querycompatiblerpcv2protocol",
+          "useExperimentalSerde": true
         }
       }
     },
