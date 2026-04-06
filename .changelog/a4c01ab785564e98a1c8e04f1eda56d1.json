@@ -1,8 +1,0 @@
-{
-    "id": "a4c01ab7-8556-4e98-a1c8-e04f1eda56d1",
-    "type": "feature",
-    "description": "This release adds support for Fast Snapshot Restore AvailabilityZone Ids in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.",
-    "modules": [
-        "service/dlm"
-    ]
-}

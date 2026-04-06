@@ -1,8 +1,0 @@
-{
-    "id": "903fb5d4-88bb-4e20-bf7f-cbe6ce1b144b",
-    "type": "feature",
-    "description": "Added optional originRequestId parameter to SendMessageRequest and ListSpans response in Amazon Q in Connect to support request tracing across service boundaries.",
-    "modules": [
-        "service/qconnect"
-    ]
-}

@@ -1,3 +1,25 @@
+# Release (2026-04-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.46.0](service/accessanalyzer/CHANGELOG.md#v1460-2026-04-06)
+  * **Feature**: Brookie helps customers preview the impact of SCPs before deployment using historical access activity. It evaluates attached policies and proposed policy updates using collected access activity through CloudTrail authorization events and reports where currently allowed access will be denied.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.29.0](service/deadline/CHANGELOG.md#v1290-2026-04-06)
+  * **Feature**: Added 8 batch APIs (BatchGetJob, BatchGetStep, BatchGetTask, BatchGetSession, BatchGetSessionAction, BatchGetWorker, BatchUpdateJob, BatchUpdateTask) for bulk operations. Monitors can now use an Identity Center instance in a different region via the identityCenterRegion parameter.
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.36.0](service/dlm/CHANGELOG.md#v1360-2026-04-06)
+  * **Feature**: This release adds support for Fast Snapshot Restore AvailabilityZone Ids in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.10.1](service/geomaps/CHANGELOG.md#v1101-2026-04-06)
+  * **Documentation**: This release updates API reference documentation for Amazon Location Service Maps APIs to reflect regional restrictions for Grab Maps users
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.75.0](service/guardduty/CHANGELOG.md#v1750-2026-04-06)
+  * **Feature**: Migrated to Smithy. No functional changes
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.53.0](service/lightsail/CHANGELOG.md#v1530-2026-04-06)
+  * **Feature**: This release adds support for the Asia Pacific (Malaysia) (ap-southeast-5) Region.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.57.0](service/mediatailor/CHANGELOG.md#v1570-2026-04-06)
+  * **Feature**: This change adds support for Tagging the resource types Programs and Prefetch Schedules
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.29.0](service/qconnect/CHANGELOG.md#v1290-2026-04-06)
+  * **Feature**: Added optional originRequestId parameter to SendMessageRequest and ListSpans response in Amazon Q in Connect to support request tracing across service boundaries.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.70.0](service/transfer/CHANGELOG.md#v1700-2026-04-06)
+  * **Feature**: AWS Transfer Family Connectors now support IPv6 connectivity, enabling outbound connections to remote SFTP or AS2 servers using IPv4-only or dual-stack (IPv4 and IPv6) configurations based on network requirements.
+
 # Release (2026-04-03)
 
 ## Module Highlights

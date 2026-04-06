@@ -1,3 +1,7 @@
+# v1.36.0 (2026-04-06)
+
+* **Feature**: This release adds support for Fast Snapshot Restore AvailabilityZone Ids in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.
+
 # v1.35.16 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

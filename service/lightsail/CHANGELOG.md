@@ -1,3 +1,7 @@
+# v1.53.0 (2026-04-06)
+
+* **Feature**: This release adds support for the Asia Pacific (Malaysia) (ap-southeast-5) Region.
+
 # v1.52.0 (2026-04-03)
 
 * **Feature**: Add support for tagging of Alarm resource type

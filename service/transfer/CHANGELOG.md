@@ -1,3 +1,7 @@
+# v1.70.0 (2026-04-06)
+
+* **Feature**: AWS Transfer Family Connectors now support IPv6 connectivity, enabling outbound connections to remote SFTP or AS2 servers using IPv4-only or dual-stack (IPv4 and IPv6) configurations based on network requirements.
+
 # v1.69.5 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

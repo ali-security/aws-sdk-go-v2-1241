@@ -1,3 +1,7 @@
+# v1.10.1 (2026-04-06)
+
+* **Documentation**: This release updates API reference documentation for Amazon Location Service Maps APIs to reflect regional restrictions for Grab Maps users
+
 # v1.10.0 (2026-03-31)
 
 * **Feature**: This release expands map customization options with adjustable contour line density, dark mode support for Hybrid and Satellite views, enhanced traffic information across multiple map styles, and transit and truck travel modes for Monochrome and Hybrid map styles.

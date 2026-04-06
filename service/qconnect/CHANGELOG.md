@@ -1,3 +1,7 @@
+# v1.29.0 (2026-04-06)
+
+* **Feature**: Added optional originRequestId parameter to SendMessageRequest and ListSpans response in Amazon Q in Connect to support request tracing across service boundaries.
+
 # v1.28.4 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

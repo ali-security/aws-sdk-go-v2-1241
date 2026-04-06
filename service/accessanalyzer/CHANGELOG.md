@@ -1,3 +1,7 @@
+# v1.46.0 (2026-04-06)
+
+* **Feature**: Brookie helps customers preview the impact of SCPs before deployment using historical access activity. It evaluates attached policies and proposed policy updates using collected access activity through CloudTrail authorization events and reports where currently allowed access will be denied.
+
 # v1.45.12 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
