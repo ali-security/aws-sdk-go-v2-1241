@@ -137,6 +137,25 @@ func (ConnectorEgressType) Values() []ConnectorEgressType {
 	}
 }
 
+type ConnectorsIpAddressType string
+
+// Enum values for ConnectorsIpAddressType
+const (
+	ConnectorsIpAddressTypeIpv4      ConnectorsIpAddressType = "IPV4"
+	ConnectorsIpAddressTypeDualstack ConnectorsIpAddressType = "DUALSTACK"
+)
+
+// Values returns all known values for ConnectorsIpAddressType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorsIpAddressType) Values() []ConnectorsIpAddressType {
+	return []ConnectorsIpAddressType{
+		"IPV4",
+		"DUALSTACK",
+	}
+}
+
 type ConnectorStatus string
 
 // Enum values for ConnectorStatus

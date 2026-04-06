@@ -210,6 +210,166 @@ func (m *validateOpBatchGetJobEntity) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetJob struct {
+}
+
+func (*validateOpBatchGetJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetSessionAction struct {
+}
+
+func (*validateOpBatchGetSessionAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetSessionAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetSessionActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetSessionActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetSession struct {
+}
+
+func (*validateOpBatchGetSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetStep struct {
+}
+
+func (*validateOpBatchGetStep) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetStep) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetStepInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetStepInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetTask struct {
+}
+
+func (*validateOpBatchGetTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetWorker struct {
+}
+
+func (*validateOpBatchGetWorker) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetWorker) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetWorkerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetWorkerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchUpdateJob struct {
+}
+
+func (*validateOpBatchUpdateJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchUpdateTask struct {
+}
+
+func (*validateOpBatchUpdateTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCopyJobTemplate struct {
 }
 
@@ -2230,6 +2390,38 @@ func addOpBatchGetJobEntityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetJobEntity{}, middleware.After)
 }
 
+func addOpBatchGetJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetJob{}, middleware.After)
+}
+
+func addOpBatchGetSessionActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetSessionAction{}, middleware.After)
+}
+
+func addOpBatchGetSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetSession{}, middleware.After)
+}
+
+func addOpBatchGetStepValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetStep{}, middleware.After)
+}
+
+func addOpBatchGetTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetTask{}, middleware.After)
+}
+
+func addOpBatchGetWorkerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetWorker{}, middleware.After)
+}
+
+func addOpBatchUpdateJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateJob{}, middleware.After)
+}
+
+func addOpBatchUpdateTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateTask{}, middleware.After)
+}
+
 func addOpCopyJobTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCopyJobTemplate{}, middleware.After)
 }
@@ -2722,6 +2914,334 @@ func validateAttachments(v *types.Attachments) error {
 	} else if v.Manifests != nil {
 		if err := validateManifestPropertiesList(v.Manifests); err != nil {
 			invalidParams.AddNested("Manifests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetJobIdentifier(v *types.BatchGetJobIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetJobIdentifier"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetJobIdentifiers(v []types.BatchGetJobIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetJobIdentifiers"}
+	for i := range v {
+		if err := validateBatchGetJobIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetSessionActionIdentifier(v *types.BatchGetSessionActionIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetSessionActionIdentifier"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.SessionActionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionActionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetSessionActionIdentifiers(v []types.BatchGetSessionActionIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetSessionActionIdentifiers"}
+	for i := range v {
+		if err := validateBatchGetSessionActionIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetSessionIdentifier(v *types.BatchGetSessionIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetSessionIdentifier"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetSessionIdentifiers(v []types.BatchGetSessionIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetSessionIdentifiers"}
+	for i := range v {
+		if err := validateBatchGetSessionIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetStepIdentifier(v *types.BatchGetStepIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetStepIdentifier"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.StepId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StepId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetStepIdentifiers(v []types.BatchGetStepIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetStepIdentifiers"}
+	for i := range v {
+		if err := validateBatchGetStepIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetTaskIdentifier(v *types.BatchGetTaskIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetTaskIdentifier"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.StepId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StepId"))
+	}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetTaskIdentifiers(v []types.BatchGetTaskIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetTaskIdentifiers"}
+	for i := range v {
+		if err := validateBatchGetTaskIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetWorkerIdentifier(v *types.BatchGetWorkerIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetWorkerIdentifier"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.WorkerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchGetWorkerIdentifiers(v []types.BatchGetWorkerIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetWorkerIdentifiers"}
+	for i := range v {
+		if err := validateBatchGetWorkerIdentifier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchUpdateJobItem(v *types.BatchUpdateJobItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateJobItem"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchUpdateJobItems(v []types.BatchUpdateJobItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateJobItems"}
+	for i := range v {
+		if err := validateBatchUpdateJobItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchUpdateTaskItem(v *types.BatchUpdateTaskItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateTaskItem"}
+	if v.FarmId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FarmId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.StepId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StepId"))
+	}
+	if v.TaskId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
+	}
+	if len(v.TargetRunStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetRunStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchUpdateTaskItems(v []types.BatchUpdateTaskItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateTaskItems"}
+	for i := range v {
+		if err := validateBatchUpdateTaskItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4039,6 +4559,158 @@ func validateOpBatchGetJobEntityInput(v *BatchGetJobEntityInput) error {
 	} else if v.Identifiers != nil {
 		if err := validateJobEntityIdentifiers(v.Identifiers); err != nil {
 			invalidParams.AddNested("Identifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetJobInput(v *BatchGetJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetJobInput"}
+	if v.Identifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifiers"))
+	} else if v.Identifiers != nil {
+		if err := validateBatchGetJobIdentifiers(v.Identifiers); err != nil {
+			invalidParams.AddNested("Identifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetSessionActionInput(v *BatchGetSessionActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetSessionActionInput"}
+	if v.Identifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifiers"))
+	} else if v.Identifiers != nil {
+		if err := validateBatchGetSessionActionIdentifiers(v.Identifiers); err != nil {
+			invalidParams.AddNested("Identifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetSessionInput(v *BatchGetSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetSessionInput"}
+	if v.Identifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifiers"))
+	} else if v.Identifiers != nil {
+		if err := validateBatchGetSessionIdentifiers(v.Identifiers); err != nil {
+			invalidParams.AddNested("Identifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetStepInput(v *BatchGetStepInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetStepInput"}
+	if v.Identifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifiers"))
+	} else if v.Identifiers != nil {
+		if err := validateBatchGetStepIdentifiers(v.Identifiers); err != nil {
+			invalidParams.AddNested("Identifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetTaskInput(v *BatchGetTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetTaskInput"}
+	if v.Identifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifiers"))
+	} else if v.Identifiers != nil {
+		if err := validateBatchGetTaskIdentifiers(v.Identifiers); err != nil {
+			invalidParams.AddNested("Identifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetWorkerInput(v *BatchGetWorkerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetWorkerInput"}
+	if v.Identifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifiers"))
+	} else if v.Identifiers != nil {
+		if err := validateBatchGetWorkerIdentifiers(v.Identifiers); err != nil {
+			invalidParams.AddNested("Identifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchUpdateJobInput(v *BatchUpdateJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateJobInput"}
+	if v.Jobs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Jobs"))
+	} else if v.Jobs != nil {
+		if err := validateBatchUpdateJobItems(v.Jobs); err != nil {
+			invalidParams.AddNested("Jobs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchUpdateTaskInput(v *BatchUpdateTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateTaskInput"}
+	if v.Tasks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tasks"))
+	} else if v.Tasks != nil {
+		if err := validateBatchUpdateTaskItems(v.Tasks); err != nil {
+			invalidParams.AddNested("Tasks", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -5555,6 +5555,11 @@ func awsAwsjson11_serializeOpDocumentCreateConnectorInput(v *CreateConnectorInpu
 		}
 	}
 
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
+	}
+
 	if v.LoggingRole != nil {
 		ok := object.Key("LoggingRole")
 		ok.String(*v.LoggingRole)
@@ -7020,6 +7025,11 @@ func awsAwsjson11_serializeOpDocumentUpdateConnectorInput(v *UpdateConnectorInpu
 		if err := awsAwsjson11_serializeDocumentUpdateConnectorEgressConfig(v.EgressConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.IpAddressType) > 0 {
+		ok := object.Key("IpAddressType")
+		ok.String(string(v.IpAddressType))
 	}
 
 	if v.LoggingRole != nil {

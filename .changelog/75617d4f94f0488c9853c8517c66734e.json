@@ -1,0 +1,8 @@
+{
+    "id": "75617d4f-94f0-488c-9853-c8517c66734e",
+    "type": "feature",
+    "description": "Migrated to Smithy. No functional changes",
+    "modules": [
+        "service/guardduty"
+    ]
+}

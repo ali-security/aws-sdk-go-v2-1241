@@ -1,0 +1,8 @@
+{
+    "id": "fac0e8be-f0ee-4daa-92d9-d53171a7f967",
+    "type": "feature",
+    "description": "Brookie helps customers preview the impact of SCPs before deployment using historical access activity. It evaluates attached policies and proposed policy updates using collected access activity through CloudTrail authorization events and reports where currently allowed access will be denied.",
+    "modules": [
+        "service/accessanalyzer"
+    ]
+}

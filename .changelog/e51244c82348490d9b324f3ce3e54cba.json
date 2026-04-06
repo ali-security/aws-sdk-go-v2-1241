@@ -1,0 +1,8 @@
+{
+    "id": "e51244c8-2348-490d-9b32-4f3ce3e54cba",
+    "type": "documentation",
+    "description": "This release updates API reference documentation for Amazon Location Service Maps APIs to reflect regional restrictions for Grab Maps users",
+    "modules": [
+        "service/geomaps"
+    ]
+}

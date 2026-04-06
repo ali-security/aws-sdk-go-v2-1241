@@ -2583,6 +2583,8 @@ type MemberDataSourceConfiguration struct {
 
 	// Contains information on the status of data sources for the account.
 	//
+	// This member is required.
+	//
 	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *DataSourceConfigurationsResult
 

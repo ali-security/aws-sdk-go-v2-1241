@@ -336,6 +336,975 @@ type AwsCredentials struct {
 	noSmithyDocumentSerde
 }
 
+// The error details for a job that could not be retrieved in a batch get
+// operation.
+type BatchGetJobError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetJobErrorCode
+
+	// The farm ID of the job that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the job that could not be retrieved.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the job that could not be retrieved.
+	//
+	// This member is required.
+	QueueId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a job.
+type BatchGetJobIdentifier struct {
+
+	// The farm ID of the job.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the job.
+	//
+	// This member is required.
+	QueueId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a job returned in a batch get operation.
+type BatchGetJobItem struct {
+
+	// The date and time the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The user or system that created this resource.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The farm ID of the job.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID.
+	//
+	// This member is required.
+	JobId *string
+
+	// The life cycle status of the job.
+	//
+	// This member is required.
+	LifecycleStatus JobLifecycleStatus
+
+	// A message that communicates the status of the life cycle.
+	//
+	// This member is required.
+	LifecycleStatusMessage *string
+
+	// The name of the job.
+	//
+	// This member is required.
+	Name *string
+
+	// The job priority.
+	//
+	// This member is required.
+	Priority *int32
+
+	// The queue ID of the job.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The attachments for the job.
+	Attachments *Attachments
+
+	// The description of the job.
+	Description *string
+
+	// The date and time the resource ended running.
+	EndedAt *time.Time
+
+	// The number of task failures before the job stops running and is marked as FAILED
+	// .
+	MaxFailedTasksCount *int32
+
+	// The maximum number of retries per failed tasks.
+	MaxRetriesPerTask *int32
+
+	// The maximum number of worker hosts that can concurrently process a job.
+	MaxWorkerCount *int32
+
+	// The parameters for the job.
+	Parameters map[string]JobParameter
+
+	// The job ID for the source job.
+	SourceJobId *string
+
+	// The date and time the resource started running.
+	StartedAt *time.Time
+
+	// The storage profile ID associated with the job.
+	StorageProfileId *string
+
+	// The task status to start with on the job.
+	TargetTaskRunStatus JobTargetTaskRunStatus
+
+	// The number of times that tasks failed and were retried.
+	TaskFailureRetryCount *int32
+
+	// The task run status for the job.
+	TaskRunStatus TaskRunStatus
+
+	// The number of tasks for each run status for the job.
+	TaskRunStatusCounts map[string]int32
+
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a session action that could not be retrieved in a batch
+// get operation.
+type BatchGetSessionActionError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetSessionActionErrorCode
+
+	// The farm ID of the session action that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the session action that could not be retrieved.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the session action that could not be retrieved.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session action ID of the session action that could not be retrieved.
+	//
+	// This member is required.
+	SessionActionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a session action.
+type BatchGetSessionActionIdentifier struct {
+
+	// The farm ID of the session action.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the session action.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the session action.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session action ID.
+	//
+	// This member is required.
+	SessionActionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a session action returned in a batch get operation.
+type BatchGetSessionActionItem struct {
+
+	// The session action definition.
+	//
+	// This member is required.
+	Definition SessionActionDefinition
+
+	// The farm ID of the session action.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the session action.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the session action.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session action ID.
+	//
+	// This member is required.
+	SessionActionId *string
+
+	// The session ID for the session action.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The status of the session action.
+	//
+	// This member is required.
+	Status SessionActionStatus
+
+	// The limits that were acquired for the session action.
+	AcquiredLimits []AcquiredLimit
+
+	// The date and time the resource ended running.
+	EndedAt *time.Time
+
+	// The manifests for the session action.
+	Manifests []TaskRunManifestPropertiesResponse
+
+	// The exit code to apply to the session action.
+	ProcessExitCode *int32
+
+	// The message that communicates the progress of the session action.
+	ProgressMessage *string
+
+	// The completion percentage for the session action.
+	ProgressPercent *float32
+
+	// The date and time the resource started running.
+	StartedAt *time.Time
+
+	// The date and time the resource was updated by a worker.
+	WorkerUpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a session that could not be retrieved in a batch get
+// operation.
+type BatchGetSessionError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetSessionErrorCode
+
+	// The farm ID of the session that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the session that could not be retrieved.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the session that could not be retrieved.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session ID of the session that could not be retrieved.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a session.
+type BatchGetSessionIdentifier struct {
+
+	// The farm ID of the session.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the session.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the session.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session ID.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a session returned in a batch get operation.
+type BatchGetSessionItem struct {
+
+	// The farm ID of the session.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The fleet ID of the session.
+	//
+	// This member is required.
+	FleetId *string
+
+	// The job ID of the session.
+	//
+	// This member is required.
+	JobId *string
+
+	// The life cycle status of the session.
+	//
+	// This member is required.
+	LifecycleStatus SessionLifecycleStatus
+
+	// The session log.
+	//
+	// This member is required.
+	Log *LogConfiguration
+
+	// The queue ID of the session.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session ID.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The date and time the resource started running.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The worker ID of the session.
+	//
+	// This member is required.
+	WorkerId *string
+
+	// The date and time the resource ended running.
+	EndedAt *time.Time
+
+	// The host properties for the session.
+	HostProperties *HostPropertiesResponse
+
+	// The target life cycle status for the session.
+	TargetLifecycleStatus SessionLifecycleTargetStatus
+
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
+	// The worker log for the session.
+	WorkerLog *LogConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a step that could not be retrieved in a batch get
+// operation.
+type BatchGetStepError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetStepErrorCode
+
+	// The farm ID of the step that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the step that could not be retrieved.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the step that could not be retrieved.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID of the step that could not be retrieved.
+	//
+	// This member is required.
+	StepId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a step.
+type BatchGetStepIdentifier struct {
+
+	// The farm ID of the step.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the step.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the step.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID.
+	//
+	// This member is required.
+	StepId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a step returned in a batch get operation.
+type BatchGetStepItem struct {
+
+	// The date and time the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The user or system that created this resource.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The farm ID of the step.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the step.
+	//
+	// This member is required.
+	JobId *string
+
+	// The life cycle status of the step.
+	//
+	// This member is required.
+	LifecycleStatus StepLifecycleStatus
+
+	// The name of the step.
+	//
+	// This member is required.
+	Name *string
+
+	// The queue ID of the step.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID.
+	//
+	// This member is required.
+	StepId *string
+
+	// The task run status for the step.
+	//
+	// This member is required.
+	TaskRunStatus TaskRunStatus
+
+	// The number of tasks for each run status for the step.
+	//
+	// This member is required.
+	TaskRunStatusCounts map[string]int32
+
+	// The number of dependencies for the step.
+	DependencyCounts *DependencyCounts
+
+	// The description of the step.
+	Description *string
+
+	// The date and time the resource ended running.
+	EndedAt *time.Time
+
+	// A message that communicates the status of the life cycle.
+	LifecycleStatusMessage *string
+
+	// The parameter space for the step.
+	ParameterSpace *ParameterSpace
+
+	// The required capabilities for the step.
+	RequiredCapabilities *StepRequiredCapabilities
+
+	// The date and time the resource started running.
+	StartedAt *time.Time
+
+	// The task status to start with on the step.
+	TargetTaskRunStatus StepTargetTaskRunStatus
+
+	// The number of times that tasks failed and were retried.
+	TaskFailureRetryCount *int32
+
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a task that could not be retrieved in a batch get
+// operation.
+type BatchGetTaskError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetTaskErrorCode
+
+	// The farm ID of the task that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the task that could not be retrieved.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the task that could not be retrieved.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID of the task that could not be retrieved.
+	//
+	// This member is required.
+	StepId *string
+
+	// The task ID of the task that could not be retrieved.
+	//
+	// This member is required.
+	TaskId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a task.
+type BatchGetTaskIdentifier struct {
+
+	// The farm ID of the task.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the task.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the task.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID of the task.
+	//
+	// This member is required.
+	StepId *string
+
+	// The task ID.
+	//
+	// This member is required.
+	TaskId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a task returned in a batch get operation.
+type BatchGetTaskItem struct {
+
+	// The date and time the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The user or system that created this resource.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The farm ID of the task.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the task.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the task.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The run status of the task.
+	//
+	// This member is required.
+	RunStatus TaskRunStatus
+
+	// The step ID of the task.
+	//
+	// This member is required.
+	StepId *string
+
+	// The task ID.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The date and time the resource ended running.
+	EndedAt *time.Time
+
+	// The number of times the task failed and was retried.
+	FailureRetryCount *int32
+
+	// The latest session action for the task.
+	LatestSessionActionId *string
+
+	// The parameters for the task.
+	Parameters map[string]TaskParameterValue
+
+	// The date and time the resource started running.
+	StartedAt *time.Time
+
+	// The run status with which to start the task.
+	TargetRunStatus TaskTargetRunStatus
+
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a worker that could not be retrieved in a batch get
+// operation.
+type BatchGetWorkerError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetWorkerErrorCode
+
+	// The farm ID of the worker that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The fleet ID of the worker that could not be retrieved.
+	//
+	// This member is required.
+	FleetId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The worker ID of the worker that could not be retrieved.
+	//
+	// This member is required.
+	WorkerId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a worker.
+type BatchGetWorkerIdentifier struct {
+
+	// The farm ID of the worker.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The fleet ID of the worker.
+	//
+	// This member is required.
+	FleetId *string
+
+	// The worker ID.
+	//
+	// This member is required.
+	WorkerId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a worker returned in a batch get operation.
+type BatchGetWorkerItem struct {
+
+	// The date and time the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The user or system that created this resource.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The farm ID of the worker.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The fleet ID of the worker.
+	//
+	// This member is required.
+	FleetId *string
+
+	// The status of the worker.
+	//
+	// This member is required.
+	Status WorkerStatus
+
+	// The worker ID.
+	//
+	// This member is required.
+	WorkerId *string
+
+	// The host properties for the worker.
+	HostProperties *HostPropertiesResponse
+
+	// The log configuration for the worker.
+	Log *LogConfiguration
+
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a job that could not be updated in a batch update
+// operation.
+type BatchUpdateJobError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchUpdateJobErrorCode
+
+	// The farm ID of the job that could not be updated.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the job that could not be updated.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the job that could not be updated.
+	//
+	// This member is required.
+	QueueId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a job to update in a batch update operation.
+type BatchUpdateJobItem struct {
+
+	// The farm ID of the job to update.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the job to update.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the job to update.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The description of the job to update.
+	Description *string
+
+	// The status of a job in its lifecycle. When you change the status of the job to
+	// ARCHIVED , the job can't be scheduled or archived.
+	//
+	// An archived job and its steps and tasks are deleted after 120 days. The job
+	// can't be recovered.
+	LifecycleStatus UpdateJobLifecycleStatus
+
+	// The number of task failures before the job stops running and is marked as FAILED
+	// .
+	MaxFailedTasksCount *int32
+
+	// The maximum number of retries per failed tasks.
+	MaxRetriesPerTask *int32
+
+	// The maximum number of worker hosts that can concurrently process a job.
+	MaxWorkerCount *int32
+
+	// The name of the job to update.
+	Name *string
+
+	// The job priority to update.
+	Priority *int32
+
+	// The task status to update the job's tasks to.
+	TargetTaskRunStatus JobTargetTaskRunStatus
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a task that could not be updated in a batch update
+// operation.
+type BatchUpdateTaskError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchUpdateTaskErrorCode
+
+	// The farm ID of the task that could not be updated.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the task that could not be updated.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the task that could not be updated.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID of the task that could not be updated.
+	//
+	// This member is required.
+	StepId *string
+
+	// The task ID of the task that could not be updated.
+	//
+	// This member is required.
+	TaskId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a task to update in a batch update operation.
+type BatchUpdateTaskItem struct {
+
+	// The farm ID of the task to update.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the task to update.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the task to update.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID of the task to update.
+	//
+	// This member is required.
+	StepId *string
+
+	// The run status with which to start the task.
+	//
+	// This member is required.
+	TargetRunStatus TaskTargetRunStatus
+
+	// The task ID of the task to update.
+	//
+	// This member is required.
+	TaskId *string
+
+	noSmithyDocumentSerde
+}
+
 // The budget action to add.
 type BudgetActionToAdd struct {
 
@@ -1932,6 +2901,9 @@ type MonitorSummary struct {
 	//
 	// This member is required.
 	Url *string
+
+	// The AWS region where IAM Identity Center is enabled.
+	IdentityCenterRegion *string
 
 	// The UNIX timestamp of the date and time that the monitor was last updated.
 	UpdatedAt *time.Time

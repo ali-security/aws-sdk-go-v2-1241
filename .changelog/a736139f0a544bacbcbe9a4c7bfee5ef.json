@@ -1,0 +1,8 @@
+{
+    "id": "a736139f-0a54-4bac-bcbe-9a4c7bfee5ef",
+    "type": "feature",
+    "description": "Added 8 batch APIs (BatchGetJob, BatchGetStep, BatchGetTask, BatchGetSession, BatchGetSessionAction, BatchGetWorker, BatchUpdateJob, BatchUpdateTask) for bulk operations. Monitors can now use an Identity Center instance in a different region via the identityCenterRegion parameter.",
+    "modules": [
+        "service/deadline"
+    ]
+}

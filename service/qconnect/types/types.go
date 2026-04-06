@@ -5520,6 +5520,9 @@ type Span struct {
 	// This member is required.
 	Status SpanStatus
 
+	// The origin request identifier for end-to-end tracing.
+	OriginRequestId *string
+
 	// Parent span identifier for hierarchy. Null for root spans.
 	ParentSpanId *string
 

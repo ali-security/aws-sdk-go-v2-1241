@@ -1,0 +1,8 @@
+{
+    "id": "42772ddb-b3bf-4f4b-9a63-9f949bcb64e7",
+    "type": "feature",
+    "description": "This release adds support for the Asia Pacific (Malaysia) (ap-southeast-5) Region.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

@@ -345,6 +345,48 @@ func (FindingType) Values() []FindingType {
 	}
 }
 
+type ImpactAnalysisJobStatus string
+
+// Enum values for ImpactAnalysisJobStatus
+const (
+	ImpactAnalysisJobStatusSubmitted  ImpactAnalysisJobStatus = "SUBMITTED"
+	ImpactAnalysisJobStatusInProgress ImpactAnalysisJobStatus = "IN_PROGRESS"
+	ImpactAnalysisJobStatusCompleted  ImpactAnalysisJobStatus = "COMPLETED"
+	ImpactAnalysisJobStatusFailed     ImpactAnalysisJobStatus = "FAILED"
+	ImpactAnalysisJobStatusCanceled   ImpactAnalysisJobStatus = "CANCELED"
+)
+
+// Values returns all known values for ImpactAnalysisJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImpactAnalysisJobStatus) Values() []ImpactAnalysisJobStatus {
+	return []ImpactAnalysisJobStatus{
+		"SUBMITTED",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"CANCELED",
+	}
+}
+
+type ImpactAnalysisJobType string
+
+// Enum values for ImpactAnalysisJobType
+const (
+	ImpactAnalysisJobTypeScp ImpactAnalysisJobType = "SCP"
+)
+
+// Values returns all known values for ImpactAnalysisJobType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImpactAnalysisJobType) Values() []ImpactAnalysisJobType {
+	return []ImpactAnalysisJobType{
+		"SCP",
+	}
+}
+
 type InternalAccessType string
 
 // Enum values for InternalAccessType
@@ -368,10 +410,19 @@ type JobErrorCode string
 
 // Enum values for JobErrorCode
 const (
-	JobErrorCodeAuthorizationError        JobErrorCode = "AUTHORIZATION_ERROR"
-	JobErrorCodeResourceNotFoundError     JobErrorCode = "RESOURCE_NOT_FOUND_ERROR"
-	JobErrorCodeServiceQuotaExceededError JobErrorCode = "SERVICE_QUOTA_EXCEEDED_ERROR"
-	JobErrorCodeServiceError              JobErrorCode = "SERVICE_ERROR"
+	JobErrorCodeAuthorizationError                JobErrorCode = "AUTHORIZATION_ERROR"
+	JobErrorCodeResourceNotFoundError             JobErrorCode = "RESOURCE_NOT_FOUND_ERROR"
+	JobErrorCodeServiceQuotaExceededError         JobErrorCode = "SERVICE_QUOTA_EXCEEDED_ERROR"
+	JobErrorCodeServiceError                      JobErrorCode = "SERVICE_ERROR"
+	JobErrorCodeCanceledJobError                  JobErrorCode = "CANCELED_JOB_ERROR"
+	JobErrorCodeInvalidServiceLinkedRole          JobErrorCode = "INVALID_SERVICE_LINKED_ROLE"
+	JobErrorCodeInsufficientPermissionsError      JobErrorCode = "INSUFFICIENT_PERMISSIONS_ERROR"
+	JobErrorCodeOrganizationAccessDeniedError     JobErrorCode = "ORGANIZATION_ACCESS_DENIED_ERROR"
+	JobErrorCodeInvalidTargetError                JobErrorCode = "INVALID_TARGET_ERROR"
+	JobErrorCodeInvalidPolicyPreviewConfiguration JobErrorCode = "INVALID_POLICY_PREVIEW_CONFIGURATION"
+	JobErrorCodeInvalidOrganizationConfiguration  JobErrorCode = "INVALID_ORGANIZATION_CONFIGURATION"
+	JobErrorCodeS3BucketNotFoundError             JobErrorCode = "S3_BUCKET_NOT_FOUND_ERROR"
+	JobErrorCodeS3BucketPermissionError           JobErrorCode = "S3_BUCKET_PERMISSION_ERROR"
 )
 
 // Values returns all known values for JobErrorCode. Note that this can be
@@ -384,6 +435,15 @@ func (JobErrorCode) Values() []JobErrorCode {
 		"RESOURCE_NOT_FOUND_ERROR",
 		"SERVICE_QUOTA_EXCEEDED_ERROR",
 		"SERVICE_ERROR",
+		"CANCELED_JOB_ERROR",
+		"INVALID_SERVICE_LINKED_ROLE",
+		"INSUFFICIENT_PERMISSIONS_ERROR",
+		"ORGANIZATION_ACCESS_DENIED_ERROR",
+		"INVALID_TARGET_ERROR",
+		"INVALID_POLICY_PREVIEW_CONFIGURATION",
+		"INVALID_ORGANIZATION_CONFIGURATION",
+		"S3_BUCKET_NOT_FOUND_ERROR",
+		"S3_BUCKET_PERMISSION_ERROR",
 	}
 }
 
@@ -504,6 +564,63 @@ func (OrderBy) Values() []OrderBy {
 	return []OrderBy{
 		"ASC",
 		"DESC",
+	}
+}
+
+type PolicyPreviewJobFilterName string
+
+// Enum values for PolicyPreviewJobFilterName
+const (
+	PolicyPreviewJobFilterNameJobStatus PolicyPreviewJobFilterName = "jobStatus"
+	PolicyPreviewJobFilterNameTargetId  PolicyPreviewJobFilterName = "targetId"
+)
+
+// Values returns all known values for PolicyPreviewJobFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyPreviewJobFilterName) Values() []PolicyPreviewJobFilterName {
+	return []PolicyPreviewJobFilterName{
+		"jobStatus",
+		"targetId",
+	}
+}
+
+type PolicyPreviewScope string
+
+// Enum values for PolicyPreviewScope
+const (
+	PolicyPreviewScopeGlobal PolicyPreviewScope = "GLOBAL"
+)
+
+// Values returns all known values for PolicyPreviewScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyPreviewScope) Values() []PolicyPreviewScope {
+	return []PolicyPreviewScope{
+		"GLOBAL",
+	}
+}
+
+type PolicyPreviewStatus string
+
+// Enum values for PolicyPreviewStatus
+const (
+	PolicyPreviewStatusActive          PolicyPreviewStatus = "ACTIVE"
+	PolicyPreviewStatusPendingCreation PolicyPreviewStatus = "PENDING_CREATION"
+	PolicyPreviewStatusFailed          PolicyPreviewStatus = "FAILED"
+)
+
+// Values returns all known values for PolicyPreviewStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyPreviewStatus) Values() []PolicyPreviewStatus {
+	return []PolicyPreviewStatus{
+		"ACTIVE",
+		"PENDING_CREATION",
+		"FAILED",
 	}
 }
 

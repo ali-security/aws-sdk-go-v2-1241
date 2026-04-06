@@ -76,6 +76,13 @@ type CreatePrefetchScheduleInput struct {
 	// schedules for the playback configuration, regardless of StreamId .
 	StreamId *string
 
+	// The tags to assign to the prefetch schedule. Tags are key-value pairs that you
+	// can associate with Amazon resources to help with organization, access control,
+	// and cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -116,6 +123,13 @@ type CreatePrefetchScheduleOutput struct {
 	// on StreamId . If not specified, MediaTailor returns all of the prefetch
 	// schedules for the playback configuration, regardless of StreamId .
 	StreamId *string
+
+	// The tags to assign to the prefetch schedule. Tags are key-value pairs that you
+	// can associate with Amazon resources to help with organization, access control,
+	// and cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

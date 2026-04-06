@@ -583,6 +583,13 @@ func awsRestjson1_serializeOpDocumentCreatePrefetchScheduleInput(v *CreatePrefet
 		ok.String(*v.StreamId)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -710,6 +717,13 @@ func awsRestjson1_serializeOpDocumentCreateProgramInput(v *CreateProgramInput, v
 	if v.SourceLocationName != nil {
 		ok := object.Key("SourceLocationName")
 		ok.String(*v.SourceLocationName)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocument__mapOf__string(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.VodSourceName != nil {

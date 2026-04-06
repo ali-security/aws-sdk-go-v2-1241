@@ -1014,6 +1014,11 @@ func awsRestjson1_deserializeOpDocumentCreatePrefetchScheduleOutput(v **CreatePr
 				sv.StreamId = ptr.String(jtv)
 			}
 
+		case "tags":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -1261,6 +1266,11 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.SourceLocationName = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "VodSourceName":
@@ -3097,6 +3107,11 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 				sv.SourceLocationName = ptr.String(jtv)
 			}
 
+		case "tags":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		case "VodSourceName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4354,6 +4369,11 @@ func awsRestjson1_deserializeOpDocumentGetPrefetchScheduleOutput(v **GetPrefetch
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.StreamId = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		default:
@@ -7061,6 +7081,11 @@ func awsRestjson1_deserializeOpDocumentUpdateProgramOutput(v **UpdateProgramOutp
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.SourceLocationName = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		case "VodSourceName":
@@ -10686,6 +10711,11 @@ func awsRestjson1_deserializeDocumentPrefetchSchedule(v **types.PrefetchSchedule
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.StreamId = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocument__mapOf__string(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		default:

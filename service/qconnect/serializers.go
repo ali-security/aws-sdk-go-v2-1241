@@ -7429,6 +7429,11 @@ func awsRestjson1_serializeOpDocumentSendMessageInput(v *SendMessageInput, value
 		ok.String(*v.OrchestratorUseCase)
 	}
 
+	if v.OriginRequestId != nil {
+		ok := object.Key("originRequestId")
+		ok.String(*v.OriginRequestId)
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))

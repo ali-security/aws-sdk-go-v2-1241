@@ -50,6 +50,26 @@ func (m *validateOpCancelPolicyGeneration) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelPolicyPreviewJob struct {
+}
+
+func (*validateOpCancelPolicyPreviewJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelPolicyPreviewJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelPolicyPreviewJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelPolicyPreviewJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCheckAccessNotGranted struct {
 }
 
@@ -410,6 +430,26 @@ func (m *validateOpGetGeneratedPolicy) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPolicyPreviewJob struct {
+}
+
+func (*validateOpGetPolicyPreviewJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPolicyPreviewJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPolicyPreviewJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPolicyPreviewJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAccessPreviewFindings struct {
 }
 
@@ -570,6 +610,26 @@ func (m *validateOpStartPolicyGeneration) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartPolicyPreviewJob struct {
+}
+
+func (*validateOpStartPolicyPreviewJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartPolicyPreviewJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartPolicyPreviewJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartPolicyPreviewJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartResourceScan struct {
 }
 
@@ -718,6 +778,10 @@ func addOpCancelPolicyGenerationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCancelPolicyGeneration{}, middleware.After)
 }
 
+func addOpCancelPolicyPreviewJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelPolicyPreviewJob{}, middleware.After)
+}
+
 func addOpCheckAccessNotGrantedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCheckAccessNotGranted{}, middleware.After)
 }
@@ -790,6 +854,10 @@ func addOpGetGeneratedPolicyValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetGeneratedPolicy{}, middleware.After)
 }
 
+func addOpGetPolicyPreviewJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPolicyPreviewJob{}, middleware.After)
+}
+
 func addOpListAccessPreviewFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccessPreviewFindings{}, middleware.After)
 }
@@ -820,6 +888,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpStartPolicyGenerationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartPolicyGeneration{}, middleware.After)
+}
+
+func addOpStartPolicyPreviewJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartPolicyPreviewJob{}, middleware.After)
 }
 
 func addOpStartResourceScanValidationMiddleware(stack *middleware.Stack) error {
@@ -1022,6 +1094,44 @@ func validateNetworkOriginConfiguration(v types.NetworkOriginConfiguration) erro
 			invalidParams.AddNested("[vpcConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyConfiguration(v *types.PolicyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyConfiguration"}
+	if len(v.JobType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JobType"))
+	}
+	if v.TargetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
+	}
+	if v.PolicyDocumentsList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocumentsList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyConfigurationsList(v []types.PolicyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyConfigurationsList"}
+	for i := range v {
+		if err := validatePolicyConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1287,6 +1397,21 @@ func validateOpCancelPolicyGenerationInput(v *CancelPolicyGenerationInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CancelPolicyGenerationInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelPolicyPreviewJobInput(v *CancelPolicyPreviewJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelPolicyPreviewJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
@@ -1627,6 +1752,21 @@ func validateOpGetGeneratedPolicyInput(v *GetGeneratedPolicyInput) error {
 	}
 }
 
+func validateOpGetPolicyPreviewJobInput(v *GetPolicyPreviewJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPolicyPreviewJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAccessPreviewFindingsInput(v *ListAccessPreviewFindingsInput) error {
 	if v == nil {
 		return nil
@@ -1751,6 +1891,31 @@ func validateOpStartPolicyGenerationInput(v *StartPolicyGenerationInput) error {
 		if err := validateCloudTrailDetails(v.CloudTrailDetails); err != nil {
 			invalidParams.AddNested("CloudTrailDetails", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartPolicyPreviewJobInput(v *StartPolicyPreviewJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartPolicyPreviewJobInput"}
+	if v.PolicyConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyConfigurations"))
+	} else if v.PolicyConfigurations != nil {
+		if err := validatePolicyConfigurationsList(v.PolicyConfigurations); err != nil {
+			invalidParams.AddNested("PolicyConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.OutputS3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputS3Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -28099,6 +28099,15 @@ func awsRestjson1_deserializeDocumentSpan(v **types.Span, value interface{}) err
 				}
 			}
 
+		case "originRequestId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.OriginRequestId = ptr.String(jtv)
+			}
+
 		case "parentSpanId":
 			if value != nil {
 				jtv, ok := value.(string)

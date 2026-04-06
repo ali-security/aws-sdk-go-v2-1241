@@ -71,6 +71,10 @@ type SendMessageInput struct {
 	// The orchestrator use case for message processing.
 	OrchestratorUseCase *string
 
+	// Request identifier from the origin system, used for end-to-end tracing across
+	// spans.
+	OriginRequestId *string
+
 	noSmithyDocumentSerde
 }
 
