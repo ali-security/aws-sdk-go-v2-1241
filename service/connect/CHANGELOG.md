@@ -1,3 +1,7 @@
+# v1.168.0 (2026-04-07)
+
+* **Feature**: The voice enhancement mode used by the agent can now be viewed on the contact record via the DescribeContact api.
+
 # v1.167.0 (2026-04-02)
 
 * **Feature**: Include CUSTOMER to evaluation target and participant role. Support Korean, Japanese and Simplified Chinese in evaluation forms.

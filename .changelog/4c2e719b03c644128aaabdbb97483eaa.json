@@ -1,8 +1,0 @@
-{
-    "id": "4c2e719b-03c6-4412-8aaa-bdbb97483eaa",
-    "type": "feature",
-    "description": "Revert previous additions of API changes.",
-    "modules": [
-        "service/accessanalyzer"
-    ]
-}

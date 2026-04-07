@@ -1,8 +1,0 @@
-{
-    "id": "93f521b3-8c05-4708-a1ec-84acd8a4085f",
-    "type": "feature",
-    "description": "Updated list of the valid AWS Region values for the LocationConstraint parameter for general purpose buckets.",
-    "modules": [
-        "service/s3"
-    ]
-}

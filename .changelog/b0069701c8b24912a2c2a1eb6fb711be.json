@@ -1,8 +1,0 @@
-{
-    "id": "b0069701-c8b2-4912-a2c2-a1eb6fb711be",
-    "type": "feature",
-    "description": "EKS MNG WarmPool feature to support ASG WarmPool feature.",
-    "modules": [
-        "service/eks"
-    ]
-}

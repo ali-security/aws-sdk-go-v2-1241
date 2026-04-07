@@ -1,3 +1,7 @@
+# v1.34.22 (2026-04-07)
+
+* No change notes available for this release.
+
 # v1.34.21 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

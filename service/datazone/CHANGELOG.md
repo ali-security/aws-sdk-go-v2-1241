@@ -1,3 +1,7 @@
+# v1.56.0 (2026-04-07)
+
+* **Feature**: Update Configurations and registerS3AccessGrantLocation as public attributes for cfn
+
 # v1.55.0 (2026-03-31)
 
 * **Feature**: Adds environmentConfigurationName field to CreateEnvironmentInput and UpdateEnvironmentInput, so that Domain Owners can now recover orphaned environments by recreating deleted configurations with the same name, and will auto-recover orphaned environments

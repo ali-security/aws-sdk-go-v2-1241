@@ -1,8 +1,0 @@
-{
-    "id": "8383d1b1-cc15-4083-8693-27276aacd189",
-    "type": "feature",
-    "description": "This release includes support for 1) InvokeBrowser API, enabling OS-level control of AgentCore Browser Tool sessions through mouse actions, keyboard input, and screenshots. 2) Added documentation noting that empty sessions are automatically deleted after one day in the ListSessions API.",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

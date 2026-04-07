@@ -1,8 +1,0 @@
-{
-    "id": "047e2b06-8000-4139-84fc-7e3cd959e771",
-    "type": "feature",
-    "description": "Update Configurations and registerS3AccessGrantLocation as public attributes for cfn",
-    "modules": [
-        "service/datazone"
-    ]
-}

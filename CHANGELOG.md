@@ -1,3 +1,37 @@
+# Release (2026-04-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.47.0](service/accessanalyzer/CHANGELOG.md#v1470-2026-04-07)
+  * **Feature**: Revert previous additions of API changes.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.19.0](service/bedrockagentcore/CHANGELOG.md#v1190-2026-04-07)
+  * **Feature**: This release includes support for 1) InvokeBrowser API, enabling OS-level control of AgentCore Browser Tool sessions through mouse actions, keyboard input, and screenshots. 2) Added documentation noting that empty sessions are automatically deleted after one day in the ListSessions API.
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.40.0](service/braket/CHANGELOG.md#v1400-2026-04-07)
+  * **Feature**: Added support for t3, g6, and g6e instance types for Hybrid Jobs.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.168.0](service/connect/CHANGELOG.md#v11680-2026-04-07)
+  * **Feature**: The voice enhancement mode used by the agent can now be viewed on the contact record via the DescribeContact api.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.56.0](service/datazone/CHANGELOG.md#v1560-2026-04-07)
+  * **Feature**: Update Configurations and registerS3AccessGrantLocation as public attributes for cfn
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.297.0](service/ec2/CHANGELOG.md#v12970-2026-04-07)
+  * **Feature**: EC2 Capacity Manager adds new dimensions for grouping and filtering capacity metrics, including tag-based dimensions and Account Name.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.77.0](service/ecs/CHANGELOG.md#v1770-2026-04-07)
+  * **Feature**: This release provides the functionality of mounting Amazon S3 Files to Amazon ECS tasks by adding support for the new S3FilesVolumeConfiguration parameter in ECS RegisterTaskDefinition API.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.82.0](service/eks/CHANGELOG.md#v1820-2026-04-07)
+  * **Feature**: EKS MNG WarmPool feature to support ASG WarmPool feature.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.89.0](service/lambda/CHANGELOG.md#v1890-2026-04-07)
+  * **Feature**: Launching Lambda integration with S3 Files as a new file system configuration.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.58.0](service/outposts/CHANGELOG.md#v1580-2026-04-07)
+  * **Feature**: This change allows listAssets to surface pending and non-compute asset information. Adds the INSTALLING asset state enum and the STORAGE, POWERSHELF, SWITCH, and NETWORKING AssetTypes.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.3.0](service/rtbfabric/CHANGELOG.md#v130-2026-04-07)
+  * **Feature**: AWS RTB Fabric External Responder gateways now support HTTP in addition to HTTPS for inbound external links. Gateways can accept bid requests on port 80 or serve both protocols simultaneously via listener configuration, giving customers flexible transport options for their bidding infrastructure
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.99.0](service/s3/CHANGELOG.md#v1990-2026-04-07)
+  * **Feature**: Updated list of the valid AWS Region values for the LocationConstraint parameter for general purpose buckets.
+* `github.com/aws/aws-sdk-go-v2/service/s3files`: [v1.0.0](service/s3files/CHANGELOG.md#v100-2026-04-07)
+  * **Release**: New AWS service client module
+  * **Feature**: Support for S3 Files, a new shared file system that connects any AWS compute directly with your data in Amazon S3. It provides fast, direct access to all of your S3 data as files with full file system semantics and low-latency performance, without your data ever leaving S3.
+
 # Release (2026-04-06)
 
 ## Module Highlights
