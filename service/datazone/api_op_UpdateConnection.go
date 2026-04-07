@@ -44,6 +44,9 @@ type UpdateConnectionInput struct {
 	// The location where a connection is to be updated.
 	AwsLocation *types.AwsLocation
 
+	// The configurations of the connection.
+	Configurations []types.Configuration
+
 	// The description of a connection.
 	Description *string
 
@@ -84,6 +87,9 @@ type UpdateConnectionOutput struct {
 	//
 	// This member is required.
 	Type types.ConnectionType
+
+	// The configurations of the connection.
+	Configurations []types.Configuration
 
 	// The connection description.
 	Description *string

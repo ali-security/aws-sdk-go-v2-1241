@@ -8,6 +8,98 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
 )
 
+func ExampleBrowserAction_outputUsage() {
+	var union types.BrowserAction
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.BrowserActionMemberKeyPress:
+		_ = v.Value // Value is types.KeyPressArguments
+
+	case *types.BrowserActionMemberKeyShortcut:
+		_ = v.Value // Value is types.KeyShortcutArguments
+
+	case *types.BrowserActionMemberKeyType:
+		_ = v.Value // Value is types.KeyTypeArguments
+
+	case *types.BrowserActionMemberMouseClick:
+		_ = v.Value // Value is types.MouseClickArguments
+
+	case *types.BrowserActionMemberMouseDrag:
+		_ = v.Value // Value is types.MouseDragArguments
+
+	case *types.BrowserActionMemberMouseMove:
+		_ = v.Value // Value is types.MouseMoveArguments
+
+	case *types.BrowserActionMemberMouseScroll:
+		_ = v.Value // Value is types.MouseScrollArguments
+
+	case *types.BrowserActionMemberScreenshot:
+		_ = v.Value // Value is types.ScreenshotArguments
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MouseClickArguments
+var _ *types.KeyPressArguments
+var _ *types.MouseMoveArguments
+var _ *types.KeyShortcutArguments
+var _ *types.KeyTypeArguments
+var _ *types.MouseScrollArguments
+var _ *types.MouseDragArguments
+var _ *types.ScreenshotArguments
+
+func ExampleBrowserActionResult_outputUsage() {
+	var union types.BrowserActionResult
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.BrowserActionResultMemberKeyPress:
+		_ = v.Value // Value is types.KeyPressResult
+
+	case *types.BrowserActionResultMemberKeyShortcut:
+		_ = v.Value // Value is types.KeyShortcutResult
+
+	case *types.BrowserActionResultMemberKeyType:
+		_ = v.Value // Value is types.KeyTypeResult
+
+	case *types.BrowserActionResultMemberMouseClick:
+		_ = v.Value // Value is types.MouseClickResult
+
+	case *types.BrowserActionResultMemberMouseDrag:
+		_ = v.Value // Value is types.MouseDragResult
+
+	case *types.BrowserActionResultMemberMouseMove:
+		_ = v.Value // Value is types.MouseMoveResult
+
+	case *types.BrowserActionResultMemberMouseScroll:
+		_ = v.Value // Value is types.MouseScrollResult
+
+	case *types.BrowserActionResultMemberScreenshot:
+		_ = v.Value // Value is types.ScreenshotResult
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MouseMoveResult
+var _ *types.KeyTypeResult
+var _ *types.MouseDragResult
+var _ *types.KeyShortcutResult
+var _ *types.MouseScrollResult
+var _ *types.KeyPressResult
+var _ *types.MouseClickResult
+var _ *types.ScreenshotResult
+
 func ExampleCertificateLocation_outputUsage() {
 	var union types.CertificateLocation
 	// type switches can be used to check the union value

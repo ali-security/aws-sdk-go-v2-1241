@@ -1968,6 +1968,107 @@ func awsRestjson1_serializeOpHttpBindingsInvokeAgentRuntimeCommandInput(v *Invok
 	return nil
 }
 
+type awsRestjson1_serializeOpInvokeBrowser struct {
+}
+
+func (*awsRestjson1_serializeOpInvokeBrowser) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpInvokeBrowser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*InvokeBrowserInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/browsers/{browserIdentifier}/sessions/invoke")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsInvokeBrowserInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentInvokeBrowserInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsInvokeBrowserInput(v *InvokeBrowserInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BrowserIdentifier == nil || len(*v.BrowserIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member browserIdentifier must not be empty")}
+	}
+	if v.BrowserIdentifier != nil {
+		if err := encoder.SetURI("browserIdentifier").String(*v.BrowserIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.SessionId != nil {
+		locationName := "X-Amzn-Browser-Session-Id"
+		encoder.SetHeader(locationName).String(*v.SessionId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentInvokeBrowserInput(v *InvokeBrowserInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Action != nil {
+		ok := object.Key("action")
+		if err := awsRestjson1_serializeDocumentBrowserAction(v.Action, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpInvokeCodeInterpreter struct {
 }
 
@@ -3935,6 +4036,66 @@ func awsRestjson1_serializeDocumentBranchFilter(v *types.BranchFilter, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBrowserAction(v types.BrowserAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.BrowserActionMemberKeyPress:
+		av := object.Key("keyPress")
+		if err := awsRestjson1_serializeDocumentKeyPressArguments(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.BrowserActionMemberKeyShortcut:
+		av := object.Key("keyShortcut")
+		if err := awsRestjson1_serializeDocumentKeyShortcutArguments(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.BrowserActionMemberKeyType:
+		av := object.Key("keyType")
+		if err := awsRestjson1_serializeDocumentKeyTypeArguments(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.BrowserActionMemberMouseClick:
+		av := object.Key("mouseClick")
+		if err := awsRestjson1_serializeDocumentMouseClickArguments(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.BrowserActionMemberMouseDrag:
+		av := object.Key("mouseDrag")
+		if err := awsRestjson1_serializeDocumentMouseDragArguments(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.BrowserActionMemberMouseMove:
+		av := object.Key("mouseMove")
+		if err := awsRestjson1_serializeDocumentMouseMoveArguments(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.BrowserActionMemberMouseScroll:
+		av := object.Key("mouseScroll")
+		if err := awsRestjson1_serializeDocumentMouseScrollArguments(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.BrowserActionMemberScreenshot:
+		av := object.Key("screenshot")
+		if err := awsRestjson1_serializeDocumentScreenshotArguments(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBrowserEnterprisePolicies(v []types.BrowserEnterprisePolicy, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4470,6 +4631,60 @@ func awsRestjson1_serializeDocumentInvokeAgentRuntimeCommandRequestBody(v *types
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKeyList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKeyPressArguments(v *types.KeyPressArguments, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Presses != nil {
+		ok := object.Key("presses")
+		ok.Integer(*v.Presses)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKeyShortcutArguments(v *types.KeyShortcutArguments, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Keys != nil {
+		ok := object.Key("keys")
+		if err := awsRestjson1_serializeDocumentKeyList(v.Keys, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKeyTypeArguments(v *types.KeyTypeArguments, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Text != nil {
+		ok := object.Key("text")
+		ok.String(*v.Text)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLeftExpression(v types.LeftExpression, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4696,6 +4911,109 @@ func awsRestjson1_serializeDocumentMetadataValue(v types.MetadataValue, value sm
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMouseClickArguments(v *types.MouseClickArguments, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Button) > 0 {
+		ok := object.Key("button")
+		ok.String(string(v.Button))
+	}
+
+	if v.ClickCount != nil {
+		ok := object.Key("clickCount")
+		ok.Integer(*v.ClickCount)
+	}
+
+	if v.X != nil {
+		ok := object.Key("x")
+		ok.Integer(*v.X)
+	}
+
+	if v.Y != nil {
+		ok := object.Key("y")
+		ok.Integer(*v.Y)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMouseDragArguments(v *types.MouseDragArguments, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Button) > 0 {
+		ok := object.Key("button")
+		ok.String(string(v.Button))
+	}
+
+	if v.EndX != nil {
+		ok := object.Key("endX")
+		ok.Integer(*v.EndX)
+	}
+
+	if v.EndY != nil {
+		ok := object.Key("endY")
+		ok.Integer(*v.EndY)
+	}
+
+	if v.StartX != nil {
+		ok := object.Key("startX")
+		ok.Integer(*v.StartX)
+	}
+
+	if v.StartY != nil {
+		ok := object.Key("startY")
+		ok.Integer(*v.StartY)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMouseMoveArguments(v *types.MouseMoveArguments, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.X != nil {
+		ok := object.Key("x")
+		ok.Integer(*v.X)
+	}
+
+	if v.Y != nil {
+		ok := object.Key("y")
+		ok.Integer(*v.Y)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMouseScrollArguments(v *types.MouseScrollArguments, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeltaX != nil {
+		ok := object.Key("deltaX")
+		ok.Integer(*v.DeltaX)
+	}
+
+	if v.DeltaY != nil {
+		ok := object.Key("deltaY")
+		ok.Integer(*v.DeltaY)
+	}
+
+	if v.X != nil {
+		ok := object.Key("x")
+		ok.Integer(*v.X)
+	}
+
+	if v.Y != nil {
+		ok := object.Key("y")
+		ok.Integer(*v.Y)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNamespacesList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4900,6 +5218,18 @@ func awsRestjson1_serializeDocumentScopesListType(v []string, value smithyjson.V
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScreenshotArguments(v *types.ScreenshotArguments, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Format) > 0 {
+		ok := object.Key("format")
+		ok.String(string(v.Format))
+	}
+
 	return nil
 }
 

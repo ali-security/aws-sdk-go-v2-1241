@@ -1,0 +1,8 @@
+{
+    "id": "5b299ed3-7810-4266-b12e-748642dff944",
+    "type": "feature",
+    "description": "Launching Lambda integration with S3 Files as a new file system configuration.",
+    "modules": [
+        "service/lambda"
+    ]
+}

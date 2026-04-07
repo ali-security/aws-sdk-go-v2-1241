@@ -79,6 +79,9 @@ type GetConnectionOutput struct {
 	// This member is required.
 	Type types.ConnectionType
 
+	// The configurations of the connection.
+	Configurations []types.Configuration
+
 	// Connection credentials.
 	ConnectionCredentials *types.ConnectionCredentials
 

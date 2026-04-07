@@ -55,6 +55,9 @@ type UpdateResponderGatewayInput struct {
 	// The domain name for the responder gateway.
 	DomainName *string
 
+	// The listener configuration for the responder gateway.
+	ListenerConfig *types.ListenerConfig
+
 	// The configuration for the managed endpoint.
 	ManagedEndpointConfiguration types.ManagedEndpointConfiguration
 

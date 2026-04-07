@@ -302,6 +302,18 @@ func TestCheckSnapshot_InvokeAgentRuntimeCommand(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_InvokeBrowser(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeBrowser(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InvokeBrowser")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_InvokeCodeInterpreter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InvokeCodeInterpreter(context.Background(), nil, func(o *Options) {
@@ -738,6 +750,18 @@ func TestUpdateSnapshot_InvokeAgentRuntimeCommand(t *testing.T) {
 	_, err := svc.InvokeAgentRuntimeCommand(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "InvokeAgentRuntimeCommand")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_InvokeBrowser(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeBrowser(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InvokeBrowser")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

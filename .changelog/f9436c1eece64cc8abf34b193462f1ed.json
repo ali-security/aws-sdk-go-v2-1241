@@ -1,0 +1,8 @@
+{
+    "id": "f9436c1e-ece6-4cc8-abf3-4b193462f1ed",
+    "type": "feature",
+    "description": "Allow IAM role ARNs with IAM Paths for \"SecretAccessRoleArn\" field in \"CustomSecretConfig\"",
+    "modules": [
+        "service/datasync"
+    ]
+}

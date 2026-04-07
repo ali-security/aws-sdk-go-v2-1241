@@ -1,0 +1,8 @@
+{
+    "id": "5fe332a4-d82f-49c1-9104-49949020a8c4",
+    "type": "feature",
+    "description": "EC2 Capacity Manager adds new dimensions for grouping and filtering capacity metrics, including tag-based dimensions and Account Name.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -57,6 +57,9 @@ type CreateLinkInput struct {
 	// A map of the key-value pairs of the tag or tags to assign to the resource.
 	Tags map[string]string
 
+	// The timeout value in milliseconds.
+	TimeoutInMillis *int64
+
 	noSmithyDocumentSerde
 }
 
@@ -95,6 +98,9 @@ type CreateLinkOutput struct {
 	// Attributes of the link.
 	Attributes *types.LinkAttributes
 
+	// The connectivity type of the link.
+	ConnectivityType types.ConnectivityType
+
 	// The customer-provided unique identifier of the link.
 	CustomerProvidedId *string
 
@@ -103,6 +109,9 @@ type CreateLinkOutput struct {
 
 	// The configuration of flow modules.
 	FlowModules []types.ModuleConfiguration
+
+	// Describes the settings for a link log.
+	LogSettings *types.LinkLogSettings
 
 	// The configuration of pending flow modules.
 	PendingFlowModules []types.ModuleConfiguration

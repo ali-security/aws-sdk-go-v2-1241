@@ -1810,6 +1810,13 @@ func awsRestjson1_serializeOpDocumentCreateConnectionInput(v *CreateConnectionIn
 		ok.String(*v.ClientToken)
 	}
 
+	if v.Configurations != nil {
+		ok := object.Key("configurations")
+		if err := awsRestjson1_serializeDocumentConfigurations(v.Configurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -15665,6 +15672,13 @@ func awsRestjson1_serializeOpDocumentUpdateConnectionInput(v *UpdateConnectionIn
 		}
 	}
 
+	if v.Configurations != nil {
+		ok := object.Key("configurations")
+		if err := awsRestjson1_serializeDocumentConfigurations(v.Configurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
@@ -18620,6 +18634,38 @@ func awsRestjson1_serializeDocumentComputeEnvironmentsList(v []types.ComputeEnvi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConfiguration(v *types.Configuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Classification != nil {
+		ok := object.Key("classification")
+		ok.String(*v.Classification)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("properties")
+		if err := awsRestjson1_serializeDocumentPropertyMap(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfigurations(v []types.Configuration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConnectionProperties(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19815,6 +19861,17 @@ func awsRestjson1_serializeDocumentGlueConnectionInput(v *types.GlueConnectionIn
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGlueConnectionNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -21634,6 +21691,11 @@ func awsRestjson1_serializeDocumentS3PropertiesInput(v *types.S3PropertiesInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.RegisterS3AccessGrantLocation != nil {
+		ok := object.Key("registerS3AccessGrantLocation")
+		ok.Boolean(*v.RegisterS3AccessGrantLocation)
+	}
+
 	if v.S3AccessGrantLocationId != nil {
 		ok := object.Key("s3AccessGrantLocationId")
 		ok.String(*v.S3AccessGrantLocationId)
@@ -21650,6 +21712,11 @@ func awsRestjson1_serializeDocumentS3PropertiesInput(v *types.S3PropertiesInput,
 func awsRestjson1_serializeDocumentS3PropertiesPatch(v *types.S3PropertiesPatch, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.RegisterS3AccessGrantLocation != nil {
+		ok := object.Key("registerS3AccessGrantLocation")
+		ok.Boolean(*v.RegisterS3AccessGrantLocation)
+	}
 
 	if v.S3AccessGrantLocationId != nil {
 		ok := object.Key("s3AccessGrantLocationId")
@@ -21901,6 +21968,13 @@ func awsRestjson1_serializeDocumentSparkGluePropertiesInput(v *types.SparkGluePr
 	if v.GlueConnectionName != nil {
 		ok := object.Key("glueConnectionName")
 		ok.String(*v.GlueConnectionName)
+	}
+
+	if v.GlueConnectionNames != nil {
+		ok := object.Key("glueConnectionNames")
+		if err := awsRestjson1_serializeDocumentGlueConnectionNames(v.GlueConnectionNames, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.GlueVersion != nil {

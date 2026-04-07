@@ -25,9 +25,10 @@ type AssetState string
 
 // Enum values for AssetState
 const (
-	AssetStateActive   AssetState = "ACTIVE"
-	AssetStateRetiring AssetState = "RETIRING"
-	AssetStateIsolated AssetState = "ISOLATED"
+	AssetStateActive     AssetState = "ACTIVE"
+	AssetStateRetiring   AssetState = "RETIRING"
+	AssetStateIsolated   AssetState = "ISOLATED"
+	AssetStateInstalling AssetState = "INSTALLING"
 )
 
 // Values returns all known values for AssetState. Note that this can be expanded
@@ -39,6 +40,7 @@ func (AssetState) Values() []AssetState {
 		"ACTIVE",
 		"RETIRING",
 		"ISOLATED",
+		"INSTALLING",
 	}
 }
 
@@ -46,7 +48,11 @@ type AssetType string
 
 // Enum values for AssetType
 const (
-	AssetTypeCompute AssetType = "COMPUTE"
+	AssetTypeCompute    AssetType = "COMPUTE"
+	AssetTypeStorage    AssetType = "STORAGE"
+	AssetTypePowershelf AssetType = "POWERSHELF"
+	AssetTypeSwitch     AssetType = "SWITCH"
+	AssetTypeNetworking AssetType = "NETWORKING"
 )
 
 // Values returns all known values for AssetType. Note that this can be expanded
@@ -56,6 +62,10 @@ const (
 func (AssetType) Values() []AssetType {
 	return []AssetType{
 		"COMPUTE",
+		"STORAGE",
+		"POWERSHELF",
+		"SWITCH",
+		"NETWORKING",
 	}
 }
 
@@ -211,9 +221,10 @@ type ComputeAssetState string
 
 // Enum values for ComputeAssetState
 const (
-	ComputeAssetStateActive   ComputeAssetState = "ACTIVE"
-	ComputeAssetStateIsolated ComputeAssetState = "ISOLATED"
-	ComputeAssetStateRetiring ComputeAssetState = "RETIRING"
+	ComputeAssetStateActive     ComputeAssetState = "ACTIVE"
+	ComputeAssetStateIsolated   ComputeAssetState = "ISOLATED"
+	ComputeAssetStateRetiring   ComputeAssetState = "RETIRING"
+	ComputeAssetStateInstalling ComputeAssetState = "INSTALLING"
 )
 
 // Values returns all known values for ComputeAssetState. Note that this can be
@@ -225,6 +236,7 @@ func (ComputeAssetState) Values() []ComputeAssetState {
 		"ACTIVE",
 		"ISOLATED",
 		"RETIRING",
+		"INSTALLING",
 	}
 }
 

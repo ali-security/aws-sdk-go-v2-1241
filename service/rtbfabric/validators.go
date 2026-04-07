@@ -839,6 +839,21 @@ func validateLinkLogSettings(v *types.LinkLogSettings) error {
 	}
 }
 
+func validateListenerConfig(v *types.ListenerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListenerConfig"}
+	if v.Protocols == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Protocols"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateManagedEndpointConfiguration(v types.ManagedEndpointConfiguration) error {
 	if v == nil {
 		return nil
@@ -1170,6 +1185,11 @@ func validateOpCreateResponderGatewayInput(v *CreateResponderGatewayInput) error
 	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if v.ListenerConfig != nil {
+		if err := validateListenerConfig(v.ListenerConfig); err != nil {
+			invalidParams.AddNested("ListenerConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.TrustStoreConfiguration != nil {
 		if err := validateTrustStoreConfiguration(v.TrustStoreConfiguration); err != nil {
@@ -1522,6 +1542,11 @@ func validateOpUpdateResponderGatewayInput(v *UpdateResponderGatewayInput) error
 	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if v.ListenerConfig != nil {
+		if err := validateListenerConfig(v.ListenerConfig); err != nil {
+			invalidParams.AddNested("ListenerConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.TrustStoreConfiguration != nil {
 		if err := validateTrustStoreConfiguration(v.TrustStoreConfiguration); err != nil {

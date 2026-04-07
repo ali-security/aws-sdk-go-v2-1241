@@ -1555,6 +1555,12 @@ func awsRestjson1_serializeOpHttpBindingsListAssetsInput(v *ListAssetsInput, enc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.AssetTypeFilter != nil {
+		for i := range v.AssetTypeFilter {
+			encoder.AddQuery("AssetTypeFilter").String(string(v.AssetTypeFilter[i]))
+		}
+	}
+
 	if v.HostIdFilter != nil {
 		for i := range v.HostIdFilter {
 			encoder.AddQuery("HostIdFilter").String(v.HostIdFilter[i])

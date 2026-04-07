@@ -81,11 +81,17 @@ type RejectLinkOutput struct {
 	// Attributes of the link.
 	Attributes *types.LinkAttributes
 
+	// The connectivity type of the link.
+	ConnectivityType types.ConnectivityType
+
 	// The direction of the link.
 	Direction types.LinkDirection
 
 	// The configuration of flow modules.
 	FlowModules []types.ModuleConfiguration
+
+	// Describes the settings for a link log.
+	LogSettings *types.LinkLogSettings
 
 	// The configuration of pending flow modules.
 	PendingFlowModules []types.ModuleConfiguration

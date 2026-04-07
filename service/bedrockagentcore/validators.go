@@ -410,6 +410,26 @@ func (m *validateOpInvokeAgentRuntime) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeBrowser struct {
+}
+
+func (*validateOpInvokeBrowser) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeBrowser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeBrowserInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeBrowserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInvokeCodeInterpreter struct {
 }
 
@@ -830,6 +850,10 @@ func addOpInvokeAgentRuntimeValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpInvokeAgentRuntime{}, middleware.After)
 }
 
+func addOpInvokeBrowserValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeBrowser{}, middleware.After)
+}
+
 func addOpInvokeCodeInterpreterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpInvokeCodeInterpreter{}, middleware.After)
 }
@@ -935,6 +959,55 @@ func validateBranchFilter(v *types.BranchFilter) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BranchFilter"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBrowserAction(v types.BrowserAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BrowserAction"}
+	switch uv := v.(type) {
+	case *types.BrowserActionMemberKeyPress:
+		if err := validateKeyPressArguments(&uv.Value); err != nil {
+			invalidParams.AddNested("[keyPress]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.BrowserActionMemberKeyShortcut:
+		if err := validateKeyShortcutArguments(&uv.Value); err != nil {
+			invalidParams.AddNested("[keyShortcut]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.BrowserActionMemberKeyType:
+		if err := validateKeyTypeArguments(&uv.Value); err != nil {
+			invalidParams.AddNested("[keyType]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.BrowserActionMemberMouseClick:
+		if err := validateMouseClickArguments(&uv.Value); err != nil {
+			invalidParams.AddNested("[mouseClick]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.BrowserActionMemberMouseDrag:
+		if err := validateMouseDragArguments(&uv.Value); err != nil {
+			invalidParams.AddNested("[mouseDrag]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.BrowserActionMemberMouseMove:
+		if err := validateMouseMoveArguments(&uv.Value); err != nil {
+			invalidParams.AddNested("[mouseMove]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.BrowserActionMemberMouseScroll:
+		if err := validateMouseScrollArguments(&uv.Value); err != nil {
+			invalidParams.AddNested("[mouseScroll]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1300,6 +1373,51 @@ func validateInvokeAgentRuntimeCommandRequestBody(v *types.InvokeAgentRuntimeCom
 	}
 }
 
+func validateKeyPressArguments(v *types.KeyPressArguments) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KeyPressArguments"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKeyShortcutArguments(v *types.KeyShortcutArguments) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KeyShortcutArguments"}
+	if v.Keys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Keys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKeyTypeArguments(v *types.KeyTypeArguments) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KeyTypeArguments"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMemoryMetadataFilterExpression(v *types.MemoryMetadataFilterExpression) error {
 	if v == nil {
 		return nil
@@ -1435,6 +1553,84 @@ func validateMemoryRecordUpdateInput(v *types.MemoryRecordUpdateInput) error {
 	}
 	if v.Timestamp == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMouseClickArguments(v *types.MouseClickArguments) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MouseClickArguments"}
+	if v.X == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("X"))
+	}
+	if v.Y == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Y"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMouseDragArguments(v *types.MouseDragArguments) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MouseDragArguments"}
+	if v.EndX == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndX"))
+	}
+	if v.EndY == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndY"))
+	}
+	if v.StartX == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartX"))
+	}
+	if v.StartY == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartY"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMouseMoveArguments(v *types.MouseMoveArguments) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MouseMoveArguments"}
+	if v.X == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("X"))
+	}
+	if v.Y == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Y"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMouseScrollArguments(v *types.MouseScrollArguments) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MouseScrollArguments"}
+	if v.X == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("X"))
+	}
+	if v.Y == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Y"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2075,6 +2271,31 @@ func validateOpInvokeAgentRuntimeInput(v *InvokeAgentRuntimeInput) error {
 	}
 	if v.Payload == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInvokeBrowserInput(v *InvokeBrowserInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeBrowserInput"}
+	if v.BrowserIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrowserIdentifier"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if v.Action == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	} else if v.Action != nil {
+		if err := validateBrowserAction(v.Action); err != nil {
+			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

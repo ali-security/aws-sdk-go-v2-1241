@@ -3371,6 +3371,11 @@ func awsRestjson1_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 
 	for key, value := range shape {
 		switch key {
+		case "configurations":
+			if err := awsRestjson1_deserializeDocumentConfigurations(&sv.Configurations, value); err != nil {
+				return err
+			}
+
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14067,6 +14072,11 @@ func awsRestjson1_deserializeOpDocumentGetConnectionOutput(v **GetConnectionOutp
 
 	for key, value := range shape {
 		switch key {
+		case "configurations":
+			if err := awsRestjson1_deserializeDocumentConfigurations(&sv.Configurations, value); err != nil {
+				return err
+			}
+
 		case "connectionCredentials":
 			if err := awsRestjson1_deserializeDocumentConnectionCredentials(&sv.ConnectionCredentials, value); err != nil {
 				return err
@@ -32363,6 +32373,11 @@ func awsRestjson1_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnecti
 
 	for key, value := range shape {
 		switch key {
+		case "configurations":
+			if err := awsRestjson1_deserializeDocumentConfigurations(&sv.Configurations, value); err != nil {
+				return err
+			}
+
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -40387,6 +40402,85 @@ func awsRestjson1_deserializeDocumentConfigurableEnvironmentAction(v **types.Con
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentConfiguration(v **types.Configuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Configuration
+	if *v == nil {
+		sv = &types.Configuration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "classification":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Classification = ptr.String(jtv)
+			}
+
+		case "properties":
+			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.Properties, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConfigurations(v *[]types.Configuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Configuration
+	if *v == nil {
+		cv = []types.Configuration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Configuration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -40740,6 +40834,11 @@ func awsRestjson1_deserializeDocumentConnectionSummary(v **types.ConnectionSumma
 
 	for key, value := range shape {
 		switch key {
+		case "configurations":
+			if err := awsRestjson1_deserializeDocumentConfigurations(&sv.Configurations, value); err != nil {
+				return err
+			}
+
 		case "connectionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -46494,6 +46593,42 @@ func awsRestjson1_deserializeDocumentGlueConnection(v **types.GlueConnection, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGlueConnectionNames(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GlueConnectionName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGlueOAuth2Credentials(v **types.GlueOAuth2Credentials, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -51218,6 +51353,11 @@ func awsRestjson1_deserializeDocumentPhysicalEndpoint(v **types.PhysicalEndpoint
 				sv.GlueConnectionName = ptr.String(jtv)
 			}
 
+		case "glueConnectionNames":
+			if err := awsRestjson1_deserializeDocumentGlueConnectionNames(&sv.GlueConnectionNames, value); err != nil {
+				return err
+			}
+
 		case "host":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -54514,6 +54654,15 @@ func awsRestjson1_deserializeDocumentS3PropertiesOutput(v **types.S3PropertiesOu
 				sv.ErrorMessage = ptr.String(jtv)
 			}
 
+		case "registerS3AccessGrantLocation":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RegisterS3AccessGrantLocation = ptr.Bool(jtv)
+			}
+
 		case "s3AccessGrantLocationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -55441,6 +55590,11 @@ func awsRestjson1_deserializeDocumentSparkGluePropertiesOutput(v **types.SparkGl
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.GlueConnectionName = ptr.String(jtv)
+			}
+
+		case "glueConnectionNames":
+			if err := awsRestjson1_deserializeDocumentGlueConnectionNames(&sv.GlueConnectionNames, value); err != nil {
+				return err
 			}
 
 		case "glueVersion":

@@ -32,10 +32,13 @@ import (
 //
 // [StopBrowserSession]
 //
+// [InvokeBrowser]
+//
 // [SaveBrowserSessionProfile]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_SaveBrowserSessionProfile.html
 // [UpdateBrowserStream]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_UpdateBrowserStream.html
 // [GetBrowserSession]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html
 // [StopBrowserSession]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html
+// [InvokeBrowser]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_InvokeBrowser.html
 func (c *Client) StartBrowserSession(ctx context.Context, params *StartBrowserSessionInput, optFns ...func(*Options)) (*StartBrowserSessionOutput, error) {
 	if params == nil {
 		params = &StartBrowserSessionInput{}

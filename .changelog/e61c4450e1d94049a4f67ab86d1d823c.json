@@ -1,0 +1,8 @@
+{
+    "id": "e61c4450-e1d9-4049-a4f6-7ab86d1d823c",
+    "type": "feature",
+    "description": "Added support for t3, g6, and g6e instance types for Hybrid Jobs.",
+    "modules": [
+        "service/braket"
+    ]
+}

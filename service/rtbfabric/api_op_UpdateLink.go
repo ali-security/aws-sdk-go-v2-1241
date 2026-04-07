@@ -44,6 +44,9 @@ type UpdateLinkInput struct {
 	// Settings for the application logs.
 	LogSettings *types.LinkLogSettings
 
+	// The timeout value in milliseconds.
+	TimeoutInMillis *int64
+
 	noSmithyDocumentSerde
 }
 

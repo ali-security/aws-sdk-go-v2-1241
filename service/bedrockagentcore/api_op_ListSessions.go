@@ -15,6 +15,8 @@ import (
 // recommend using pagination to ensure that the operation returns quickly and
 // successfully.
 //
+// Empty sessions are automatically deleted after one day.
+//
 // To use this operation, you must have the bedrock-agentcore:ListSessions
 // permission.
 func (c *Client) ListSessions(ctx context.Context, params *ListSessionsInput, optFns ...func(*Options)) (*ListSessionsOutput, error) {

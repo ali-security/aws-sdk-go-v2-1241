@@ -125,6 +125,11 @@ func awsRestjson1_serializeOpDocumentAcceptLinkInput(v *AcceptLinkInput, value s
 		}
 	}
 
+	if v.TimeoutInMillis != nil {
+		ok := object.Key("timeoutInMillis")
+		ok.Long(*v.TimeoutInMillis)
+	}
+
 	return nil
 }
 
@@ -358,6 +363,11 @@ func awsRestjson1_serializeOpDocumentCreateLinkInput(v *CreateLinkInput, value s
 		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.TimeoutInMillis != nil {
+		ok := object.Key("timeoutInMillis")
+		ok.Long(*v.TimeoutInMillis)
 	}
 
 	return nil
@@ -681,6 +691,18 @@ func awsRestjson1_serializeOpDocumentCreateResponderGatewayInput(v *CreateRespon
 	if v.DomainName != nil {
 		ok := object.Key("domainName")
 		ok.String(*v.DomainName)
+	}
+
+	if len(v.GatewayType) > 0 {
+		ok := object.Key("gatewayType")
+		ok.String(string(v.GatewayType))
+	}
+
+	if v.ListenerConfig != nil {
+		ok := object.Key("listenerConfig")
+		if err := awsRestjson1_serializeDocumentListenerConfig(v.ListenerConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ManagedEndpointConfiguration != nil {
@@ -2145,6 +2167,11 @@ func awsRestjson1_serializeOpDocumentUpdateLinkInput(v *UpdateLinkInput, value s
 		}
 	}
 
+	if v.TimeoutInMillis != nil {
+		ok := object.Key("timeoutInMillis")
+		ok.Long(*v.TimeoutInMillis)
+	}
+
 	return nil
 }
 
@@ -2458,6 +2485,13 @@ func awsRestjson1_serializeOpDocumentUpdateResponderGatewayInput(v *UpdateRespon
 		ok.String(*v.DomainName)
 	}
 
+	if v.ListenerConfig != nil {
+		ok := object.Key("listenerConfig")
+		if err := awsRestjson1_serializeDocumentListenerConfig(v.ListenerConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ManagedEndpointConfiguration != nil {
 		ok := object.Key("managedEndpointConfiguration")
 		if err := awsRestjson1_serializeDocumentManagedEndpointConfiguration(v.ManagedEndpointConfiguration, ok); err != nil {
@@ -2764,6 +2798,20 @@ func awsRestjson1_serializeDocumentLinkLogSettings(v *types.LinkLogSettings, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListenerConfig(v *types.ListenerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Protocols != nil {
+		ok := object.Key("protocols")
+		if err := awsRestjson1_serializeDocumentProtocolList(v.Protocols, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentManagedEndpointConfiguration(v types.ManagedEndpointConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2950,6 +2998,17 @@ func awsRestjson1_serializeDocumentOpenRtbAttributeModuleParameters(v *types.Ope
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProtocolList(v []types.Protocol, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

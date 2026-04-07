@@ -21,6 +21,25 @@ func (AutomationStreamStatus) Values() []AutomationStreamStatus {
 	}
 }
 
+type BrowserActionStatus string
+
+// Enum values for BrowserActionStatus
+const (
+	BrowserActionStatusSuccess BrowserActionStatus = "SUCCESS"
+	BrowserActionStatusFailed  BrowserActionStatus = "FAILED"
+)
+
+// Values returns all known values for BrowserActionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BrowserActionStatus) Values() []BrowserActionStatus {
+	return []BrowserActionStatus{
+		"SUCCESS",
+		"FAILED",
+	}
+}
+
 type BrowserEnterprisePolicyType string
 
 // Enum values for BrowserEnterprisePolicyType
@@ -195,6 +214,27 @@ func (MemoryRecordStatus) Values() []MemoryRecordStatus {
 	}
 }
 
+type MouseButton string
+
+// Enum values for MouseButton
+const (
+	MouseButtonLeft   MouseButton = "LEFT"
+	MouseButtonRight  MouseButton = "RIGHT"
+	MouseButtonMiddle MouseButton = "MIDDLE"
+)
+
+// Values returns all known values for MouseButton. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MouseButton) Values() []MouseButton {
+	return []MouseButton{
+		"LEFT",
+		"RIGHT",
+		"MIDDLE",
+	}
+}
+
 type Oauth2FlowType string
 
 // Enum values for Oauth2FlowType
@@ -295,6 +335,23 @@ func (Role) Values() []Role {
 		"USER",
 		"TOOL",
 		"OTHER",
+	}
+}
+
+type ScreenshotFormat string
+
+// Enum values for ScreenshotFormat
+const (
+	ScreenshotFormatPng ScreenshotFormat = "PNG"
+)
+
+// Values returns all known values for ScreenshotFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScreenshotFormat) Values() []ScreenshotFormat {
+	return []ScreenshotFormat{
+		"PNG",
 	}
 }
 

@@ -23506,6 +23506,77 @@ func awsAwsjson11_deserializeDocumentRuntimePlatform(v **types.RuntimePlatform, 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentS3FilesVolumeConfiguration(v **types.S3FilesVolumeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3FilesVolumeConfiguration
+	if *v == nil {
+		sv = &types.S3FilesVolumeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accessPointArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessPointArn = ptr.String(jtv)
+			}
+
+		case "fileSystemArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FileSystemArn = ptr.String(jtv)
+			}
+
+		case "rootDirectory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RootDirectory = ptr.String(jtv)
+			}
+
+		case "transitEncryptionPort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TransitEncryptionPort = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentScale(v **types.Scale, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -28789,6 +28860,11 @@ func awsAwsjson11_deserializeDocumentVolume(v **types.Volume, value interface{})
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "s3filesVolumeConfiguration":
+			if err := awsAwsjson11_deserializeDocumentS3FilesVolumeConfiguration(&sv.S3filesVolumeConfiguration, value); err != nil {
+				return err
 			}
 
 		default:

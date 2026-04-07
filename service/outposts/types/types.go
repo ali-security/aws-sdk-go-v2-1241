@@ -247,6 +247,9 @@ type ComputeAttributes struct {
 	//   - RETIRING - The underlying hardware for the asset is degraded. Capacity for
 	//   new compute resources is reduced. Amazon Web Services sends notifications for
 	//   resources that must be stopped before the asset can be replaced.
+	//
+	//   - INSTALLING - The asset is being installed and can't yet provide capacity
+	//   for new compute resources.
 	State ComputeAssetState
 
 	noSmithyDocumentSerde

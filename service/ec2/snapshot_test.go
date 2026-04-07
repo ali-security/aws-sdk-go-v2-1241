@@ -6434,6 +6434,18 @@ func TestCheckSnapshot_GetCapacityManagerMetricDimensions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCapacityManagerMonitoredTagKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerMonitoredTagKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCapacityManagerMonitoredTagKeys")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCapacityReservationUsage(context.Background(), nil, func(o *Options) {
@@ -9067,6 +9079,18 @@ func TestCheckSnapshot_UnmonitorInstances(t *testing.T) {
 	_, err := svc.UnmonitorInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UnmonitorInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateCapacityManagerMonitoredTagKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCapacityManagerMonitoredTagKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCapacityManagerMonitoredTagKeys")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -15505,6 +15529,18 @@ func TestUpdateSnapshot_GetCapacityManagerMetricDimensions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCapacityManagerMonitoredTagKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerMonitoredTagKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCapacityManagerMonitoredTagKeys")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCapacityReservationUsage(context.Background(), nil, func(o *Options) {
@@ -18138,6 +18174,18 @@ func TestUpdateSnapshot_UnmonitorInstances(t *testing.T) {
 	_, err := svc.UnmonitorInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UnmonitorInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCapacityManagerMonitoredTagKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCapacityManagerMonitoredTagKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCapacityManagerMonitoredTagKeys")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

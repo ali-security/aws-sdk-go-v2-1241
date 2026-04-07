@@ -180,6 +180,18 @@ type LinkLogSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Listener configuration for the protocols (HTTP, HTTPS, or both) accepted by the
+// gateway.
+type ListenerConfig struct {
+
+	// The protocol for connections from clients to the gateway
+	//
+	// This member is required.
+	Protocols []Protocol
+
+	noSmithyDocumentSerde
+}
+
 // Describes a link.
 type ListLinksResponseStructure struct {
 
@@ -216,14 +228,23 @@ type ListLinksResponseStructure struct {
 	// Describes attributes of a link.
 	Attributes *LinkAttributes
 
+	// The connectivity type of the link.
+	ConnectivityType ConnectivityType
+
 	// The direction of the link.
 	Direction LinkDirection
 
 	// Describes the configuration of flow modules.
 	FlowModules []ModuleConfiguration
 
+	// Describes the settings for a link log.
+	LogSettings *LinkLogSettings
+
 	// Describes the configuration of pending flow modules.
 	PendingFlowModules []ModuleConfiguration
+
+	// The public endpoint of the outbound link.
+	PublicEndpoint *string
 
 	// A map of the key-value pairs of the tag or tags to assign to the resource.
 	Tags map[string]string

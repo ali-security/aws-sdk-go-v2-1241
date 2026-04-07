@@ -86,18 +86,6 @@ func TestCheckSnapshot_CancelPolicyGeneration(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_CancelPolicyPreviewJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.CancelPolicyPreviewJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "CancelPolicyPreviewJob")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_CheckAccessNotGranted(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CheckAccessNotGranted(context.Background(), nil, func(o *Options) {
@@ -170,18 +158,6 @@ func TestCheckSnapshot_CreateArchiveRule(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_CreatePolicyPreviewConfiguration(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.CreatePolicyPreviewConfiguration(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "CreatePolicyPreviewConfiguration")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_DeleteAnalyzer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAnalyzer(context.Background(), nil, func(o *Options) {
@@ -199,18 +175,6 @@ func TestCheckSnapshot_DeleteArchiveRule(t *testing.T) {
 	_, err := svc.DeleteArchiveRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteArchiveRule")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_DeletePolicyPreviewConfiguration(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DeletePolicyPreviewConfiguration(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "DeletePolicyPreviewConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -338,30 +302,6 @@ func TestCheckSnapshot_GetGeneratedPolicy(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_GetPolicyPreviewConfiguration(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.GetPolicyPreviewConfiguration(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "GetPolicyPreviewConfiguration")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_GetPolicyPreviewJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.GetPolicyPreviewJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "GetPolicyPreviewJob")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_ListAccessPreviewFindings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAccessPreviewFindings(context.Background(), nil, func(o *Options) {
@@ -458,18 +398,6 @@ func TestCheckSnapshot_ListPolicyGenerations(t *testing.T) {
 	}
 }
 
-func TestCheckSnapshot_ListPolicyPreviewJobs(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.ListPolicyPreviewJobs(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "ListPolicyPreviewJobs")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -487,18 +415,6 @@ func TestCheckSnapshot_StartPolicyGeneration(t *testing.T) {
 	_, err := svc.StartPolicyGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartPolicyGeneration")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCheckSnapshot_StartPolicyPreviewJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.StartPolicyPreviewJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "StartPolicyPreviewJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -613,18 +529,6 @@ func TestUpdateSnapshot_CancelPolicyGeneration(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_CancelPolicyPreviewJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.CancelPolicyPreviewJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "CancelPolicyPreviewJob")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_CheckAccessNotGranted(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CheckAccessNotGranted(context.Background(), nil, func(o *Options) {
@@ -697,18 +601,6 @@ func TestUpdateSnapshot_CreateArchiveRule(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_CreatePolicyPreviewConfiguration(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.CreatePolicyPreviewConfiguration(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "CreatePolicyPreviewConfiguration")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_DeleteAnalyzer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAnalyzer(context.Background(), nil, func(o *Options) {
@@ -726,18 +618,6 @@ func TestUpdateSnapshot_DeleteArchiveRule(t *testing.T) {
 	_, err := svc.DeleteArchiveRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteArchiveRule")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_DeletePolicyPreviewConfiguration(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.DeletePolicyPreviewConfiguration(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "DeletePolicyPreviewConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -865,30 +745,6 @@ func TestUpdateSnapshot_GetGeneratedPolicy(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_GetPolicyPreviewConfiguration(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.GetPolicyPreviewConfiguration(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "GetPolicyPreviewConfiguration")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_GetPolicyPreviewJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.GetPolicyPreviewJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "GetPolicyPreviewJob")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_ListAccessPreviewFindings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListAccessPreviewFindings(context.Background(), nil, func(o *Options) {
@@ -985,18 +841,6 @@ func TestUpdateSnapshot_ListPolicyGenerations(t *testing.T) {
 	}
 }
 
-func TestUpdateSnapshot_ListPolicyPreviewJobs(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.ListPolicyPreviewJobs(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "ListPolicyPreviewJobs")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -1014,18 +858,6 @@ func TestUpdateSnapshot_StartPolicyGeneration(t *testing.T) {
 	_, err := svc.StartPolicyGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartPolicyGeneration")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUpdateSnapshot_StartPolicyPreviewJob(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.StartPolicyPreviewJob(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "StartPolicyPreviewJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,0 +1,8 @@
+{
+    "id": "a003458b-4599-4e51-bc58-f1582a9f4395",
+    "type": "feature",
+    "description": "This release provides the functionality of mounting Amazon S3 Files to Amazon ECS tasks by adding support for the new S3FilesVolumeConfiguration parameter in ECS RegisterTaskDefinition API.",
+    "modules": [
+        "service/ecs"
+    ]
+}

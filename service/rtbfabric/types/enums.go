@@ -2,6 +2,29 @@
 
 package types
 
+type ConnectivityType string
+
+// Enum values for ConnectivityType
+const (
+	ConnectivityTypeDefault         ConnectivityType = "DEFAULT"
+	ConnectivityTypePublicIngress   ConnectivityType = "PUBLIC_INGRESS"
+	ConnectivityTypePublicEgress    ConnectivityType = "PUBLIC_EGRESS"
+	ConnectivityTypeExternalInbound ConnectivityType = "EXTERNAL_INBOUND"
+)
+
+// Values returns all known values for ConnectivityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectivityType) Values() []ConnectivityType {
+	return []ConnectivityType{
+		"DEFAULT",
+		"PUBLIC_INGRESS",
+		"PUBLIC_EGRESS",
+		"EXTERNAL_INBOUND",
+	}
+}
+
 type FilterType string
 
 // Enum values for FilterType
@@ -18,6 +41,25 @@ func (FilterType) Values() []FilterType {
 	return []FilterType{
 		"INCLUDE",
 		"EXCLUDE",
+	}
+}
+
+type GatewayType string
+
+// Enum values for GatewayType
+const (
+	GatewayTypeExternal GatewayType = "EXTERNAL"
+	GatewayTypeInternal GatewayType = "INTERNAL"
+)
+
+// Values returns all known values for GatewayType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayType) Values() []GatewayType {
+	return []GatewayType{
+		"EXTERNAL",
+		"INTERNAL",
 	}
 }
 

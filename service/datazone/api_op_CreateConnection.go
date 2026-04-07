@@ -48,6 +48,9 @@ type CreateConnectionInput struct {
 	// of the request.
 	ClientToken *string
 
+	// The configurations of the connection.
+	Configurations []types.Configuration
+
 	// A connection description.
 	Description *string
 
@@ -97,6 +100,9 @@ type CreateConnectionOutput struct {
 	//
 	// This member is required.
 	Type types.ConnectionType
+
+	// The configurations of the connection.
+	Configurations []types.Configuration
 
 	// The connection description.
 	Description *string

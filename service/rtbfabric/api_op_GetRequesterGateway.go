@@ -4,6 +4,7 @@ package rtbfabric
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
@@ -558,6 +559,13 @@ func requesterGatewayDeletedStateRetryable(ctx context.Context, input *GetReques
 		var pathValue string
 		pathValue = string(v1)
 		if pathValue == expectedValue {
+			return false, nil
+		}
+	}
+
+	if err != nil {
+		var errorType *types.ResourceNotFoundException
+		if errors.As(err, &errorType) {
 			return false, nil
 		}
 	}

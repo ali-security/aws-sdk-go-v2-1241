@@ -179,6 +179,15 @@ func awsRestjson1_deserializeOpDocumentAcceptLinkOutput(v **AcceptLinkOutput, va
 				return err
 			}
 
+		case "connectivityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectivityType to be of type string, got %T instead", value)
+				}
+				sv.ConnectivityType = types.ConnectivityType(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -225,6 +234,11 @@ func awsRestjson1_deserializeOpDocumentAcceptLinkOutput(v **AcceptLinkOutput, va
 					return fmt.Errorf("expected LinkId to be of type string, got %T instead", value)
 				}
 				sv.LinkId = ptr.String(jtv)
+			}
+
+		case "logSettings":
+			if err := awsRestjson1_deserializeDocumentLinkLogSettings(&sv.LogSettings, value); err != nil {
+				return err
 			}
 
 		case "peerGatewayId":
@@ -637,6 +651,15 @@ func awsRestjson1_deserializeOpDocumentCreateLinkOutput(v **CreateLinkOutput, va
 				return err
 			}
 
+		case "connectivityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectivityType to be of type string, got %T instead", value)
+				}
+				sv.ConnectivityType = types.ConnectivityType(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -692,6 +715,11 @@ func awsRestjson1_deserializeOpDocumentCreateLinkOutput(v **CreateLinkOutput, va
 					return fmt.Errorf("expected LinkId to be of type string, got %T instead", value)
 				}
 				sv.LinkId = ptr.String(jtv)
+			}
+
+		case "logSettings":
+			if err := awsRestjson1_deserializeDocumentLinkLogSettings(&sv.LogSettings, value); err != nil {
+				return err
 			}
 
 		case "peerGatewayId":
@@ -1273,6 +1301,15 @@ func awsRestjson1_deserializeOpDocumentCreateResponderGatewayOutput(v **CreateRe
 
 	for key, value := range shape {
 		switch key {
+		case "externalInboundEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
+				}
+				sv.ExternalInboundEndpoint = ptr.String(jtv)
+			}
+
 		case "gatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1280,6 +1317,11 @@ func awsRestjson1_deserializeOpDocumentCreateResponderGatewayOutput(v **CreateRe
 					return fmt.Errorf("expected GatewayId to be of type string, got %T instead", value)
 				}
 				sv.GatewayId = ptr.String(jtv)
+			}
+
+		case "listenerConfig":
+			if err := awsRestjson1_deserializeDocumentListenerConfig(&sv.ListenerConfig, value); err != nil {
+				return err
 			}
 
 		case "status":
@@ -2349,6 +2391,15 @@ func awsRestjson1_deserializeOpDocumentGetInboundExternalLinkOutput(v **GetInbou
 				return err
 			}
 
+		case "connectivityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectivityType to be of type string, got %T instead", value)
+				}
+				sv.ConnectivityType = types.ConnectivityType(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2604,6 +2655,15 @@ func awsRestjson1_deserializeOpDocumentGetLinkOutput(v **GetLinkOutput, value in
 				return err
 			}
 
+		case "connectivityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectivityType to be of type string, got %T instead", value)
+				}
+				sv.ConnectivityType = types.ConnectivityType(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2641,6 +2701,15 @@ func awsRestjson1_deserializeOpDocumentGetLinkOutput(v **GetLinkOutput, value in
 					return fmt.Errorf("expected GatewayId to be of type string, got %T instead", value)
 				}
 				sv.GatewayId = ptr.String(jtv)
+			}
+
+		case "httpResponderAllowed":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.HttpResponderAllowed = ptr.Bool(jtv)
 			}
 
 		case "linkId":
@@ -2683,6 +2752,19 @@ func awsRestjson1_deserializeOpDocumentGetLinkOutput(v **GetLinkOutput, value in
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		case "timeoutInMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LinkTimeoutInMillis to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutInMillis = ptr.Int64(i64)
 			}
 
 		case "updatedAt":
@@ -2860,6 +2942,20 @@ func awsRestjson1_deserializeOpDocumentGetOutboundExternalLinkOutput(v **GetOutb
 
 	for key, value := range shape {
 		switch key {
+		case "attributes":
+			if err := awsRestjson1_deserializeDocumentLinkAttributes(&sv.Attributes, value); err != nil {
+				return err
+			}
+
+		case "connectivityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectivityType to be of type string, got %T instead", value)
+				}
+				sv.ConnectivityType = types.ConnectivityType(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2874,6 +2970,11 @@ func awsRestjson1_deserializeOpDocumentGetOutboundExternalLinkOutput(v **GetOutb
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "flowModules":
+			if err := awsRestjson1_deserializeDocumentModuleConfigurationList(&sv.FlowModules, value); err != nil {
+				return err
 			}
 
 		case "gatewayId":
@@ -2896,6 +2997,11 @@ func awsRestjson1_deserializeOpDocumentGetOutboundExternalLinkOutput(v **GetOutb
 
 		case "logSettings":
 			if err := awsRestjson1_deserializeDocumentLinkLogSettings(&sv.LogSettings, value); err != nil {
+				return err
+			}
+
+		case "pendingFlowModules":
+			if err := awsRestjson1_deserializeDocumentModuleConfigurationList(&sv.PendingFlowModules, value); err != nil {
 				return err
 			}
 
@@ -3421,6 +3527,15 @@ func awsRestjson1_deserializeOpDocumentGetResponderGatewayOutput(v **GetResponde
 				sv.DomainName = ptr.String(jtv)
 			}
 
+		case "externalInboundEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DomainName to be of type string, got %T instead", value)
+				}
+				sv.ExternalInboundEndpoint = ptr.String(jtv)
+			}
+
 		case "gatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3428,6 +3543,15 @@ func awsRestjson1_deserializeOpDocumentGetResponderGatewayOutput(v **GetResponde
 					return fmt.Errorf("expected GatewayId to be of type string, got %T instead", value)
 				}
 				sv.GatewayId = ptr.String(jtv)
+			}
+
+		case "gatewayType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GatewayType to be of type string, got %T instead", value)
+				}
+				sv.GatewayType = types.GatewayType(jtv)
 			}
 
 		case "inboundLinksCount":
@@ -3441,6 +3565,11 @@ func awsRestjson1_deserializeOpDocumentGetResponderGatewayOutput(v **GetResponde
 					return err
 				}
 				sv.InboundLinksCount = ptr.Int32(int32(i64))
+			}
+
+		case "listenerConfig":
+			if err := awsRestjson1_deserializeDocumentListenerConfig(&sv.ListenerConfig, value); err != nil {
+				return err
 			}
 
 		case "managedEndpointConfiguration":
@@ -4369,6 +4498,15 @@ func awsRestjson1_deserializeOpDocumentRejectLinkOutput(v **RejectLinkOutput, va
 				return err
 			}
 
+		case "connectivityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectivityType to be of type string, got %T instead", value)
+				}
+				sv.ConnectivityType = types.ConnectivityType(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4415,6 +4553,11 @@ func awsRestjson1_deserializeOpDocumentRejectLinkOutput(v **RejectLinkOutput, va
 					return fmt.Errorf("expected LinkId to be of type string, got %T instead", value)
 				}
 				sv.LinkId = ptr.String(jtv)
+			}
+
+		case "logSettings":
+			if err := awsRestjson1_deserializeDocumentLinkLogSettings(&sv.LogSettings, value); err != nil {
+				return err
 			}
 
 		case "peerGatewayId":
@@ -6541,6 +6684,42 @@ func awsRestjson1_deserializeDocumentLinkLogSettings(v **types.LinkLogSettings, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentListenerConfig(v **types.ListenerConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ListenerConfig
+	if *v == nil {
+		sv = &types.ListenerConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "protocols":
+			if err := awsRestjson1_deserializeDocumentProtocolList(&sv.Protocols, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentListLinksResponseStructure(v **types.ListLinksResponseStructure, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6566,6 +6745,15 @@ func awsRestjson1_deserializeDocumentListLinksResponseStructure(v **types.ListLi
 		case "attributes":
 			if err := awsRestjson1_deserializeDocumentLinkAttributes(&sv.Attributes, value); err != nil {
 				return err
+			}
+
+		case "connectivityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectivityType to be of type string, got %T instead", value)
+				}
+				sv.ConnectivityType = types.ConnectivityType(jtv)
 			}
 
 		case "createdAt":
@@ -6616,6 +6804,11 @@ func awsRestjson1_deserializeDocumentListLinksResponseStructure(v **types.ListLi
 				sv.LinkId = ptr.String(jtv)
 			}
 
+		case "logSettings":
+			if err := awsRestjson1_deserializeDocumentLinkLogSettings(&sv.LogSettings, value); err != nil {
+				return err
+			}
+
 		case "peerGatewayId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6628,6 +6821,15 @@ func awsRestjson1_deserializeDocumentListLinksResponseStructure(v **types.ListLi
 		case "pendingFlowModules":
 			if err := awsRestjson1_deserializeDocumentModuleConfigurationList(&sv.PendingFlowModules, value); err != nil {
 				return err
+			}
+
+		case "publicEndpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected URL to be of type string, got %T instead", value)
+				}
+				sv.PublicEndpoint = ptr.String(jtv)
 			}
 
 		case "status":
@@ -7084,6 +7286,42 @@ func awsRestjson1_deserializeDocumentOpenRtbAttributeModuleParameters(v **types.
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProtocolList(v *[]types.Protocol, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Protocol
+	if *v == nil {
+		cv = []types.Protocol{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Protocol
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Protocol to be of type string, got %T instead", value)
+			}
+			col = types.Protocol(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

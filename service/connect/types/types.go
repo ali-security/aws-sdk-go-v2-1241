@@ -202,6 +202,11 @@ type AgentInfo struct {
 	// List of StateTransition for a supervisor.
 	StateTransitions []StateTransition
 
+	// The voice enhancement mode used by the agent as the call is ending. Valid
+	// values: VOICE_ISOLATION | NOISE_SUPPRESSION | NONE. A value of null indicates
+	// this mode has not yet been set for this user.
+	VoiceEnhancementMode VoiceEnhancementMode
+
 	noSmithyDocumentSerde
 }
 

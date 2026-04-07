@@ -102,6 +102,183 @@ type BranchFilter struct {
 	noSmithyDocumentSerde
 }
 
+// The browser action to perform. Exactly one member must be set per request.
+//
+// The following types satisfy this interface:
+//
+//	BrowserActionMemberKeyPress
+//	BrowserActionMemberKeyShortcut
+//	BrowserActionMemberKeyType
+//	BrowserActionMemberMouseClick
+//	BrowserActionMemberMouseDrag
+//	BrowserActionMemberMouseMove
+//	BrowserActionMemberMouseScroll
+//	BrowserActionMemberScreenshot
+type BrowserAction interface {
+	isBrowserAction()
+}
+
+// Press a key one or more times.
+type BrowserActionMemberKeyPress struct {
+	Value KeyPressArguments
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionMemberKeyPress) isBrowserAction() {}
+
+// Press a key combination.
+type BrowserActionMemberKeyShortcut struct {
+	Value KeyShortcutArguments
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionMemberKeyShortcut) isBrowserAction() {}
+
+// Type a string of text.
+type BrowserActionMemberKeyType struct {
+	Value KeyTypeArguments
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionMemberKeyType) isBrowserAction() {}
+
+// Click at the specified coordinates.
+type BrowserActionMemberMouseClick struct {
+	Value MouseClickArguments
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionMemberMouseClick) isBrowserAction() {}
+
+// Drag from a start position to an end position.
+type BrowserActionMemberMouseDrag struct {
+	Value MouseDragArguments
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionMemberMouseDrag) isBrowserAction() {}
+
+// Move the cursor to the specified coordinates.
+type BrowserActionMemberMouseMove struct {
+	Value MouseMoveArguments
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionMemberMouseMove) isBrowserAction() {}
+
+// Scroll at the specified position.
+type BrowserActionMemberMouseScroll struct {
+	Value MouseScrollArguments
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionMemberMouseScroll) isBrowserAction() {}
+
+// Capture a full-screen screenshot.
+type BrowserActionMemberScreenshot struct {
+	Value ScreenshotArguments
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionMemberScreenshot) isBrowserAction() {}
+
+// The result of a browser action execution. Exactly one member is set, matching
+// the action that was performed.
+//
+// The following types satisfy this interface:
+//
+//	BrowserActionResultMemberKeyPress
+//	BrowserActionResultMemberKeyShortcut
+//	BrowserActionResultMemberKeyType
+//	BrowserActionResultMemberMouseClick
+//	BrowserActionResultMemberMouseDrag
+//	BrowserActionResultMemberMouseMove
+//	BrowserActionResultMemberMouseScroll
+//	BrowserActionResultMemberScreenshot
+type BrowserActionResult interface {
+	isBrowserActionResult()
+}
+
+// The result of a key press action.
+type BrowserActionResultMemberKeyPress struct {
+	Value KeyPressResult
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionResultMemberKeyPress) isBrowserActionResult() {}
+
+// The result of a key shortcut action.
+type BrowserActionResultMemberKeyShortcut struct {
+	Value KeyShortcutResult
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionResultMemberKeyShortcut) isBrowserActionResult() {}
+
+// The result of a key type action.
+type BrowserActionResultMemberKeyType struct {
+	Value KeyTypeResult
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionResultMemberKeyType) isBrowserActionResult() {}
+
+// The result of a mouse click action.
+type BrowserActionResultMemberMouseClick struct {
+	Value MouseClickResult
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionResultMemberMouseClick) isBrowserActionResult() {}
+
+// The result of a mouse drag action.
+type BrowserActionResultMemberMouseDrag struct {
+	Value MouseDragResult
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionResultMemberMouseDrag) isBrowserActionResult() {}
+
+// The result of a mouse move action.
+type BrowserActionResultMemberMouseMove struct {
+	Value MouseMoveResult
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionResultMemberMouseMove) isBrowserActionResult() {}
+
+// The result of a mouse scroll action.
+type BrowserActionResultMemberMouseScroll struct {
+	Value MouseScrollResult
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionResultMemberMouseScroll) isBrowserActionResult() {}
+
+// The result of a screenshot action.
+type BrowserActionResultMemberScreenshot struct {
+	Value ScreenshotResult
+
+	noSmithyDocumentSerde
+}
+
+func (*BrowserActionResultMemberScreenshot) isBrowserActionResult() {}
+
 // Browser enterprise policy configuration.
 type BrowserEnterprisePolicy struct {
 
@@ -904,6 +1081,84 @@ type InvokeAgentRuntimeCommandStreamOutputMemberChunk struct {
 
 func (*InvokeAgentRuntimeCommandStreamOutputMemberChunk) isInvokeAgentRuntimeCommandStreamOutput() {}
 
+// Arguments for a key press action.
+type KeyPressArguments struct {
+
+	// The key name to press (for example, enter , tab , escape ).
+	//
+	// This member is required.
+	Key *string
+
+	// The number of times to press the key. Valid range: 1–100. Defaults to 1.
+	Presses *int32
+
+	noSmithyDocumentSerde
+}
+
+// The result of a key press action.
+type KeyPressResult struct {
+
+	// The status of the action execution.
+	//
+	// This member is required.
+	Status BrowserActionStatus
+
+	// The error message. Present only when the action failed.
+	Error *string
+
+	noSmithyDocumentSerde
+}
+
+// Arguments for a key shortcut action.
+type KeyShortcutArguments struct {
+
+	// The key combination to press (for example, ["ctrl", "s"] ). Maximum 5 keys.
+	//
+	// This member is required.
+	Keys []string
+
+	noSmithyDocumentSerde
+}
+
+// The result of a key shortcut action.
+type KeyShortcutResult struct {
+
+	// The status of the action execution.
+	//
+	// This member is required.
+	Status BrowserActionStatus
+
+	// The error message. Present only when the action failed.
+	Error *string
+
+	noSmithyDocumentSerde
+}
+
+// Arguments for a key type action.
+type KeyTypeArguments struct {
+
+	// The text string to type. Maximum length: 10,000 characters.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// The result of a key type action.
+type KeyTypeResult struct {
+
+	// The status of the action execution.
+	//
+	// This member is required.
+	Status BrowserActionStatus
+
+	// The error message. Present only when the action failed.
+	Error *string
+
+	noSmithyDocumentSerde
+}
+
 // Left expression of the event metadata filter.
 //
 // The following types satisfy this interface:
@@ -1174,6 +1429,152 @@ type MetadataValueMemberStringValue struct {
 
 func (*MetadataValueMemberStringValue) isMetadataValue() {}
 
+// Arguments for a mouse click action.
+type MouseClickArguments struct {
+
+	// The X coordinate on screen where the click occurs.
+	//
+	// This member is required.
+	X *int32
+
+	// The Y coordinate on screen where the click occurs.
+	//
+	// This member is required.
+	Y *int32
+
+	// The mouse button to use. Defaults to LEFT .
+	Button MouseButton
+
+	// The number of clicks to perform. Valid range: 1–10. Defaults to 1.
+	ClickCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// The result of a mouse click action.
+type MouseClickResult struct {
+
+	// The status of the action execution.
+	//
+	// This member is required.
+	Status BrowserActionStatus
+
+	// The error message. Present only when the action failed.
+	Error *string
+
+	noSmithyDocumentSerde
+}
+
+// Arguments for a mouse drag action.
+type MouseDragArguments struct {
+
+	// The ending X coordinate for the drag.
+	//
+	// This member is required.
+	EndX *int32
+
+	// The ending Y coordinate for the drag.
+	//
+	// This member is required.
+	EndY *int32
+
+	// The starting X coordinate for the drag.
+	//
+	// This member is required.
+	StartX *int32
+
+	// The starting Y coordinate for the drag.
+	//
+	// This member is required.
+	StartY *int32
+
+	// The mouse button to use for the drag. Defaults to LEFT .
+	Button MouseButton
+
+	noSmithyDocumentSerde
+}
+
+// The result of a mouse drag action.
+type MouseDragResult struct {
+
+	// The status of the action execution.
+	//
+	// This member is required.
+	Status BrowserActionStatus
+
+	// The error message. Present only when the action failed.
+	Error *string
+
+	noSmithyDocumentSerde
+}
+
+// Arguments for a mouse move action.
+type MouseMoveArguments struct {
+
+	// The target X coordinate on screen.
+	//
+	// This member is required.
+	X *int32
+
+	// The target Y coordinate on screen.
+	//
+	// This member is required.
+	Y *int32
+
+	noSmithyDocumentSerde
+}
+
+// The result of a mouse move action.
+type MouseMoveResult struct {
+
+	// The status of the action execution.
+	//
+	// This member is required.
+	Status BrowserActionStatus
+
+	// The error message. Present only when the action failed.
+	Error *string
+
+	noSmithyDocumentSerde
+}
+
+// Arguments for a mouse scroll action.
+type MouseScrollArguments struct {
+
+	// The X coordinate on screen where the scroll occurs.
+	//
+	// This member is required.
+	X *int32
+
+	// The Y coordinate on screen where the scroll occurs.
+	//
+	// This member is required.
+	Y *int32
+
+	// The horizontal scroll delta. Valid range: -1000 to 1000.
+	DeltaX *int32
+
+	// The vertical scroll delta. Valid range: -1000 to 1000. Negative values scroll
+	// down.
+	DeltaY *int32
+
+	noSmithyDocumentSerde
+}
+
+// The result of a mouse scroll action.
+type MouseScrollResult struct {
+
+	// The status of the action execution.
+	//
+	// This member is required.
+	Status BrowserActionStatus
+
+	// The error message. Present only when the action failed.
+	Error *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the payload content for an event.
 //
 // The following types satisfy this interface:
@@ -1370,6 +1771,32 @@ type S3Location struct {
 
 	// The name of the Amazon S3 version ID where the resource is stored (Optional).
 	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Arguments for a screenshot action.
+type ScreenshotArguments struct {
+
+	// The image format for the screenshot. Defaults to PNG .
+	Format ScreenshotFormat
+
+	noSmithyDocumentSerde
+}
+
+// The result of a screenshot action.
+type ScreenshotResult struct {
+
+	// The status of the action execution.
+	//
+	// This member is required.
+	Status BrowserActionStatus
+
+	// The base64-encoded image data. Present only when the action succeeded.
+	Data []byte
+
+	// The error message. Present only when the action failed.
+	Error *string
 
 	noSmithyDocumentSerde
 }
@@ -1653,6 +2080,8 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isBrowserAction()                         {}
+func (*UnknownUnionMember) isBrowserActionResult()                   {}
 func (*UnknownUnionMember) isCertificateLocation()                   {}
 func (*UnknownUnionMember) isCodeInterpreterStreamOutput()           {}
 func (*UnknownUnionMember) isContent()                               {}

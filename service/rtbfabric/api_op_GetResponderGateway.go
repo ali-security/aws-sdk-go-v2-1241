@@ -4,6 +4,7 @@ package rtbfabric
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
@@ -89,8 +90,17 @@ type GetResponderGatewayOutput struct {
 	// The domain name of the responder gateway.
 	DomainName *string
 
+	// The external inbound endpoint for the responder gateway.
+	ExternalInboundEndpoint *string
+
+	// The type of gateway. Valid values are EXTERNAL or INTERNAL .
+	GatewayType types.GatewayType
+
 	// The count of inbound links for the responder gateway.
 	InboundLinksCount *int32
+
+	// The listener configuration for the responder gateway.
+	ListenerConfig *types.ListenerConfig
 
 	// The configuration of the managed endpoint.
 	ManagedEndpointConfiguration types.ManagedEndpointConfiguration
@@ -575,6 +585,13 @@ func responderGatewayDeletedStateRetryable(ctx context.Context, input *GetRespon
 		var pathValue string
 		pathValue = string(v1)
 		if pathValue == expectedValue {
+			return false, nil
+		}
+	}
+
+	if err != nil {
+		var errorType *types.ResourceNotFoundException
+		if errors.As(err, &errorType) {
 			return false, nil
 		}
 	}

@@ -67,6 +67,13 @@ type CreateResponderGatewayInput struct {
 	// The domain name for the responder gateway.
 	DomainName *string
 
+	// The type of gateway. Valid values are EXTERNAL or INTERNAL .
+	GatewayType types.GatewayType
+
+	// Listener configuration for the protocols (HTTP, HTTPS, or both) accepted by the
+	// gateway.
+	ListenerConfig *types.ListenerConfig
+
 	// The configuration for the managed endpoint.
 	ManagedEndpointConfiguration types.ManagedEndpointConfiguration
 
@@ -90,6 +97,12 @@ type CreateResponderGatewayOutput struct {
 	//
 	// This member is required.
 	Status types.ResponderGatewayStatus
+
+	// The external inbound endpoint for the responder gateway.
+	ExternalInboundEndpoint *string
+
+	// The listener configuration for the responder gateway.
+	ListenerConfig *types.ListenerConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

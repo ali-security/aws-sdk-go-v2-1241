@@ -39,6 +39,19 @@ type ListAssetsInput struct {
 	// This member is required.
 	OutpostIdentifier *string
 
+	// Filters the results by asset type.
+	//
+	//   - COMPUTE - Server asset used for customer compute
+	//
+	//   - STORAGE - Server asset used by storage services
+	//
+	//   - POWERSHELF - Powershelf assets
+	//
+	//   - SWITCH - Switch assets
+	//
+	//   - NETWORKING - Asset managed by Amazon Web Services for networking purposes
+	AssetTypeFilter []types.AssetType
+
 	// Filters the results by the host ID of a Dedicated Host.
 	HostIdFilter []string
 

@@ -991,6 +991,18 @@ type ConfigurableEnvironmentAction struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of a connection.
+type Configuration struct {
+
+	// The classification of the connection configuration.
+	Classification *string
+
+	// The properties of the connection configuration.
+	Properties map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The credentials of a connection.
 type ConnectionCredentials struct {
 
@@ -1386,6 +1398,9 @@ type ConnectionSummary struct {
 	//
 	// This member is required.
 	Type ConnectionType
+
+	// The configurations of a connection summary.
+	Configurations []Configuration
 
 	// The environment ID of a connection.
 	EnvironmentId *string
@@ -4595,6 +4610,9 @@ type PhysicalEndpoint struct {
 	// The Amazon Web Services Glue connection name.
 	GlueConnectionName *string
 
+	// The Amazon Web Services Glue connection names in the physical endpoint.
+	GlueConnectionNames []string
+
 	// The host in the physical endpoints of a connection.
 	Host *string
 
@@ -5827,6 +5845,9 @@ type S3PropertiesInput struct {
 	// This member is required.
 	S3Uri *string
 
+	// Specifies whether to register the Amazon S3 Access Grant location.
+	RegisterS3AccessGrantLocation *bool
+
 	// The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties
 	// of a connection.
 	S3AccessGrantLocationId *string
@@ -5845,6 +5866,9 @@ type S3PropertiesOutput struct {
 	// The error message that gets displayed.
 	ErrorMessage *string
 
+	// Specifies whether to register the Amazon S3 Access Grant location.
+	RegisterS3AccessGrantLocation *bool
+
 	// The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties
 	// of a connection.
 	S3AccessGrantLocationId *string
@@ -5862,6 +5886,9 @@ type S3PropertiesPatch struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	// Specifies whether to register the Amazon S3 Access Grant location.
+	RegisterS3AccessGrantLocation *bool
 
 	// The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties
 	// patch of a connection.
@@ -6238,8 +6265,14 @@ type SparkGluePropertiesInput struct {
 	AdditionalArgs *SparkGlueArgs
 
 	// The Amazon Web Services Glue connection name in the Spark Amazon Web Services
-	// Glue properties.
+	// Glue properties. Specify either glueConnectionName or glueConnectionNames , but
+	// not both.
 	GlueConnectionName *string
+
+	// The Amazon Web Services Glue connection names in the Spark Amazon Web Services
+	// Glue properties. Specify either glueConnectionName or glueConnectionNames , but
+	// not both.
+	GlueConnectionNames []string
 
 	// The Amazon Web Services Glue version in the Spark Amazon Web Services Glue
 	// properties.
@@ -6272,6 +6305,10 @@ type SparkGluePropertiesOutput struct {
 	// The Amazon Web Services Glue connection name in the Spark Amazon Web Services
 	// Glue properties.
 	GlueConnectionName *string
+
+	// The Amazon Web Services Glue connection names in the Spark Amazon Web Services
+	// Glue properties.
+	GlueConnectionNames []string
 
 	// The Amazon Web Services Glue version in the Spark Amazon Web Services Glue
 	// properties.

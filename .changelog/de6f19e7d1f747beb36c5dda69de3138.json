@@ -1,0 +1,8 @@
+{
+    "id": "de6f19e7-d1f7-47be-b36c-5dda69de3138",
+    "type": "feature",
+    "description": "This change allows listAssets to surface pending and non-compute asset information. Adds the INSTALLING asset state enum and the STORAGE, POWERSHELF, SWITCH, and NETWORKING AssetTypes.",
+    "modules": [
+        "service/outposts"
+    ]
+}
