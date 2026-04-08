@@ -1,8 +1,0 @@
-{
-    "id": "f1143451-ef51-4db8-a239-fb67716f21a3",
-    "type": "feature",
-    "description": "Adding EKS specific backup vault notification types for AWS Backup.",
-    "modules": [
-        "service/backup"
-    ]
-}

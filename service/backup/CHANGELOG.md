@@ -1,3 +1,7 @@
+# v1.55.0 (2026-04-08)
+
+* **Feature**: Adding EKS specific backup vault notification types for AWS Backup.
+
 # v1.54.11 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

@@ -1,8 +1,0 @@
-{
-    "id": "2fdc0f81-67b0-4c37-afb7-76e2d9f50764",
-    "type": "feature",
-    "description": "This changes adds support for modifying the replication configuration to support data replication using IPv6.",
-    "modules": [
-        "service/drs"
-    ]
-}

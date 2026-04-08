@@ -1,3 +1,22 @@
+# Release (2026-04-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.55.0](service/backup/CHANGELOG.md#v1550-2026-04-08)
+  * **Feature**: Adding EKS specific backup vault notification types for AWS Backup.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.37.0](service/drs/CHANGELOG.md#v1370-2026-04-08)
+  * **Feature**: This changes adds support for modifying the replication configuration to support data replication using IPv6.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.57.0](service/ecr/CHANGELOG.md#v1570-2026-04-08)
+  * **Feature**: Add UnableToListUpstreamImageReferrersException in ListImageReferrers
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.34.0](service/ivsrealtime/CHANGELOG.md#v1340-2026-04-08)
+  * **Feature**: Adds support for Amazon IVS real-time streaming redundant ingest.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacediscovery`: [v1.0.0](service/marketplacediscovery/CHANGELOG.md#v100-2026-04-08)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Marketplace Discovery API provides an interface that enables programmatic access to the AWS Marketplace catalog, including searching and browsing listings, retrieving product details and fulfillment options, and accessing public and private offer pricing and terms.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.95.0](service/medialive/CHANGELOG.md#v1950-2026-04-08)
+  * **Feature**: MediaLive is adding support for MediaConnect Router by supporting a new output type called MEDIACONNECT ROUTER. This new output type will provide seamless encrypted transport between your MediaLive channel and MediaConnect Router.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.59.0](service/outposts/CHANGELOG.md#v1590-2026-04-08)
+  * **Feature**: Add AWS Outposts APIs to view renewal pricing options and submit renewal requests for Outpost contracts
+
 # Release (2026-04-07)
 
 ## General Highlights

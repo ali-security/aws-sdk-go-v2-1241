@@ -1,3 +1,7 @@
+# v1.59.0 (2026-04-08)
+
+* **Feature**: Add AWS Outposts APIs to view renewal pricing options and submit renewal requests for Outpost contracts
+
 # v1.58.0 (2026-04-07)
 
 * **Feature**: This change allows listAssets to surface pending and non-compute asset information. Adds the INSTALLING asset state enum and the STORAGE, POWERSHELF, SWITCH, and NETWORKING AssetTypes.

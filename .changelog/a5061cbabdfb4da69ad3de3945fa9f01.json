@@ -1,8 +1,0 @@
-{
-    "id": "a5061cba-bdfb-4da6-9ad3-de3945fa9f01",
-    "type": "feature",
-    "description": "MediaLive is adding support for MediaConnect Router by supporting a new output type called MEDIACONNECT ROUTER. This new output type will provide seamless encrypted transport between your MediaLive channel and MediaConnect Router.",
-    "modules": [
-        "service/medialive"
-    ]
-}
