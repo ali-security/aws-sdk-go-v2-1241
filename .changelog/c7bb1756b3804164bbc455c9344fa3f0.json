@@ -1,0 +1,8 @@
+{
+    "id": "c7bb1756-b380-4164-bbc4-55c9344fa3f0",
+    "type": "feature",
+    "description": "AWS Marketplace Discovery API provides an interface that enables programmatic access to the AWS Marketplace catalog, including searching and browsing listings, retrieving product details and fulfillment options, and accessing public and private offer pricing and terms.",
+    "modules": [
+        "service/marketplacediscovery"
+    ]
+}

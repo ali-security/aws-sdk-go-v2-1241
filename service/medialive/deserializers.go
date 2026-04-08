@@ -26916,6 +26916,40 @@ func awsRestjson1_deserializeDocument__listOfMediaConnectFlow(v *[]types.MediaCo
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfMediaConnectRouterOutputDestinationSettings(v *[]types.MediaConnectRouterOutputDestinationSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MediaConnectRouterOutputDestinationSettings
+	if *v == nil {
+		cv = []types.MediaConnectRouterOutputDestinationSettings{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MediaConnectRouterOutputDestinationSettings
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMediaConnectRouterOutputDestinationSettings(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfMediaPackageAdditionalDestinations(v *[]types.MediaPackageAdditionalDestinations, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -41665,6 +41699,222 @@ func awsRestjson1_deserializeDocumentMediaConnectFlow(v **types.MediaConnectFlow
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMediaConnectRouterContainerSettings(v **types.MediaConnectRouterContainerSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaConnectRouterContainerSettings
+	if *v == nil {
+		sv = &types.MediaConnectRouterContainerSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "m2tsSettings":
+			if err := awsRestjson1_deserializeDocumentM2tsSettings(&sv.M2tsSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaConnectRouterGroupSettings(v **types.MediaConnectRouterGroupSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaConnectRouterGroupSettings
+	if *v == nil {
+		sv = &types.MediaConnectRouterGroupSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "availabilityZones":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.AvailabilityZones, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnectionMap(v **types.MediaConnectRouterOutputConnectionMap, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaConnectRouterOutputConnectionMap
+	if *v == nil {
+		sv = &types.MediaConnectRouterOutputConnectionMap{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "pipeline0":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Pipeline0 = ptr.String(jtv)
+			}
+
+		case "pipeline1":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Pipeline1 = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaConnectRouterOutputDestinationSettings(v **types.MediaConnectRouterOutputDestinationSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaConnectRouterOutputDestinationSettings
+	if *v == nil {
+		sv = &types.MediaConnectRouterOutputDestinationSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "encryptionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaConnectRouterOutputEncryptionType to be of type string, got %T instead", value)
+				}
+				sv.EncryptionType = types.MediaConnectRouterOutputEncryptionType(jtv)
+			}
+
+		case "secretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaConnectRouterOutputSettings(v **types.MediaConnectRouterOutputSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaConnectRouterOutputSettings
+	if *v == nil {
+		sv = &types.MediaConnectRouterOutputSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectedRouterInputs":
+			if err := awsRestjson1_deserializeDocumentMediaConnectRouterOutputConnectionMap(&sv.ConnectedRouterInputs, value); err != nil {
+				return err
+			}
+
+		case "containerSettings":
+			if err := awsRestjson1_deserializeDocumentMediaConnectRouterContainerSettings(&sv.ContainerSettings, value); err != nil {
+				return err
+			}
+
+		case "destination":
+			if err := awsRestjson1_deserializeDocumentOutputLocationRef(&sv.Destination, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMediaPackageAdditionalDestinations(v **types.MediaPackageAdditionalDestinations, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -45334,6 +45584,11 @@ func awsRestjson1_deserializeDocumentOutputDestination(v **types.OutputDestinati
 				return err
 			}
 
+		case "mediaConnectRouterSettings":
+			if err := awsRestjson1_deserializeDocument__listOfMediaConnectRouterOutputDestinationSettings(&sv.MediaConnectRouterSettings, value); err != nil {
+				return err
+			}
+
 		case "mediaPackageSettings":
 			if err := awsRestjson1_deserializeDocument__listOfMediaPackageOutputDestinationSettings(&sv.MediaPackageSettings, value); err != nil {
 				return err
@@ -45522,6 +45777,11 @@ func awsRestjson1_deserializeDocumentOutputGroupSettings(v **types.OutputGroupSe
 				return err
 			}
 
+		case "mediaConnectRouterGroupSettings":
+			if err := awsRestjson1_deserializeDocumentMediaConnectRouterGroupSettings(&sv.MediaConnectRouterGroupSettings, value); err != nil {
+				return err
+			}
+
 		case "mediaPackageGroupSettings":
 			if err := awsRestjson1_deserializeDocumentMediaPackageGroupSettings(&sv.MediaPackageGroupSettings, value); err != nil {
 				return err
@@ -45686,6 +45946,11 @@ func awsRestjson1_deserializeDocumentOutputSettings(v **types.OutputSettings, va
 
 		case "hlsOutputSettings":
 			if err := awsRestjson1_deserializeDocumentHlsOutputSettings(&sv.HlsOutputSettings, value); err != nil {
+				return err
+			}
+
+		case "mediaConnectRouterOutputSettings":
+			if err := awsRestjson1_deserializeDocumentMediaConnectRouterOutputSettings(&sv.MediaConnectRouterOutputSettings, value); err != nil {
 				return err
 			}
 

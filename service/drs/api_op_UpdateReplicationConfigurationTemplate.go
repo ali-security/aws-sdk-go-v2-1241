@@ -64,6 +64,10 @@ type UpdateReplicationConfigurationTemplateInput struct {
 	// The ARN of the EBS encryption key to be used during replication.
 	EbsEncryptionKeyArn *string
 
+	// Which version of the Internet Protocol to use for replication of data. (IPv4 or
+	// IPv6)
+	InternetProtocol types.InternetProtocol
+
 	// The Point in time (PIT) policy to manage snapshots taken during replication.
 	PitPolicy []types.PITPolicyRule
 
@@ -122,6 +126,10 @@ type UpdateReplicationConfigurationTemplateOutput struct {
 
 	// The ARN of the EBS encryption key to be used during replication.
 	EbsEncryptionKeyArn *string
+
+	// Which version of the Internet Protocol to use for replication of data. (IPv4 or
+	// IPv6)
+	InternetProtocol types.InternetProtocol
 
 	// The Point in time (PIT) policy to manage snapshots taken during replication.
 	PitPolicy []types.PITPolicyRule

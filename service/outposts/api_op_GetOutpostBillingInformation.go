@@ -55,6 +55,12 @@ type GetOutpostBillingInformationOutput struct {
 	// The pagination token.
 	NextToken *string
 
+	// The payment option.
+	PaymentOption types.PaymentOption
+
+	// The payment term.
+	PaymentTerm types.PaymentTerm
+
 	// The subscription details for the specified Outpost.
 	Subscriptions []types.Subscription
 

@@ -1,0 +1,8 @@
+{
+    "id": "f2fbf40f-520e-4e92-b8ea-df9662874aea",
+    "type": "feature",
+    "description": "Add UnableToListUpstreamImageReferrersException in ListImageReferrers",
+    "modules": [
+        "service/ecr"
+    ]
+}

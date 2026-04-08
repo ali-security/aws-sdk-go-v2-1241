@@ -1,0 +1,8 @@
+{
+    "id": "d63185b1-d5a8-4032-8da0-fba8175ca4c2",
+    "type": "feature",
+    "description": "Add AWS Outposts APIs to view renewal pricing options and submit renewal requests for Outpost contracts",
+    "modules": [
+        "service/outposts"
+    ]
+}

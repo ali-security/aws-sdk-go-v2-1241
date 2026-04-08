@@ -66,6 +66,10 @@ type GetReplicationConfigurationOutput struct {
 	// The ARN of the EBS encryption key to be used during replication.
 	EbsEncryptionKeyArn *string
 
+	// Which version of the Internet Protocol to use for replication of data. (IPv4 or
+	// IPv6)
+	InternetProtocol types.InternetProtocol
+
 	// The name of the Replication Configuration.
 	Name *string
 

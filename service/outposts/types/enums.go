@@ -563,6 +563,42 @@ func (PowerPhase) Values() []PowerPhase {
 	}
 }
 
+type PricingResult string
+
+// Enum values for PricingResult
+const (
+	PricingResultPriced        PricingResult = "PRICED"
+	PricingResultUnableToPrice PricingResult = "UNABLE_TO_PRICE"
+)
+
+// Values returns all known values for PricingResult. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PricingResult) Values() []PricingResult {
+	return []PricingResult{
+		"PRICED",
+		"UNABLE_TO_PRICE",
+	}
+}
+
+type QuotePricingType string
+
+// Enum values for QuotePricingType
+const (
+	QuotePricingTypeSubscription QuotePricingType = "SUBSCRIPTION"
+)
+
+// Values returns all known values for QuotePricingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuotePricingType) Values() []QuotePricingType {
+	return []QuotePricingType{
+		"SUBSCRIPTION",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -612,6 +648,7 @@ type SubscriptionStatus string
 // Enum values for SubscriptionStatus
 const (
 	SubscriptionStatusActive    SubscriptionStatus = "ACTIVE"
+	SubscriptionStatusPending   SubscriptionStatus = "PENDING"
 	SubscriptionStatusInactive  SubscriptionStatus = "INACTIVE"
 	SubscriptionStatusCancelled SubscriptionStatus = "CANCELLED"
 )
@@ -623,6 +660,7 @@ const (
 func (SubscriptionStatus) Values() []SubscriptionStatus {
 	return []SubscriptionStatus{
 		"ACTIVE",
+		"PENDING",
 		"INACTIVE",
 		"CANCELLED",
 	}

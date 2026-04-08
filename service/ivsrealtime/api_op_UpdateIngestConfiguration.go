@@ -37,6 +37,10 @@ type UpdateIngestConfigurationInput struct {
 	// This member is required.
 	Arn *string
 
+	// Indicates whether redundant ingest is enabled for the ingest configuration.
+	// Default: false .
+	RedundantIngest bool
+
 	// Stage ARN that needs to be updated.
 	StageArn *string
 

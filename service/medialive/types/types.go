@@ -5305,6 +5305,76 @@ type MediaConnectFlowRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Media Connect Router Container Settings
+type MediaConnectRouterContainerSettings struct {
+
+	// M2ts Settings
+	M2tsSettings *M2tsSettings
+
+	noSmithyDocumentSerde
+}
+
+// Media Connect Router Group Settings
+type MediaConnectRouterGroupSettings struct {
+
+	// The names of the Availability Zones in which to write output to MediaConnect
+	// Router.
+	AvailabilityZones []string
+
+	noSmithyDocumentSerde
+}
+
+// Map of MediaLive pipeline IDs to the ARNs of the MediaConnect Router Inputs to
+// which this Output is connected.
+type MediaConnectRouterOutputConnectionMap struct {
+
+	// The ARN of the MediaConnect Router Input connected to pipeline 0.
+	Pipeline0 *string
+
+	// The ARN of the MediaConnect Router Input connected to pipeline 1.
+	Pipeline1 *string
+
+	noSmithyDocumentSerde
+}
+
+// MediaConnect Router Output Destination Settings
+type MediaConnectRouterOutputDestinationSettings struct {
+
+	// Encryption configuration for MediaConnect router. When using SECRETS_MANAGER
+	// encryption, you must provide the ARN of the secret used to encrypt data in
+	// transit. When using AUTOMATIC encryption, a service-managed secret will be used
+	// instead.
+	EncryptionType MediaConnectRouterOutputEncryptionType
+
+	// ARN of the secret used to encrypt this input. Used only with the
+	// SECRETS_MANAGER encryption type.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Media Connect Router Output Settings
+type MediaConnectRouterOutputSettings struct {
+
+	// Media Connect Router Container Settings
+	//
+	// This member is required.
+	ContainerSettings *MediaConnectRouterContainerSettings
+
+	// Destination for this MediaConnect Router Output. The referenced
+	// OutputDestination must have MediaConnect Router settings configured.
+	//
+	// This member is required.
+	Destination *OutputLocationRef
+
+	// Shows the MediaConnect Router Inputs that are connected to this output. This
+	// parameter is purely informative, and editing it will have no effect. To connect
+	// or disconnect MediaConnect Router Inputs, go to MediaConnect.
+	ConnectedRouterInputs *MediaConnectRouterOutputConnectionMap
+
+	noSmithyDocumentSerde
+}
+
 // Additional output destinations for a CMAF Ingest output group
 type MediaPackageAdditionalDestinations struct {
 
@@ -6519,6 +6589,10 @@ type OutputDestination struct {
 	// applies to on premises channels.
 	LogicalInterfaceNames []string
 
+	// Destination settings for a MediaConnect Router output; one destination for each
+	// redundant encoder.
+	MediaConnectRouterSettings []MediaConnectRouterOutputDestinationSettings
+
 	// Destination settings for a MediaPackage output; one destination for both
 	// encoders.
 	MediaPackageSettings []MediaPackageOutputDestinationSettings
@@ -6589,6 +6663,9 @@ type OutputGroupSettings struct {
 	// Hls Group Settings
 	HlsGroupSettings *HlsGroupSettings
 
+	// Media Connect Router Group Settings
+	MediaConnectRouterGroupSettings *MediaConnectRouterGroupSettings
+
 	// Media Package Group Settings
 	MediaPackageGroupSettings *MediaPackageGroupSettings
 
@@ -6648,6 +6725,9 @@ type OutputSettings struct {
 
 	// Hls Output Settings
 	HlsOutputSettings *HlsOutputSettings
+
+	// Media Connect Router Output Settings
+	MediaConnectRouterOutputSettings *MediaConnectRouterOutputSettings
 
 	// Media Package Output Settings
 	MediaPackageOutputSettings *MediaPackageOutputSettings

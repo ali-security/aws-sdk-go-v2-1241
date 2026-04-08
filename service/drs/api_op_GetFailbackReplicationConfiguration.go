@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +48,10 @@ type GetFailbackReplicationConfigurationOutput struct {
 	// Configure bandwidth throttling for the outbound data transfer rate of the
 	// Recovery Instance in Mbps.
 	BandwidthThrottling int64
+
+	// Which version of the Internet Protocol to use for replication of data. (IPv4 or
+	// IPv6)
+	InternetProtocol types.InternetProtocol
 
 	// The name of the Failback Replication Configuration.
 	Name *string

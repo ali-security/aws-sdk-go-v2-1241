@@ -50,6 +50,10 @@ type CreateIngestConfigurationInput struct {
 	// Optional name that can be specified for the IngestConfiguration being created.
 	Name *string
 
+	// Indicates whether redundant ingest is enabled for the ingest configuration.
+	// Default: false .
+	RedundantIngest bool
+
 	// ARN of the stage with which the IngestConfiguration is associated.
 	StageArn *string
 
