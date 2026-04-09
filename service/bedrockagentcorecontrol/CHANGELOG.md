@@ -1,3 +1,7 @@
+# v1.29.0 (2026-04-09)
+
+* **Feature**: Initial release for CRUDL in AgentCore Registry Service
+
 # v1.28.1 (2026-04-03)
 
 * **Documentation**: Documentation Update for Adds support for three-legged (Authorization Code grant type) OAuth along with predefined MCP tool schema configuration for Amazon Bedrock AgentCore gateway MCP server targets.

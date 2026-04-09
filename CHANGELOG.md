@@ -1,3 +1,19 @@
+# Release (2026-04-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bcmdashboards`: [v1.2.0](service/bcmdashboards/CHANGELOG.md#v120-2026-04-09)
+  * **Feature**: Scheduled email reports of Billing and Cost Management Dashboards
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.20.0](service/bedrockagentcore/CHANGELOG.md#v1200-2026-04-09)
+  * **Feature**: Introducing support for SearchRegistryRecords API on AgentCoreRegistry
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.29.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1290-2026-04-09)
+  * **Feature**: Initial release for CRUDL in AgentCore Registry Service
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.48.0](service/mediaconnect/CHANGELOG.md#v1480-2026-04-09)
+  * **Feature**: Adds support for MediaLive Channel-type Router Inputs.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.39.0](service/redshiftdata/CHANGELOG.md#v1390-2026-04-09)
+  * **Feature**: The BatchExecuteStatement API now supports named SQL parameters, enabling secure batch queries with parameterized values. This enhancement helps prevent SQL injection vulnerabilities and improves query reusability.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.239.0](service/sagemaker/CHANGELOG.md#v12390-2026-04-09)
+  * **Feature**: Release support for g7e instance types for SageMaker HyperPod
+
 # Release (2026-04-08)
 
 ## Module Highlights

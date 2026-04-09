@@ -1,3 +1,7 @@
+# v1.48.0 (2026-04-09)
+
+* **Feature**: Adds support for MediaLive Channel-type Router Inputs.
+
 # v1.47.5 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

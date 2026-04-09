@@ -1,8 +1,0 @@
-{
-    "id": "b9627e6a-3fc6-42ea-abfc-7fca0c6ba631",
-    "type": "feature",
-    "description": "The BatchExecuteStatement API now supports named SQL parameters, enabling secure batch queries with parameterized values. This enhancement helps prevent SQL injection vulnerabilities and improves query reusability.",
-    "modules": [
-        "service/redshiftdata"
-    ]
-}
