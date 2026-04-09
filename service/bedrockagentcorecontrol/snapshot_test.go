@@ -230,6 +230,30 @@ func TestCheckSnapshot_CreatePolicyEngine(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRegistry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRegistry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRegistry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateRegistryRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRegistryRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRegistryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateWorkloadIdentity(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateWorkloadIdentity(context.Background(), nil, func(o *Options) {
@@ -403,6 +427,30 @@ func TestCheckSnapshot_DeletePolicyEngine(t *testing.T) {
 	_, err := svc.DeletePolicyEngine(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeletePolicyEngine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRegistry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRegistry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRegistry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteRegistryRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRegistryRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteRegistryRecord")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -607,6 +655,30 @@ func TestCheckSnapshot_GetPolicyGeneration(t *testing.T) {
 	_, err := svc.GetPolicyGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetPolicyGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRegistry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRegistry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRegistry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRegistryRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRegistryRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRegistryRecord")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -854,6 +926,30 @@ func TestCheckSnapshot_ListPolicyGenerations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListRegistries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRegistries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRegistries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListRegistryRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRegistryRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListRegistryRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -907,6 +1003,18 @@ func TestCheckSnapshot_StartPolicyGeneration(t *testing.T) {
 	_, err := svc.StartPolicyGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartPolicyGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SubmitRegistryRecordForApproval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SubmitRegistryRecordForApproval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SubmitRegistryRecordForApproval")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1075,6 +1183,42 @@ func TestCheckSnapshot_UpdatePolicyEngine(t *testing.T) {
 	_, err := svc.UpdatePolicyEngine(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdatePolicyEngine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRegistry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRegistry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRegistry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRegistryRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRegistryRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRegistryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateRegistryRecordStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRegistryRecordStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateRegistryRecordStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1261,6 +1405,30 @@ func TestUpdateSnapshot_CreatePolicyEngine(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateRegistry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRegistry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRegistry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateRegistryRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRegistryRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRegistryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateWorkloadIdentity(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateWorkloadIdentity(context.Background(), nil, func(o *Options) {
@@ -1434,6 +1602,30 @@ func TestUpdateSnapshot_DeletePolicyEngine(t *testing.T) {
 	_, err := svc.DeletePolicyEngine(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeletePolicyEngine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRegistry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRegistry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRegistry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteRegistryRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteRegistryRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteRegistryRecord")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1638,6 +1830,30 @@ func TestUpdateSnapshot_GetPolicyGeneration(t *testing.T) {
 	_, err := svc.GetPolicyGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPolicyGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRegistry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRegistry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRegistry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRegistryRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRegistryRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRegistryRecord")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1885,6 +2101,30 @@ func TestUpdateSnapshot_ListPolicyGenerations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListRegistries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRegistries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRegistries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListRegistryRecords(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListRegistryRecords(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListRegistryRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -1938,6 +2178,18 @@ func TestUpdateSnapshot_StartPolicyGeneration(t *testing.T) {
 	_, err := svc.StartPolicyGeneration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartPolicyGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SubmitRegistryRecordForApproval(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SubmitRegistryRecordForApproval(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SubmitRegistryRecordForApproval")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2106,6 +2358,42 @@ func TestUpdateSnapshot_UpdatePolicyEngine(t *testing.T) {
 	_, err := svc.UpdatePolicyEngine(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdatePolicyEngine")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRegistry(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRegistry(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRegistry")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRegistryRecord(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRegistryRecord(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRegistryRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateRegistryRecordStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateRegistryRecordStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateRegistryRecordStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

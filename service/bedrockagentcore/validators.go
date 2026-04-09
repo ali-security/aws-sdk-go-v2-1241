@@ -630,6 +630,26 @@ func (m *validateOpSaveBrowserSessionProfile) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchRegistryRecords struct {
+}
+
+func (*validateOpSearchRegistryRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchRegistryRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchRegistryRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchRegistryRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartBrowserSession struct {
 }
 
@@ -892,6 +912,10 @@ func addOpRetrieveMemoryRecordsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpSaveBrowserSessionProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSaveBrowserSessionProfile{}, middleware.After)
+}
+
+func addOpSearchRegistryRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchRegistryRecords{}, middleware.After)
 }
 
 func addOpStartBrowserSessionValidationMiddleware(stack *middleware.Stack) error {
@@ -2487,6 +2511,24 @@ func validateOpSaveBrowserSessionProfileInput(v *SaveBrowserSessionProfileInput)
 	}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchRegistryRecordsInput(v *SearchRegistryRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchRegistryRecordsInput"}
+	if v.SearchQuery == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SearchQuery"))
+	}
+	if v.RegistryIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

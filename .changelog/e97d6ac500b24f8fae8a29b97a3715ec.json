@@ -1,0 +1,8 @@
+{
+    "id": "e97d6ac5-00b2-4f8f-ae8a-29b97a3715ec",
+    "type": "feature",
+    "description": "Initial release for CRUDL in AgentCore Registry Service",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

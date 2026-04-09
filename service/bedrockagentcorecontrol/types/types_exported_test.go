@@ -938,6 +938,28 @@ func ExampleReflectionConfiguration_outputUsage() {
 var _ *types.EpisodicReflectionConfiguration
 var _ types.CustomReflectionConfiguration
 
+func ExampleRegistryRecordCredentialProviderUnion_outputUsage() {
+	var union types.RegistryRecordCredentialProviderUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RegistryRecordCredentialProviderUnionMemberIamCredentialProvider:
+		_ = v.Value // Value is types.RegistryRecordIamCredentialProvider
+
+	case *types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider:
+		_ = v.Value // Value is types.RegistryRecordOAuthCredentialProvider
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RegistryRecordIamCredentialProvider
+var _ *types.RegistryRecordOAuthCredentialProvider
+
 func ExampleRequestHeaderConfiguration_outputUsage() {
 	var union types.RequestHeaderConfiguration
 	// type switches can be used to check the union value

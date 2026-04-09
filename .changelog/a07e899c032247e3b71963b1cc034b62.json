@@ -1,0 +1,8 @@
+{
+    "id": "a07e899c-0322-47e3-b719-63b1cc034b62",
+    "type": "feature",
+    "description": "Introducing support for SearchRegistryRecords API on AgentCoreRegistry",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

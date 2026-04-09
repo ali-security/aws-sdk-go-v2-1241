@@ -1,0 +1,8 @@
+{
+    "id": "63fdb992-f90f-402b-bc8a-4d07c9464628",
+    "type": "feature",
+    "description": "Release support for g7e instance types for SageMaker HyperPod",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

@@ -290,6 +290,46 @@ func (m *validateOpCreatePolicy) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRegistry struct {
+}
+
+func (*validateOpCreateRegistry) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRegistry) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRegistryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRegistryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRegistryRecord struct {
+}
+
+func (*validateOpCreateRegistryRecord) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRegistryRecord) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRegistryRecordInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRegistryRecordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWorkloadIdentity struct {
 }
 
@@ -585,6 +625,46 @@ func (m *validateOpDeletePolicy) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRegistry struct {
+}
+
+func (*validateOpDeleteRegistry) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRegistry) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRegistryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRegistryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRegistryRecord struct {
+}
+
+func (*validateOpDeleteRegistryRecord) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRegistryRecord) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRegistryRecordInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRegistryRecordInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -930,6 +1010,46 @@ func (m *validateOpGetPolicy) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRegistry struct {
+}
+
+func (*validateOpGetRegistry) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRegistry) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRegistryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRegistryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRegistryRecord struct {
+}
+
+func (*validateOpGetRegistryRecord) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRegistryRecord) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRegistryRecordInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRegistryRecordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResourcePolicy struct {
 }
 
@@ -1090,6 +1210,26 @@ func (m *validateOpListPolicyGenerations) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRegistryRecords struct {
+}
+
+func (*validateOpListRegistryRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRegistryRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRegistryRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRegistryRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -1165,6 +1305,26 @@ func (m *validateOpStartPolicyGeneration) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartPolicyGenerationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSubmitRegistryRecordForApproval struct {
+}
+
+func (*validateOpSubmitRegistryRecordForApproval) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSubmitRegistryRecordForApproval) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SubmitRegistryRecordForApprovalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSubmitRegistryRecordForApprovalInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1450,6 +1610,66 @@ func (m *validateOpUpdatePolicy) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRegistry struct {
+}
+
+func (*validateOpUpdateRegistry) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRegistry) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRegistryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRegistryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRegistryRecord struct {
+}
+
+func (*validateOpUpdateRegistryRecord) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRegistryRecord) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRegistryRecordInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRegistryRecordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRegistryRecordStatus struct {
+}
+
+func (*validateOpUpdateRegistryRecordStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRegistryRecordStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRegistryRecordStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRegistryRecordStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateWorkloadIdentity struct {
 }
 
@@ -1526,6 +1746,14 @@ func addOpCreatePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePolicy{}, middleware.After)
 }
 
+func addOpCreateRegistryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRegistry{}, middleware.After)
+}
+
+func addOpCreateRegistryRecordValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRegistryRecord{}, middleware.After)
+}
+
 func addOpCreateWorkloadIdentityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkloadIdentity{}, middleware.After)
 }
@@ -1584,6 +1812,14 @@ func addOpDeletePolicyEngineValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeletePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePolicy{}, middleware.After)
+}
+
+func addOpDeleteRegistryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRegistry{}, middleware.After)
+}
+
+func addOpDeleteRegistryRecordValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRegistryRecord{}, middleware.After)
 }
 
 func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1654,6 +1890,14 @@ func addOpGetPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPolicy{}, middleware.After)
 }
 
+func addOpGetRegistryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRegistry{}, middleware.After)
+}
+
+func addOpGetRegistryRecordValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRegistryRecord{}, middleware.After)
+}
+
 func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
 }
@@ -1686,6 +1930,10 @@ func addOpListPolicyGenerationsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpListPolicyGenerations{}, middleware.After)
 }
 
+func addOpListRegistryRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRegistryRecords{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -1700,6 +1948,10 @@ func addOpSetTokenVaultCMKValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartPolicyGenerationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartPolicyGeneration{}, middleware.After)
+}
+
+func addOpSubmitRegistryRecordForApprovalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSubmitRegistryRecordForApproval{}, middleware.After)
 }
 
 func addOpSynchronizeGatewayTargetsValidationMiddleware(stack *middleware.Stack) error {
@@ -1756,6 +2008,18 @@ func addOpUpdatePolicyEngineValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpUpdatePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePolicy{}, middleware.After)
+}
+
+func addOpUpdateRegistryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRegistry{}, middleware.After)
+}
+
+func addOpUpdateRegistryRecordValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRegistryRecord{}, middleware.After)
+}
+
+func addOpUpdateRegistryRecordStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRegistryRecordStatus{}, middleware.After)
 }
 
 func addOpUpdateWorkloadIdentityValidationMiddleware(stack *middleware.Stack) error {
@@ -2857,6 +3121,26 @@ func validateFilterList(v []types.Filter) error {
 	}
 }
 
+func validateFromUrlSynchronizationConfiguration(v *types.FromUrlSynchronizationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FromUrlSynchronizationConfiguration"}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.CredentialProviderConfigurations != nil {
+		if err := validateRegistryRecordCredentialProviderConfigurationList(v.CredentialProviderConfigurations); err != nil {
+			invalidParams.AddNested("CredentialProviderConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGatewayApiKeyCredentialProvider(v *types.GatewayApiKeyCredentialProvider) error {
 	if v == nil {
 		return nil
@@ -3770,6 +4054,79 @@ func validateRecordingConfig(v *types.RecordingConfig) error {
 	}
 }
 
+func validateRegistryRecordCredentialProviderConfiguration(v *types.RegistryRecordCredentialProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistryRecordCredentialProviderConfiguration"}
+	if len(v.CredentialProviderType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialProviderType"))
+	}
+	if v.CredentialProvider == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialProvider"))
+	} else if v.CredentialProvider != nil {
+		if err := validateRegistryRecordCredentialProviderUnion(v.CredentialProvider); err != nil {
+			invalidParams.AddNested("CredentialProvider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistryRecordCredentialProviderConfigurationList(v []types.RegistryRecordCredentialProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistryRecordCredentialProviderConfigurationList"}
+	for i := range v {
+		if err := validateRegistryRecordCredentialProviderConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistryRecordCredentialProviderUnion(v types.RegistryRecordCredentialProviderUnion) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistryRecordCredentialProviderUnion"}
+	switch uv := v.(type) {
+	case *types.RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider:
+		if err := validateRegistryRecordOAuthCredentialProvider(&uv.Value); err != nil {
+			invalidParams.AddNested("[oauthCredentialProvider]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegistryRecordOAuthCredentialProvider(v *types.RegistryRecordOAuthCredentialProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegistryRecordOAuthCredentialProvider"}
+	if v.ProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResourceLocation(v types.ResourceLocation) error {
 	if v == nil {
 		return nil
@@ -4187,6 +4544,23 @@ func validateSummaryOverrideConsolidationConfigurationInput(v *types.SummaryOver
 	}
 }
 
+func validateSynchronizationConfiguration(v *types.SynchronizationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SynchronizationConfiguration"}
+	if v.FromUrl != nil {
+		if err := validateFromUrlSynchronizationConfiguration(v.FromUrl); err != nil {
+			invalidParams.AddNested("FromUrl", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTargetConfiguration(v types.TargetConfiguration) error {
 	if v == nil {
 		return nil
@@ -4264,6 +4638,40 @@ func validateToolSchema(v types.ToolSchema) error {
 			invalidParams.AddNested("[inlinePayload]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdatedAuthorizerConfiguration(v *types.UpdatedAuthorizerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedAuthorizerConfiguration"}
+	if v.OptionalValue != nil {
+		if err := validateAuthorizerConfiguration(v.OptionalValue); err != nil {
+			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdatedSynchronizationConfiguration(v *types.UpdatedSynchronizationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedSynchronizationConfiguration"}
+	if v.OptionalValue != nil {
+		if err := validateSynchronizationConfiguration(v.OptionalValue); err != nil {
+			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4760,6 +5168,52 @@ func validateOpCreatePolicyInput(v *CreatePolicyInput) error {
 	}
 }
 
+func validateOpCreateRegistryInput(v *CreateRegistryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRegistryInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.AuthorizerConfiguration != nil {
+		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
+			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRegistryRecordInput(v *CreateRegistryRecordInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRegistryRecordInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.DescriptorType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DescriptorType"))
+	}
+	if v.SynchronizationConfiguration != nil {
+		if err := validateSynchronizationConfiguration(v.SynchronizationConfiguration); err != nil {
+			invalidParams.AddNested("SynchronizationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateWorkloadIdentityInput(v *CreateWorkloadIdentityInput) error {
 	if v == nil {
 		return nil
@@ -4986,6 +5440,39 @@ func validateOpDeletePolicyInput(v *DeletePolicyInput) error {
 	}
 	if v.PolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRegistryInput(v *DeleteRegistryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRegistryInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRegistryRecordInput(v *DeleteRegistryRecordInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRegistryRecordInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if v.RecordId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5261,6 +5748,39 @@ func validateOpGetPolicyInput(v *GetPolicyInput) error {
 	}
 }
 
+func validateOpGetRegistryInput(v *GetRegistryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRegistryInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRegistryRecordInput(v *GetRegistryRecordInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRegistryRecordInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if v.RecordId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
 	if v == nil {
 		return nil
@@ -5384,6 +5904,21 @@ func validateOpListPolicyGenerationsInput(v *ListPolicyGenerationsInput) error {
 	}
 }
 
+func validateOpListRegistryRecordsInput(v *ListRegistryRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRegistryRecordsInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -5452,6 +5987,24 @@ func validateOpStartPolicyGenerationInput(v *StartPolicyGenerationInput) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSubmitRegistryRecordForApprovalInput(v *SubmitRegistryRecordForApprovalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubmitRegistryRecordForApprovalInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if v.RecordId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5807,6 +6360,73 @@ func validateOpUpdatePolicyInput(v *UpdatePolicyInput) error {
 		if err := validatePolicyDefinition(v.Definition); err != nil {
 			invalidParams.AddNested("Definition", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRegistryInput(v *UpdateRegistryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRegistryInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if v.AuthorizerConfiguration != nil {
+		if err := validateUpdatedAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
+			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRegistryRecordInput(v *UpdateRegistryRecordInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRegistryRecordInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if v.RecordId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordId"))
+	}
+	if v.SynchronizationConfiguration != nil {
+		if err := validateUpdatedSynchronizationConfiguration(v.SynchronizationConfiguration); err != nil {
+			invalidParams.AddNested("SynchronizationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRegistryRecordStatusInput(v *UpdateRegistryRecordStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRegistryRecordStatusInput"}
+	if v.RegistryId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistryId"))
+	}
+	if v.RecordId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.StatusReason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatusReason"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

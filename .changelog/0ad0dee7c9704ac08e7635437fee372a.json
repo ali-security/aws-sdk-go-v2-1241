@@ -1,0 +1,8 @@
+{
+    "id": "0ad0dee7-c970-4ac0-8e76-35437fee372a",
+    "type": "feature",
+    "description": "Scheduled email reports of Billing and Cost Management Dashboards",
+    "modules": [
+        "service/bcmdashboards"
+    ]
+}

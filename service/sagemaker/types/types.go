@@ -4164,11 +4164,6 @@ type ClusterInstanceGroupSpecification struct {
 	// This member is required.
 	InstanceGroupName *string
 
-	// Specifies the instance type of the instance group.
-	//
-	// This member is required.
-	InstanceType ClusterInstanceType
-
 	// Specifies the LifeCycle configuration for the instance group.
 	//
 	// This member is required.
@@ -4207,6 +4202,9 @@ type ClusterInstanceGroupSpecification struct {
 	// Specifies the additional storage configurations for the instances in the
 	// SageMaker HyperPod cluster instance group.
 	InstanceStorageConfigs []ClusterInstanceStorageConfig
+
+	// Specifies the instance type of the instance group.
+	InstanceType ClusterInstanceType
 
 	// Specifies the Kubernetes configuration for the instance group. You describe
 	// what you want the labels and taints to look like, and the cluster works to

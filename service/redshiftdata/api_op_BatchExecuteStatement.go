@@ -89,6 +89,10 @@ type BatchExecuteStatementInput struct {
 	// as a database user and authenticating using temporary credentials.
 	DbUser *string
 
+	// The parameters for the SQL statements. The parameters are shared across all SQL
+	// statements in the batch.
+	Parameters []types.SqlParameter
+
 	// The data format of the result of the SQL statement. If no format is specified,
 	// the default is JSON.
 	ResultFormat types.ResultFormatString

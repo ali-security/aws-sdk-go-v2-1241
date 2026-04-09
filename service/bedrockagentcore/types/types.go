@@ -8,6 +8,18 @@ import (
 	"time"
 )
 
+// The A2A (Agent-to-Agent) descriptor configuration for a registry record.
+type A2aDescriptor struct {
+
+	//  The agent card definition that describes the agent's capabilities and
+	// interface.
+	//
+	// This member is required.
+	AgentCard *AgentCardDefinition
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about an actor in an AgentCore Memory resource.
 type ActorSummary struct {
 
@@ -15,6 +27,34 @@ type ActorSummary struct {
 	//
 	// This member is required.
 	ActorId *string
+
+	noSmithyDocumentSerde
+}
+
+//	The agent card definition for A2A descriptors, including the schema version
+//
+// and inline content that describes the agent's capabilities.
+type AgentCardDefinition struct {
+
+	//  The inline content of the agent card definition.
+	InlineContent *string
+
+	//  The schema version of the agent card definition.
+	SchemaVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// The agent skills descriptor configuration for a registry record.
+type AgentSkillsDescriptor struct {
+
+	//  The skill description in markdown format.
+	//
+	// This member is required.
+	SkillMd *SkillMdDefinition
+
+	//  The structured skill definition with a schema version and content.
+	SkillDefinition *SkillDefinition
 
 	noSmithyDocumentSerde
 }
@@ -641,6 +681,39 @@ type Conversational struct {
 	noSmithyDocumentSerde
 }
 
+// A custom descriptor configuration for a registry record.
+type CustomDescriptor struct {
+
+	//  The inline content of the custom descriptor.
+	InlineContent *string
+
+	noSmithyDocumentSerde
+}
+
+//	Contains the descriptor configuration for a registry record. Only the field
+//
+// that matches the record's descriptorType is populated.
+type Descriptors struct {
+
+	//  The A2A (Agent-to-Agent) descriptor configuration. Populated when the record's
+	// descriptorType is A2A .
+	A2a *A2aDescriptor
+
+	//  The agent skills descriptor configuration. Populated when the record's
+	// descriptorType is AGENT_SKILLS .
+	AgentSkills *AgentSkillsDescriptor
+
+	//  The custom descriptor configuration. Populated when the record's descriptorType
+	// is CUSTOM .
+	Custom *CustomDescriptor
+
+	//  The MCP (Model Context Protocol) descriptor configuration. Populated when the
+	// record's descriptorType is MCP .
+	Mcp *McpDescriptor
+
+	noSmithyDocumentSerde
+}
+
 //	A content block for ground truth data in evaluation reference inputs. Supports
 //
 // text content for expected responses and assertions.
@@ -1190,6 +1263,24 @@ type LiveViewStream struct {
 	noSmithyDocumentSerde
 }
 
+//	The MCP (Model Context Protocol) descriptor configuration for a registry
+//
+// record. Contains the server definition and tools definition.
+type McpDescriptor struct {
+
+	//  The MCP server definition that describes the server configuration.
+	//
+	// This member is required.
+	Server *ServerDefinition
+
+	//  The MCP tools definition that describes the available tools.
+	//
+	// This member is required.
+	Tools *ToolsDefinition
+
+	noSmithyDocumentSerde
+}
+
 // Contains the content of a memory record.
 //
 // The following types satisfy this interface:
@@ -1677,6 +1768,65 @@ type ProxyCredentialsMemberBasicAuth struct {
 
 func (*ProxyCredentialsMemberBasicAuth) isProxyCredentials() {}
 
+// Summary information about a registry record.
+type RegistryRecordSummary struct {
+
+	//  The date and time when the registry record was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	//  The type of descriptor associated with this registry record.
+	//
+	// This member is required.
+	DescriptorType DescriptorType
+
+	//  The descriptor configurations for this registry record.
+	//
+	// This member is required.
+	Descriptors *Descriptors
+
+	//  The name of the registry record.
+	//
+	// This member is required.
+	Name *string
+
+	//  The Amazon Resource Name (ARN) of the registry record.
+	//
+	// This member is required.
+	RecordArn *string
+
+	//  The unique identifier of the registry record.
+	//
+	// This member is required.
+	RecordId *string
+
+	//  The Amazon Resource Name (ARN) of the registry that this record belongs to.
+	//
+	// This member is required.
+	RegistryArn *string
+
+	//  The current status of the registry record.
+	//
+	// This member is required.
+	Status RegistryRecordStatus
+
+	//  The date and time when the registry record was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	//  The version of the registry record.
+	//
+	// This member is required.
+	Version *string
+
+	//  A description of the registry record.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about resource content.
 type ResourceContent struct {
 
@@ -1834,6 +1984,21 @@ type SecretsManagerLocation struct {
 	noSmithyDocumentSerde
 }
 
+//	The MCP server definition with a schema version and inline content. The
+//
+// schemaVersion identifies the version of the MCP server configuration schema.
+type ServerDefinition struct {
+
+	//  The inline content of the server definition.
+	InlineContent *string
+
+	//  The schema version of the MCP server configuration. The schema version
+	// identifies the format of the server definition content.
+	SchemaVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains filter criteria for listing sessions.
 type SessionFilter struct {
 
@@ -1861,6 +2026,28 @@ type SessionSummary struct {
 	//
 	// This member is required.
 	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The structured skill definition with a schema version and inline content.
+type SkillDefinition struct {
+
+	//  The inline content of the skill definition.
+	InlineContent *string
+
+	//  The schema version of the skill definition. If you don't specify a version,
+	// the service detects it automatically.
+	SchemaVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// The skill markdown definition for agent skills descriptors.
+type SkillMdDefinition struct {
+
+	//  The inline markdown content of the skill definition.
+	InlineContent *string
 
 	noSmithyDocumentSerde
 }
@@ -1996,6 +2183,24 @@ type ToolResultStructuredContent struct {
 
 	// The status of the task that produced the result.
 	TaskStatus TaskStatus
+
+	noSmithyDocumentSerde
+}
+
+//	The MCP tools definition with a protocol version and inline content. The
+//
+// protocolVersion identifies the MCP protocol version that the tools conform to.
+// This differs from schemaVersion in the server definition, which identifies the
+// server configuration schema format.
+type ToolsDefinition struct {
+
+	//  The inline content of the tools definition.
+	InlineContent *string
+
+	//  The MCP protocol version that the tools conform to. This differs from the
+	// schemaVersion field in the server definition, which identifies the server
+	// configuration schema format.
+	ProtocolVersion *string
 
 	noSmithyDocumentSerde
 }

@@ -8814,9 +8814,6 @@ func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpec
 	if v.InstanceGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupName"))
 	}
-	if len(v.InstanceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
 	if v.LifeCycleConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LifeCycleConfig"))
 	} else if v.LifeCycleConfig != nil {

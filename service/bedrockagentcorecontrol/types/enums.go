@@ -401,6 +401,29 @@ func (CredentialProviderVendorType) Values() []CredentialProviderVendorType {
 	}
 }
 
+type DescriptorType string
+
+// Enum values for DescriptorType
+const (
+	DescriptorTypeMcp         DescriptorType = "MCP"
+	DescriptorTypeA2a         DescriptorType = "A2A"
+	DescriptorTypeCustom      DescriptorType = "CUSTOM"
+	DescriptorTypeAgentSkills DescriptorType = "AGENT_SKILLS"
+)
+
+// Values returns all known values for DescriptorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DescriptorType) Values() []DescriptorType {
+	return []DescriptorType{
+		"MCP",
+		"A2A",
+		"CUSTOM",
+		"AGENT_SKILLS",
+	}
+}
+
 type EndpointIpAddressType string
 
 // Enum values for EndpointIpAddressType
@@ -987,6 +1010,125 @@ func (PolicyValidationMode) Values() []PolicyValidationMode {
 	}
 }
 
+type RegistryAuthorizerType string
+
+// Enum values for RegistryAuthorizerType
+const (
+	RegistryAuthorizerTypeCustomJwt RegistryAuthorizerType = "CUSTOM_JWT"
+	RegistryAuthorizerTypeAwsIam    RegistryAuthorizerType = "AWS_IAM"
+)
+
+// Values returns all known values for RegistryAuthorizerType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RegistryAuthorizerType) Values() []RegistryAuthorizerType {
+	return []RegistryAuthorizerType{
+		"CUSTOM_JWT",
+		"AWS_IAM",
+	}
+}
+
+type RegistryRecordCredentialProviderType string
+
+// Enum values for RegistryRecordCredentialProviderType
+const (
+	RegistryRecordCredentialProviderTypeOauth RegistryRecordCredentialProviderType = "OAUTH"
+	RegistryRecordCredentialProviderTypeIam   RegistryRecordCredentialProviderType = "IAM"
+)
+
+// Values returns all known values for RegistryRecordCredentialProviderType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RegistryRecordCredentialProviderType) Values() []RegistryRecordCredentialProviderType {
+	return []RegistryRecordCredentialProviderType{
+		"OAUTH",
+		"IAM",
+	}
+}
+
+type RegistryRecordOAuthGrantType string
+
+// Enum values for RegistryRecordOAuthGrantType
+const (
+	RegistryRecordOAuthGrantTypeClientCredentials RegistryRecordOAuthGrantType = "CLIENT_CREDENTIALS"
+)
+
+// Values returns all known values for RegistryRecordOAuthGrantType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RegistryRecordOAuthGrantType) Values() []RegistryRecordOAuthGrantType {
+	return []RegistryRecordOAuthGrantType{
+		"CLIENT_CREDENTIALS",
+	}
+}
+
+type RegistryRecordStatus string
+
+// Enum values for RegistryRecordStatus
+const (
+	RegistryRecordStatusDraft           RegistryRecordStatus = "DRAFT"
+	RegistryRecordStatusPendingApproval RegistryRecordStatus = "PENDING_APPROVAL"
+	RegistryRecordStatusApproved        RegistryRecordStatus = "APPROVED"
+	RegistryRecordStatusRejected        RegistryRecordStatus = "REJECTED"
+	RegistryRecordStatusDeprecated      RegistryRecordStatus = "DEPRECATED"
+	RegistryRecordStatusCreating        RegistryRecordStatus = "CREATING"
+	RegistryRecordStatusUpdating        RegistryRecordStatus = "UPDATING"
+	RegistryRecordStatusCreateFailed    RegistryRecordStatus = "CREATE_FAILED"
+	RegistryRecordStatusUpdateFailed    RegistryRecordStatus = "UPDATE_FAILED"
+)
+
+// Values returns all known values for RegistryRecordStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RegistryRecordStatus) Values() []RegistryRecordStatus {
+	return []RegistryRecordStatus{
+		"DRAFT",
+		"PENDING_APPROVAL",
+		"APPROVED",
+		"REJECTED",
+		"DEPRECATED",
+		"CREATING",
+		"UPDATING",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+	}
+}
+
+type RegistryStatus string
+
+// Enum values for RegistryStatus
+const (
+	RegistryStatusCreating     RegistryStatus = "CREATING"
+	RegistryStatusReady        RegistryStatus = "READY"
+	RegistryStatusUpdating     RegistryStatus = "UPDATING"
+	RegistryStatusCreateFailed RegistryStatus = "CREATE_FAILED"
+	RegistryStatusUpdateFailed RegistryStatus = "UPDATE_FAILED"
+	RegistryStatusDeleting     RegistryStatus = "DELETING"
+	RegistryStatusDeleteFailed RegistryStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for RegistryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RegistryStatus) Values() []RegistryStatus {
+	return []RegistryStatus{
+		"CREATING",
+		"READY",
+		"UPDATING",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETING",
+		"DELETE_FAILED",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -1099,6 +1241,23 @@ func (ServerProtocol) Values() []ServerProtocol {
 		"HTTP",
 		"A2A",
 		"AGUI",
+	}
+}
+
+type SynchronizationType string
+
+// Enum values for SynchronizationType
+const (
+	SynchronizationTypeUrl SynchronizationType = "URL"
+)
+
+// Values returns all known values for SynchronizationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SynchronizationType) Values() []SynchronizationType {
+	return []SynchronizationType{
+		"URL",
 	}
 }
 

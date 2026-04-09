@@ -8,6 +8,31 @@ import (
 	"time"
 )
 
+// The Agent-to-Agent (A2A) protocol descriptor for a registry record. Contains
+// the agent card definition as defined by the A2A protocol specification.
+type A2aDescriptor struct {
+
+	// The agent card definition for the A2A agent, as defined by the A2A protocol
+	// specification.
+	AgentCard *AgentCardDefinition
+
+	noSmithyDocumentSerde
+}
+
+// The agent card definition for an A2A descriptor. Contains the schema version
+// and inline content for the agent card.
+type AgentCardDefinition struct {
+
+	// The JSON content containing the A2A agent card definition, conforming to the
+	// A2A protocol specification.
+	InlineContent *string
+
+	// The schema version of the agent card based on the A2A protocol specification.
+	SchemaVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about an agent runtime. An agent runtime is the execution
 // environment for a Amazon Bedrock AgentCore Agent.
 type AgentRuntime struct {
@@ -129,6 +154,21 @@ type AgentRuntimeEndpoint struct {
 	// The target version of the agent runtime endpoint. This is the version that the
 	// endpoint is being updated to.
 	TargetVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// The agent skills descriptor for a registry record. Contains an optional skill
+// markdown definition in human-readable format and an optional structured skill
+// definition.
+type AgentSkillsDescriptor struct {
+
+	// The structured skill definition with schema version and content.
+	SkillDefinition *SkillDefinition
+
+	// The optional skill markdown definition describing the agent's skills in a
+	// human-readable format.
+	SkillMd *SkillMdDefinition
 
 	noSmithyDocumentSerde
 }
@@ -272,6 +312,18 @@ type ApiSchemaConfigurationMemberS3 struct {
 }
 
 func (*ApiSchemaConfigurationMemberS3) isApiSchemaConfiguration() {}
+
+// Configuration for the registry record approval workflow. Controls whether
+// records added to the registry require explicit approval before becoming active.
+type ApprovalConfiguration struct {
+
+	// Whether registry records are auto-approved. When set to true , records are
+	// automatically approved upon creation. When set to false (the default), records
+	// require explicit approval for security purposes.
+	AutoApproval bool
+
+	noSmithyDocumentSerde
+}
 
 // Configuration settings for connecting to Atlassian services using OAuth2
 // authentication. This includes the client credentials required to authenticate
@@ -1100,6 +1152,18 @@ type CustomConsolidationConfigurationInputMemberUserPreferenceConsolidationOverr
 func (*CustomConsolidationConfigurationInputMemberUserPreferenceConsolidationOverride) isCustomConsolidationConfigurationInput() {
 }
 
+// A custom descriptor for a registry record. Use this for resources such as APIs,
+// Lambda functions, or servers that do not conform to a standard protocol like MCP
+// or A2A.
+type CustomDescriptor struct {
+
+	// The custom descriptor content as a valid JSON document. You can define any
+	// custom schema that describes your resource.
+	InlineContent *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains custom extraction configuration information.
 //
 // The following types satisfy this interface:
@@ -1336,6 +1400,28 @@ type DeleteMemoryStrategyInput struct {
 	//
 	// This member is required.
 	MemoryStrategyId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains descriptor-type-specific configurations for a registry record. Only
+// the descriptor matching the record's descriptorType should be populated.
+type Descriptors struct {
+
+	// The Agent-to-Agent (A2A) protocol descriptor configuration. Use this when the
+	// descriptorType is A2A .
+	A2a *A2aDescriptor
+
+	// The agent skills descriptor configuration. Use this when the descriptorType is
+	// AGENT_SKILLS .
+	AgentSkills *AgentSkillsDescriptor
+
+	// The custom descriptor configuration. Use this when the descriptorType is CUSTOM .
+	Custom *CustomDescriptor
+
+	// The Model Context Protocol (MCP) descriptor configuration. Use this when the
+	// descriptorType is MCP .
+	Mcp *McpDescriptor
 
 	noSmithyDocumentSerde
 }
@@ -1795,6 +1881,21 @@ type Finding struct {
 	// warning, recommendation, or informational message to help users understand the
 	// severity and nature of the issue.
 	Type FindingType
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for synchronizing from a URL-based MCP server.
+type FromUrlSynchronizationConfiguration struct {
+
+	// The HTTPS URL of the MCP server to synchronize from.
+	//
+	// This member is required.
+	Url *string
+
+	// Optional list of credential provider configurations for authenticating with the
+	// MCP server. At most one credential provider configuration can be specified.
+	CredentialProviderConfigurations []RegistryRecordCredentialProviderConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2416,6 +2517,22 @@ type ManagedResourceDetails struct {
 
 	// The ARN of the VPC Lattice resource gateway created in your account.
 	ResourceGatewayArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The Model Context Protocol (MCP) descriptor for a registry record. Contains the
+// server definition and tools definition for an MCP-compatible server. The schema
+// is validated against the MCP protocol specification.
+type McpDescriptor struct {
+
+	// The MCP server definition, containing the server configuration and schema as
+	// defined by the MCP protocol specification.
+	Server *ServerDefinition
+
+	// The MCP tools definition, containing the tools available on the MCP server as
+	// defined by the MCP protocol specification.
+	Tools *ToolsDefinition
 
 	noSmithyDocumentSerde
 }
@@ -3861,6 +3978,209 @@ type ReflectionConfigurationMemberEpisodicReflectionConfiguration struct {
 
 func (*ReflectionConfigurationMemberEpisodicReflectionConfiguration) isReflectionConfiguration() {}
 
+// A pairing of a credential provider type with its corresponding provider details
+// for authenticating with external sources.
+type RegistryRecordCredentialProviderConfiguration struct {
+
+	// The credential provider configuration details. The structure depends on the
+	// credentialProviderType .
+	//
+	// This member is required.
+	CredentialProvider RegistryRecordCredentialProviderUnion
+
+	// The type of credential provider.
+	//
+	//   - OAUTH - OAuth-based authentication.
+	//
+	//   - IAM - Amazon Web Services IAM-based authentication using SigV4 signing.
+	//
+	// This member is required.
+	CredentialProviderType RegistryRecordCredentialProviderType
+
+	noSmithyDocumentSerde
+}
+
+// Union of supported credential provider types for registry record
+// synchronization.
+//
+// The following types satisfy this interface:
+//
+//	RegistryRecordCredentialProviderUnionMemberIamCredentialProvider
+//	RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider
+type RegistryRecordCredentialProviderUnion interface {
+	isRegistryRecordCredentialProviderUnion()
+}
+
+// The IAM credential provider configuration for authenticating with the external
+// source using SigV4 signing.
+type RegistryRecordCredentialProviderUnionMemberIamCredentialProvider struct {
+	Value RegistryRecordIamCredentialProvider
+
+	noSmithyDocumentSerde
+}
+
+func (*RegistryRecordCredentialProviderUnionMemberIamCredentialProvider) isRegistryRecordCredentialProviderUnion() {
+}
+
+// The OAuth credential provider configuration for authenticating with the
+// external source.
+type RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider struct {
+	Value RegistryRecordOAuthCredentialProvider
+
+	noSmithyDocumentSerde
+}
+
+func (*RegistryRecordCredentialProviderUnionMemberOauthCredentialProvider) isRegistryRecordCredentialProviderUnion() {
+}
+
+// IAM credential provider configuration for authenticating with an external
+// source using SigV4 signing during synchronization.
+type RegistryRecordIamCredentialProvider struct {
+
+	// The Amazon Web Services region for SigV4 signing (for example, us-west-2 ). If
+	// not specified, the region is extracted from the MCP server URL hostname, with
+	// fallback to the service's own region.
+	Region *string
+
+	// The Amazon Resource Name (ARN) of the IAM role to assume for SigV4 signing.
+	RoleArn *string
+
+	// The SigV4 signing service name (for example, execute-api or bedrock-agentcore ).
+	Service *string
+
+	noSmithyDocumentSerde
+}
+
+// OAuth credential provider configuration for authenticating with an external
+// source during synchronization.
+type RegistryRecordOAuthCredentialProvider struct {
+
+	// The Amazon Resource Name (ARN) of the OAuth credential provider resource.
+	//
+	// This member is required.
+	ProviderArn *string
+
+	// Additional custom parameters for the OAuth flow.
+	CustomParameters map[string]string
+
+	// The OAuth grant type. Currently only CLIENT_CREDENTIALS is supported.
+	GrantType RegistryRecordOAuthGrantType
+
+	// The OAuth scopes to request during authentication.
+	Scopes []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a registry record.
+type RegistryRecordSummary struct {
+
+	// The timestamp when the registry record was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The descriptor type of the registry record. Possible values are MCP , A2A ,
+	// CUSTOM , and AGENT_SKILLS .
+	//
+	// This member is required.
+	DescriptorType DescriptorType
+
+	// The name of the registry record.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the registry record.
+	//
+	// This member is required.
+	RecordArn *string
+
+	// The unique identifier of the registry record.
+	//
+	// This member is required.
+	RecordId *string
+
+	// The version of the registry record.
+	//
+	// This member is required.
+	RecordVersion *string
+
+	// The Amazon Resource Name (ARN) of the registry that contains the record.
+	//
+	// This member is required.
+	RegistryArn *string
+
+	// The current status of the registry record. Possible values include CREATING ,
+	// DRAFT , APPROVED , PENDING_APPROVAL , REJECTED , DEPRECATED , UPDATING ,
+	// CREATE_FAILED , and UPDATE_FAILED .
+	//
+	// This member is required.
+	Status RegistryRecordStatus
+
+	// The timestamp when the registry record was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The description of the registry record.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a registry.
+type RegistrySummary struct {
+
+	// The timestamp when the registry was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the registry.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the registry.
+	//
+	// This member is required.
+	RegistryArn *string
+
+	// The unique identifier of the registry.
+	//
+	// This member is required.
+	RegistryId *string
+
+	// The current status of the registry. Possible values include CREATING , READY ,
+	// UPDATING , CREATE_FAILED , UPDATE_FAILED , DELETING , and DELETE_FAILED .
+	//
+	// This member is required.
+	Status RegistryStatus
+
+	// The timestamp when the registry was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The type of authorizer used by the registry. This controls the authorization
+	// method for the Search and Invoke APIs used by consumers.
+	//
+	//   - CUSTOM_JWT - Authorize with a bearer token.
+	//
+	//   - AWS_IAM - Authorize with your Amazon Web Services IAM credentials.
+	AuthorizerType RegistryAuthorizerType
+
+	// The description of the registry.
+	Description *string
+
+	// The reason for the current status, typically set when the status is a failure
+	// state.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for HTTP request headers that will be passed through to the
 // runtime.
 //
@@ -4246,6 +4566,21 @@ type SemanticOverrideExtractionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+// The server definition for an MCP descriptor. Contains the schema version and
+// inline content for the MCP server configuration.
+type ServerDefinition struct {
+
+	// The JSON content containing the MCP server definition, conforming to the MCP
+	// protocol specification.
+	InlineContent *string
+
+	// The schema version of the server definition based on the MCP protocol
+	// specification. If not specified, the version is auto-detected from the content.
+	SchemaVersion *string
+
+	noSmithyDocumentSerde
+}
+
 //	The configuration that defines how agent sessions are detected and when they
 //
 // are considered complete for evaluation.
@@ -4271,6 +4606,27 @@ type SessionStorageConfiguration struct {
 	//
 	// This member is required.
 	MountPath *string
+
+	noSmithyDocumentSerde
+}
+
+// The structured skill definition with schema version and content.
+type SkillDefinition struct {
+
+	// The JSON content containing the structured skill definition.
+	InlineContent *string
+
+	// The version of the skill definition schema.
+	SchemaVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// The skill markdown definition for an agent skills descriptor.
+type SkillMdDefinition struct {
+
+	// The markdown content describing the agent's skills in a human-readable format.
+	InlineContent *string
 
 	noSmithyDocumentSerde
 }
@@ -4414,6 +4770,16 @@ type SummaryOverrideConsolidationConfigurationInput struct {
 	//
 	// This member is required.
 	ModelId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for synchronizing registry record metadata from an external
+// source.
+type SynchronizationConfiguration struct {
+
+	// Configuration for synchronizing from a URL-based source.
+	FromUrl *FromUrlSynchronizationConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -4569,6 +4935,21 @@ type ToolSchemaMemberS3 struct {
 
 func (*ToolSchemaMemberS3) isToolSchema() {}
 
+// The tools definition for an MCP descriptor. Contains the protocol version and
+// inline content describing the available tools.
+type ToolsDefinition struct {
+
+	// The JSON content containing the MCP tools definition, conforming to the MCP
+	// protocol specification.
+	InlineContent *string
+
+	// The protocol version of the tools definition based on the MCP protocol
+	// specification. If not specified, the version is auto-detected from the content.
+	ProtocolVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // Condition that triggers memory processing.
 //
 // The following types satisfy this interface:
@@ -4645,6 +5026,80 @@ type TriggerConditionInputMemberTokenBasedTrigger struct {
 
 func (*TriggerConditionInputMemberTokenBasedTrigger) isTriggerConditionInput() {}
 
+// Wrapper for updating an A2A descriptor with PATCH semantics. When present, the
+// A2A descriptor is replaced with the provided value. When absent, the A2A
+// descriptor is left unchanged. To unset, include the wrapper with the value set
+// to null.
+type UpdatedA2aDescriptor struct {
+
+	// The updated A2A descriptor value.
+	OptionalValue *A2aDescriptor
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating an agent skills descriptor with PATCH semantics. When
+// present with a value, individual fields can be updated independently. When
+// present with a null value, the entire agent skills descriptor is unset. When
+// absent, the agent skills descriptor is left unchanged.
+type UpdatedAgentSkillsDescriptor struct {
+
+	// The updated agent skills descriptor fields.
+	OptionalValue *UpdatedAgentSkillsDescriptorFields
+
+	noSmithyDocumentSerde
+}
+
+// Individual agent skills descriptor fields that can be updated independently.
+type UpdatedAgentSkillsDescriptorFields struct {
+
+	// The updated skill definition.
+	SkillDefinition *UpdatedSkillDefinition
+
+	// The updated skill markdown definition.
+	SkillMd *UpdatedSkillMdDefinition
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating an optional approval configuration field with PATCH
+// semantics. When present in an update request, the approval configuration is
+// replaced with the provided value. When absent, the approval configuration is
+// left unchanged.
+type UpdatedApprovalConfiguration struct {
+
+	// The updated approval configuration value. Set to null to unset the approval
+	// configuration.
+	OptionalValue *ApprovalConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating an optional AuthorizerConfiguration field with PATCH
+// semantics. When present in an update request, the authorizer configuration is
+// replaced with optionalValue. When absent, the authorizer configuration is left
+// unchanged. To unset, include the wrapper with optionalValue not specified.
+type UpdatedAuthorizerConfiguration struct {
+
+	// The updated authorizer configuration value. If not specified, it will clear the
+	// current authorizer configuration of the resource.
+	OptionalValue AuthorizerConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating a custom descriptor with PATCH semantics. When present,
+// the custom descriptor is replaced with the provided value. When absent, the
+// custom descriptor is left unchanged. To unset, include the wrapper with the
+// value set to null.
+type UpdatedCustomDescriptor struct {
+
+	// The updated custom descriptor value.
+	OptionalValue *CustomDescriptor
+
+	noSmithyDocumentSerde
+}
+
 // Wrapper for updating an optional Description field with PATCH semantics. When
 // present in an update request, the description is replaced with optionalValue.
 // When absent, the description is left unchanged. To unset the description,
@@ -4655,6 +5110,124 @@ type UpdatedDescription struct {
 	// description of the resource. If not specified, it will clear the current
 	// description of the resource.
 	OptionalValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating an optional descriptors field with PATCH semantics. When
+// present with a value, individual descriptors can be updated. When present with a
+// null value, all descriptors are unset. When absent, descriptors are left
+// unchanged.
+type UpdatedDescriptors struct {
+
+	// The updated descriptors value. Contains per-descriptor-type wrappers that are
+	// each independently updatable.
+	OptionalValue *UpdatedDescriptorsUnion
+
+	noSmithyDocumentSerde
+}
+
+// Contains per-descriptor-type wrappers for updating descriptors. Each descriptor
+// type can be updated independently.
+type UpdatedDescriptorsUnion struct {
+
+	// The updated A2A descriptor.
+	A2a *UpdatedA2aDescriptor
+
+	// The updated agent skills descriptor.
+	AgentSkills *UpdatedAgentSkillsDescriptor
+
+	// The updated custom descriptor.
+	Custom *UpdatedCustomDescriptor
+
+	// The updated MCP descriptor.
+	Mcp *UpdatedMcpDescriptor
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating an MCP descriptor with PATCH semantics. When present with
+// a value, individual MCP fields can be updated independently. When present with a
+// null value, the entire MCP descriptor is unset. When absent, the MCP descriptor
+// is left unchanged.
+type UpdatedMcpDescriptor struct {
+
+	// The updated MCP descriptor fields.
+	OptionalValue *UpdatedMcpDescriptorFields
+
+	noSmithyDocumentSerde
+}
+
+// Individual MCP descriptor fields that can be updated independently.
+type UpdatedMcpDescriptorFields struct {
+
+	// The updated server definition for the MCP descriptor.
+	Server *UpdatedServerDefinition
+
+	// The updated tools definition for the MCP descriptor.
+	Tools *UpdatedToolsDefinition
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating a server definition with PATCH semantics. When present,
+// the server definition is replaced with the provided value. When absent, the
+// server definition is left unchanged. To unset, include the wrapper with the
+// value set to null.
+type UpdatedServerDefinition struct {
+
+	// The updated server definition value.
+	OptionalValue *ServerDefinition
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating a skill definition with PATCH semantics.
+type UpdatedSkillDefinition struct {
+
+	// The updated skill definition value.
+	OptionalValue *SkillDefinition
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating a skill markdown definition with PATCH semantics.
+type UpdatedSkillMdDefinition struct {
+
+	// The updated skill markdown definition value.
+	OptionalValue *SkillMdDefinition
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating the synchronization configuration with PATCH semantics.
+// Must be matched with UpdatedSynchronizationType .
+type UpdatedSynchronizationConfiguration struct {
+
+	// The updated synchronization configuration value.
+	OptionalValue *SynchronizationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating the synchronization type with PATCH semantics. Must be
+// matched with UpdatedSynchronizationConfiguration .
+type UpdatedSynchronizationType struct {
+
+	// The updated synchronization type value.
+	OptionalValue SynchronizationType
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating a tools definition with PATCH semantics. When present, the
+// tools definition is replaced with the provided value. When absent, the tools
+// definition is left unchanged. To unset, include the wrapper with the value set
+// to null.
+type UpdatedToolsDefinition struct {
+
+	// The updated tools definition value.
+	OptionalValue *ToolsDefinition
 
 	noSmithyDocumentSerde
 }
@@ -4870,6 +5443,7 @@ func (*UnknownUnionMember) isPolicyDefinition()                      {}
 func (*UnknownUnionMember) isPrivateEndpoint()                       {}
 func (*UnknownUnionMember) isRatingScale()                           {}
 func (*UnknownUnionMember) isReflectionConfiguration()               {}
+func (*UnknownUnionMember) isRegistryRecordCredentialProviderUnion() {}
 func (*UnknownUnionMember) isRequestHeaderConfiguration()            {}
 func (*UnknownUnionMember) isResource()                              {}
 func (*UnknownUnionMember) isResourceLocation()                      {}

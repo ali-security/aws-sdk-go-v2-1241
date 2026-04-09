@@ -35,12 +35,13 @@ type UpdateDashboardInput struct {
 	// This member is required.
 	Arn *string
 
-	// The new description for the dashboard. If not specified, the existing
-	// description is retained.
-	Description *string
-
-	// The new name for the dashboard. If not specified, the existing name is retained.
+	// The new name for the dashboard.
+	//
+	// This member is required.
 	Name *string
+
+	// The new description for the dashboard.
+	Description *string
 
 	// The updated array of widget configurations for the dashboard. Replaces all
 	// existing widgets.

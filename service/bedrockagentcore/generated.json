@@ -40,6 +40,7 @@
         "api_op_ListSessions.go",
         "api_op_RetrieveMemoryRecords.go",
         "api_op_SaveBrowserSessionProfile.go",
+        "api_op_SearchRegistryRecords.go",
         "api_op_StartBrowserSession.go",
         "api_op_StartCodeInterpreterSession.go",
         "api_op_StartMemoryExtractionJob.go",

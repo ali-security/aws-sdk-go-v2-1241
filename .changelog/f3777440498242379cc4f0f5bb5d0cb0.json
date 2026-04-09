@@ -1,0 +1,8 @@
+{
+    "id": "f3777440-4982-4237-9cc4-f0f5bb5d0cb0",
+    "type": "feature",
+    "description": "Adds support for MediaLive Channel-type Router Inputs.",
+    "modules": [
+        "service/mediaconnect"
+    ]
+}

@@ -140,6 +140,29 @@ func (ContentBlockType) Values() []ContentBlockType {
 	}
 }
 
+type DescriptorType string
+
+// Enum values for DescriptorType
+const (
+	DescriptorTypeMcp         DescriptorType = "MCP"
+	DescriptorTypeA2a         DescriptorType = "A2A"
+	DescriptorTypeCustom      DescriptorType = "CUSTOM"
+	DescriptorTypeAgentSkills DescriptorType = "AGENT_SKILLS"
+)
+
+// Values returns all known values for DescriptorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DescriptorType) Values() []DescriptorType {
+	return []DescriptorType{
+		"MCP",
+		"A2A",
+		"CUSTOM",
+		"AGENT_SKILLS",
+	}
+}
+
 type EventFilterCondition string
 
 // Enum values for EventFilterCondition
@@ -293,6 +316,31 @@ func (ProgrammingLanguage) Values() []ProgrammingLanguage {
 		"python",
 		"javascript",
 		"typescript",
+	}
+}
+
+type RegistryRecordStatus string
+
+// Enum values for RegistryRecordStatus
+const (
+	RegistryRecordStatusDraft           RegistryRecordStatus = "DRAFT"
+	RegistryRecordStatusPendingApproval RegistryRecordStatus = "PENDING_APPROVAL"
+	RegistryRecordStatusApproved        RegistryRecordStatus = "APPROVED"
+	RegistryRecordStatusRejected        RegistryRecordStatus = "REJECTED"
+	RegistryRecordStatusDeprecated      RegistryRecordStatus = "DEPRECATED"
+)
+
+// Values returns all known values for RegistryRecordStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RegistryRecordStatus) Values() []RegistryRecordStatus {
+	return []RegistryRecordStatus{
+		"DRAFT",
+		"PENDING_APPROVAL",
+		"APPROVED",
+		"REJECTED",
+		"DEPRECATED",
 	}
 }
 
