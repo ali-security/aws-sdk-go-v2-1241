@@ -1,3 +1,7 @@
+# v1.13.0 (2026-04-10)
+
+* **Feature**: CloudWatch Observability Admin adds support for multi-region telemetry evaluation and telemetry enablement rules.
+
 # v1.12.0 (2026-03-31)
 
 * **Feature**: This release adds the Bedrock and Security Hub resource types for Omnia Enablement launch for March 31.

@@ -1,8 +1,0 @@
-{
-    "id": "6d19b0f5-eaef-47a4-b015-99d1679395b4",
-    "type": "feature",
-    "description": "Adds optional health check configuration for Responder Gateways with ASG Managed Endpoints. When provided, RTB Fabric continuously probes customers' instance IPs and routes traffic only to healthy ones, reducing errors during deployments, scaling events, and instance failures.",
-    "modules": [
-        "service/rtbfabric"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.240.0 (2026-04-10)
+
+* **Feature**: Support new SageMaker StartClusterHealthCheck API for on-demand DHC on Hyperpod EKS cluster. Support updated CreateCluster, UpdateCluster, DescribeCluster, BatchAddClusterNodes APIs for flexible instance group on HyperPod cluster
+
 # v1.239.0 (2026-04-09)
 
 * **Feature**: Release support for g7e instance types for SageMaker HyperPod

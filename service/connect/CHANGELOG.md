@@ -1,3 +1,7 @@
+# v1.169.0 (2026-04-10)
+
+* **Feature**: Conversational Analytics for Email
+
 # v1.168.0 (2026-04-07)
 
 * **Feature**: The voice enhancement mode used by the agent can now be viewed on the contact record via the DescribeContact api.

@@ -1,3 +1,23 @@
+# Release (2026-04-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.169.0](service/connect/CHANGELOG.md#v11690-2026-04-10)
+  * **Feature**: Conversational Analytics for Email
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.2.0](service/devopsagent/CHANGELOG.md#v120-2026-04-10)
+  * **Feature**: Devops Agent now supports associate Splunk, Datadog and custom MCP server to an Agent Space.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.78.0](service/ecs/CHANGELOG.md#v1780-2026-04-10)
+  * **Feature**: Minor updates to exceptions for completeness
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.52.0](service/imagebuilder/CHANGELOG.md#v1520-2026-04-10)
+  * **Feature**: Image pipelines can now automatically apply tags to images they create. Set the imageTags property when creating or updating your pipelines to get started.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.90.0](service/mediaconvert/CHANGELOG.md#v1900-2026-04-10)
+  * **Feature**: Adds support for MV-HEVC video output and clear lead for AV1 DRM output.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.13.0](service/observabilityadmin/CHANGELOG.md#v1130-2026-04-10)
+  * **Feature**: CloudWatch Observability Admin adds support for multi-region telemetry evaluation and telemetry enablement rules.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.4.0](service/rtbfabric/CHANGELOG.md#v140-2026-04-10)
+  * **Feature**: Adds optional health check configuration for Responder Gateways with ASG Managed Endpoints. When provided, RTB Fabric continuously probes customers' instance IPs and routes traffic only to healthy ones, reducing errors during deployments, scaling events, and instance failures.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.240.0](service/sagemaker/CHANGELOG.md#v12400-2026-04-10)
+  * **Feature**: Support new SageMaker StartClusterHealthCheck API for on-demand DHC on Hyperpod EKS cluster. Support updated CreateCluster, UpdateCluster, DescribeCluster, BatchAddClusterNodes APIs for flexible instance group on HyperPod cluster
+
 # Release (2026-04-09)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.52.0 (2026-04-10)
+
+* **Feature**: Image pipelines can now automatically apply tags to images they create. Set the imageTags property when creating or updating your pipelines to get started.
+
 # v1.51.4 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

@@ -1,8 +1,0 @@
-{
-    "id": "6522f95a-e779-4697-8bdb-c2538e484188",
-    "type": "feature",
-    "description": "Support new SageMaker StartClusterHealthCheck API for on-demand DHC on Hyperpod EKS cluster. Support updated CreateCluster, UpdateCluster, DescribeCluster, BatchAddClusterNodes APIs for flexible instance group on HyperPod cluster",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
