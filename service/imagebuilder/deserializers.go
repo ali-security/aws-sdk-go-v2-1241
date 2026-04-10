@@ -18670,6 +18670,11 @@ func awsRestjson1_deserializeDocumentImagePipeline(v **types.ImagePipeline, valu
 				return err
 			}
 
+		case "imageTags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.ImageTags, value); err != nil {
+				return err
+			}
+
 		case "imageTestsConfiguration":
 			if err := awsRestjson1_deserializeDocumentImageTestsConfiguration(&sv.ImageTestsConfiguration, value); err != nil {
 				return err

@@ -4890,6 +4890,26 @@ func (m *validateOpSendPipelineExecutionStepSuccess) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartClusterHealthCheck struct {
+}
+
+func (*validateOpStartClusterHealthCheck) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartClusterHealthCheck) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartClusterHealthCheckInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartClusterHealthCheckInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartEdgeDeploymentStage struct {
 }
 
@@ -7226,6 +7246,10 @@ func addOpSendPipelineExecutionStepSuccessValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpSendPipelineExecutionStepSuccess{}, middleware.After)
 }
 
+func addOpStartClusterHealthCheckValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartClusterHealthCheck{}, middleware.After)
+}
+
 func addOpStartEdgeDeploymentStageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartEdgeDeploymentStage{}, middleware.After)
 }
@@ -8814,11 +8838,9 @@ func validateClusterInstanceGroupSpecification(v *types.ClusterInstanceGroupSpec
 	if v.InstanceGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupName"))
 	}
-	if v.LifeCycleConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LifeCycleConfig"))
-	} else if v.LifeCycleConfig != nil {
-		if err := validateClusterLifeCycleConfig(v.LifeCycleConfig); err != nil {
-			invalidParams.AddNested("LifeCycleConfig", err.(smithy.InvalidParamsError))
+	if v.InstanceRequirements != nil {
+		if err := validateClusterInstanceRequirements(v.InstanceRequirements); err != nil {
+			invalidParams.AddNested("InstanceRequirements", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ExecutionRole == nil {
@@ -8865,6 +8887,21 @@ func validateClusterInstanceGroupSpecifications(v []types.ClusterInstanceGroupSp
 		if err := validateClusterInstanceGroupSpecification(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterInstanceRequirements(v *types.ClusterInstanceRequirements) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterInstanceRequirements"}
+	if v.InstanceTypes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8958,24 +8995,6 @@ func validateClusterKubernetesTaints(v []types.ClusterKubernetesTaint) error {
 		if err := validateClusterKubernetesTaint(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateClusterLifeCycleConfig(v *types.ClusterLifeCycleConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ClusterLifeCycleConfig"}
-	if v.SourceS3Uri == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceS3Uri"))
-	}
-	if v.OnCreate == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("OnCreate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9771,6 +9790,23 @@ func validateDebugRuleConfigurations(v []types.DebugRuleConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DebugRuleConfigurations"}
 	for i := range v {
 		if err := validateDebugRuleConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeepHealthCheckConfigurations(v []types.InstanceGroupHealthCheckConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeepHealthCheckConfigurations"}
+	for i := range v {
+		if err := validateInstanceGroupHealthCheckConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -11368,6 +11404,24 @@ func validateInstanceGroup(v *types.InstanceGroup) error {
 	}
 	if v.InstanceGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstanceGroupHealthCheckConfiguration(v *types.InstanceGroupHealthCheckConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceGroupHealthCheckConfiguration"}
+	if v.InstanceGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupName"))
+	}
+	if v.DeepHealthChecks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeepHealthChecks"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20406,6 +20460,28 @@ func validateOpSendPipelineExecutionStepSuccessInput(v *SendPipelineExecutionSte
 	if v.OutputParameters != nil {
 		if err := validateOutputParameterList(v.OutputParameters); err != nil {
 			invalidParams.AddNested("OutputParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartClusterHealthCheckInput(v *StartClusterHealthCheckInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartClusterHealthCheckInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if v.DeepHealthCheckConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeepHealthCheckConfigurations"))
+	} else if v.DeepHealthCheckConfigurations != nil {
+		if err := validateDeepHealthCheckConfigurations(v.DeepHealthCheckConfigurations); err != nil {
+			invalidParams.AddNested("DeepHealthCheckConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -82753,6 +82753,26 @@ loop:
 			uv = &types.ReferenceSummaryMemberEmailMessagePlainText{Value: mv}
 			break loop
 
+		case "EmailMessagePlainTextRedacted":
+			var mv types.EmailMessageReference
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEmailMessageReference(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ReferenceSummaryMemberEmailMessagePlainTextRedacted{Value: mv}
+			break loop
+
+		case "EmailMessageRedacted":
+			var mv types.EmailMessageReference
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEmailMessageReference(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ReferenceSummaryMemberEmailMessageRedacted{Value: mv}
+			break loop
+
 		case "Number":
 			var mv types.NumberReference
 			destAddr := &mv

@@ -3364,6 +3364,19 @@ func awsRestjson1_serializeDocument__listOfMsSmoothAdditionalManifest(v []types.
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfMultiViewSettings(v []types.MultiViewSettings, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMultiViewSettings(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfOutput(v []types.Output, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -8000,6 +8013,13 @@ func awsRestjson1_serializeDocumentInput(v *types.Input, value smithyjson.Value)
 		ok.String(string(v.InputScanType))
 	}
 
+	if v.MultiViewSettings != nil {
+		ok := object.Key("multiViewSettings")
+		if err := awsRestjson1_serializeDocument__listOfMultiViewSettings(v.MultiViewSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Position != nil {
 		ok := object.Key("position")
 		if err := awsRestjson1_serializeDocumentRectangle(v.Position, ok); err != nil {
@@ -8229,6 +8249,13 @@ func awsRestjson1_serializeDocumentInputTemplate(v *types.InputTemplate, value s
 	if len(v.InputScanType) > 0 {
 		ok := object.Key("inputScanType")
 		ok.String(string(v.InputScanType))
+	}
+
+	if v.MultiViewSettings != nil {
+		ok := object.Key("multiViewSettings")
+		if err := awsRestjson1_serializeDocument__listOfMultiViewSettings(v.MultiViewSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Position != nil {
@@ -9696,6 +9723,32 @@ func awsRestjson1_serializeDocumentMsSmoothGroupSettings(v *types.MsSmoothGroupS
 	if len(v.ManifestEncoding) > 0 {
 		ok := object.Key("manifestEncoding")
 		ok.String(string(v.ManifestEncoding))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiViewInput(v *types.MultiViewInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileInput != nil {
+		ok := object.Key("fileInput")
+		ok.String(*v.FileInput)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiViewSettings(v *types.MultiViewSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Input != nil {
+		ok := object.Key("input")
+		if err := awsRestjson1_serializeDocumentMultiViewInput(v.Input, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

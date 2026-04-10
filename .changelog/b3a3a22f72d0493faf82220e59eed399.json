@@ -1,0 +1,8 @@
+{
+    "id": "b3a3a22f-72d0-493f-af82-220e59eed399",
+    "type": "feature",
+    "description": "Image pipelines can now automatically apply tags to images they create. Set the imageTags property when creating or updating your pipelines to get started.",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

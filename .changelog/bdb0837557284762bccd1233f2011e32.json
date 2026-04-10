@@ -1,0 +1,8 @@
+{
+    "id": "bdb08375-5728-4762-bccd-1233f2011e32",
+    "type": "feature",
+    "description": "Conversational Analytics for Email",
+    "modules": [
+        "service/connect"
+    ]
+}

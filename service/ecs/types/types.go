@@ -4417,9 +4417,6 @@ type LinuxParameters struct {
 
 	// The container path, mount options, and size (in MiB) of the tmpfs mount. This
 	// parameter maps to the --tmpfs option to docker run.
-	//
-	// If you're using tasks that use the Fargate launch type, the tmpfs parameter
-	// isn't supported.
 	Tmpfs []Tmpfs
 
 	noSmithyDocumentSerde
@@ -7417,6 +7414,8 @@ type Task struct {
 	HealthStatus HealthStatus
 
 	// The Elastic Inference accelerator that's associated with the task.
+	//
+	// Deprecated: This feature is no longer available.
 	InferenceAccelerators []InferenceAccelerator
 
 	// The last known status for the task. For more information, see [Task Lifecycle].
@@ -7632,6 +7631,8 @@ type TaskDefinition struct {
 	Family *string
 
 	// The Elastic Inference accelerator that's associated with the task.
+	//
+	// Deprecated: This feature is no longer available.
 	InferenceAccelerators []InferenceAccelerator
 
 	// The IPC resource namespace to use for the containers in the task. The valid
@@ -8076,6 +8077,8 @@ type TaskOverride struct {
 	ExecutionRoleArn *string
 
 	// The Elastic Inference accelerator override for the task.
+	//
+	// Deprecated: This feature is no longer available.
 	InferenceAcceleratorOverrides []InferenceAcceleratorOverride
 
 	// The memory override for the task.

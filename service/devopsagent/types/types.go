@@ -965,6 +965,22 @@ type MCPServerBearerTokenConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for Model Context Protocol (MCP) server integration.
+type MCPServerConfiguration struct {
+
+	// List of MCP tools can be used with the association.
+	//
+	// This member is required.
+	Tools []string
+
+	noSmithyDocumentSerde
+}
+
+// Mixin for webhook update support.
+type MCPServerDatadogConfiguration struct {
+	noSmithyDocumentSerde
+}
+
 // Complete service details for MCP server integration.
 type MCPServerDetails struct {
 
@@ -1097,6 +1113,11 @@ type MCPServerOAuthClientCredentialsConfig struct {
 	// offline_access.
 	Scopes []string
 
+	noSmithyDocumentSerde
+}
+
+// Mixin for webhook update support.
+type MCPServerSplunkConfiguration struct {
 	noSmithyDocumentSerde
 }
 
@@ -1705,7 +1726,7 @@ type RegisteredSlackServiceDetails struct {
 // Configuration for a self-managed Private Connection.
 type SelfManagedInput struct {
 
-	// The ARN of the Resource Configuration.
+	// The ID or ARN of the resource configuration.
 	//
 	// This member is required.
 	ResourceConfigurationId *string
@@ -2040,8 +2061,11 @@ type SendMessageUsageInfo struct {
 //	ServiceConfigurationMemberEventChannel
 //	ServiceConfigurationMemberGithub
 //	ServiceConfigurationMemberGitlab
+//	ServiceConfigurationMemberMcpserver
+//	ServiceConfigurationMemberMcpserverdatadog
 //	ServiceConfigurationMemberMcpservergrafana
 //	ServiceConfigurationMemberMcpservernewrelic
+//	ServiceConfigurationMemberMcpserversplunk
 //	ServiceConfigurationMemberPagerduty
 //	ServiceConfigurationMemberServicenow
 //	ServiceConfigurationMemberSlack
@@ -2113,6 +2137,24 @@ type ServiceConfigurationMemberGitlab struct {
 
 func (*ServiceConfigurationMemberGitlab) isServiceConfiguration() {}
 
+// MCP (Model Context Protocol) server integration configuration.
+type ServiceConfigurationMemberMcpserver struct {
+	Value MCPServerConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceConfigurationMemberMcpserver) isServiceConfiguration() {}
+
+// Datadog MCP server integration configuration.
+type ServiceConfigurationMemberMcpserverdatadog struct {
+	Value MCPServerDatadogConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceConfigurationMemberMcpserverdatadog) isServiceConfiguration() {}
+
 // Grafana MCP server integration configuration.
 type ServiceConfigurationMemberMcpservergrafana struct {
 	Value MCPServerGrafanaConfiguration
@@ -2130,6 +2172,15 @@ type ServiceConfigurationMemberMcpservernewrelic struct {
 }
 
 func (*ServiceConfigurationMemberMcpservernewrelic) isServiceConfiguration() {}
+
+// Splunk MCP server integration configuration.
+type ServiceConfigurationMemberMcpserversplunk struct {
+	Value MCPServerSplunkConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceConfigurationMemberMcpserversplunk) isServiceConfiguration() {}
 
 // PagerDuty integration configuration
 type ServiceConfigurationMemberPagerduty struct {

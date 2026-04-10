@@ -1092,6 +1092,9 @@ type ImagePipeline struct {
 	// Contains settings for vulnerability scans.
 	ImageScanningConfiguration *ImageScanningConfiguration
 
+	// The tags to be applied to the images produced by this pipeline.
+	ImageTags map[string]string
+
 	// The image tests configuration of the image pipeline.
 	ImageTestsConfiguration *ImageTestsConfiguration
 

@@ -1742,10 +1742,10 @@ type CmafEncryptionSettings struct {
 	// segment and insert the first #EXT-X-KEY immediately before the first encrypted
 	// fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and
 	// is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2,
-	// and Static Key encryption). Supported codecs: H.264 and H.265 video codecs, and
-	// AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose
-	// Disabled to use standard encryption where all segments are encrypted from the
-	// beginning.
+	// and Static Key encryption). Supported codecs: H.264, H.265, and AV1 video
+	// codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM
+	// optimization. Choose Disabled to use standard encryption where all segments are
+	// encrypted from the beginning.
 	ClearLead HlsClearLead
 
 	// This is a 128-bit, 16-byte hex value represented by a 32-character text string.
@@ -2380,6 +2380,11 @@ type Container struct {
 	// media file has a format that the MediaConvert Probe operation does not
 	// recognize.
 	Format Format
+
+	// The start timecode of the media file, in HH:MM:SS:FF format (or HH:MM:SS;FF for
+	// drop frame timecode). Note that this field is null when the container does not
+	// include an embedded start timecode.
+	StartTimecode *string
 
 	// Details about each track (video, audio, or data) in the media file.
 	Tracks []Track
@@ -5362,6 +5367,14 @@ type Input struct {
 	// horizontal interlacing artifacts.
 	InputScanType InputScanType
 
+	// Specify the enhancement layer input video file path for Multi View outputs. The
+	// base layer input is treated as the left eye and this Multi View input is treated
+	// as the right eye. Only one Multi View input is currently supported. MediaConvert
+	// encodes both views into a single MV-HEVC output codec. When you add
+	// MultiViewSettings to your job, you can only produce Multi View outputs. Adding
+	// any other codec output to the same job is not supported.
+	MultiViewSettings []MultiViewSettings
+
 	// Use Selection placement to define the video area in your output frame. The area
 	// outside of the rectangle that you specify here is black. If you specify a value
 	// here, it will override any value that you specify in the output setting
@@ -5656,6 +5669,14 @@ type InputTemplate struct {
 	// PsF. Don't set this value to PsF when your input is interlaced. Doing so creates
 	// horizontal interlacing artifacts.
 	InputScanType InputScanType
+
+	// Specify the enhancement layer input video file path for Multi View outputs. The
+	// base layer input is treated as the left eye and this Multi View input is treated
+	// as the right eye. Only one Multi View input is currently supported. MediaConvert
+	// encodes both views into a single MV-HEVC output codec. When you add
+	// MultiViewSettings to your job, you can only produce Multi View outputs. Adding
+	// any other codec output to the same job is not supported.
+	MultiViewSettings []MultiViewSettings
 
 	// Use Selection placement to define the video area in your output frame. The area
 	// outside of the rectangle that you specify here is black. If you specify a value
@@ -7490,6 +7511,31 @@ type MsSmoothGroupSettings struct {
 	// Use Manifest encoding to specify the encoding format for the server and client
 	// manifest. Valid options are utf8 and utf16.
 	ManifestEncoding MsSmoothManifestEncoding
+
+	noSmithyDocumentSerde
+}
+
+// Input settings for MultiView Settings. You can include exactly one input as
+// enhancement layer.
+type MultiViewInput struct {
+
+	// Specify the input file S3, HTTP, or HTTPS URL for your right eye view video.
+	FileInput *string
+
+	noSmithyDocumentSerde
+}
+
+// Specify the enhancement layer input video file path for Multi View outputs. The
+// base layer input is treated as the left eye and this Multi View input is treated
+// as the right eye. Only one Multi View input is currently supported. MediaConvert
+// encodes both views into a single MV-HEVC output codec. When you add
+// MultiViewSettings to your job, you can only produce Multi View outputs. Adding
+// any other codec output to the same job is not supported.
+type MultiViewSettings struct {
+
+	// Input settings for MultiView Settings. You can include exactly one input as
+	// enhancement layer.
+	Input *MultiViewInput
 
 	noSmithyDocumentSerde
 }

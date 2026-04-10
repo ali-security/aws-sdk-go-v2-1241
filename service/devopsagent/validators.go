@@ -1363,6 +1363,21 @@ func validateMCPServerBearerTokenConfig(v *types.MCPServerBearerTokenConfig) err
 	}
 }
 
+func validateMCPServerConfiguration(v *types.MCPServerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MCPServerConfiguration"}
+	if v.Tools == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tools"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMCPServerDetails(v *types.MCPServerDetails) error {
 	if v == nil {
 		return nil
@@ -1723,6 +1738,11 @@ func validateServiceConfiguration(v types.ServiceConfiguration) error {
 	case *types.ServiceConfigurationMemberGitlab:
 		if err := validateGitLabConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[gitlab]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ServiceConfigurationMemberMcpserver:
+		if err := validateMCPServerConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[mcpserver]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ServiceConfigurationMemberMcpservergrafana:

@@ -474,6 +474,34 @@ type Record struct {
 	noSmithyDocumentSerde
 }
 
+//	Represents the status of a multi-region operation in a specific Amazon Web
+//
+// Services Region. This structure is used to report per-region progress for both
+// telemetry evaluation and telemetry rule replication.
+type RegionStatus struct {
+
+	//  The reason for a failure status in this region. This field is only populated
+	// when Status indicates a failure.
+	FailureReason *string
+
+	//  The Amazon Web Services Region code (for example, eu-west-1 or us-west-2 ) that
+	// this status applies to.
+	Region *string
+
+	//  The Amazon Resource Name (ARN) of the telemetry rule in this spoke region.
+	// This field is only present for telemetry rule region statuses and is populated
+	// when the rule has been successfully created in the spoke region (status is
+	// ACTIVE ).
+	RuleArn *string
+
+	//  The status of the operation in this region. For telemetry evaluation, valid
+	// values include STARTING , RUNNING , and FAILED_START . For telemetry rules,
+	// valid values include PENDING , ACTIVE , and FAILED .
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 //	Structure containing a name field limited to 64 characters for header or query
 //
 // parameter identification.
@@ -714,8 +742,20 @@ type TelemetryRule struct {
 	// This member is required.
 	TelemetryType TelemetryType
 
+	//  If set to true , the telemetry rule is replicated to all Amazon Web Services
+	// Regions where Amazon CloudWatch Observability Admin is available in the current
+	// partition. When new regions become available, the rule automatically replicates
+	// to them. Mutually exclusive with Regions .
+	AllRegions *bool
+
 	//  Configuration specifying where and how the telemetry data should be delivered.
 	DestinationConfiguration *TelemetryDestinationConfiguration
+
+	//  An optional list of Amazon Web Services Regions where this telemetry rule
+	// should be replicated. When specified, the rule is created in the home region and
+	// automatically replicated to all listed regions. Mutually exclusive with
+	// AllRegions .
+	Regions []string
 
 	//  The type of Amazon Web Services resource to configure telemetry for (e.g.,
 	// "AWS::EC2::VPC", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL").

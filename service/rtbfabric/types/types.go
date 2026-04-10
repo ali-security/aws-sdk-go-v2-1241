@@ -48,6 +48,9 @@ type AutoScalingGroupsConfiguration struct {
 	// This member is required.
 	RoleArn *string
 
+	// The health check configuration for the Auto Scaling group managed endpoint.
+	HealthCheckConfig *HealthCheckConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -126,6 +129,46 @@ type HeaderTagAction struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The health check configuration for a managed endpoint. Defines how the service
+// probes instances in the Auto Scaling group to determine their health status.
+type HealthCheckConfig struct {
+
+	// The destination path for the health check request. Must start with / .
+	//
+	// This member is required.
+	Path *string
+
+	// The port to use for health check probes. Valid range is 80 to 65535.
+	//
+	// This member is required.
+	Port *int32
+
+	// The number of consecutive successful health checks required before an instance
+	// is considered healthy. Valid range is 2 to 10.
+	HealthyThresholdCount *int32
+
+	// The interval between health check probes, in seconds. Valid range is 5 to 60.
+	IntervalSeconds *int32
+
+	// The protocol to use for health check probes.
+	Protocol Protocol
+
+	// The expected HTTP status code or status code pattern from healthy instances.
+	// Supports a single code (for example, 200 ), a range (for example, 200-299 ), or
+	// a comma-separated list (for example, 200,204 ).
+	StatusCodeMatcher *string
+
+	// The timeout for each health check probe, in milliseconds. Valid range is 100 to
+	// 5000.
+	TimeoutMs *int32
+
+	// The number of consecutive failed health checks required before an instance is
+	// considered unhealthy. Valid range is 2 to 10.
+	UnhealthyThresholdCount *int32
 
 	noSmithyDocumentSerde
 }

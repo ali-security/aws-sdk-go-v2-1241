@@ -5945,6 +5945,11 @@ func awsRestjson1_deserializeDocumentAutoScalingGroupsConfiguration(v **types.Au
 				return err
 			}
 
+		case "healthCheckConfig":
+			if err := awsRestjson1_deserializeDocumentHealthCheckConfig(&sv.HealthCheckConfig, value); err != nil {
+				return err
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6383,6 +6388,129 @@ func awsRestjson1_deserializeDocumentHeaderTagAction(v **types.HeaderTagAction, 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHealthCheckConfig(v **types.HealthCheckConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HealthCheckConfig
+	if *v == nil {
+		sv = &types.HealthCheckConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "healthyThresholdCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.HealthyThresholdCount = ptr.Int32(int32(i64))
+			}
+
+		case "intervalSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IntervalSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Path = ptr.String(jtv)
+			}
+
+		case "port":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		case "protocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Protocol to be of type string, got %T instead", value)
+				}
+				sv.Protocol = types.Protocol(jtv)
+			}
+
+		case "statusCodeMatcher":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusCodeMatcher to be of type string, got %T instead", value)
+				}
+				sv.StatusCodeMatcher = ptr.String(jtv)
+			}
+
+		case "timeoutMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutMs = ptr.Int32(int32(i64))
+			}
+
+		case "unhealthyThresholdCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UnhealthyThresholdCount = ptr.Int32(int32(i64))
 			}
 
 		default:

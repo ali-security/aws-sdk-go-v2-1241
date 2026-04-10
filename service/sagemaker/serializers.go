@@ -19111,6 +19111,67 @@ func (m *awsAwsjson11_serializeOpSendPipelineExecutionStepSuccess) HandleSeriali
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpStartClusterHealthCheck struct {
+}
+
+func (*awsAwsjson11_serializeOpStartClusterHealthCheck) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStartClusterHealthCheck) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartClusterHealthCheckInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.StartClusterHealthCheck")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStartClusterHealthCheckInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpStartEdgeDeploymentStage struct {
 }
 
@@ -23314,6 +23375,13 @@ func awsAwsjson11_serializeDocumentAddClusterNodeSpecification(v *types.AddClust
 	object := value.Object()
 	defer object.Close()
 
+	if v.AvailabilityZones != nil {
+		ok := object.Key("AvailabilityZones")
+		if err := awsAwsjson11_serializeDocumentClusterAvailabilityZones(v.AvailabilityZones, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IncrementTargetCountBy != nil {
 		ok := object.Key("IncrementTargetCountBy")
 		ok.Integer(*v.IncrementTargetCountBy)
@@ -23322,6 +23390,13 @@ func awsAwsjson11_serializeDocumentAddClusterNodeSpecification(v *types.AddClust
 	if v.InstanceGroupName != nil {
 		ok := object.Key("InstanceGroupName")
 		ok.String(*v.InstanceGroupName)
+	}
+
+	if v.InstanceTypes != nil {
+		ok := object.Key("InstanceTypes")
+		if err := awsAwsjson11_serializeDocumentClusterInstanceTypes(v.InstanceTypes, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -25298,6 +25373,17 @@ func awsAwsjson11_serializeDocumentClusterAutoScalingConfig(v *types.ClusterAuto
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClusterAvailabilityZones(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterCapacityRequirements(v *types.ClusterCapacityRequirements, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25411,6 +25497,13 @@ func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecification(v *types.Cl
 		ok.String(*v.InstanceGroupName)
 	}
 
+	if v.InstanceRequirements != nil {
+		ok := object.Key("InstanceRequirements")
+		if err := awsAwsjson11_serializeDocumentClusterInstanceRequirements(v.InstanceRequirements, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InstanceStorageConfigs != nil {
 		ok := object.Key("InstanceStorageConfigs")
 		if err := awsAwsjson11_serializeDocumentClusterInstanceStorageConfigs(v.InstanceStorageConfigs, ok); err != nil {
@@ -25507,6 +25600,20 @@ func awsAwsjson11_serializeDocumentClusterInstanceGroupsToDelete(v []string, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClusterInstanceRequirements(v *types.ClusterInstanceRequirements, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceTypes != nil {
+		ok := object.Key("InstanceTypes")
+		if err := awsAwsjson11_serializeDocumentClusterInstanceTypes(v.InstanceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterInstanceStorageConfig(v types.ClusterInstanceStorageConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -25549,6 +25656,17 @@ func awsAwsjson11_serializeDocumentClusterInstanceStorageConfigs(v []types.Clust
 		if err := awsAwsjson11_serializeDocumentClusterInstanceStorageConfig(v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterInstanceTypes(v []types.ClusterInstanceType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -26988,6 +27106,30 @@ func awsAwsjson11_serializeDocumentDebugRuleConfigurations(v []types.DebugRuleCo
 		if err := awsAwsjson11_serializeDocumentDebugRuleConfiguration(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeepHealthCheckConfigurations(v []types.InstanceGroupHealthCheckConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentInstanceGroupHealthCheckConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeepHealthChecks(v []types.DeepHealthCheckType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -29772,6 +29914,32 @@ func awsAwsjson11_serializeDocumentInstanceGroup(v *types.InstanceGroup, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInstanceGroupHealthCheckConfiguration(v *types.InstanceGroupHealthCheckConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeepHealthChecks != nil {
+		ok := object.Key("DeepHealthChecks")
+		if err := awsAwsjson11_serializeDocumentDeepHealthChecks(v.DeepHealthChecks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceGroupName != nil {
+		ok := object.Key("InstanceGroupName")
+		ok.String(*v.InstanceGroupName)
+	}
+
+	if v.InstanceIds != nil {
+		ok := object.Key("InstanceIds")
+		if err := awsAwsjson11_serializeDocumentInstanceIds(v.InstanceIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInstanceGroupNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -29792,6 +29960,17 @@ func awsAwsjson11_serializeDocumentInstanceGroups(v []types.InstanceGroup, value
 		if err := awsAwsjson11_serializeDocumentInstanceGroup(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInstanceIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -46866,6 +47045,25 @@ func awsAwsjson11_serializeOpDocumentSendPipelineExecutionStepSuccessInput(v *Se
 	if v.OutputParameters != nil {
 		ok := object.Key("OutputParameters")
 		if err := awsAwsjson11_serializeDocumentOutputParameterList(v.OutputParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentStartClusterHealthCheckInput(v *StartClusterHealthCheckInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClusterName != nil {
+		ok := object.Key("ClusterName")
+		ok.String(*v.ClusterName)
+	}
+
+	if v.DeepHealthCheckConfigurations != nil {
+		ok := object.Key("DeepHealthCheckConfigurations")
+		if err := awsAwsjson11_serializeDocumentDeepHealthCheckConfigurations(v.DeepHealthCheckConfigurations, ok); err != nil {
 			return err
 		}
 	}

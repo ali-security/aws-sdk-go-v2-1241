@@ -6781,6 +6781,40 @@ func awsRestjson1_deserializeDocument__listOfMsSmoothAdditionalManifest(v *[]typ
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfMultiViewSettings(v *[]types.MultiViewSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MultiViewSettings
+	if *v == nil {
+		cv = []types.MultiViewSettings{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MultiViewSettings
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMultiViewSettings(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfOutput(v *[]types.Output, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11924,6 +11958,15 @@ func awsRestjson1_deserializeDocumentContainer(v **types.Container, value interf
 					return fmt.Errorf("expected Format to be of type string, got %T instead", value)
 				}
 				sv.Format = types.Format(jtv)
+			}
+
+		case "startTimecode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.StartTimecode = ptr.String(jtv)
 			}
 
 		case "tracks":
@@ -17713,6 +17756,11 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 				sv.InputScanType = types.InputScanType(jtv)
 			}
 
+		case "multiViewSettings":
+			if err := awsRestjson1_deserializeDocument__listOfMultiViewSettings(&sv.MultiViewSettings, value); err != nil {
+				return err
+			}
+
 		case "position":
 			if err := awsRestjson1_deserializeDocumentRectangle(&sv.Position, value); err != nil {
 				return err
@@ -18102,6 +18150,11 @@ func awsRestjson1_deserializeDocumentInputTemplate(v **types.InputTemplate, valu
 					return fmt.Errorf("expected InputScanType to be of type string, got %T instead", value)
 				}
 				sv.InputScanType = types.InputScanType(jtv)
+			}
+
+		case "multiViewSettings":
+			if err := awsRestjson1_deserializeDocument__listOfMultiViewSettings(&sv.MultiViewSettings, value); err != nil {
+				return err
 			}
 
 		case "position":
@@ -21804,6 +21857,82 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 					return fmt.Errorf("expected MsSmoothManifestEncoding to be of type string, got %T instead", value)
 				}
 				sv.ManifestEncoding = types.MsSmoothManifestEncoding(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiViewInput(v **types.MultiViewInput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultiViewInput
+	if *v == nil {
+		sv = &types.MultiViewInput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fileInput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3Https to be of type string, got %T instead", value)
+				}
+				sv.FileInput = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMultiViewSettings(v **types.MultiViewSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MultiViewSettings
+	if *v == nil {
+		sv = &types.MultiViewSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "input":
+			if err := awsRestjson1_deserializeDocumentMultiViewInput(&sv.Input, value); err != nil {
+				return err
 			}
 
 		default:

@@ -1283,8 +1283,10 @@ type BatchAddClusterNodesErrorCode string
 
 // Enum values for BatchAddClusterNodesErrorCode
 const (
-	BatchAddClusterNodesErrorCodeInstanceGroupNotFound      BatchAddClusterNodesErrorCode = "InstanceGroupNotFound"
-	BatchAddClusterNodesErrorCodeInvalidInstanceGroupStatus BatchAddClusterNodesErrorCode = "InvalidInstanceGroupStatus"
+	BatchAddClusterNodesErrorCodeInstanceGroupNotFound         BatchAddClusterNodesErrorCode = "InstanceGroupNotFound"
+	BatchAddClusterNodesErrorCodeInvalidInstanceGroupStatus    BatchAddClusterNodesErrorCode = "InvalidInstanceGroupStatus"
+	BatchAddClusterNodesErrorCodeIncompatibleAvailabilityZones BatchAddClusterNodesErrorCode = "IncompatibleAvailabilityZones"
+	BatchAddClusterNodesErrorCodeIncompatibleInstanceTypes     BatchAddClusterNodesErrorCode = "IncompatibleInstanceTypes"
 )
 
 // Values returns all known values for BatchAddClusterNodesErrorCode. Note that
@@ -1296,6 +1298,8 @@ func (BatchAddClusterNodesErrorCode) Values() []BatchAddClusterNodesErrorCode {
 	return []BatchAddClusterNodesErrorCode{
 		"InstanceGroupNotFound",
 		"InvalidInstanceGroupStatus",
+		"IncompatibleAvailabilityZones",
+		"IncompatibleInstanceTypes",
 	}
 }
 

@@ -355,11 +355,20 @@ func ExampleServiceConfiguration_outputUsage() {
 	case *types.ServiceConfigurationMemberGitlab:
 		_ = v.Value // Value is types.GitLabConfiguration
 
+	case *types.ServiceConfigurationMemberMcpserver:
+		_ = v.Value // Value is types.MCPServerConfiguration
+
+	case *types.ServiceConfigurationMemberMcpserverdatadog:
+		_ = v.Value // Value is types.MCPServerDatadogConfiguration
+
 	case *types.ServiceConfigurationMemberMcpservergrafana:
 		_ = v.Value // Value is types.MCPServerGrafanaConfiguration
 
 	case *types.ServiceConfigurationMemberMcpservernewrelic:
 		_ = v.Value // Value is types.MCPServerNewRelicConfiguration
+
+	case *types.ServiceConfigurationMemberMcpserversplunk:
+		_ = v.Value // Value is types.MCPServerSplunkConfiguration
 
 	case *types.ServiceConfigurationMemberPagerduty:
 		_ = v.Value // Value is types.PagerDutyConfiguration
@@ -386,11 +395,14 @@ var _ *types.AzureDevOpsConfiguration
 var _ *types.MCPServerNewRelicConfiguration
 var _ *types.DynatraceConfiguration
 var _ *types.PagerDutyConfiguration
+var _ *types.MCPServerSplunkConfiguration
 var _ *types.ServiceNowConfiguration
 var _ *types.EventChannelConfiguration
 var _ *types.GitLabConfiguration
+var _ *types.MCPServerConfiguration
 var _ *types.AzureConfiguration
 var _ *types.SlackConfiguration
+var _ *types.MCPServerDatadogConfiguration
 var _ *types.MCPServerGrafanaConfiguration
 var _ *types.SourceAwsConfiguration
 var _ *types.AWSConfiguration

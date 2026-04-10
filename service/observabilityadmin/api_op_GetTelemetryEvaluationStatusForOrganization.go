@@ -41,6 +41,18 @@ type GetTelemetryEvaluationStatusForOrganizationOutput struct {
 	// populated if Status is FAILED_START or FAILED_STOP .
 	FailureReason *string
 
+	//  The Amazon Web Services Region that is designated as the home region for
+	// multi-region telemetry evaluation for the organization. The home region is the
+	// single management point for all multi-region operations on this organization.
+	// This field is only present when multi-region telemetry evaluation is active.
+	HomeRegion *string
+
+	//  A list of per-region telemetry evaluation statuses for the organization. Each
+	// entry indicates the evaluation status for a specific spoke region included in
+	// the multi-region configuration. This field is only present when multi-region
+	// telemetry evaluation is active.
+	RegionStatuses []types.RegionStatus
+
 	//  The onboarding status of the telemetry config feature for the organization.
 	Status types.Status
 

@@ -1,0 +1,8 @@
+{
+    "id": "58450848-2013-43ea-bcac-60daaf14cf16",
+    "type": "feature",
+    "description": "CloudWatch Observability Admin adds support for multi-region telemetry evaluation and telemetry enablement rules.",
+    "modules": [
+        "service/observabilityadmin"
+    ]
+}

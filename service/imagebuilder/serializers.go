@@ -858,6 +858,13 @@ func awsRestjson1_serializeOpDocumentCreateImagePipelineInput(v *CreateImagePipe
 		}
 	}
 
+	if v.ImageTags != nil {
+		ok := object.Key("imageTags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.ImageTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ImageTestsConfiguration != nil {
 		ok := object.Key("imageTestsConfiguration")
 		if err := awsRestjson1_serializeDocumentImageTestsConfiguration(v.ImageTestsConfiguration, ok); err != nil {
@@ -6912,6 +6919,13 @@ func awsRestjson1_serializeOpDocumentUpdateImagePipelineInput(v *UpdateImagePipe
 	if v.ImageScanningConfiguration != nil {
 		ok := object.Key("imageScanningConfiguration")
 		if err := awsRestjson1_serializeDocumentImageScanningConfiguration(v.ImageScanningConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ImageTags != nil {
+		ok := object.Key("imageTags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.ImageTags, ok); err != nil {
 			return err
 		}
 	}

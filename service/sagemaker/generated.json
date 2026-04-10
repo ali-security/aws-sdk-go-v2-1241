@@ -321,6 +321,7 @@
         "api_op_SearchTrainingPlanOfferings.go",
         "api_op_SendPipelineExecutionStepFailure.go",
         "api_op_SendPipelineExecutionStepSuccess.go",
+        "api_op_StartClusterHealthCheck.go",
         "api_op_StartEdgeDeploymentStage.go",
         "api_op_StartInferenceExperiment.go",
         "api_op_StartMlflowTrackingServer.go",

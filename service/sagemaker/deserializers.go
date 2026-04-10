@@ -33747,6 +33747,117 @@ func awsAwsjson11_deserializeOpErrorSendPipelineExecutionStepSuccess(response *s
 	}
 }
 
+type awsAwsjson11_deserializeOpStartClusterHealthCheck struct {
+}
+
+func (*awsAwsjson11_deserializeOpStartClusterHealthCheck) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpStartClusterHealthCheck) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorStartClusterHealthCheck(response, &metadata)
+	}
+	output := &StartClusterHealthCheckOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentStartClusterHealthCheckOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorStartClusterHealthCheck(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("ResourceNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFound(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpStartEdgeDeploymentStage struct {
 }
 
@@ -45987,6 +46098,11 @@ func awsAwsjson11_deserializeDocumentBatchAddClusterNodesError(v **types.BatchAd
 
 	for key, value := range shape {
 		switch key {
+		case "AvailabilityZones":
+			if err := awsAwsjson11_deserializeDocumentClusterAvailabilityZones(&sv.AvailabilityZones, value); err != nil {
+				return err
+			}
+
 		case "ErrorCode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -46016,6 +46132,11 @@ func awsAwsjson11_deserializeDocumentBatchAddClusterNodesError(v **types.BatchAd
 					return fmt.Errorf("expected InstanceGroupName to be of type string, got %T instead", value)
 				}
 				sv.InstanceGroupName = ptr.String(jtv)
+			}
+
+		case "InstanceTypes":
+			if err := awsAwsjson11_deserializeDocumentClusterInstanceTypes(&sv.InstanceTypes, value); err != nil {
+				return err
 			}
 
 		case "Message":
@@ -49321,6 +49442,42 @@ func awsAwsjson11_deserializeDocumentClusterAutoScalingConfigOutput(v **types.Cl
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClusterAvailabilityZones(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ClusterAvailabilityZone to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentClusterCapacityRequirements(v **types.ClusterCapacityRequirements, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -49876,6 +50033,11 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 				sv.InstanceGroupName = ptr.String(jtv)
 			}
 
+		case "InstanceRequirements":
+			if err := awsAwsjson11_deserializeDocumentClusterInstanceRequirementDetails(&sv.InstanceRequirements, value); err != nil {
+				return err
+			}
+
 		case "InstanceStorageConfigs":
 			if err := awsAwsjson11_deserializeDocumentClusterInstanceStorageConfigs(&sv.InstanceStorageConfigs, value); err != nil {
 				return err
@@ -49888,6 +50050,11 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 					return fmt.Errorf("expected ClusterInstanceType to be of type string, got %T instead", value)
 				}
 				sv.InstanceType = types.ClusterInstanceType(jtv)
+			}
+
+		case "InstanceTypeDetails":
+			if err := awsAwsjson11_deserializeDocumentClusterInstanceTypeDetails(&sv.InstanceTypeDetails, value); err != nil {
+				return err
 			}
 
 		case "KubernetesConfig":
@@ -50100,6 +50267,47 @@ func awsAwsjson11_deserializeDocumentClusterInstancePlacement(v **types.ClusterI
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClusterInstanceRequirementDetails(v **types.ClusterInstanceRequirementDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterInstanceRequirementDetails
+	if *v == nil {
+		sv = &types.ClusterInstanceRequirementDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentInstanceTypes":
+			if err := awsAwsjson11_deserializeDocumentClusterInstanceTypes(&sv.CurrentInstanceTypes, value); err != nil {
+				return err
+			}
+
+		case "DesiredInstanceTypes":
+			if err := awsAwsjson11_deserializeDocumentClusterInstanceTypes(&sv.DesiredInstanceTypes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentClusterInstanceStatusDetails(v **types.ClusterInstanceStatusDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -50233,6 +50441,142 @@ func awsAwsjson11_deserializeDocumentClusterInstanceStorageConfigs(v *[]types.Cl
 		var col types.ClusterInstanceStorageConfig
 		if err := awsAwsjson11_deserializeDocumentClusterInstanceStorageConfig(&col, value); err != nil {
 			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterInstanceTypeDetail(v **types.ClusterInstanceTypeDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterInstanceTypeDetail
+	if *v == nil {
+		sv = &types.ClusterInstanceTypeDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ClusterNonNegativeInstanceCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CurrentCount = ptr.Int32(int32(i64))
+			}
+
+		case "InstanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.ClusterInstanceType(jtv)
+			}
+
+		case "ThreadsPerCore":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ClusterThreadsPerCore to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThreadsPerCore = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterInstanceTypeDetails(v *[]types.ClusterInstanceTypeDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ClusterInstanceTypeDetail
+	if *v == nil {
+		cv = []types.ClusterInstanceTypeDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ClusterInstanceTypeDetail
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentClusterInstanceTypeDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterInstanceTypes(v *[]types.ClusterInstanceType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ClusterInstanceType
+	if *v == nil {
+		cv = []types.ClusterInstanceType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ClusterInstanceType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ClusterInstanceType to be of type string, got %T instead", value)
+			}
+			col = types.ClusterInstanceType(jtv)
 		}
 		cv = append(cv, col)
 
@@ -77461,6 +77805,11 @@ func awsAwsjson11_deserializeDocumentNodeAdditionResult(v **types.NodeAdditionRe
 
 	for key, value := range shape {
 		switch key {
+		case "AvailabilityZones":
+			if err := awsAwsjson11_deserializeDocumentClusterAvailabilityZones(&sv.AvailabilityZones, value); err != nil {
+				return err
+			}
+
 		case "InstanceGroupName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -77468,6 +77817,11 @@ func awsAwsjson11_deserializeDocumentNodeAdditionResult(v **types.NodeAdditionRe
 					return fmt.Errorf("expected ClusterInstanceGroupName to be of type string, got %T instead", value)
 				}
 				sv.InstanceGroupName = ptr.String(jtv)
+			}
+
+		case "InstanceTypes":
+			if err := awsAwsjson11_deserializeDocumentClusterInstanceTypes(&sv.InstanceTypes, value); err != nil {
+				return err
 			}
 
 		case "NodeLogicalId":
@@ -117262,6 +117616,46 @@ func awsAwsjson11_deserializeOpDocumentSendPipelineExecutionStepSuccessOutput(v 
 					return fmt.Errorf("expected PipelineExecutionArn to be of type string, got %T instead", value)
 				}
 				sv.PipelineExecutionArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentStartClusterHealthCheckOutput(v **StartClusterHealthCheckOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StartClusterHealthCheckOutput
+	if *v == nil {
+		sv = &StartClusterHealthCheckOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ClusterArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterArn to be of type string, got %T instead", value)
+				}
+				sv.ClusterArn = ptr.String(jtv)
 			}
 
 		default:

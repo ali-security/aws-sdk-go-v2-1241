@@ -2565,6 +2565,13 @@ func awsRestjson1_serializeDocumentAutoScalingGroupsConfiguration(v *types.AutoS
 		}
 	}
 
+	if v.HealthCheckConfig != nil {
+		ok := object.Key("healthCheckConfig")
+		if err := awsRestjson1_serializeDocumentHealthCheckConfig(v.HealthCheckConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
@@ -2703,6 +2710,53 @@ func awsRestjson1_serializeDocumentHeaderTagAction(v *types.HeaderTagAction, val
 	if v.Value != nil {
 		ok := object.Key("value")
 		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHealthCheckConfig(v *types.HealthCheckConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HealthyThresholdCount != nil {
+		ok := object.Key("healthyThresholdCount")
+		ok.Integer(*v.HealthyThresholdCount)
+	}
+
+	if v.IntervalSeconds != nil {
+		ok := object.Key("intervalSeconds")
+		ok.Integer(*v.IntervalSeconds)
+	}
+
+	if v.Path != nil {
+		ok := object.Key("path")
+		ok.String(*v.Path)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
+	}
+
+	if len(v.Protocol) > 0 {
+		ok := object.Key("protocol")
+		ok.String(string(v.Protocol))
+	}
+
+	if v.StatusCodeMatcher != nil {
+		ok := object.Key("statusCodeMatcher")
+		ok.String(*v.StatusCodeMatcher)
+	}
+
+	if v.TimeoutMs != nil {
+		ok := object.Key("timeoutMs")
+		ok.Integer(*v.TimeoutMs)
+	}
+
+	if v.UnhealthyThresholdCount != nil {
+		ok := object.Key("unhealthyThresholdCount")
+		ok.Integer(*v.UnhealthyThresholdCount)
 	}
 
 	return nil

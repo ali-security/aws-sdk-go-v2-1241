@@ -2190,6 +2190,20 @@ func awsRestjson1_deserializeOpDocumentGetTelemetryEvaluationStatusOutput(v **Ge
 				sv.FailureReason = ptr.String(jtv)
 			}
 
+		case "HomeRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+				}
+				sv.HomeRegion = ptr.String(jtv)
+			}
+
+		case "RegionStatuses":
+			if err := awsRestjson1_deserializeDocumentRegionStatuses(&sv.RegionStatuses, value); err != nil {
+				return err
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2362,6 +2376,20 @@ func awsRestjson1_deserializeOpDocumentGetTelemetryEvaluationStatusForOrganizati
 					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
 				}
 				sv.FailureReason = ptr.String(jtv)
+			}
+
+		case "HomeRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+				}
+				sv.HomeRegion = ptr.String(jtv)
+			}
+
+		case "RegionStatuses":
+			if err := awsRestjson1_deserializeDocumentRegionStatuses(&sv.RegionStatuses, value); err != nil {
+				return err
 			}
 
 		case "Status":
@@ -2709,6 +2737,24 @@ func awsRestjson1_deserializeOpDocumentGetTelemetryRuleOutput(v **GetTelemetryRu
 				sv.CreatedTimeStamp = ptr.Int64(i64)
 			}
 
+		case "HomeRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+				}
+				sv.HomeRegion = ptr.String(jtv)
+			}
+
+		case "IsReplicated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected IsReplicated to be of type *bool, got %T instead", value)
+				}
+				sv.IsReplicated = ptr.Bool(jtv)
+			}
+
 		case "LastUpdateTimeStamp":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2720,6 +2766,11 @@ func awsRestjson1_deserializeOpDocumentGetTelemetryRuleOutput(v **GetTelemetryRu
 					return err
 				}
 				sv.LastUpdateTimeStamp = ptr.Int64(i64)
+			}
+
+		case "RegionStatuses":
+			if err := awsRestjson1_deserializeDocumentRegionStatuses(&sv.RegionStatuses, value); err != nil {
+				return err
 			}
 
 		case "RuleArn":
@@ -2917,6 +2968,24 @@ func awsRestjson1_deserializeOpDocumentGetTelemetryRuleForOrganizationOutput(v *
 				sv.CreatedTimeStamp = ptr.Int64(i64)
 			}
 
+		case "HomeRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+				}
+				sv.HomeRegion = ptr.String(jtv)
+			}
+
+		case "IsReplicated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected IsReplicated to be of type *bool, got %T instead", value)
+				}
+				sv.IsReplicated = ptr.Bool(jtv)
+			}
+
 		case "LastUpdateTimeStamp":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2928,6 +2997,11 @@ func awsRestjson1_deserializeOpDocumentGetTelemetryRuleForOrganizationOutput(v *
 					return err
 				}
 				sv.LastUpdateTimeStamp = ptr.Int64(i64)
+			}
+
+		case "RegionStatuses":
+			if err := awsRestjson1_deserializeDocumentRegionStatuses(&sv.RegionStatuses, value); err != nil {
+				return err
 			}
 
 		case "RuleArn":
@@ -8551,6 +8625,107 @@ func awsRestjson1_deserializeDocumentRegions(v *[]string, value interface{}) err
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRegionStatus(v **types.RegionStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RegionStatus
+	if *v == nil {
+		sv = &types.RegionStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FailureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = ptr.String(jtv)
+			}
+
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "RuleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.RuleArn = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRegionStatuses(v *[]types.RegionStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RegionStatus
+	if *v == nil {
+		cv = []types.RegionStatus{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RegionStatus
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRegionStatus(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9550,8 +9725,22 @@ func awsRestjson1_deserializeDocumentTelemetryRule(v **types.TelemetryRule, valu
 
 	for key, value := range shape {
 		switch key {
+		case "AllRegions":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected AllRegions to be of type *bool, got %T instead", value)
+				}
+				sv.AllRegions = ptr.Bool(jtv)
+			}
+
 		case "DestinationConfiguration":
 			if err := awsRestjson1_deserializeDocumentTelemetryDestinationConfiguration(&sv.DestinationConfiguration, value); err != nil {
+				return err
+			}
+
+		case "Regions":
+			if err := awsRestjson1_deserializeDocumentRegions(&sv.Regions, value); err != nil {
 				return err
 			}
 

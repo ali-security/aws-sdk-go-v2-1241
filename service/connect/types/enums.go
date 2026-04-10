@@ -1561,8 +1561,12 @@ type FileUseCaseType string
 
 // Enum values for FileUseCaseType
 const (
-	FileUseCaseTypeEmailMessage FileUseCaseType = "EMAIL_MESSAGE"
-	FileUseCaseTypeAttachment   FileUseCaseType = "ATTACHMENT"
+	FileUseCaseTypeContactAnalysis               FileUseCaseType = "CONTACT_ANALYSIS"
+	FileUseCaseTypeEmailMessage                  FileUseCaseType = "EMAIL_MESSAGE"
+	FileUseCaseTypeEmailMessagePlainText         FileUseCaseType = "EMAIL_MESSAGE_PLAIN_TEXT"
+	FileUseCaseTypeEmailMessageRedacted          FileUseCaseType = "EMAIL_MESSAGE_REDACTED"
+	FileUseCaseTypeEmailMessagePlainTextRedacted FileUseCaseType = "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED"
+	FileUseCaseTypeAttachment                    FileUseCaseType = "ATTACHMENT"
 )
 
 // Values returns all known values for FileUseCaseType. Note that this can be
@@ -1571,7 +1575,11 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (FileUseCaseType) Values() []FileUseCaseType {
 	return []FileUseCaseType{
+		"CONTACT_ANALYSIS",
 		"EMAIL_MESSAGE",
+		"EMAIL_MESSAGE_PLAIN_TEXT",
+		"EMAIL_MESSAGE_REDACTED",
+		"EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
 		"ATTACHMENT",
 	}
 }
@@ -3510,15 +3518,17 @@ type ReferenceType string
 
 // Enum values for ReferenceType
 const (
-	ReferenceTypeUrl                   ReferenceType = "URL"
-	ReferenceTypeAttachment            ReferenceType = "ATTACHMENT"
-	ReferenceTypeContactAnalysis       ReferenceType = "CONTACT_ANALYSIS"
-	ReferenceTypeNumber                ReferenceType = "NUMBER"
-	ReferenceTypeString                ReferenceType = "STRING"
-	ReferenceTypeDate                  ReferenceType = "DATE"
-	ReferenceTypeEmail                 ReferenceType = "EMAIL"
-	ReferenceTypeEmailMessage          ReferenceType = "EMAIL_MESSAGE"
-	ReferenceTypeEmailMessagePlainText ReferenceType = "EMAIL_MESSAGE_PLAIN_TEXT"
+	ReferenceTypeUrl                           ReferenceType = "URL"
+	ReferenceTypeAttachment                    ReferenceType = "ATTACHMENT"
+	ReferenceTypeContactAnalysis               ReferenceType = "CONTACT_ANALYSIS"
+	ReferenceTypeNumber                        ReferenceType = "NUMBER"
+	ReferenceTypeString                        ReferenceType = "STRING"
+	ReferenceTypeDate                          ReferenceType = "DATE"
+	ReferenceTypeEmail                         ReferenceType = "EMAIL"
+	ReferenceTypeEmailMessage                  ReferenceType = "EMAIL_MESSAGE"
+	ReferenceTypeEmailMessagePlainText         ReferenceType = "EMAIL_MESSAGE_PLAIN_TEXT"
+	ReferenceTypeEmailMessagePlainTextRedacted ReferenceType = "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED"
+	ReferenceTypeEmailMessageRedacted          ReferenceType = "EMAIL_MESSAGE_REDACTED"
 )
 
 // Values returns all known values for ReferenceType. Note that this can be
@@ -3536,6 +3546,8 @@ func (ReferenceType) Values() []ReferenceType {
 		"EMAIL",
 		"EMAIL_MESSAGE",
 		"EMAIL_MESSAGE_PLAIN_TEXT",
+		"EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
+		"EMAIL_MESSAGE_REDACTED",
 	}
 }
 

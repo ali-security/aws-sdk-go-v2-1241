@@ -45,8 +45,25 @@ type GetTelemetryRuleForOrganizationOutput struct {
 	//  The timestamp when the organization telemetry rule was created.
 	CreatedTimeStamp *int64
 
+	//  The Amazon Web Services Region where the organization telemetry rule was
+	// originally created. For replicated rules in spoke regions, this indicates the
+	// region that manages the rule. For rules created without multi-region scope, this
+	// field is not present.
+	HomeRegion *string
+
+	//  Indicates whether this organization telemetry rule is a replica that was
+	// created in this region through multi-region fan-out from the home region.
+	// Replicated rules cannot be directly updated or deleted in the spoke region. To
+	// modify a replicated rule, make changes in the home region.
+	IsReplicated *bool
+
 	//  The timestamp when the organization telemetry rule was last updated.
 	LastUpdateTimeStamp *int64
+
+	//  A list of per-region replication statuses for the organization telemetry rule.
+	// Each entry indicates the replication status of the rule in a specific spoke
+	// region. This field is only present for rules created with multi-region scope.
+	RegionStatuses []types.RegionStatus
 
 	//  The Amazon Resource Name (ARN) of the organization telemetry rule.
 	RuleArn *string

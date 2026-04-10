@@ -1,0 +1,8 @@
+{
+    "id": "534ce46f-e49e-4b5d-8313-22a978b08091",
+    "type": "feature",
+    "description": "Devops Agent now supports associate Splunk, Datadog and custom MCP server to an Agent Space.",
+    "modules": [
+        "service/devopsagent"
+    ]
+}

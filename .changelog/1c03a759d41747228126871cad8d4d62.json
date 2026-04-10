@@ -1,0 +1,8 @@
+{
+    "id": "1c03a759-d417-4722-8126-871cad8d4d62",
+    "type": "feature",
+    "description": "Adds support for MV-HEVC video output and clear lead for AV1 DRM output.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

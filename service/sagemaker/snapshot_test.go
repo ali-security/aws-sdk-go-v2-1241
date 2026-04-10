@@ -3818,6 +3818,18 @@ func TestCheckSnapshot_SendPipelineExecutionStepSuccess(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartClusterHealthCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartClusterHealthCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartClusterHealthCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartEdgeDeploymentStage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartEdgeDeploymentStage(context.Background(), nil, func(o *Options) {
@@ -8382,6 +8394,18 @@ func TestUpdateSnapshot_SendPipelineExecutionStepSuccess(t *testing.T) {
 	_, err := svc.SendPipelineExecutionStepSuccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SendPipelineExecutionStepSuccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartClusterHealthCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartClusterHealthCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartClusterHealthCheck")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

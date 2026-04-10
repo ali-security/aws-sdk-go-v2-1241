@@ -640,6 +640,11 @@ func validateAutoScalingGroupsConfiguration(v *types.AutoScalingGroupsConfigurat
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
+	if v.HealthCheckConfig != nil {
+		if err := validateHealthCheckConfig(v.HealthCheckConfig); err != nil {
+			invalidParams.AddNested("HealthCheckConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -758,6 +763,24 @@ func validateHeaderTagAction(v *types.HeaderTagAction) error {
 	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHealthCheckConfig(v *types.HealthCheckConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HealthCheckConfig"}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -8536,6 +8536,8 @@ type Reference struct {
 //	ReferenceSummaryMemberEmail
 //	ReferenceSummaryMemberEmailMessage
 //	ReferenceSummaryMemberEmailMessagePlainText
+//	ReferenceSummaryMemberEmailMessagePlainTextRedacted
+//	ReferenceSummaryMemberEmailMessageRedacted
 //	ReferenceSummaryMemberNumber
 //	ReferenceSummaryMemberString
 //	ReferenceSummaryMemberUrl
@@ -8590,6 +8592,26 @@ type ReferenceSummaryMemberEmailMessagePlainText struct {
 }
 
 func (*ReferenceSummaryMemberEmailMessagePlainText) isReferenceSummary() {}
+
+// Information about the reference when the referenceType is EMAIL_MESSAGE .
+// Otherwise, null.
+type ReferenceSummaryMemberEmailMessagePlainTextRedacted struct {
+	Value EmailMessageReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberEmailMessagePlainTextRedacted) isReferenceSummary() {}
+
+// Information about the reference when the referenceType is EMAIL_MESSAGE .
+// Otherwise, null.
+type ReferenceSummaryMemberEmailMessageRedacted struct {
+	Value EmailMessageReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberEmailMessageRedacted) isReferenceSummary() {}
 
 // Information about a reference when the referenceType is NUMBER . Otherwise, null.
 type ReferenceSummaryMemberNumber struct {

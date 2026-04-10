@@ -89,6 +89,14 @@ type AddClusterNodeSpecification struct {
 	// This member is required.
 	InstanceGroupName *string
 
+	// The availability zones in which to add nodes. Use this to target node placement
+	// in specific availability zones within a flexible instance group.
+	AvailabilityZones []string
+
+	// The instance types to use when adding nodes. Use this to target specific
+	// instance types within a flexible instance group.
+	InstanceTypes []ClusterInstanceType
+
 	noSmithyDocumentSerde
 }
 
@@ -2553,6 +2561,12 @@ type BatchAddClusterNodesError struct {
 	// This member is required.
 	InstanceGroupName *string
 
+	// The availability zones associated with the failed node addition request.
+	AvailabilityZones []string
+
+	// The instance types associated with the failed node addition request.
+	InstanceTypes []ClusterInstanceType
+
 	// A descriptive message providing additional details about the error.
 	Message *string
 
@@ -4040,12 +4054,22 @@ type ClusterInstanceGroupDetails struct {
 	// The name of the instance group of a SageMaker HyperPod cluster.
 	InstanceGroupName *string
 
+	// The instance requirements for the instance group, including the current and
+	// desired instance types. This field is present for flexible instance groups that
+	// support multiple instance types.
+	InstanceRequirements *ClusterInstanceRequirementDetails
+
 	// The additional storage configurations for the instances in the SageMaker
 	// HyperPod cluster instance group.
 	InstanceStorageConfigs []ClusterInstanceStorageConfig
 
 	// The instance type of the instance group of a SageMaker HyperPod cluster.
 	InstanceType ClusterInstanceType
+
+	// Details about the instance types in the instance group, including the count and
+	// configuration of each instance type. This field is present for flexible instance
+	// groups that support multiple instance types.
+	InstanceTypeDetails []ClusterInstanceTypeDetail
 
 	// The Kubernetes configuration for the instance group that contains labels and
 	// taints to be applied for the nodes in this instance group.
@@ -4164,11 +4188,6 @@ type ClusterInstanceGroupSpecification struct {
 	// This member is required.
 	InstanceGroupName *string
 
-	// Specifies the LifeCycle configuration for the instance group.
-	//
-	// This member is required.
-	LifeCycleConfig *ClusterLifeCycleConfig
-
 	// Specifies the capacity requirements for the instance group.
 	CapacityRequirements *ClusterCapacityRequirements
 
@@ -4199,6 +4218,12 @@ type ClusterInstanceGroupSpecification struct {
 	// with the specified image.
 	ImageId *string
 
+	// The instance requirements for the instance group, including the instance types
+	// to use. Use this to create a flexible instance group that supports multiple
+	// instance types. The InstanceType and InstanceRequirements properties are
+	// mutually exclusive.
+	InstanceRequirements *ClusterInstanceRequirements
+
 	// Specifies the additional storage configurations for the instances in the
 	// SageMaker HyperPod cluster instance group.
 	InstanceStorageConfigs []ClusterInstanceStorageConfig
@@ -4211,6 +4236,9 @@ type ClusterInstanceGroupSpecification struct {
 	// reconcile the actual state with the declared state for nodes in this instance
 	// group.
 	KubernetesConfig *ClusterKubernetesConfig
+
+	// Specifies the LifeCycle configuration for the instance group.
+	LifeCycleConfig *ClusterLifeCycleConfig
 
 	// Defines the minimum number of instances required for an instance group to
 	// become InService . If this threshold isn't met within 3 hours, the instance
@@ -4299,6 +4327,36 @@ type ClusterInstancePlacement struct {
 	noSmithyDocumentSerde
 }
 
+// The instance requirement details for a flexible instance group, including the
+// current and desired instance types.
+type ClusterInstanceRequirementDetails struct {
+
+	// The instance types currently in use by the instance group.
+	CurrentInstanceTypes []ClusterInstanceType
+
+	// The desired instance types for the instance group, as specified in the most
+	// recent update request.
+	DesiredInstanceTypes []ClusterInstanceType
+
+	noSmithyDocumentSerde
+}
+
+// The instance requirements for a flexible instance group. Use this to specify
+// multiple instance types that the instance group can use. The order of instance
+// types in the list determines the priority for instance provisioning.
+type ClusterInstanceRequirements struct {
+
+	// The list of instance types that the instance group can use. The order of
+	// instance types determines the priority—HyperPod attempts to provision instances
+	// using the first instance type in the list and falls back to subsequent types if
+	// capacity is unavailable.
+	//
+	// This member is required.
+	InstanceTypes []ClusterInstanceType
+
+	noSmithyDocumentSerde
+}
+
 // Details of an instance in a SageMaker HyperPod cluster.
 type ClusterInstanceStatusDetails struct {
 
@@ -4358,6 +4416,22 @@ type ClusterInstanceStorageConfigMemberFsxOpenZfsConfig struct {
 }
 
 func (*ClusterInstanceStorageConfigMemberFsxOpenZfsConfig) isClusterInstanceStorageConfig() {}
+
+// Details about a specific instance type within a flexible instance group,
+// including the count and configuration.
+type ClusterInstanceTypeDetail struct {
+
+	// The number of instances of this type currently running in the instance group.
+	CurrentCount *int32
+
+	// The instance type.
+	InstanceType ClusterInstanceType
+
+	// The number of threads per CPU core for this instance type.
+	ThreadsPerCore *int32
+
+	noSmithyDocumentSerde
+}
 
 // Kubernetes configuration that specifies labels and taints to be applied to
 // cluster nodes in an instance group.
@@ -4435,8 +4509,6 @@ type ClusterLifeCycleConfig struct {
 
 	// The file name of the entrypoint script of lifecycle scripts under SourceS3Uri .
 	// This entrypoint script runs during cluster creation.
-	//
-	// This member is required.
 	OnCreate *string
 
 	// An Amazon S3 bucket path where your lifecycle scripts are stored.
@@ -4447,8 +4519,6 @@ type ClusterLifeCycleConfig struct {
 	//
 	// [AmazonSageMakerClusterInstanceRolePolicy]: https://docs.aws.amazon.com/sagemaker/latest/dg/security-iam-awsmanpol-cluster.html
 	// [IAM role for SageMaker HyperPod]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod-prerequisites.html#sagemaker-hyperpod-prerequisites-iam-role-for-hyperpod
-	//
-	// This member is required.
 	SourceS3Uri *string
 
 	noSmithyDocumentSerde
@@ -11597,6 +11667,32 @@ type InstanceGroup struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of deep health checks for an instance group.
+//
+// Overlapping deep health check configurations will be merged into a single
+// operation.
+type InstanceGroupHealthCheckConfiguration struct {
+
+	// A list of deep health checks to be performed.
+	//
+	// This member is required.
+	DeepHealthChecks []DeepHealthCheckType
+
+	// The name of the instance group.
+	//
+	// This member is required.
+	InstanceGroupName *string
+
+	// A list of Amazon Elastic Compute Cloud (EC2) instance IDs on which to perform
+	// deep health checks.
+	//
+	// Leave this field blank to perform deep health checks on the entire instance
+	// group.
+	InstanceIds []string
+
+	noSmithyDocumentSerde
+}
+
 // Metadata information about an instance group in a HyperPod cluster.
 type InstanceGroupMetadata struct {
 
@@ -14795,6 +14891,12 @@ type NodeAdditionResult struct {
 	//
 	// This member is required.
 	Status ClusterInstanceStatus
+
+	// The availability zones associated with the successfully added node.
+	AvailabilityZones []string
+
+	// The instance types associated with the successfully added node.
+	InstanceTypes []ClusterInstanceType
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,8 @@
+{
+    "id": "3cd0d2ce-af45-4634-9762-2df6f988546c",
+    "type": "feature",
+    "description": "Minor updates to exceptions for completeness",
+    "modules": [
+        "service/ecs"
+    ]
+}

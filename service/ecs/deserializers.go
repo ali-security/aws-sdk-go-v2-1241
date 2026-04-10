@@ -121,6 +121,9 @@ func awsAwsjson11_deserializeOpErrorCreateCapacityProvider(response *smithyhttp.
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -250,6 +253,9 @@ func awsAwsjson11_deserializeOpErrorCreateCluster(response *smithyhttp.Response,
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -778,6 +784,9 @@ func awsAwsjson11_deserializeOpErrorCreateTaskSet(response *smithyhttp.Response,
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("NamespaceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNamespaceNotFoundException(response, errorBody)
 
@@ -907,6 +916,9 @@ func awsAwsjson11_deserializeOpErrorDeleteAccountSetting(response *smithyhttp.Re
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -1024,11 +1036,20 @@ func awsAwsjson11_deserializeOpErrorDeleteAttributes(response *smithyhttp.Respon
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ClientException", errorCode):
+		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
+
 	case strings.EqualFold("ClusterNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("ServerException", errorCode):
+		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
 
 	case strings.EqualFold("TargetNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorTargetNotFoundException(response, errorBody)
@@ -1141,6 +1162,9 @@ func awsAwsjson11_deserializeOpErrorDeleteCapacityProvider(response *smithyhttp.
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -1155,6 +1179,9 @@ func awsAwsjson11_deserializeOpErrorDeleteCapacityProvider(response *smithyhttp.
 
 	case strings.EqualFold("UnsupportedFeatureException", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedFeatureException(response, errorBody)
+
+	case strings.EqualFold("UpdateInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorUpdateInProgressException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1264,6 +1291,9 @@ func awsAwsjson11_deserializeOpErrorDeleteCluster(response *smithyhttp.Response,
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -1783,6 +1813,9 @@ func awsAwsjson11_deserializeOpErrorDeleteService(response *smithyhttp.Response,
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -2038,6 +2071,9 @@ func awsAwsjson11_deserializeOpErrorDeleteTaskSet(response *smithyhttp.Response,
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
 
@@ -2161,6 +2197,9 @@ func awsAwsjson11_deserializeOpErrorDeregisterContainerInstance(response *smithy
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -2281,6 +2320,9 @@ func awsAwsjson11_deserializeOpErrorDeregisterTaskDefinition(response *smithyhtt
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -2398,6 +2440,9 @@ func awsAwsjson11_deserializeOpErrorDescribeCapacityProviders(response *smithyht
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -2521,6 +2566,9 @@ func awsAwsjson11_deserializeOpErrorDescribeClusters(response *smithyhttp.Respon
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -2638,6 +2686,9 @@ func awsAwsjson11_deserializeOpErrorDescribeContainerInstances(response *smithyh
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -3646,6 +3697,9 @@ func awsAwsjson11_deserializeOpErrorDescribeServices(response *smithyhttp.Respon
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -3766,6 +3820,9 @@ func awsAwsjson11_deserializeOpErrorDescribeTaskDefinition(response *smithyhttp.
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -3883,6 +3940,9 @@ func awsAwsjson11_deserializeOpErrorDescribeTasks(response *smithyhttp.Response,
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -4135,8 +4195,14 @@ func awsAwsjson11_deserializeOpErrorDiscoverPollEndpoint(response *smithyhttp.Re
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
@@ -4504,6 +4570,9 @@ func awsAwsjson11_deserializeOpErrorListAccountSettings(response *smithyhttp.Res
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -4621,11 +4690,20 @@ func awsAwsjson11_deserializeOpErrorListAttributes(response *smithyhttp.Response
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ClientException", errorCode):
+		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
+
 	case strings.EqualFold("ClusterNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("ServerException", errorCode):
+		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -4735,6 +4813,9 @@ func awsAwsjson11_deserializeOpErrorListClusters(response *smithyhttp.Response, 
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -4852,6 +4933,9 @@ func awsAwsjson11_deserializeOpErrorListContainerInstances(response *smithyhttp.
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -5350,6 +5434,9 @@ func awsAwsjson11_deserializeOpErrorListServiceDeployments(response *smithyhttp.
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
+	case strings.EqualFold("ClusterNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
@@ -5470,6 +5557,9 @@ func awsAwsjson11_deserializeOpErrorListServices(response *smithyhttp.Response, 
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -5590,6 +5680,9 @@ func awsAwsjson11_deserializeOpErrorListServicesByNamespace(response *smithyhttp
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -5710,6 +5803,9 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -5830,6 +5926,9 @@ func awsAwsjson11_deserializeOpErrorListTaskDefinitionFamilies(response *smithyh
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -5947,6 +6046,9 @@ func awsAwsjson11_deserializeOpErrorListTaskDefinitions(response *smithyhttp.Res
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -6064,6 +6166,9 @@ func awsAwsjson11_deserializeOpErrorListTasks(response *smithyhttp.Response, met
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -6187,6 +6292,9 @@ func awsAwsjson11_deserializeOpErrorPutAccountSetting(response *smithyhttp.Respo
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -6304,6 +6412,9 @@ func awsAwsjson11_deserializeOpErrorPutAccountSettingDefault(response *smithyhtt
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -6421,14 +6532,23 @@ func awsAwsjson11_deserializeOpErrorPutAttributes(response *smithyhttp.Response,
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("AttributeLimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorAttributeLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ClientException", errorCode):
+		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
 	case strings.EqualFold("ClusterNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("ServerException", errorCode):
+		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
 
 	case strings.EqualFold("TargetNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorTargetNotFoundException(response, errorBody)
@@ -6541,6 +6661,9 @@ func awsAwsjson11_deserializeOpErrorPutClusterCapacityProviders(response *smithy
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -6667,8 +6790,14 @@ func awsAwsjson11_deserializeOpErrorRegisterContainerInstance(response *smithyht
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
+
+	case strings.EqualFold("ClusterNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
@@ -6907,11 +7036,17 @@ func awsAwsjson11_deserializeOpErrorRegisterTaskDefinition(response *smithyhttp.
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
@@ -7162,6 +7297,9 @@ func awsAwsjson11_deserializeOpErrorStartTask(response *smithyhttp.Response, met
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -7170,6 +7308,9 @@ func awsAwsjson11_deserializeOpErrorStartTask(response *smithyhttp.Response, met
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NamespaceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorNamespaceNotFoundException(response, errorBody)
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
@@ -7414,6 +7555,9 @@ func awsAwsjson11_deserializeOpErrorStopTask(response *smithyhttp.Response, meta
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -7540,6 +7684,9 @@ func awsAwsjson11_deserializeOpErrorSubmitAttachmentStateChanges(response *smith
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
+	case strings.EqualFold("ClusterNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
@@ -7660,6 +7807,12 @@ func awsAwsjson11_deserializeOpErrorSubmitContainerStateChange(response *smithyh
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
+	case strings.EqualFold("ClusterNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
 
@@ -7777,6 +7930,9 @@ func awsAwsjson11_deserializeOpErrorSubmitTaskStateChange(response *smithyhttp.R
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
+	case strings.EqualFold("ClusterNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorClusterNotFoundException(response, errorBody)
+
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
@@ -7891,6 +8047,9 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -7899,6 +8058,9 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -8014,6 +8176,9 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -8137,6 +8302,9 @@ func awsAwsjson11_deserializeOpErrorUpdateCapacityProvider(response *smithyhttp.
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -8260,6 +8428,9 @@ func awsAwsjson11_deserializeOpErrorUpdateCluster(response *smithyhttp.Response,
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -8383,6 +8554,9 @@ func awsAwsjson11_deserializeOpErrorUpdateClusterSettings(response *smithyhttp.R
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -8394,6 +8568,9 @@ func awsAwsjson11_deserializeOpErrorUpdateClusterSettings(response *smithyhttp.R
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)
+
+	case strings.EqualFold("UpdateInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorUpdateInProgressException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -8503,6 +8680,9 @@ func awsAwsjson11_deserializeOpErrorUpdateContainerAgent(response *smithyhttp.Re
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -8632,6 +8812,9 @@ func awsAwsjson11_deserializeOpErrorUpdateContainerInstancesState(response *smit
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsAwsjson11_deserializeErrorClientException(response, errorBody)
 
@@ -9435,6 +9618,9 @@ func awsAwsjson11_deserializeOpErrorUpdateTaskSet(response *smithyhttp.Response,
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("ServerException", errorCode):
 		return awsAwsjson11_deserializeErrorServerException(response, errorBody)

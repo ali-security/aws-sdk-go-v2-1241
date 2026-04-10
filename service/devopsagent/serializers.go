@@ -4537,6 +4537,27 @@ func awsRestjson1_serializeDocumentMCPServerBearerTokenConfig(v *types.MCPServer
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMCPServerConfiguration(v *types.MCPServerConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Tools != nil {
+		ok := object.Key("tools")
+		if err := awsRestjson1_serializeDocumentMCPToolsList(v.Tools, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMCPServerDatadogConfiguration(v *types.MCPServerDatadogConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMCPServerDetails(v *types.MCPServerDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4700,6 +4721,13 @@ func awsRestjson1_serializeDocumentMCPServerOAuthClientCredentialsConfig(v *type
 			return err
 		}
 	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMCPServerSplunkConfiguration(v *types.MCPServerSplunkConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	return nil
 }
@@ -5136,6 +5164,18 @@ func awsRestjson1_serializeDocumentServiceConfiguration(v types.ServiceConfigura
 			return err
 		}
 
+	case *types.ServiceConfigurationMemberMcpserver:
+		av := object.Key("mcpserver")
+		if err := awsRestjson1_serializeDocumentMCPServerConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ServiceConfigurationMemberMcpserverdatadog:
+		av := object.Key("mcpserverdatadog")
+		if err := awsRestjson1_serializeDocumentMCPServerDatadogConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ServiceConfigurationMemberMcpservergrafana:
 		av := object.Key("mcpservergrafana")
 		if err := awsRestjson1_serializeDocumentMCPServerGrafanaConfiguration(&uv.Value, av); err != nil {
@@ -5145,6 +5185,12 @@ func awsRestjson1_serializeDocumentServiceConfiguration(v types.ServiceConfigura
 	case *types.ServiceConfigurationMemberMcpservernewrelic:
 		av := object.Key("mcpservernewrelic")
 		if err := awsRestjson1_serializeDocumentMCPServerNewRelicConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ServiceConfigurationMemberMcpserversplunk:
+		av := object.Key("mcpserversplunk")
+		if err := awsRestjson1_serializeDocumentMCPServerSplunkConfiguration(&uv.Value, av); err != nil {
 			return err
 		}
 

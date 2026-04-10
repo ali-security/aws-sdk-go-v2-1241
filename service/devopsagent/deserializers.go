@@ -11760,6 +11760,73 @@ func awsRestjson1_deserializeDocumentJournalRecordList(v *[]types.JournalRecord,
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMCPServerConfiguration(v **types.MCPServerConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MCPServerConfiguration
+	if *v == nil {
+		sv = &types.MCPServerConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "tools":
+			if err := awsRestjson1_deserializeDocumentMCPToolsList(&sv.Tools, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMCPServerDatadogConfiguration(v **types.MCPServerDatadogConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MCPServerDatadogConfiguration
+	if *v == nil {
+		sv = &types.MCPServerDatadogConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMCPServerGrafanaConfiguration(v **types.MCPServerGrafanaConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11854,6 +11921,37 @@ func awsRestjson1_deserializeDocumentMCPServerNewRelicConfiguration(v **types.MC
 				sv.Endpoint = ptr.String(jtv)
 			}
 
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMCPServerSplunkConfiguration(v **types.MCPServerSplunkConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MCPServerSplunkConfiguration
+	if *v == nil {
+		sv = &types.MCPServerSplunkConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		default:
 			_, _ = key, value
 
@@ -13418,6 +13516,26 @@ loop:
 			uv = &types.ServiceConfigurationMemberGitlab{Value: mv}
 			break loop
 
+		case "mcpserver":
+			var mv types.MCPServerConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMCPServerConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ServiceConfigurationMemberMcpserver{Value: mv}
+			break loop
+
+		case "mcpserverdatadog":
+			var mv types.MCPServerDatadogConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMCPServerDatadogConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ServiceConfigurationMemberMcpserverdatadog{Value: mv}
+			break loop
+
 		case "mcpservergrafana":
 			var mv types.MCPServerGrafanaConfiguration
 			destAddr := &mv
@@ -13436,6 +13554,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ServiceConfigurationMemberMcpservernewrelic{Value: mv}
+			break loop
+
+		case "mcpserversplunk":
+			var mv types.MCPServerSplunkConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMCPServerSplunkConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ServiceConfigurationMemberMcpserversplunk{Value: mv}
 			break loop
 
 		case "pagerduty":
