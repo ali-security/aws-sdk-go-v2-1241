@@ -734,6 +734,18 @@ func TestCheckSnapshot_GetMonitor(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMonitorSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMonitorSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMonitorSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetQueue(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetQueue(context.Background(), nil, func(o *Options) {
@@ -1387,6 +1399,18 @@ func TestCheckSnapshot_UpdateMonitor(t *testing.T) {
 	_, err := svc.UpdateMonitor(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateMonitorSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMonitorSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateMonitorSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2185,6 +2209,18 @@ func TestUpdateSnapshot_GetMonitor(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMonitorSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMonitorSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMonitorSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetQueue(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetQueue(context.Background(), nil, func(o *Options) {
@@ -2838,6 +2874,18 @@ func TestUpdateSnapshot_UpdateMonitor(t *testing.T) {
 	_, err := svc.UpdateMonitor(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateMonitorSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMonitorSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateMonitorSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1132,6 +1132,46 @@ func (SegmentSnapshotStatus) Values() []SegmentSnapshotStatus {
 	}
 }
 
+type SegmentSortDataType string
+
+// Enum values for SegmentSortDataType
+const (
+	SegmentSortDataTypeString SegmentSortDataType = "STRING"
+	SegmentSortDataTypeNumber SegmentSortDataType = "NUMBER"
+	SegmentSortDataTypeDate   SegmentSortDataType = "DATE"
+)
+
+// Values returns all known values for SegmentSortDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SegmentSortDataType) Values() []SegmentSortDataType {
+	return []SegmentSortDataType{
+		"STRING",
+		"NUMBER",
+		"DATE",
+	}
+}
+
+type SegmentSortOrder string
+
+// Enum values for SegmentSortOrder
+const (
+	SegmentSortOrderAsc  SegmentSortOrder = "ASC"
+	SegmentSortOrderDesc SegmentSortOrder = "DESC"
+)
+
+// Values returns all known values for SegmentSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SegmentSortOrder) Values() []SegmentSortOrder {
+	return []SegmentSortOrder{
+		"ASC",
+		"DESC",
+	}
+}
+
 type SegmentType string
 
 // Enum values for SegmentType
@@ -1205,6 +1245,25 @@ func (ServiceNowConnectorOperator) Values() []ServiceNowConnectorOperator {
 		"VALIDATE_NON_NEGATIVE",
 		"VALIDATE_NUMERIC",
 		"NO_OP",
+	}
+}
+
+type SortAttributeType string
+
+// Enum values for SortAttributeType
+const (
+	SortAttributeTypeProfile    SortAttributeType = "PROFILE"
+	SortAttributeTypeCalculated SortAttributeType = "CALCULATED"
+)
+
+// Values returns all known values for SortAttributeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortAttributeType) Values() []SortAttributeType {
+	return []SortAttributeType{
+		"PROFILE",
+		"CALCULATED",
 	}
 }
 

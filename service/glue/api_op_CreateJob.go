@@ -116,7 +116,7 @@ type CreateJobInput struct {
 	// For more information about the available Glue versions and corresponding Spark
 	// and Python versions, see [Glue version]in the developer guide.
 	//
-	// Jobs that are created without specifying a Glue version default to Glue 0.9.
+	// Jobs that are created without specifying a Glue version default to Glue 5.1.
 	//
 	// [Glue version]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	GlueVersion *string

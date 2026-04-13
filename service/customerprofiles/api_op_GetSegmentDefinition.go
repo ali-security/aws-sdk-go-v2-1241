@@ -65,6 +65,9 @@ type GetSegmentDefinitionOutput struct {
 	// The segment criteria associated with this definition.
 	SegmentGroups *types.SegmentGroup
 
+	// The segment sort.
+	SegmentSort *types.SegmentSort
+
 	// The segment SQL query.
 	SegmentSqlQuery *string
 

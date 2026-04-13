@@ -5288,6 +5288,13 @@ func awsRestjson1_serializeOpDocumentGetFindingStatisticsV2Input(v *GetFindingSt
 		ok.Integer(*v.MaxStatisticResults)
 	}
 
+	if v.Scopes != nil {
+		ok := object.Key("Scopes")
+		if err := awsRestjson1_serializeDocumentFindingScopes(v.Scopes, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.SortOrder) > 0 {
 		ok := object.Key("SortOrder")
 		ok.String(string(v.SortOrder))
@@ -5487,6 +5494,13 @@ func awsRestjson1_serializeOpDocumentGetFindingsV2Input(v *GetFindingsV2Input, v
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.Scopes != nil {
+		ok := object.Key("Scopes")
+		if err := awsRestjson1_serializeDocumentFindingScopes(v.Scopes, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SortCriteria != nil {
@@ -5947,6 +5961,13 @@ func awsRestjson1_serializeOpDocumentGetResourcesStatisticsV2Input(v *GetResourc
 		ok.Integer(*v.MaxStatisticResults)
 	}
 
+	if v.Scopes != nil {
+		ok := object.Key("Scopes")
+		if err := awsRestjson1_serializeDocumentResourceScopes(v.Scopes, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.SortOrder) > 0 {
 		ok := object.Key("SortOrder")
 		ok.String(string(v.SortOrder))
@@ -6146,6 +6167,13 @@ func awsRestjson1_serializeOpDocumentGetResourcesV2Input(v *GetResourcesV2Input,
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.Scopes != nil {
+		ok := object.Key("Scopes")
+		if err := awsRestjson1_serializeDocumentResourceScopes(v.Scopes, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SortCriteria != nil {
@@ -22940,6 +22968,36 @@ func awsRestjson1_serializeDocumentAwsOpenSearchServiceDomainVpcOptionsDetails(v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsOrganizationScope(v *types.AwsOrganizationScope, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OrganizationalUnitId != nil {
+		ok := object.Key("OrganizationalUnitId")
+		ok.String(*v.OrganizationalUnitId)
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsOrganizationScopeList(v []types.AwsOrganizationScope, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsOrganizationScope(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsRdsDbClusterAssociatedRole(v *types.AwsRdsDbClusterAssociatedRole, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -29779,6 +29837,20 @@ func awsRestjson1_serializeDocumentFindingProviderSeverity(v *types.FindingProvi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFindingScopes(v *types.FindingScopes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AwsOrganizations != nil {
+		ok := object.Key("AwsOrganizations")
+		if err := awsRestjson1_serializeDocumentAwsOrganizationScopeList(v.AwsOrganizations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFindingsTrendsCompositeFilter(v *types.FindingsTrendsCompositeFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -32663,6 +32735,20 @@ func awsRestjson1_serializeDocumentResourcesCompositeFilterList(v []types.Resour
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceScopes(v *types.ResourceScopes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AwsOrganizations != nil {
+		ok := object.Key("AwsOrganizations")
+		if err := awsRestjson1_serializeDocumentAwsOrganizationScopeList(v.AwsOrganizations, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

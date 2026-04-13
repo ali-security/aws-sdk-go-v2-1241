@@ -1676,6 +1676,13 @@ func awsRestjson1_serializeOpDocumentCreateSegmentDefinitionInput(v *CreateSegme
 		}
 	}
 
+	if v.SegmentSort != nil {
+		ok := object.Key("SegmentSort")
+		if err := awsRestjson1_serializeDocumentSegmentSort(v.SegmentSort, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SegmentSqlQuery != nil {
 		ok := object.Key("SegmentSqlQuery")
 		ok.String(*v.SegmentSqlQuery)
@@ -12266,6 +12273,20 @@ func awsRestjson1_serializeDocumentSegmentGroupStructure(v *types.SegmentGroupSt
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSegmentSort(v *types.SegmentSort, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("Attributes")
+		if err := awsRestjson1_serializeDocumentSortAttributeList(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentServiceNowSourceProperties(v *types.ServiceNowSourceProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12275,6 +12296,46 @@ func awsRestjson1_serializeDocumentServiceNowSourceProperties(v *types.ServiceNo
 		ok.String(*v.Object)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSortAttribute(v *types.SortAttribute, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataType) > 0 {
+		ok := object.Key("DataType")
+		ok.String(string(v.DataType))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Order) > 0 {
+		ok := object.Key("Order")
+		ok.String(string(v.Order))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSortAttributeList(v []types.SortAttribute, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSortAttribute(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

@@ -3780,6 +3780,25 @@ func validateSegmentGroupStructure(v *types.SegmentGroupStructure) error {
 	}
 }
 
+func validateSegmentSort(v *types.SegmentSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SegmentSort"}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	} else if v.Attributes != nil {
+		if err := validateSortAttributeList(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateServiceNowSourceProperties(v *types.ServiceNowSourceProperties) error {
 	if v == nil {
 		return nil
@@ -3787,6 +3806,41 @@ func validateServiceNowSourceProperties(v *types.ServiceNowSourceProperties) err
 	invalidParams := smithy.InvalidParamsError{Context: "ServiceNowSourceProperties"}
 	if v.Object == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSortAttribute(v *types.SortAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SortAttribute"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Order) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSortAttributeList(v []types.SortAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SortAttributeList"}
+	for i := range v {
+		if err := validateSortAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4305,6 +4359,11 @@ func validateOpCreateSegmentDefinitionInput(v *CreateSegmentDefinitionInput) err
 	if v.SegmentGroups != nil {
 		if err := validateSegmentGroup(v.SegmentGroups); err != nil {
 			invalidParams.AddNested("SegmentGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SegmentSort != nil {
+		if err := validateSegmentSort(v.SegmentSort); err != nil {
+			invalidParams.AddNested("SegmentSort", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

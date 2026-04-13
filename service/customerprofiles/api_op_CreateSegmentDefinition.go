@@ -52,6 +52,9 @@ type CreateSegmentDefinitionInput struct {
 	// their respective relationship.
 	SegmentGroups *types.SegmentGroup
 
+	// The segment sort.
+	SegmentSort *types.SegmentSort
+
 	// The segment SQL query.
 	SegmentSqlQuery *string
 

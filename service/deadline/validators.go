@@ -1130,6 +1130,26 @@ func (m *validateOpGetMonitor) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMonitorSettings struct {
+}
+
+func (*validateOpGetMonitorSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMonitorSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMonitorSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMonitorSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetQueueEnvironment struct {
 }
 
@@ -2150,6 +2170,26 @@ func (m *validateOpUpdateMonitor) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMonitorSettings struct {
+}
+
+func (*validateOpUpdateMonitorSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMonitorSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMonitorSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMonitorSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateQueueEnvironment struct {
 }
 
@@ -2574,6 +2614,10 @@ func addOpGetMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMonitor{}, middleware.After)
 }
 
+func addOpGetMonitorSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMonitorSettings{}, middleware.After)
+}
+
 func addOpGetQueueEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetQueueEnvironment{}, middleware.After)
 }
@@ -2776,6 +2820,10 @@ func addOpUpdateLimitValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateMonitorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMonitor{}, middleware.After)
+}
+
+func addOpUpdateMonitorSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMonitorSettings{}, middleware.After)
 }
 
 func addOpUpdateQueueEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -5514,6 +5562,21 @@ func validateOpGetMonitorInput(v *GetMonitorInput) error {
 	}
 }
 
+func validateOpGetMonitorSettingsInput(v *GetMonitorSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMonitorSettingsInput"}
+	if v.MonitorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetQueueEnvironmentInput(v *GetQueueEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -6555,6 +6618,24 @@ func validateOpUpdateMonitorInput(v *UpdateMonitorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMonitorInput"}
 	if v.MonitorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MonitorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMonitorSettingsInput(v *UpdateMonitorSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMonitorSettingsInput"}
+	if v.MonitorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonitorId"))
+	}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

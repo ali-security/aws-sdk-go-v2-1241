@@ -9959,6 +9959,11 @@ func awsRestjson1_deserializeOpDocumentGetSegmentDefinitionOutput(v **GetSegment
 				return err
 			}
 
+		case "SegmentSort":
+			if err := awsRestjson1_deserializeDocumentSegmentSort(&sv.SegmentSort, value); err != nil {
+				return err
+			}
+
 		case "SegmentSqlQuery":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -28698,6 +28703,143 @@ func awsRestjson1_deserializeDocumentSegmentGroupList(v *[]types.Group, value in
 		var col types.Group
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentGroup(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSegmentSort(v **types.SegmentSort, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SegmentSort
+	if *v == nil {
+		sv = &types.SegmentSort{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Attributes":
+			if err := awsRestjson1_deserializeDocumentSortAttributeList(&sv.Attributes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSortAttribute(v **types.SortAttribute, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SortAttribute
+	if *v == nil {
+		sv = &types.SortAttribute{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DataType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentSortDataType to be of type string, got %T instead", value)
+				}
+				sv.DataType = types.SegmentSortDataType(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected fieldName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Order":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SegmentSortOrder to be of type string, got %T instead", value)
+				}
+				sv.Order = types.SegmentSortOrder(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SortAttributeType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SortAttributeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSortAttributeList(v *[]types.SortAttribute, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SortAttribute
+	if *v == nil {
+		cv = []types.SortAttribute{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SortAttribute
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSortAttribute(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
