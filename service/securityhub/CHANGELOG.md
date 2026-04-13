@@ -1,3 +1,7 @@
+# v1.69.0 (2026-04-13)
+
+* **Feature**: Provide organizational unit scoping capability for GetFindingsV2, GetFindingStatisticsV2, GetResourcesV2, GetResourcesStatisticsV2 APIs.
+
 # v1.68.3 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

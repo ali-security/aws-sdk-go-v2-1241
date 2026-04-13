@@ -1,3 +1,7 @@
+# v1.58.0 (2026-04-13)
+
+* **Feature**: This release introduces changes to SegmentDefinition APIs to support sorting by attributes.
+
 # v1.57.2 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

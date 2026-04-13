@@ -1,3 +1,7 @@
+# v1.51.0 (2026-04-13)
+
+* **Feature**: This release adds an optional expectedBucketOwner field to the Macie S3 export configuration, allowing customers to verify bucket ownership before Macie writes results to the destination bucket.
+
 # v1.50.13 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

@@ -1,3 +1,20 @@
+# Release (2026-04-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.58.0](service/customerprofiles/CHANGELOG.md#v1580-2026-04-13)
+  * **Feature**: This release introduces changes to SegmentDefinition APIs to support sorting by attributes.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.30.0](service/deadline/CHANGELOG.md#v1300-2026-04-13)
+  * **Feature**: Adds GetMonitorSettings and UpdateMonitorSettings APIs to Deadline Cloud. Enables reading and writing monitor settings as key-value pairs (up to 64 keys per monitor). UpdateMonitorSettings supports upsert and delete (via empty value) semantics and is idempotent.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.139.2](service/glue/CHANGELOG.md#v11392-2026-04-13)
+  * **Documentation**: AWS Glue now defaults to Glue version 5.1 for newly created jobs if the Glue version is not specified in the request, and UpdateJob now preserves the existing Glue version of a job when the Glue version is not specified in the update request.
+* `github.com/aws/aws-sdk-go-v2/service/interconnect`: [v1.0.0](service/interconnect/CHANGELOG.md#v100-2026-04-13)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS Interconnect -- a managed private connectivity service that enables you to create high-speed network connections between your AWS Virtual Private Clouds (VPCs) and your VPCs on other public clouds or your on-premise networks.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.51.0](service/macie2/CHANGELOG.md#v1510-2026-04-13)
+  * **Feature**: This release adds an optional expectedBucketOwner field to the Macie S3 export configuration, allowing customers to verify bucket ownership before Macie writes results to the destination bucket.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.69.0](service/securityhub/CHANGELOG.md#v1690-2026-04-13)
+  * **Feature**: Provide organizational unit scoping capability for GetFindingsV2, GetFindingStatisticsV2, GetResourcesV2, GetResourcesStatisticsV2 APIs.
+
 # Release (2026-04-10)
 
 ## Module Highlights

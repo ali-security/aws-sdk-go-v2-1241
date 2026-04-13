@@ -1,8 +1,0 @@
-{
-    "id": "0ed246ce-6aef-4ce6-a844-5d78299be31d",
-    "type": "feature",
-    "description": "This release introduces changes to SegmentDefinition APIs to support sorting by attributes.",
-    "modules": [
-        "service/customerprofiles"
-    ]
-}

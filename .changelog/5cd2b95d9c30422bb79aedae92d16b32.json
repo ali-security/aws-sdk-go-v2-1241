@@ -1,8 +1,0 @@
-{
-    "id": "5cd2b95d-9c30-422b-b79a-edae92d16b32",
-    "type": "feature",
-    "description": "This release adds an optional expectedBucketOwner field to the Macie S3 export configuration, allowing customers to verify bucket ownership before Macie writes results to the destination bucket.",
-    "modules": [
-        "service/macie2"
-    ]
-}
