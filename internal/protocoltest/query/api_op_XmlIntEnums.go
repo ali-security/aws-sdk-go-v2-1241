@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,18 @@ type XmlIntEnumsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlIntEnumsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_XmlIntEnumsInput)
+	s.CloseMap()
+}
+func (v *XmlIntEnumsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_XmlIntEnumsInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type XmlIntEnumsOutput struct {
 	IntEnum1 types.IntegerEnum
 
@@ -50,16 +64,58 @@ type XmlIntEnumsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlIntEnumsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_XmlIntEnumsOutput)
+	s.WriteInt32(schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnum1, int32(v.IntEnum1))
+	s.WriteInt32(schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnum2, int32(v.IntEnum2))
+	s.WriteInt32(schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnum3, int32(v.IntEnum3))
+	serializeIntegerEnumList(s, schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnumList, v.IntEnumList)
+	serializeIntegerEnumMap(s, schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnumMap, v.IntEnumMap)
+	serializeIntegerEnumSet(s, schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnumSet, v.IntEnumSet)
+	s.CloseMap()
+}
+func (v *XmlIntEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_XmlIntEnumsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnum1:
+			var ev int32
+			if err := d.ReadInt32(schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnum1, &ev); err != nil {
+				return err
+			}
+			v.IntEnum1 = types.IntegerEnum(ev)
+			return nil
+		case schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnum2:
+			var ev int32
+			if err := d.ReadInt32(schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnum2, &ev); err != nil {
+				return err
+			}
+			v.IntEnum2 = types.IntegerEnum(ev)
+			return nil
+		case schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnum3:
+			var ev int32
+			if err := d.ReadInt32(schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnum3, &ev); err != nil {
+				return err
+			}
+			v.IntEnum3 = types.IntegerEnum(ev)
+			return nil
+		case schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnumList:
+			return deserializeIntegerEnumList(d, schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnumList, &v.IntEnumList)
+		case schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnumMap:
+			return deserializeIntegerEnumMap(d, schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnumMap, &v.IntEnumMap)
+		case schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnumSet:
+			return deserializeIntegerEnumSet(d, schemas.SmithyGoSynthetic_XmlIntEnumsOutput_intEnumSet, &v.IntEnumSet)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlIntEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpXmlIntEnums{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlIntEnums, schemas.SmithyGoSynthetic_XmlIntEnumsInput, schemas.SmithyGoSynthetic_XmlIntEnumsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpXmlIntEnums{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlIntEnums, schemas.SmithyGoSynthetic_XmlIntEnumsInput, schemas.SmithyGoSynthetic_XmlIntEnumsOutput), output: &XmlIntEnumsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlIntEnums"); err != nil {

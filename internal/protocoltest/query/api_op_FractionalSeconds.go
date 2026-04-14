@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -30,6 +32,18 @@ type FractionalSecondsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FractionalSecondsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_FractionalSecondsInput)
+	s.CloseMap()
+}
+func (v *FractionalSecondsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_FractionalSecondsInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type FractionalSecondsOutput struct {
 	Datetime *time.Time
 
@@ -39,16 +53,28 @@ type FractionalSecondsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FractionalSecondsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_FractionalSecondsOutput)
+	s.WriteTimePtr(schemas.SmithyGoSynthetic_FractionalSecondsOutput_datetime, v.Datetime)
+	s.CloseMap()
+}
+func (v *FractionalSecondsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_FractionalSecondsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmithyGoSynthetic_FractionalSecondsOutput_datetime:
+			return d.ReadTimePtr(schemas.SmithyGoSynthetic_FractionalSecondsOutput_datetime, &v.Datetime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationFractionalSecondsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpFractionalSeconds{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FractionalSeconds, schemas.SmithyGoSynthetic_FractionalSecondsInput, schemas.SmithyGoSynthetic_FractionalSecondsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpFractionalSeconds{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FractionalSeconds, schemas.SmithyGoSynthetic_FractionalSecondsInput, schemas.SmithyGoSynthetic_FractionalSecondsOutput), output: &FractionalSecondsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "FractionalSeconds"); err != nil {

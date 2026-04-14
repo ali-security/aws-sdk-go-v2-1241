@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,6 +41,18 @@ func (c *Client) XmlLists(ctx context.Context, params *XmlListsInput, optFns ...
 
 type XmlListsInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *XmlListsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_XmlListsInput)
+	s.CloseMap()
+}
+func (v *XmlListsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_XmlListsInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type XmlListsOutput struct {
@@ -77,16 +91,67 @@ type XmlListsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlListsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_XmlListsOutput)
+	serializeBooleanList(s, schemas.SmithyGoSynthetic_XmlListsOutput_booleanList, v.BooleanList)
+	serializeFooEnumList(s, schemas.SmithyGoSynthetic_XmlListsOutput_enumList, v.EnumList)
+	serializeRenamedListMembers(s, schemas.SmithyGoSynthetic_XmlListsOutput_flattenedList, v.FlattenedList)
+	serializeRenamedListMembers(s, schemas.SmithyGoSynthetic_XmlListsOutput_flattenedList2, v.FlattenedList2)
+	serializeListWithMemberNamespace(s, schemas.SmithyGoSynthetic_XmlListsOutput_flattenedListWithMemberNamespace, v.FlattenedListWithMemberNamespace)
+	serializeListWithNamespace(s, schemas.SmithyGoSynthetic_XmlListsOutput_flattenedListWithNamespace, v.FlattenedListWithNamespace)
+	serializeIntegerEnumList(s, schemas.SmithyGoSynthetic_XmlListsOutput_intEnumList, v.IntEnumList)
+	serializeIntegerList(s, schemas.SmithyGoSynthetic_XmlListsOutput_integerList, v.IntegerList)
+	serializeNestedStringList(s, schemas.SmithyGoSynthetic_XmlListsOutput_nestedStringList, v.NestedStringList)
+	serializeRenamedListMembers(s, schemas.SmithyGoSynthetic_XmlListsOutput_renamedListMembers, v.RenamedListMembers)
+	serializeStringList(s, schemas.SmithyGoSynthetic_XmlListsOutput_stringList, v.StringList)
+	serializeStringSet(s, schemas.SmithyGoSynthetic_XmlListsOutput_stringSet, v.StringSet)
+	serializeStructureList(s, schemas.SmithyGoSynthetic_XmlListsOutput_structureList, v.StructureList)
+	serializeTimestampList(s, schemas.SmithyGoSynthetic_XmlListsOutput_timestampList, v.TimestampList)
+	s.CloseMap()
+}
+func (v *XmlListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_XmlListsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmithyGoSynthetic_XmlListsOutput_booleanList:
+			return deserializeBooleanList(d, schemas.SmithyGoSynthetic_XmlListsOutput_booleanList, &v.BooleanList)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_enumList:
+			return deserializeFooEnumList(d, schemas.SmithyGoSynthetic_XmlListsOutput_enumList, &v.EnumList)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_flattenedList:
+			return deserializeRenamedListMembers(d, schemas.SmithyGoSynthetic_XmlListsOutput_flattenedList, &v.FlattenedList)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_flattenedList2:
+			return deserializeRenamedListMembers(d, schemas.SmithyGoSynthetic_XmlListsOutput_flattenedList2, &v.FlattenedList2)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_flattenedListWithMemberNamespace:
+			return deserializeListWithMemberNamespace(d, schemas.SmithyGoSynthetic_XmlListsOutput_flattenedListWithMemberNamespace, &v.FlattenedListWithMemberNamespace)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_flattenedListWithNamespace:
+			return deserializeListWithNamespace(d, schemas.SmithyGoSynthetic_XmlListsOutput_flattenedListWithNamespace, &v.FlattenedListWithNamespace)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_intEnumList:
+			return deserializeIntegerEnumList(d, schemas.SmithyGoSynthetic_XmlListsOutput_intEnumList, &v.IntEnumList)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_integerList:
+			return deserializeIntegerList(d, schemas.SmithyGoSynthetic_XmlListsOutput_integerList, &v.IntegerList)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_nestedStringList:
+			return deserializeNestedStringList(d, schemas.SmithyGoSynthetic_XmlListsOutput_nestedStringList, &v.NestedStringList)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_renamedListMembers:
+			return deserializeRenamedListMembers(d, schemas.SmithyGoSynthetic_XmlListsOutput_renamedListMembers, &v.RenamedListMembers)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_stringList:
+			return deserializeStringList(d, schemas.SmithyGoSynthetic_XmlListsOutput_stringList, &v.StringList)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_stringSet:
+			return deserializeStringSet(d, schemas.SmithyGoSynthetic_XmlListsOutput_stringSet, &v.StringSet)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_structureList:
+			return deserializeStructureList(d, schemas.SmithyGoSynthetic_XmlListsOutput_structureList, &v.StructureList)
+		case schemas.SmithyGoSynthetic_XmlListsOutput_timestampList:
+			return deserializeTimestampList(d, schemas.SmithyGoSynthetic_XmlListsOutput_timestampList, &v.TimestampList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpXmlLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlLists, schemas.SmithyGoSynthetic_XmlListsInput, schemas.SmithyGoSynthetic_XmlListsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpXmlLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlLists, schemas.SmithyGoSynthetic_XmlListsInput, schemas.SmithyGoSynthetic_XmlListsOutput), output: &XmlListsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlLists"); err != nil {

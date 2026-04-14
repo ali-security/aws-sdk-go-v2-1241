@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,27 @@ type QueryTimestampsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryTimestampsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_QueryTimestampsInput)
+	s.WriteTimePtr(schemas.SmithyGoSynthetic_QueryTimestampsInput_epochMember, v.EpochMember)
+	s.WriteTimePtr(schemas.SmithyGoSynthetic_QueryTimestampsInput_epochTarget, v.EpochTarget)
+	s.WriteTimePtr(schemas.SmithyGoSynthetic_QueryTimestampsInput_normalFormat, v.NormalFormat)
+	s.CloseMap()
+}
+func (v *QueryTimestampsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_QueryTimestampsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmithyGoSynthetic_QueryTimestampsInput_epochMember:
+			return d.ReadTimePtr(schemas.SmithyGoSynthetic_QueryTimestampsInput_epochMember, &v.EpochMember)
+		case schemas.SmithyGoSynthetic_QueryTimestampsInput_epochTarget:
+			return d.ReadTimePtr(schemas.SmithyGoSynthetic_QueryTimestampsInput_epochTarget, &v.EpochTarget)
+		case schemas.SmithyGoSynthetic_QueryTimestampsInput_normalFormat:
+			return d.ReadTimePtr(schemas.SmithyGoSynthetic_QueryTimestampsInput_normalFormat, &v.NormalFormat)
+		}
+		return nil
+	})
+}
+
 type QueryTimestampsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,16 +72,25 @@ type QueryTimestampsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryTimestampsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_QueryTimestampsOutput)
+	s.CloseMap()
+}
+func (v *QueryTimestampsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_QueryTimestampsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpQueryTimestamps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryTimestamps, schemas.SmithyGoSynthetic_QueryTimestampsInput, schemas.SmithyGoSynthetic_QueryTimestampsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpQueryTimestamps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryTimestamps, schemas.SmithyGoSynthetic_QueryTimestampsInput, schemas.SmithyGoSynthetic_QueryTimestampsOutput), output: &QueryTimestampsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryTimestamps"); err != nil {

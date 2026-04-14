@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,24 @@ type NestedStructuresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NestedStructuresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_NestedStructuresInput)
+	if v.Nested != nil {
+		s.WriteStruct(schemas.SmithyGoSynthetic_NestedStructuresInput_Nested, v.Nested)
+	}
+	s.CloseMap()
+}
+func (v *NestedStructuresInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_NestedStructuresInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmithyGoSynthetic_NestedStructuresInput_Nested:
+			v.Nested = &types.StructArg{}
+			return v.Nested.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type NestedStructuresOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,16 +60,25 @@ type NestedStructuresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NestedStructuresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_NestedStructuresOutput)
+	s.CloseMap()
+}
+func (v *NestedStructuresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_NestedStructuresOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNestedStructuresMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpNestedStructures{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NestedStructures, schemas.SmithyGoSynthetic_NestedStructuresInput, schemas.SmithyGoSynthetic_NestedStructuresOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpNestedStructures{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NestedStructures, schemas.SmithyGoSynthetic_NestedStructuresInput, schemas.SmithyGoSynthetic_NestedStructuresOutput), output: &NestedStructuresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "NestedStructures"); err != nil {

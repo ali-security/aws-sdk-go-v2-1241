@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,45 @@ type QueryMapsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryMapsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_QueryMapsInput)
+	serializeComplexMap(s, schemas.SmithyGoSynthetic_QueryMapsInput_ComplexMapArg, v.ComplexMapArg)
+	serializeStringMap(s, schemas.SmithyGoSynthetic_QueryMapsInput_FlattenedMap, v.FlattenedMap)
+	serializeMapWithXmlName(s, schemas.SmithyGoSynthetic_QueryMapsInput_FlattenedMapWithXmlName, v.FlattenedMapWithXmlName)
+	serializeStringMap(s, schemas.SmithyGoSynthetic_QueryMapsInput_MapArg, v.MapArg)
+	serializeMapOfLists(s, schemas.SmithyGoSynthetic_QueryMapsInput_MapOfLists, v.MapOfLists)
+	serializeMapWithXmlName(s, schemas.SmithyGoSynthetic_QueryMapsInput_MapWithXmlMemberName, v.MapWithXmlMemberName)
+	if v.NestedStructWithMap != nil {
+		s.WriteStruct(schemas.SmithyGoSynthetic_QueryMapsInput_NestedStructWithMap, v.NestedStructWithMap)
+	}
+	serializeStringMap(s, schemas.SmithyGoSynthetic_QueryMapsInput_RenamedMapArg, v.RenamedMapArg)
+	s.CloseMap()
+}
+func (v *QueryMapsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_QueryMapsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmithyGoSynthetic_QueryMapsInput_ComplexMapArg:
+			return deserializeComplexMap(d, schemas.SmithyGoSynthetic_QueryMapsInput_ComplexMapArg, &v.ComplexMapArg)
+		case schemas.SmithyGoSynthetic_QueryMapsInput_FlattenedMap:
+			return deserializeStringMap(d, schemas.SmithyGoSynthetic_QueryMapsInput_FlattenedMap, &v.FlattenedMap)
+		case schemas.SmithyGoSynthetic_QueryMapsInput_FlattenedMapWithXmlName:
+			return deserializeMapWithXmlName(d, schemas.SmithyGoSynthetic_QueryMapsInput_FlattenedMapWithXmlName, &v.FlattenedMapWithXmlName)
+		case schemas.SmithyGoSynthetic_QueryMapsInput_MapArg:
+			return deserializeStringMap(d, schemas.SmithyGoSynthetic_QueryMapsInput_MapArg, &v.MapArg)
+		case schemas.SmithyGoSynthetic_QueryMapsInput_MapOfLists:
+			return deserializeMapOfLists(d, schemas.SmithyGoSynthetic_QueryMapsInput_MapOfLists, &v.MapOfLists)
+		case schemas.SmithyGoSynthetic_QueryMapsInput_MapWithXmlMemberName:
+			return deserializeMapWithXmlName(d, schemas.SmithyGoSynthetic_QueryMapsInput_MapWithXmlMemberName, &v.MapWithXmlMemberName)
+		case schemas.SmithyGoSynthetic_QueryMapsInput_NestedStructWithMap:
+			v.NestedStructWithMap = &types.NestedStructWithMap{}
+			return v.NestedStructWithMap.Deserialize(d)
+		case schemas.SmithyGoSynthetic_QueryMapsInput_RenamedMapArg:
+			return deserializeStringMap(d, schemas.SmithyGoSynthetic_QueryMapsInput_RenamedMapArg, &v.RenamedMapArg)
+		}
+		return nil
+	})
+}
+
 type QueryMapsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,16 +95,25 @@ type QueryMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryMapsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_QueryMapsOutput)
+	s.CloseMap()
+}
+func (v *QueryMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_QueryMapsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpQueryMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryMaps, schemas.SmithyGoSynthetic_QueryMapsInput, schemas.SmithyGoSynthetic_QueryMapsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpQueryMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryMaps, schemas.SmithyGoSynthetic_QueryMapsInput, schemas.SmithyGoSynthetic_QueryMapsOutput), output: &QueryMapsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryMaps"); err != nil {

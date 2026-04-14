@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,18 @@ func (e *ComplexError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ComplexError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComplexError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComplexError_Nested:
+			v.Nested = &ComplexNestedErrorData{}
+			return v.Nested.Deserialize(d)
+		case schemas.ComplexError_TopLevel:
+			return d.ReadStringPtr(schemas.ComplexError_TopLevel, &v.TopLevel)
+		}
+		return nil
+	})
+}
 
 type CustomCodeError struct {
 	Message *string
@@ -60,6 +73,15 @@ func (e *CustomCodeError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CustomCodeError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CustomCodeError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomCodeError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomCodeError_Message:
+			return d.ReadStringPtr(schemas.CustomCodeError_Message, &v.Message)
+		}
+		return nil
+	})
+}
 
 // This error is thrown when an invalid greeting value is provided.
 type InvalidGreeting struct {
@@ -86,3 +108,12 @@ func (e *InvalidGreeting) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidGreeting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidGreeting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidGreeting_Message:
+			return d.ReadStringPtr(schemas.InvalidGreeting_Message, &v.Message)
+		}
+		return nil
+	})
+}

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,18 @@ type XmlEnumsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEnumsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_XmlEnumsInput)
+	s.CloseMap()
+}
+func (v *XmlEnumsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_XmlEnumsInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type XmlEnumsOutput struct {
 	FooEnum1 types.FooEnum
 
@@ -50,16 +64,58 @@ type XmlEnumsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlEnumsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_XmlEnumsOutput)
+	s.WriteString(schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnum1, string(v.FooEnum1))
+	s.WriteString(schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnum2, string(v.FooEnum2))
+	s.WriteString(schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnum3, string(v.FooEnum3))
+	serializeFooEnumList(s, schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnumList, v.FooEnumList)
+	serializeFooEnumMap(s, schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnumMap, v.FooEnumMap)
+	serializeFooEnumSet(s, schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnumSet, v.FooEnumSet)
+	s.CloseMap()
+}
+func (v *XmlEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_XmlEnumsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnum1:
+			var ev string
+			if err := d.ReadString(schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnum1, &ev); err != nil {
+				return err
+			}
+			v.FooEnum1 = types.FooEnum(ev)
+			return nil
+		case schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnum2:
+			var ev string
+			if err := d.ReadString(schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnum2, &ev); err != nil {
+				return err
+			}
+			v.FooEnum2 = types.FooEnum(ev)
+			return nil
+		case schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnum3:
+			var ev string
+			if err := d.ReadString(schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnum3, &ev); err != nil {
+				return err
+			}
+			v.FooEnum3 = types.FooEnum(ev)
+			return nil
+		case schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnumList:
+			return deserializeFooEnumList(d, schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnumList, &v.FooEnumList)
+		case schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnumMap:
+			return deserializeFooEnumMap(d, schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnumMap, &v.FooEnumMap)
+		case schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnumSet:
+			return deserializeFooEnumSet(d, schemas.SmithyGoSynthetic_XmlEnumsOutput_fooEnumSet, &v.FooEnumSet)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpXmlEnums{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEnums, schemas.SmithyGoSynthetic_XmlEnumsInput, schemas.SmithyGoSynthetic_XmlEnumsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpXmlEnums{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlEnums, schemas.SmithyGoSynthetic_XmlEnumsInput, schemas.SmithyGoSynthetic_XmlEnumsOutput), output: &XmlEnumsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlEnums"); err != nil {

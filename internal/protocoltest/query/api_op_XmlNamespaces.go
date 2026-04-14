@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,6 +32,18 @@ type XmlNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlNamespacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_XmlNamespacesInput)
+	s.CloseMap()
+}
+func (v *XmlNamespacesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_XmlNamespacesInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type XmlNamespacesOutput struct {
 	Nested *types.XmlNamespaceNested
 
@@ -39,16 +53,31 @@ type XmlNamespacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlNamespacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_XmlNamespacesOutput)
+	if v.Nested != nil {
+		s.WriteStruct(schemas.SmithyGoSynthetic_XmlNamespacesOutput_nested, v.Nested)
+	}
+	s.CloseMap()
+}
+func (v *XmlNamespacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_XmlNamespacesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmithyGoSynthetic_XmlNamespacesOutput_nested:
+			v.Nested = &types.XmlNamespaceNested{}
+			return v.Nested.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpXmlNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlNamespaces, schemas.SmithyGoSynthetic_XmlNamespacesInput, schemas.SmithyGoSynthetic_XmlNamespacesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpXmlNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlNamespaces, schemas.SmithyGoSynthetic_XmlNamespacesInput, schemas.SmithyGoSynthetic_XmlNamespacesOutput), output: &XmlNamespacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlNamespaces"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,18 @@ type EmptyInputAndEmptyOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EmptyInputAndEmptyOutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_EmptyInputAndEmptyOutputInput)
+	s.CloseMap()
+}
+func (v *EmptyInputAndEmptyOutputInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_EmptyInputAndEmptyOutputInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type EmptyInputAndEmptyOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,16 +54,25 @@ type EmptyInputAndEmptyOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EmptyInputAndEmptyOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_EmptyInputAndEmptyOutputOutput)
+	s.CloseMap()
+}
+func (v *EmptyInputAndEmptyOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_EmptyInputAndEmptyOutputOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEmptyInputAndEmptyOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpEmptyInputAndEmptyOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EmptyInputAndEmptyOutput, schemas.SmithyGoSynthetic_EmptyInputAndEmptyOutputInput, schemas.SmithyGoSynthetic_EmptyInputAndEmptyOutputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpEmptyInputAndEmptyOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EmptyInputAndEmptyOutput, schemas.SmithyGoSynthetic_EmptyInputAndEmptyOutputInput, schemas.SmithyGoSynthetic_EmptyInputAndEmptyOutputOutput), output: &EmptyInputAndEmptyOutputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "EmptyInputAndEmptyOutput"); err != nil {

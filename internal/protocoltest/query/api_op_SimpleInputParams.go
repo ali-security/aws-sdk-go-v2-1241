@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,55 @@ type SimpleInputParamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleInputParamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_SimpleInputParamsInput)
+	s.WriteInt32Ptr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Bam, v.Bam)
+	s.WriteStringPtr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Bar, v.Bar)
+	s.WriteBoolPtr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Baz, v.Baz)
+	s.WriteFloat64Ptr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Boo, v.Boo)
+	s.WriteFloat32Ptr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_FloatValue, v.FloatValue)
+	s.WriteStringPtr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Foo, v.Foo)
+	s.WriteString(schemas.SmithyGoSynthetic_SimpleInputParamsInput_FooEnum, string(v.FooEnum))
+	s.WriteInt32(schemas.SmithyGoSynthetic_SimpleInputParamsInput_IntegerEnum, int32(v.IntegerEnum))
+	s.WriteBlob(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Qux, v.Qux)
+	s.CloseMap()
+}
+func (v *SimpleInputParamsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_SimpleInputParamsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmithyGoSynthetic_SimpleInputParamsInput_Bam:
+			return d.ReadInt32Ptr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Bam, &v.Bam)
+		case schemas.SmithyGoSynthetic_SimpleInputParamsInput_Bar:
+			return d.ReadStringPtr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Bar, &v.Bar)
+		case schemas.SmithyGoSynthetic_SimpleInputParamsInput_Baz:
+			return d.ReadBoolPtr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Baz, &v.Baz)
+		case schemas.SmithyGoSynthetic_SimpleInputParamsInput_Boo:
+			return d.ReadFloat64Ptr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Boo, &v.Boo)
+		case schemas.SmithyGoSynthetic_SimpleInputParamsInput_FloatValue:
+			return d.ReadFloat32Ptr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_FloatValue, &v.FloatValue)
+		case schemas.SmithyGoSynthetic_SimpleInputParamsInput_Foo:
+			return d.ReadStringPtr(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Foo, &v.Foo)
+		case schemas.SmithyGoSynthetic_SimpleInputParamsInput_FooEnum:
+			var ev string
+			if err := d.ReadString(schemas.SmithyGoSynthetic_SimpleInputParamsInput_FooEnum, &ev); err != nil {
+				return err
+			}
+			v.FooEnum = types.FooEnum(ev)
+			return nil
+		case schemas.SmithyGoSynthetic_SimpleInputParamsInput_IntegerEnum:
+			var ev int32
+			if err := d.ReadInt32(schemas.SmithyGoSynthetic_SimpleInputParamsInput_IntegerEnum, &ev); err != nil {
+				return err
+			}
+			v.IntegerEnum = types.IntegerEnum(ev)
+			return nil
+		case schemas.SmithyGoSynthetic_SimpleInputParamsInput_Qux:
+			return d.ReadBlob(schemas.SmithyGoSynthetic_SimpleInputParamsInput_Qux, &v.Qux)
+		}
+		return nil
+	})
+}
+
 type SimpleInputParamsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,16 +107,25 @@ type SimpleInputParamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleInputParamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_SimpleInputParamsOutput)
+	s.CloseMap()
+}
+func (v *SimpleInputParamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_SimpleInputParamsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSimpleInputParamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpSimpleInputParams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleInputParams, schemas.SmithyGoSynthetic_SimpleInputParamsInput, schemas.SmithyGoSynthetic_SimpleInputParamsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpSimpleInputParams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleInputParams, schemas.SmithyGoSynthetic_SimpleInputParamsInput, schemas.SmithyGoSynthetic_SimpleInputParamsOutput), output: &SimpleInputParamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SimpleInputParams"); err != nil {

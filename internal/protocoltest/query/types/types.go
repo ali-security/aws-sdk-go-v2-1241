@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -12,16 +14,61 @@ type ComplexNestedErrorData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComplexNestedErrorData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.ComplexNestedErrorData)
+	s.WriteStringPtr(schemas.ComplexNestedErrorData_Foo, v.Foo)
+	s.CloseMap()
+}
+func (v *ComplexNestedErrorData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComplexNestedErrorData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComplexNestedErrorData_Foo:
+			return d.ReadStringPtr(schemas.ComplexNestedErrorData_Foo, &v.Foo)
+		}
+		return nil
+	})
+}
+
 type NestedStructWithList struct {
 	ListArg []string
 
 	noSmithyDocumentSerde
 }
 
+func (v *NestedStructWithList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.NestedStructWithList)
+	serializeStringList(s, schemas.NestedStructWithList_ListArg, v.ListArg)
+	s.CloseMap()
+}
+func (v *NestedStructWithList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NestedStructWithList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NestedStructWithList_ListArg:
+			return deserializeStringList(d, schemas.NestedStructWithList_ListArg, &v.ListArg)
+		}
+		return nil
+	})
+}
+
 type NestedStructWithMap struct {
 	MapArg map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NestedStructWithMap) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.NestedStructWithMap)
+	serializeStringMap(s, schemas.NestedStructWithMap_MapArg, v.MapArg)
+	s.CloseMap()
+}
+func (v *NestedStructWithMap) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NestedStructWithMap, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NestedStructWithMap_MapArg:
+			return deserializeStringMap(d, schemas.NestedStructWithMap_MapArg, &v.MapArg)
+		}
+		return nil
+	})
 }
 
 type RecursiveXmlShapesOutputNested1 struct {
@@ -32,12 +79,54 @@ type RecursiveXmlShapesOutputNested1 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecursiveXmlShapesOutputNested1) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.RecursiveXmlShapesOutputNested1)
+	s.WriteStringPtr(schemas.RecursiveXmlShapesOutputNested1_foo, v.Foo)
+	if v.Nested != nil {
+		s.WriteStruct(schemas.RecursiveXmlShapesOutputNested1_nested, v.Nested)
+	}
+	s.CloseMap()
+}
+func (v *RecursiveXmlShapesOutputNested1) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecursiveXmlShapesOutputNested1, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecursiveXmlShapesOutputNested1_foo:
+			return d.ReadStringPtr(schemas.RecursiveXmlShapesOutputNested1_foo, &v.Foo)
+		case schemas.RecursiveXmlShapesOutputNested1_nested:
+			v.Nested = &RecursiveXmlShapesOutputNested2{}
+			return v.Nested.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type RecursiveXmlShapesOutputNested2 struct {
 	Bar *string
 
 	RecursiveMember *RecursiveXmlShapesOutputNested1
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecursiveXmlShapesOutputNested2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.RecursiveXmlShapesOutputNested2)
+	s.WriteStringPtr(schemas.RecursiveXmlShapesOutputNested2_bar, v.Bar)
+	if v.RecursiveMember != nil {
+		s.WriteStruct(schemas.RecursiveXmlShapesOutputNested2_recursiveMember, v.RecursiveMember)
+	}
+	s.CloseMap()
+}
+func (v *RecursiveXmlShapesOutputNested2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecursiveXmlShapesOutputNested2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecursiveXmlShapesOutputNested2_bar:
+			return d.ReadStringPtr(schemas.RecursiveXmlShapesOutputNested2_bar, &v.Bar)
+		case schemas.RecursiveXmlShapesOutputNested2_recursiveMember:
+			v.RecursiveMember = &RecursiveXmlShapesOutputNested1{}
+			return v.RecursiveMember.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type StructArg struct {
@@ -50,12 +139,54 @@ type StructArg struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StructArg) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.StructArg)
+	s.WriteBoolPtr(schemas.StructArg_OtherArg, v.OtherArg)
+	if v.RecursiveArg != nil {
+		s.WriteStruct(schemas.StructArg_RecursiveArg, v.RecursiveArg)
+	}
+	s.WriteStringPtr(schemas.StructArg_StringArg, v.StringArg)
+	s.CloseMap()
+}
+func (v *StructArg) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StructArg, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StructArg_OtherArg:
+			return d.ReadBoolPtr(schemas.StructArg_OtherArg, &v.OtherArg)
+		case schemas.StructArg_RecursiveArg:
+			v.RecursiveArg = &StructArg{}
+			return v.RecursiveArg.Deserialize(d)
+		case schemas.StructArg_StringArg:
+			return d.ReadStringPtr(schemas.StructArg_StringArg, &v.StringArg)
+		}
+		return nil
+	})
+}
+
 type StructureListMember struct {
 	A *string
 
 	B *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StructureListMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.StructureListMember)
+	s.WriteStringPtr(schemas.StructureListMember_a, v.A)
+	s.WriteStringPtr(schemas.StructureListMember_b, v.B)
+	s.CloseMap()
+}
+func (v *StructureListMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StructureListMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StructureListMember_a:
+			return d.ReadStringPtr(schemas.StructureListMember_a, &v.A)
+		case schemas.StructureListMember_b:
+			return d.ReadStringPtr(schemas.StructureListMember_b, &v.B)
+		}
+		return nil
+	})
 }
 
 type XmlNamespaceNested struct {
@@ -66,10 +197,43 @@ type XmlNamespaceNested struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlNamespaceNested) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.XmlNamespaceNested)
+	s.WriteStringPtr(schemas.XmlNamespaceNested_foo, v.Foo)
+	serializeXmlNamespacedList(s, schemas.XmlNamespaceNested_values, v.Values)
+	s.CloseMap()
+}
+func (v *XmlNamespaceNested) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlNamespaceNested, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlNamespaceNested_foo:
+			return d.ReadStringPtr(schemas.XmlNamespaceNested_foo, &v.Foo)
+		case schemas.XmlNamespaceNested_values:
+			return deserializeXmlNamespacedList(d, schemas.XmlNamespaceNested_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 type GreetingStruct struct {
 	Hi *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GreetingStruct) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.GreetingStruct)
+	s.WriteStringPtr(schemas.GreetingStruct_hi, v.Hi)
+	s.CloseMap()
+}
+func (v *GreetingStruct) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GreetingStruct, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GreetingStruct_hi:
+			return d.ReadStringPtr(schemas.GreetingStruct_hi, &v.Hi)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

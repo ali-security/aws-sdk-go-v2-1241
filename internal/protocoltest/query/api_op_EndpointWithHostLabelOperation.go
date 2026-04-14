@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,6 +36,21 @@ type EndpointWithHostLabelOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointWithHostLabelOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_EndpointWithHostLabelOperationInput)
+	s.WriteStringPtr(schemas.SmithyGoSynthetic_EndpointWithHostLabelOperationInput_label, v.Label)
+	s.CloseMap()
+}
+func (v *EndpointWithHostLabelOperationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_EndpointWithHostLabelOperationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmithyGoSynthetic_EndpointWithHostLabelOperationInput_label:
+			return d.ReadStringPtr(schemas.SmithyGoSynthetic_EndpointWithHostLabelOperationInput_label, &v.Label)
+		}
+		return nil
+	})
+}
+
 type EndpointWithHostLabelOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,16 +58,25 @@ type EndpointWithHostLabelOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointWithHostLabelOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_EndpointWithHostLabelOperationOutput)
+	s.CloseMap()
+}
+func (v *EndpointWithHostLabelOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_EndpointWithHostLabelOperationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEndpointWithHostLabelOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpEndpointWithHostLabelOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EndpointWithHostLabelOperation, schemas.SmithyGoSynthetic_EndpointWithHostLabelOperationInput, schemas.SmithyGoSynthetic_EndpointWithHostLabelOperationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpEndpointWithHostLabelOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EndpointWithHostLabelOperation, schemas.SmithyGoSynthetic_EndpointWithHostLabelOperationInput, schemas.SmithyGoSynthetic_EndpointWithHostLabelOperationOutput), output: &EndpointWithHostLabelOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "EndpointWithHostLabelOperation"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,6 +32,18 @@ type XmlBlobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlBlobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_XmlBlobsInput)
+	s.CloseMap()
+}
+func (v *XmlBlobsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_XmlBlobsInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type XmlBlobsOutput struct {
 	Data []byte
 
@@ -39,16 +53,28 @@ type XmlBlobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlBlobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteMap(schemas.SmithyGoSynthetic_XmlBlobsOutput)
+	s.WriteBlob(schemas.SmithyGoSynthetic_XmlBlobsOutput_data, v.Data)
+	s.CloseMap()
+}
+func (v *XmlBlobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SmithyGoSynthetic_XmlBlobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SmithyGoSynthetic_XmlBlobsOutput_data:
+			return d.ReadBlob(schemas.SmithyGoSynthetic_XmlBlobsOutput_data, &v.Data)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlBlobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpXmlBlobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlBlobs, schemas.SmithyGoSynthetic_XmlBlobsInput, schemas.SmithyGoSynthetic_XmlBlobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpXmlBlobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlBlobs, schemas.SmithyGoSynthetic_XmlBlobsInput, schemas.SmithyGoSynthetic_XmlBlobsOutput), output: &XmlBlobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlBlobs"); err != nil {
