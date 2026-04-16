@@ -1,3 +1,7 @@
+# v1.170.0 (2026-04-16)
+
+* **Feature**: This release updates the Amazon Connect Rules CRUD APIs to support a new EventSourceName - OnEmailAnalysisAvailable. Use this event source to trigger rules when conversational analytics results are available for email contacts.
+
 # v1.169.0 (2026-04-10)
 
 * **Feature**: Conversational Analytics for Email

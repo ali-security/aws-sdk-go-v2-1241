@@ -1,8 +1,0 @@
-{
-    "id": "31b3a1d2-fe91-4635-af08-0d101416a8c7",
-    "type": "feature",
-    "description": "Introducing NamespacePath in AgentCore Memory to support hierarchical prefix based memory record retrieval.",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

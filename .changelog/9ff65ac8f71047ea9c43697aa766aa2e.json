@@ -1,8 +1,0 @@
-{
-    "id": "9ff65ac8-f710-47ea-9c43-697aa766aa2e",
-    "type": "feature",
-    "description": "Adds a new DescribeServerlessV2PlatformVersions API to describe platform version properties for Aurora Serverless v2. Also introduces a new valid maintenance action value for serverless platform version updates.",
-    "modules": [
-        "service/rds"
-    ]
-}

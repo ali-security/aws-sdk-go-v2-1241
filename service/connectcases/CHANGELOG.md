@@ -1,3 +1,7 @@
+# v1.40.0 (2026-04-16)
+
+* **Feature**: Added error handling for service quota limits
+
 # v1.39.1 (2026-03-26)
 
 * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.

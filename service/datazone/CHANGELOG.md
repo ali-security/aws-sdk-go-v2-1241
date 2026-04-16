@@ -1,3 +1,7 @@
+# v1.57.0 (2026-04-16)
+
+* **Feature**: Launching SMUS IAM domain SDK support
+
 # v1.56.0 (2026-04-07)
 
 * **Feature**: Update Configurations and registerS3AccessGrantLocation as public attributes for cfn

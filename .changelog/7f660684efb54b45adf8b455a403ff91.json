@@ -1,8 +1,0 @@
-{
-    "id": "7f660684-efb5-4b45-adf8-b455a403ff91",
-    "type": "feature",
-    "description": "Adds support for Elemental Inference powered smart crop feature, enabling video verticalization",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "c821c2a8-5516-4133-a6ee-50b2c0973ebb",
-    "type": "feature",
-    "description": "Deprecate the userId from the Chat operations. This update also removes  support of AllowVendedLogDeliveryForResource API from AWS SDKs.",
-    "modules": [
-        "service/devopsagent"
-    ]
-}

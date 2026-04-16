@@ -1,8 +1,0 @@
-{
-    "id": "84ea9535-cfa5-4e08-9e01-b554f7337eaa",
-    "type": "feature",
-    "description": "Updating regex for identification of AWS Regions.",
-    "modules": [
-        "service/drs"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.59.0 (2026-04-16)
+
+* **Feature**: Amazon Connect Customer Profiles adds RecommenderSchema CRUD APIs for custom ML training columns. CreateRecommender and CreateRecommenderFilter now accept optional RecommenderSchemaName.
+
 # v1.58.0 (2026-04-13)
 
 * **Feature**: This release introduces changes to SegmentDefinition APIs to support sorting by attributes.

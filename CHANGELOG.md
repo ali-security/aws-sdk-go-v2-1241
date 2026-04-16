@@ -1,3 +1,38 @@
+# Release (2026-04-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.57.0](service/appstream/CHANGELOG.md#v1570-2026-04-16)
+  * **Feature**: Add content redirection to Update Stack
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.66.0](service/autoscaling/CHANGELOG.md#v1660-2026-04-16)
+  * **Feature**: This release adds support for specifying Availability Zone IDs as an alternative to Availability Zone names when creating or updating Auto Scaling groups.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.21.0](service/bedrockagentcore/CHANGELOG.md#v1210-2026-04-16)
+  * **Feature**: Introducing NamespacePath in AgentCore Memory to support hierarchical prefix based memory record retrieval.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.56.1](service/cloudwatch/CHANGELOG.md#v1561-2026-04-16)
+  * **Documentation**: Update documentation of alarm mute rules start and end date fields
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.69.0](service/cloudwatchlogs/CHANGELOG.md#v1690-2026-04-16)
+  * **Feature**: Endpoint update for CloudWatch Logs Streaming APIs.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.60.0](service/cognitoidentityprovider/CHANGELOG.md#v1600-2026-04-16)
+  * **Feature**: Adds support for passkey-based multi-factor authentication in Cognito User Pools. Users can authenticate securely using FIDO2-compliant passkeys with user verification, enabling passwordless MFA flows while maintaining backward compatibility with password-based authentication
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.170.0](service/connect/CHANGELOG.md#v11700-2026-04-16)
+  * **Feature**: This release updates the Amazon Connect Rules CRUD APIs to support a new EventSourceName - OnEmailAnalysisAvailable. Use this event source to trigger rules when conversational analytics results are available for email contacts.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.40.0](service/connectcases/CHANGELOG.md#v1400-2026-04-16)
+  * **Feature**: Added error handling for service quota limits
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.59.0](service/customerprofiles/CHANGELOG.md#v1590-2026-04-16)
+  * **Feature**: Amazon Connect Customer Profiles adds RecommenderSchema CRUD APIs for custom ML training columns. CreateRecommender and CreateRecommenderFilter now accept optional RecommenderSchemaName.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.57.0](service/datazone/CHANGELOG.md#v1570-2026-04-16)
+  * **Feature**: Launching SMUS IAM domain SDK support
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.3.0](service/devopsagent/CHANGELOG.md#v130-2026-04-16)
+  * **Feature**: Deprecate the userId from the Chat operations. This update also removes  support of AllowVendedLogDeliveryForResource API from AWS SDKs.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.38.0](service/drs/CHANGELOG.md#v1380-2026-04-16)
+  * **Feature**: Updating regex for identification of AWS Regions.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.91.0](service/mediaconvert/CHANGELOG.md#v1910-2026-04-16)
+  * **Feature**: Adds support for Elemental Inference powered smart crop feature, enabling video verticalization
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.118.0](service/rds/CHANGELOG.md#v11180-2026-04-16)
+  * **Feature**: Adds a new DescribeServerlessV2PlatformVersions API to describe platform version properties for Aurora Serverless v2. Also introduces a new valid maintenance action value for serverless platform version updates.
+
 # Release (2026-04-13)
 
 ## Module Highlights

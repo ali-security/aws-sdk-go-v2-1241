@@ -1,3 +1,7 @@
+# v1.21.0 (2026-04-16)
+
+* **Feature**: Introducing NamespacePath in AgentCore Memory to support hierarchical prefix based memory record retrieval.
+
 # v1.20.0 (2026-04-09)
 
 * **Feature**: Introducing support for SearchRegistryRecords API on AgentCoreRegistry

@@ -1,3 +1,7 @@
+# v1.91.0 (2026-04-16)
+
+* **Feature**: Adds support for Elemental Inference powered smart crop feature, enabling video verticalization
+
 # v1.90.0 (2026-04-10)
 
 * **Feature**: Adds support for MV-HEVC video output and clear lead for AV1 DRM output.

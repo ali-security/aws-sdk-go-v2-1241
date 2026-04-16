@@ -1,3 +1,7 @@
+# v1.38.0 (2026-04-16)
+
+* **Feature**: Updating regex for identification of AWS Regions.
+
 # v1.37.0 (2026-04-08)
 
 * **Feature**: This changes adds support for modifying the replication configuration to support data replication using IPv6.

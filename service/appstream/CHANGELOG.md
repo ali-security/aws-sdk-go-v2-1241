@@ -1,3 +1,7 @@
+# v1.57.0 (2026-04-16)
+
+* **Feature**: Add content redirection to Update Stack
+
 # v1.56.0 (2026-04-02)
 
 * **Feature**: Amazon WorkSpaces Applications now supports drain mode for instances in multi-session fleets. This capability allows administrators to instruct individual fleet instances to stop accepting new user sessions while allowing existing sessions to continue uninterrupted.
