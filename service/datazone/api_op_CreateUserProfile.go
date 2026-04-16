@@ -43,6 +43,9 @@ type CreateUserProfileInput struct {
 	// of the request.
 	ClientToken *string
 
+	// The session name for IAM role sessions.
+	SessionName *string
+
 	// The user type of the user for which the user profile is created.
 	UserType types.UserType
 

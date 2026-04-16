@@ -9,7 +9,6 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
-        "api_op_AllowVendedLogDeliveryForResource.go",
         "api_op_AssociateService.go",
         "api_op_CreateAgentSpace.go",
         "api_op_CreateBacklogTask.go",

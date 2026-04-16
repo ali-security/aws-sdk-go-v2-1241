@@ -77,6 +77,9 @@ type GetRecommenderFilterOutput struct {
 	// If the recommender filter failed, provides the reason for the failure.
 	FailureReason *string
 
+	// The name of the recommender schema associated with this recommender filter.
+	RecommenderSchemaName *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

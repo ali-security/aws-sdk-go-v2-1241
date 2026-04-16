@@ -3478,6 +3478,11 @@ func awsRestjson1_serializeOpDocumentCreateGroupProfileInput(v *CreateGroupProfi
 		ok.String(*v.GroupIdentifier)
 	}
 
+	if v.RolePrincipalArn != nil {
+		ok := object.Key("rolePrincipalArn")
+		ok.String(*v.RolePrincipalArn)
+	}
+
 	return nil
 }
 
@@ -3698,9 +3703,26 @@ func awsRestjson1_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, v
 		}
 	}
 
+	if v.MembershipAssignments != nil {
+		ok := object.Key("membershipAssignments")
+		if err := awsRestjson1_serializeDocumentProjectMembershipAssignments(v.MembershipAssignments, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.ProjectCategory != nil {
+		ok := object.Key("projectCategory")
+		ok.String(*v.ProjectCategory)
+	}
+
+	if v.ProjectExecutionRole != nil {
+		ok := object.Key("projectExecutionRole")
+		ok.String(*v.ProjectExecutionRole)
 	}
 
 	if v.ProjectProfileId != nil {
@@ -4588,6 +4610,11 @@ func awsRestjson1_serializeOpDocumentCreateUserProfileInput(v *CreateUserProfile
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.SessionName != nil {
+		ok := object.Key("sessionName")
+		ok.String(*v.SessionName)
 	}
 
 	if v.UserIdentifier != nil {
@@ -9963,6 +9990,10 @@ func awsRestjson1_serializeOpHttpBindingsGetUserProfileInput(v *GetUserProfileIn
 		}
 	}
 
+	if v.SessionName != nil {
+		encoder.SetQuery("sessionName").String(*v.SessionName)
+	}
+
 	if len(v.Type) > 0 {
 		encoder.SetQuery("type").String(string(v.Type))
 	}
@@ -12395,6 +12426,10 @@ func awsRestjson1_serializeOpHttpBindingsListProjectsInput(v *ListProjectsInput,
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.ProjectCategory != nil {
+		encoder.SetQuery("projectCategory").String(*v.ProjectCategory)
 	}
 
 	if v.UserIdentifier != nil {
@@ -17911,6 +17946,11 @@ func awsRestjson1_serializeOpDocumentUpdateUserProfileInput(v *UpdateUserProfile
 	object := value.Object()
 	defer object.Close()
 
+	if v.SessionName != nil {
+		ok := object.Key("sessionName")
+		ok.String(*v.SessionName)
+	}
+
 	if len(v.Status) > 0 {
 		ok := object.Key("status")
 		ok.String(string(v.Status))
@@ -20837,6 +20877,38 @@ func awsRestjson1_serializeDocumentProjectGrantFilter(v types.ProjectGrantFilter
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProjectMembershipAssignment(v *types.ProjectMembershipAssignment, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Designation) > 0 {
+		ok := object.Key("designation")
+		ok.String(string(v.Designation))
+	}
+
+	if v.Member != nil {
+		ok := object.Key("member")
+		if err := awsRestjson1_serializeDocumentMember(v.Member, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProjectMembershipAssignments(v []types.ProjectMembershipAssignment, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentProjectMembershipAssignment(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

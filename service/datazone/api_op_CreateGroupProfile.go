@@ -35,14 +35,17 @@ type CreateGroupProfileInput struct {
 	// This member is required.
 	DomainIdentifier *string
 
-	// The identifier of the group for which the group profile is created.
-	//
-	// This member is required.
-	GroupIdentifier *string
-
 	//  A unique, case-sensitive identifier that is provided to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	// The identifier of the group for which the group profile is created.
+	GroupIdentifier *string
+
+	// The ARN of the IAM role that will be associated with the group profile. This
+	// role defines the permissions that group members will assume when accessing
+	// Amazon DataZone resources.
+	RolePrincipalArn *string
 
 	noSmithyDocumentSerde
 }
@@ -58,6 +61,14 @@ type CreateGroupProfileOutput struct {
 
 	// The identifier of the group profile.
 	Id *string
+
+	// The ARN of the IAM role principal. This role is associated with the group
+	// profile.
+	RolePrincipalArn *string
+
+	// The unique identifier of the IAM role principal. This principal is associated
+	// with the group profile.
+	RolePrincipalId *string
 
 	// The status of the group profile.
 	Status types.GroupProfileStatus

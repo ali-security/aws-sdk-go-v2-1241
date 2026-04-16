@@ -2828,6 +2828,11 @@ func awsRestjson1_serializeOpDocumentListMemoryRecordsInput(v *ListMemoryRecords
 		ok.String(*v.Namespace)
 	}
 
+	if v.NamespacePath != nil {
+		ok := object.Key("namespacePath")
+		ok.String(*v.NamespacePath)
+	}
+
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
@@ -3045,6 +3050,11 @@ func awsRestjson1_serializeOpDocumentRetrieveMemoryRecordsInput(v *RetrieveMemor
 	if v.Namespace != nil {
 		ok := object.Key("namespace")
 		ok.String(*v.Namespace)
+	}
+
+	if v.NamespacePath != nil {
+		ok := object.Key("namespacePath")
+		ok.String(*v.NamespacePath)
 	}
 
 	if v.NextToken != nil {

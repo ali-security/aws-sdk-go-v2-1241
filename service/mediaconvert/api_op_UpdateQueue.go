@@ -44,6 +44,10 @@ type UpdateQueueInput struct {
 	// The new description for the queue, if you are changing it.
 	Description *string
 
+	// Specify the maximum number of Elemental Inference feeds MediaConvert can
+	// process concurrently.
+	MaximumConcurrentFeeds *int32
+
 	// The new details of your pricing plan for your reserved queue. When you set up a
 	// new pricing plan to replace an expired one, you enter into another 12-month
 	// commitment. When you add capacity to your queue by increasing the number of RTS,

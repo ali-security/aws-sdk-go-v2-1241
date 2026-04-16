@@ -1,0 +1,8 @@
+{
+    "id": "c47f3ee8-9c69-43ad-8d31-86bc30d54857",
+    "type": "feature",
+    "description": "Add content redirection to Update Stack",
+    "modules": [
+        "service/appstream"
+    ]
+}

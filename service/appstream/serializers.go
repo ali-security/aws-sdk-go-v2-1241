@@ -8647,6 +8647,13 @@ func awsAwsjson11_serializeOpDocumentUpdateStackInput(v *UpdateStackInput, value
 		}
 	}
 
+	if v.ContentRedirection != nil {
+		ok := object.Key("ContentRedirection")
+		if err := awsAwsjson11_serializeDocumentContentRedirection(v.ContentRedirection, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DeleteStorageConnectors != nil {
 		ok := object.Key("DeleteStorageConnectors")
 		ok.Boolean(*v.DeleteStorageConnectors)

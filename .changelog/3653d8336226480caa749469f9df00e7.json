@@ -1,0 +1,8 @@
+{
+    "id": "3653d833-6226-480c-aa74-9469f9df00e7",
+    "type": "feature",
+    "description": "This release adds support for specifying Availability Zone IDs as an alternative to Availability Zone names when creating or updating Auto Scaling groups.",
+    "modules": [
+        "service/autoscaling"
+    ]
+}

@@ -928,6 +928,25 @@ func (RecommenderRecipeName) Values() []RecommenderRecipeName {
 	}
 }
 
+type RecommenderSchemaStatus string
+
+// Enum values for RecommenderSchemaStatus
+const (
+	RecommenderSchemaStatusActive   RecommenderSchemaStatus = "ACTIVE"
+	RecommenderSchemaStatusDeleting RecommenderSchemaStatus = "DELETING"
+)
+
+// Values returns all known values for RecommenderSchemaStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommenderSchemaStatus) Values() []RecommenderSchemaStatus {
+	return []RecommenderSchemaStatus{
+		"ACTIVE",
+		"DELETING",
+	}
+}
+
 type RecommenderStatus string
 
 // Enum values for RecommenderStatus
@@ -1484,12 +1503,19 @@ type TrainingMetricName string
 
 // Enum values for TrainingMetricName
 const (
-	TrainingMetricNameHit        TrainingMetricName = "hit"
-	TrainingMetricNameCoverage   TrainingMetricName = "coverage"
-	TrainingMetricNameRecall     TrainingMetricName = "recall"
-	TrainingMetricNamePopularity TrainingMetricName = "popularity"
-	TrainingMetricNameFreshness  TrainingMetricName = "freshness"
-	TrainingMetricNameSimilarity TrainingMetricName = "similarity"
+	TrainingMetricNameHit                                    TrainingMetricName = "hit"
+	TrainingMetricNameCoverage                               TrainingMetricName = "coverage"
+	TrainingMetricNameRecall                                 TrainingMetricName = "recall"
+	TrainingMetricNamePopularity                             TrainingMetricName = "popularity"
+	TrainingMetricNameFreshness                              TrainingMetricName = "freshness"
+	TrainingMetricNameSimilarity                             TrainingMetricName = "similarity"
+	TrainingMetricNameMeanReciprocalRankAt25                 TrainingMetricName = "mean_reciprocal_rank_at_25"
+	TrainingMetricNameNormalizedDiscountedCumulativeGainAt5  TrainingMetricName = "normalized_discounted_cumulative_gain_at_5"
+	TrainingMetricNameNormalizedDiscountedCumulativeGainAt10 TrainingMetricName = "normalized_discounted_cumulative_gain_at_10"
+	TrainingMetricNameNormalizedDiscountedCumulativeGainAt25 TrainingMetricName = "normalized_discounted_cumulative_gain_at_25"
+	TrainingMetricNamePrecisionAt5                           TrainingMetricName = "precision_at_5"
+	TrainingMetricNamePrecisionAt10                          TrainingMetricName = "precision_at_10"
+	TrainingMetricNamePrecisionAt25                          TrainingMetricName = "precision_at_25"
 )
 
 // Values returns all known values for TrainingMetricName. Note that this can be
@@ -1504,6 +1530,13 @@ func (TrainingMetricName) Values() []TrainingMetricName {
 		"popularity",
 		"freshness",
 		"similarity",
+		"mean_reciprocal_rank_at_25",
+		"normalized_discounted_cumulative_gain_at_5",
+		"normalized_discounted_cumulative_gain_at_10",
+		"normalized_discounted_cumulative_gain_at_25",
+		"precision_at_5",
+		"precision_at_10",
+		"precision_at_25",
 	}
 }
 

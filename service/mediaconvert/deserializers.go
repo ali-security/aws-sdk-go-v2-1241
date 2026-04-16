@@ -6233,6 +6233,76 @@ func awsRestjson1_deserializeDocument__listOfDashAdditionalManifest(v *[]types.D
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfElementalInferenceFeature(v *[]types.ElementalInferenceFeature, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ElementalInferenceFeature
+	if *v == nil {
+		cv = []types.ElementalInferenceFeature{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ElementalInferenceFeature
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ElementalInferenceFeature to be of type string, got %T instead", value)
+			}
+			col = types.ElementalInferenceFeature(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfElementalInferenceFeed(v *[]types.ElementalInferenceFeed, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ElementalInferenceFeed
+	if *v == nil {
+		cv = []types.ElementalInferenceFeed{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ElementalInferenceFeed
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentElementalInferenceFeed(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfEndpoint(v *[]types.Endpoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14091,6 +14161,96 @@ func awsRestjson1_deserializeDocumentEac3Settings(v **types.Eac3Settings, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentElementalInferenceConfiguration(v **types.ElementalInferenceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ElementalInferenceConfiguration
+	if *v == nil {
+		sv = &types.ElementalInferenceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "features":
+			if err := awsRestjson1_deserializeDocument__listOfElementalInferenceFeature(&sv.Features, value); err != nil {
+				return err
+			}
+
+		case "feeds":
+			if err := awsRestjson1_deserializeDocument__listOfElementalInferenceFeed(&sv.Feeds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentElementalInferenceFeed(v **types.ElementalInferenceFeed, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ElementalInferenceFeed
+	if *v == nil {
+		sv = &types.ElementalInferenceFeed{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "feedManagementState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ElementalInferenceFeedManagementState to be of type string, got %T instead", value)
+				}
+				sv.FeedManagementState = types.ElementalInferenceFeedManagementState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEmbeddedDestinationSettings(v **types.EmbeddedDestinationSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -18644,6 +18804,11 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 					return fmt.Errorf("expected JobPhase to be of type string, got %T instead", value)
 				}
 				sv.CurrentPhase = types.JobPhase(jtv)
+			}
+
+		case "elementalInferenceConfiguration":
+			if err := awsRestjson1_deserializeDocumentElementalInferenceConfiguration(&sv.ElementalInferenceConfiguration, value); err != nil {
+				return err
 			}
 
 		case "errorCode":
@@ -23669,6 +23834,19 @@ func awsRestjson1_deserializeDocumentQueue(v **types.Queue, value interface{}) e
 					return fmt.Errorf("expected __timestampUnix to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "maximumConcurrentFeeds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumConcurrentFeeds = ptr.Int32(int32(i64))
 			}
 
 		case "name":

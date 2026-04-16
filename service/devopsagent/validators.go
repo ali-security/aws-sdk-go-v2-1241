@@ -10,26 +10,6 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-type validateOpAllowVendedLogDeliveryForResource struct {
-}
-
-func (*validateOpAllowVendedLogDeliveryForResource) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpAllowVendedLogDeliveryForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*AllowVendedLogDeliveryForResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpAllowVendedLogDeliveryForResourceInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpAssociateService struct {
 }
 
@@ -828,10 +808,6 @@ func (m *validateOpValidateAwsAssociations) HandleInitialize(ctx context.Context
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
-}
-
-func addOpAllowVendedLogDeliveryForResourceValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpAllowVendedLogDeliveryForResource{}, middleware.After)
 }
 
 func addOpAssociateServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -2005,24 +1981,6 @@ func validateSourceAwsConfiguration(v *types.SourceAwsConfiguration) error {
 	}
 }
 
-func validateOpAllowVendedLogDeliveryForResourceInput(v *AllowVendedLogDeliveryForResourceInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AllowVendedLogDeliveryForResourceInput"}
-	if v.ResourceArnBeingAuthorized == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArnBeingAuthorized"))
-	}
-	if v.DeliverySourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeliverySourceArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpAssociateServiceInput(v *AssociateServiceInput) error {
 	if v == nil {
 		return nil
@@ -2099,9 +2057,6 @@ func validateOpCreateChatInput(v *CreateChatInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateChatInput"}
 	if v.AgentSpaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
-	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2383,9 +2338,6 @@ func validateOpListChatsInput(v *ListChatsInput) error {
 	if v.AgentSpaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentSpaceId"))
 	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2545,9 +2497,6 @@ func validateOpSendMessageInput(v *SendMessageInput) error {
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
-	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

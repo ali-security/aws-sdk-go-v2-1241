@@ -91,11 +91,10 @@ type GetUserPoolMfaConfigOutput struct {
 	// Includes TOTP enabled or disabled state.
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
-	// Shows user pool configuration for sign-in with passkey authenticators like
-	// biometric devices and security keys. Passkeys are not eligible MFA factors. They
-	// are instead an eligible primary sign-in factor for [choice-based authentication], or the USER_AUTH flow.
-	//
-	// [choice-based authentication]: https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-selection-sdk.html#authentication-flows-selection-choice
+	// Shows user pool configuration for sign-in with passkey authenticators such as
+	// biometric devices and security keys. Includes relying-party configuration,
+	// user-verification requirements, and whether passkeys can satisfy MFA
+	// requirements.
 	WebAuthnConfiguration *types.WebAuthnConfigurationType
 
 	// Metadata pertaining to the operation's result.

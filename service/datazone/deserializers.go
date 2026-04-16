@@ -6902,6 +6902,24 @@ func awsRestjson1_deserializeOpDocumentCreateGroupProfileOutput(v **CreateGroupP
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "rolePrincipalArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RolePrincipalArn = ptr.String(jtv)
+			}
+
+		case "rolePrincipalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RolePrincipalId = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7367,6 +7385,15 @@ func awsRestjson1_deserializeOpDocumentCreateProjectOutput(v **CreateProjectOutp
 					return fmt.Errorf("expected ProjectName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "projectCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProjectCategory = ptr.String(jtv)
 			}
 
 		case "projectProfileId":
@@ -18470,6 +18497,24 @@ func awsRestjson1_deserializeOpDocumentGetGroupProfileOutput(v **GetGroupProfile
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "rolePrincipalArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RolePrincipalArn = ptr.String(jtv)
+			}
+
+		case "rolePrincipalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RolePrincipalId = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20204,6 +20249,15 @@ func awsRestjson1_deserializeOpDocumentGetProjectOutput(v **GetProjectOutput, va
 					return fmt.Errorf("expected ProjectName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "projectCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProjectCategory = ptr.String(jtv)
 			}
 
 		case "projectProfileId":
@@ -35084,6 +35138,24 @@ func awsRestjson1_deserializeOpDocumentUpdateGroupProfileOutput(v **UpdateGroupP
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "rolePrincipalArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RolePrincipalArn = ptr.String(jtv)
+			}
+
+		case "rolePrincipalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RolePrincipalId = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -35354,6 +35426,15 @@ func awsRestjson1_deserializeOpDocumentUpdateProjectOutput(v **UpdateProjectOutp
 					return fmt.Errorf("expected ProjectName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "projectCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProjectCategory = ptr.String(jtv)
 			}
 
 		case "projectProfileId":
@@ -47201,6 +47282,24 @@ func awsRestjson1_deserializeDocumentGroupProfileSummary(v **types.GroupProfileS
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "rolePrincipalArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RolePrincipalArn = ptr.String(jtv)
+			}
+
+		case "rolePrincipalId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RolePrincipalId = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -47357,6 +47456,15 @@ func awsRestjson1_deserializeDocumentIamUserProfileDetails(v **types.IamUserProf
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "groupProfileId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.GroupProfileId = ptr.String(jtv)
+			}
+
 		case "principalId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -47364,6 +47472,15 @@ func awsRestjson1_deserializeDocumentIamUserProfileDetails(v **types.IamUserProf
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.PrincipalId = ptr.String(jtv)
+			}
+
+		case "sessionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SessionName = ptr.String(jtv)
 			}
 
 		default:
@@ -52439,6 +52556,15 @@ func awsRestjson1_deserializeDocumentProjectSummary(v **types.ProjectSummary, va
 					return fmt.Errorf("expected ProjectName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "projectCategory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProjectCategory = ptr.String(jtv)
 			}
 
 		case "projectStatus":

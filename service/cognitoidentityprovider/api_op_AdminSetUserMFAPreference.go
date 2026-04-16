@@ -78,6 +78,16 @@ type AdminSetUserMFAPreferenceInput struct {
 	// methods are available.
 	SoftwareTokenMfaSettings *types.SoftwareTokenMfaSettingsType
 
+	// User preferences for passkey MFA. Activates or deactivates passkey MFA for the
+	// user. When activated, passkey authentication requires user verification, and
+	// passkey sign-in is available when MFA is required. To activate this setting, the
+	// FactorConfiguration of your user pool WebAuthnConfiguration must be
+	// MULTI_FACTOR_WITH_USER_VERIFICATION . To activate this setting, your user pool
+	// must be in the [Essentials tier]or higher.
+	//
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+	WebAuthnMfaSettings *types.WebAuthnMfaSettingsType
+
 	noSmithyDocumentSerde
 }
 

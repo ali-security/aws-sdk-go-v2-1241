@@ -1871,7 +1871,8 @@ type ObjectTypeField struct {
 	Source *string
 
 	// The location of the data in the standard ProfileObject model. For example:
-	// _profile.Address.PostalCode.
+	// _profile.Address.PostalCode. Do not include sensitive or personally identifiable
+	// information (PII) in the target field name.
 	Target *string
 
 	noSmithyDocumentSerde
@@ -2298,6 +2299,13 @@ type RecommenderConfig struct {
 	// Configuration settings for how the recommender processes and uses events.
 	EventsConfig *EventsConfig
 
+	// A map of dataset type to a list of column names to train on. The column names
+	// must be a subset of the columns defined in the recommender schema. If not
+	// specified, all columns in the schema are used for training. The following
+	// columns are always included and do not need to be specified: Item.Id ,
+	// ItemList[].Id , EventTimestamp , EventType , and EventValue .
+	IncludedColumns map[string][]string
+
 	// Configuration settings for how the recommender handles inference requests.
 	InferenceConfig *InferenceConfig
 
@@ -2343,6 +2351,9 @@ type RecommenderFilterSummary struct {
 	// The name of the recommender filter.
 	RecommenderFilterName *string
 
+	// The name of the recommender schema associated with this recommender filter.
+	RecommenderSchemaName *string
+
 	// The current operational status of the recommender filter.
 	Status RecommenderFilterStatus
 
@@ -2386,6 +2397,53 @@ type RecommenderRecipe struct {
 	noSmithyDocumentSerde
 }
 
+// Defines a column in a recommender schema, including the target field name and
+// optional feature and content type settings for training.
+type RecommenderSchemaField struct {
+
+	// The name of the target field in the dataset, such as Location.City or
+	// Attributes.MealTime .
+	//
+	// This member is required.
+	TargetFieldName *string
+
+	// The data type of the column value. Valid values are String and Number . The
+	// default value is String .
+	ContentType ContentType
+
+	// How the column is treated for model training. Valid values are CATEGORICAL and
+	// TEXTUAL .
+	FeatureType FeatureType
+
+	noSmithyDocumentSerde
+}
+
+// Provides a summary of a recommender schema's configuration and current state.
+type RecommenderSchemaSummary struct {
+
+	// The timestamp when the recommender schema was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A map of dataset type to column definitions included in the schema.
+	//
+	// This member is required.
+	Fields map[string][]RecommenderSchemaField
+
+	// The name of the recommender schema.
+	//
+	// This member is required.
+	RecommenderSchemaName *string
+
+	// The current operational status of the recommender schema.
+	//
+	// This member is required.
+	Status RecommenderSchemaStatus
+
+	noSmithyDocumentSerde
+}
+
 // Provides a summary of a recommender's configuration and current state.
 type RecommenderSummary struct {
 
@@ -2413,6 +2471,9 @@ type RecommenderSummary struct {
 
 	// The name of the recommender.
 	RecommenderName *string
+
+	// The name of the recommender schema associated with this recommender.
+	RecommenderSchemaName *string
 
 	// The current operational status of the recommender.
 	Status RecommenderStatus

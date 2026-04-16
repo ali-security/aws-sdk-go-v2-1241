@@ -1443,6 +1443,7 @@ const (
 	EventSourceNameOnRealTimeCallAnalysisAvailable EventSourceName = "OnRealTimeCallAnalysisAvailable"
 	EventSourceNameOnRealTimeChatAnalysisAvailable EventSourceName = "OnRealTimeChatAnalysisAvailable"
 	EventSourceNameOnPostChatAnalysisAvailable     EventSourceName = "OnPostChatAnalysisAvailable"
+	EventSourceNameOnEmailAnalysisAvailable        EventSourceName = "OnEmailAnalysisAvailable"
 	EventSourceNameOnZendeskTicketCreate           EventSourceName = "OnZendeskTicketCreate"
 	EventSourceNameOnZendeskTicketStatusUpdate     EventSourceName = "OnZendeskTicketStatusUpdate"
 	EventSourceNameOnSalesforceCaseCreate          EventSourceName = "OnSalesforceCaseCreate"
@@ -1463,6 +1464,7 @@ func (EventSourceName) Values() []EventSourceName {
 		"OnRealTimeCallAnalysisAvailable",
 		"OnRealTimeChatAnalysisAvailable",
 		"OnPostChatAnalysisAvailable",
+		"OnEmailAnalysisAvailable",
 		"OnZendeskTicketCreate",
 		"OnZendeskTicketStatusUpdate",
 		"OnSalesforceCaseCreate",

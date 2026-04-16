@@ -87,6 +87,9 @@ type GetProjectOutput struct {
 	// The timestamp of when the project was last updated.
 	LastUpdatedAt *time.Time
 
+	// The category of the project.
+	ProjectCategory *string
+
 	// The ID of the project profile of a project.
 	ProjectProfileId *string
 

@@ -40,12 +40,6 @@ type RetrieveMemoryRecordsInput struct {
 	// This member is required.
 	MemoryId *string
 
-	// The namespace prefix to filter memory records by. Searches for memory records
-	// in namespaces that start with the provided prefix.
-	//
-	// This member is required.
-	Namespace *string
-
 	// The search criteria to use for finding relevant memory records. This includes
 	// the search query, memory strategy ID, and other search parameters.
 	//
@@ -55,6 +49,14 @@ type RetrieveMemoryRecordsInput struct {
 	// The maximum number of results to return in a single call. The default value is
 	// 20.
 	MaxResults *int32
+
+	// The namespace prefix to filter memory records by. Searches for memory records
+	// in namespaces that start with the provided prefix.
+	Namespace *string
+
+	// Use namespacePath for hierarchical retrievals. Return all memory records where
+	// namespace falls under the same parent hierarchy.
+	NamespacePath *string
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.

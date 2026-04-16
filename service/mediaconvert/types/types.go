@@ -3397,6 +3397,30 @@ type Eac3Settings struct {
 	noSmithyDocumentSerde
 }
 
+// The Elemental Inference configuration used in this job.
+type ElementalInferenceConfiguration struct {
+
+	// A list of Elemental Inference features used in this job.
+	Features []ElementalInferenceFeature
+
+	// A list of Elemental Inference feeds used by this job.
+	Feeds []ElementalInferenceFeed
+
+	noSmithyDocumentSerde
+}
+
+// Elemental Inference Feed.
+type ElementalInferenceFeed struct {
+
+	// Feed ARN.
+	Arn *string
+
+	// Elemental Inference Feed management state.
+	FeedManagementState ElementalInferenceFeedManagementState
+
+	noSmithyDocumentSerde
+}
+
 // Settings related to CEA/EIA-608 and CEA/EIA-708 (also called embedded or
 // ancillary) captions. Set up embedded captions in the same output as your video.
 // For more information, see
@@ -5897,6 +5921,9 @@ type Job struct {
 	// A job's phase can be PROBING, TRANSCODING OR UPLOADING
 	CurrentPhase JobPhase
 
+	// The Elemental Inference configuration used in this job.
+	ElementalInferenceConfiguration *ElementalInferenceConfiguration
+
 	// Error code for the job
 	ErrorCode *int32
 
@@ -8319,6 +8346,10 @@ type Queue struct {
 	// The timestamp in epoch seconds for when you most recently updated the queue.
 	LastUpdated *time.Time
 
+	// Specify the maximum number of Elemental Inference feeds MediaConvert can
+	// process concurrently.
+	MaximumConcurrentFeeds *int32
+
 	// Specifies whether the pricing plan for the queue is on-demand or reserved. For
 	// on-demand, you pay per minute, billed in increments of .01 minute. For reserved,
 	// you pay for the transcoding capacity of the entire queue, regardless of how much
@@ -9265,7 +9296,10 @@ type VideoDescription struct {
 
 	// Specify the video Scaling behavior when your output has a different resolution
 	// than your input. For more information, see
-	// https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html Select
+	// Smart Cropping using Elemental Inference as your scaling behavior to have
+	// Elemental Inference automatically crop your video. Smart Crop requires a
+	// vertical output aspect ratio (1:1 is the widest aspect ratio supported).
 	ScalingBehavior ScalingBehavior
 
 	// Use Sharpness setting to specify the strength of anti-aliasing. This setting

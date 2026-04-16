@@ -938,8 +938,9 @@ type GroupSearchType string
 
 // Enum values for GroupSearchType
 const (
-	GroupSearchTypeSsoGroup         GroupSearchType = "SSO_GROUP"
-	GroupSearchTypeDatazoneSsoGroup GroupSearchType = "DATAZONE_SSO_GROUP"
+	GroupSearchTypeSsoGroup            GroupSearchType = "SSO_GROUP"
+	GroupSearchTypeDatazoneSsoGroup    GroupSearchType = "DATAZONE_SSO_GROUP"
+	GroupSearchTypeIamRoleSessionGroup GroupSearchType = "IAM_ROLE_SESSION_GROUP"
 )
 
 // Values returns all known values for GroupSearchType. Note that this can be
@@ -950,6 +951,7 @@ func (GroupSearchType) Values() []GroupSearchType {
 	return []GroupSearchType{
 		"SSO_GROUP",
 		"DATAZONE_SSO_GROUP",
+		"IAM_ROLE_SESSION_GROUP",
 	}
 }
 
@@ -2254,9 +2256,10 @@ type UserType string
 
 // Enum values for UserType
 const (
-	UserTypeIamUser UserType = "IAM_USER"
-	UserTypeIamRole UserType = "IAM_ROLE"
-	UserTypeSsoUser UserType = "SSO_USER"
+	UserTypeIamUser        UserType = "IAM_USER"
+	UserTypeIamRole        UserType = "IAM_ROLE"
+	UserTypeSsoUser        UserType = "SSO_USER"
+	UserTypeIamRoleSession UserType = "IAM_ROLE_SESSION"
 )
 
 // Values returns all known values for UserType. Note that this can be expanded in
@@ -2268,5 +2271,6 @@ func (UserType) Values() []UserType {
 		"IAM_USER",
 		"IAM_ROLE",
 		"SSO_USER",
+		"IAM_ROLE_SESSION",
 	}
 }

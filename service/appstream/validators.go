@@ -3512,6 +3512,11 @@ func validateOpUpdateStackInput(v *UpdateStackInput) error {
 			invalidParams.AddNested("AccessEndpoints", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ContentRedirection != nil {
+		if err := validateContentRedirection(v.ContentRedirection); err != nil {
+			invalidParams.AddNested("ContentRedirection", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -50,6 +50,17 @@ type CreateProjectInput struct {
 	// The glossary terms that can be used in this Amazon DataZone project.
 	GlossaryTerms []string
 
+	// The members to be assigned to the project.
+	MembershipAssignments []types.ProjectMembershipAssignment
+
+	// The category of the project. Set to 'ADMIN' designates this as an
+	// administrative project for the Amazon DataZone domain.
+	ProjectCategory *string
+
+	// The default project IAM role that is used to access project resources and run
+	// computes such as Glue and Sagemaker.
+	ProjectExecutionRole *string
+
 	// The ID of the project profile.
 	ProjectProfileId *string
 
@@ -105,6 +116,9 @@ type CreateProjectOutput struct {
 
 	// The timestamp of when the project was last updated.
 	LastUpdatedAt *time.Time
+
+	// The category of the project.
+	ProjectCategory *string
 
 	// The project profile ID.
 	ProjectProfileId *string

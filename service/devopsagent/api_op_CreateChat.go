@@ -37,9 +37,11 @@ type CreateChatInput struct {
 	// This member is required.
 	AgentSpaceId *string
 
-	// The user identifier for the chat
+	// The user identifier for the chat. This field is deprecated and will be ignored
+	// — the service resolves user identity from the authenticated session.
 	//
-	// This member is required.
+	// Deprecated: userId is managed by the service and should not be provided by the
+	// caller
 	UserId *string
 
 	// The authentication type of the user

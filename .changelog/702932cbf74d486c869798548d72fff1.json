@@ -1,0 +1,8 @@
+{
+    "id": "702932cb-f74d-486c-8697-98548d72fff1",
+    "type": "feature",
+    "description": "Added error handling for service quota limits",
+    "modules": [
+        "service/connectcases"
+    ]
+}

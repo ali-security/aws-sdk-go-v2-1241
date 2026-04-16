@@ -1,0 +1,8 @@
+{
+    "id": "4fe88266-5912-45d8-9022-f43151d243af",
+    "type": "documentation",
+    "description": "Update documentation of alarm mute rules start and end date fields",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

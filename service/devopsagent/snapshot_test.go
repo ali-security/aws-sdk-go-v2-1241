@@ -62,18 +62,6 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
-func TestCheckSnapshot_AllowVendedLogDeliveryForResource(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.AllowVendedLogDeliveryForResource(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return testSnapshot(stack, "AllowVendedLogDeliveryForResource")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestCheckSnapshot_AssociateService(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateService(context.Background(), nil, func(o *Options) {
@@ -601,18 +589,6 @@ func TestCheckSnapshot_ValidateAwsAssociations(t *testing.T) {
 		t.Fatal(err)
 	}
 }
-func TestUpdateSnapshot_AllowVendedLogDeliveryForResource(t *testing.T) {
-	svc := New(Options{})
-	_, err := svc.AllowVendedLogDeliveryForResource(context.Background(), nil, func(o *Options) {
-		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-			return updateSnapshot(stack, "AllowVendedLogDeliveryForResource")
-		})
-	})
-	if _, ok := err.(snapshotOK); !ok && err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestUpdateSnapshot_AssociateService(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateService(context.Background(), nil, func(o *Options) {

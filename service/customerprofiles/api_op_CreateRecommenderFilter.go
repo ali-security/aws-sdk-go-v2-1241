@@ -48,6 +48,10 @@ type CreateRecommenderFilterInput struct {
 	// A description of the recommender filter.
 	Description *string
 
+	// The name of the recommender schema to use for this recommender filter. If not
+	// specified, the default schema is used.
+	RecommenderSchemaName *string
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 

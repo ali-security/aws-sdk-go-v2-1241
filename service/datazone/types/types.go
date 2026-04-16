@@ -3359,6 +3359,14 @@ type GroupProfileSummary struct {
 	// The ID of a group profile.
 	Id *string
 
+	// The ARN of the IAM role principal. This role is associated with the group
+	// profile.
+	RolePrincipalArn *string
+
+	// The unique identifier of the IAM role principal. This principal is associated
+	// with the group profile.
+	RolePrincipalId *string
+
 	// The status of a group profile.
 	Status GroupProfileStatus
 
@@ -3432,8 +3440,15 @@ type IamUserProfileDetails struct {
 	// The ARN of the IAM user.
 	Arn *string
 
+	// The identifier of the group profile associated with the IAM user profile. This
+	// links the user to a specific group profile within the Amazon DataZone domain.
+	GroupProfileId *string
+
 	// The principal ID as part of the IAM user profile details.
 	PrincipalId *string
+
+	// The session name for IAM role sessions.
+	SessionName *string
 
 	noSmithyDocumentSerde
 }
@@ -4903,6 +4918,23 @@ type ProjectMember struct {
 	noSmithyDocumentSerde
 }
 
+// A map of user or group profiles to designations that need to be assigned in the
+// project.
+type ProjectMembershipAssignment struct {
+
+	// The designation of the project membership.
+	//
+	// This member is required.
+	Designation UserDesignation
+
+	// The details about a project member.
+	//
+	// This member is required.
+	Member Member
+
+	noSmithyDocumentSerde
+}
+
 // The project policy grant principal.
 type ProjectPolicyGrantPrincipal struct {
 
@@ -5010,6 +5042,9 @@ type ProjectSummary struct {
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.
 	FailureReasons []ProjectDeletionError
+
+	// The category of the project.
+	ProjectCategory *string
 
 	// The status of the project.
 	ProjectStatus ProjectStatus

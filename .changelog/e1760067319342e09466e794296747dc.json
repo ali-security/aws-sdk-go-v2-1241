@@ -1,0 +1,8 @@
+{
+    "id": "e1760067-3193-42e0-9466-e794296747dc",
+    "type": "feature",
+    "description": "Launching SMUS IAM domain SDK support",
+    "modules": [
+        "service/datazone"
+    ]
+}

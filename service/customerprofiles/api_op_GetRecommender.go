@@ -79,6 +79,9 @@ type GetRecommenderOutput struct {
 	// settings that define its behavior.
 	RecommenderConfig *types.RecommenderConfig
 
+	// The name of the recommender schema associated with this recommender.
+	RecommenderSchemaName *string
+
 	// The current status of the recommender, indicating whether it is active,
 	// creating, updating, or in another state.
 	Status types.RecommenderStatus

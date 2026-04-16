@@ -1,0 +1,8 @@
+{
+    "id": "3610a558-85e1-48d6-a0a2-ac6bcb4cfe71",
+    "type": "feature",
+    "description": "Adds support for passkey-based multi-factor authentication in Cognito User Pools. Users can authenticate securely using FIDO2-compliant passkeys with user verification, enabling passwordless MFA flows while maintaining backward compatibility with password-based authentication",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

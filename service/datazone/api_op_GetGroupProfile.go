@@ -53,6 +53,14 @@ type GetGroupProfileOutput struct {
 	// The identifier of the group profile.
 	Id *string
 
+	// The ARN of the IAM role principal. This role is associated with the group
+	// profile.
+	RolePrincipalArn *string
+
+	// The unique identifier of the IAM role principal. This principal is associated
+	// with the group profile.
+	RolePrincipalId *string
+
 	// The identifier of the group profile.
 	Status types.GroupProfileStatus
 

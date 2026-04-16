@@ -1,0 +1,8 @@
+{
+    "id": "7450f0b4-7b11-4d5e-b8a1-a0fadf2e0e4c",
+    "type": "feature",
+    "description": "Endpoint update for CloudWatch Logs Streaming APIs.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

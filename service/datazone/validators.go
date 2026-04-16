@@ -5607,6 +5607,41 @@ func validateProjectGrantFilter(v types.ProjectGrantFilter) error {
 	}
 }
 
+func validateProjectMembershipAssignment(v *types.ProjectMembershipAssignment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProjectMembershipAssignment"}
+	if v.Member == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Member"))
+	}
+	if len(v.Designation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Designation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProjectMembershipAssignments(v []types.ProjectMembershipAssignment) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProjectMembershipAssignments"}
+	for i := range v {
+		if err := validateProjectMembershipAssignment(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProjectPolicyGrantPrincipal(v *types.ProjectPolicyGrantPrincipal) error {
 	if v == nil {
 		return nil
@@ -6880,9 +6915,6 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.DomainExecutionRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DomainExecutionRole"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7084,9 +7116,6 @@ func validateOpCreateGroupProfileInput(v *CreateGroupProfileInput) error {
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}
-	if v.GroupIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupIdentifier"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7132,6 +7161,11 @@ func validateOpCreateProjectInput(v *CreateProjectInput) error {
 	if v.UserParameters != nil {
 		if err := validateEnvironmentConfigurationUserParametersList(v.UserParameters); err != nil {
 			invalidParams.AddNested("UserParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MembershipAssignments != nil {
+		if err := validateProjectMembershipAssignments(v.MembershipAssignments); err != nil {
+			invalidParams.AddNested("MembershipAssignments", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

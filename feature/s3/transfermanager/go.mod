@@ -40,7 +40,6 @@ replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../../internal
 
 replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../../internal/endpoints/v2/
 
-
 replace github.com/aws/aws-sdk-go-v2/internal/v4a => ../../../internal/v4a/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../../service/internal/accept-encoding/

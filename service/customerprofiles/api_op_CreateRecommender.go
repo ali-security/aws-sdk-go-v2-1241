@@ -50,6 +50,10 @@ type CreateRecommenderInput struct {
 	// The recommender configuration.
 	RecommenderConfig *types.RecommenderConfig
 
+	// The name of the recommender schema to use for this recommender. If not
+	// specified, the default schema is used.
+	RecommenderSchemaName *string
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 

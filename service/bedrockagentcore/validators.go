@@ -2445,9 +2445,6 @@ func validateOpListMemoryRecordsInput(v *ListMemoryRecordsInput) error {
 	if v.MemoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
 	}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2480,9 +2477,6 @@ func validateOpRetrieveMemoryRecordsInput(v *RetrieveMemoryRecordsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RetrieveMemoryRecordsInput"}
 	if v.MemoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
-	}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
 	}
 	if v.SearchCriteria == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SearchCriteria"))

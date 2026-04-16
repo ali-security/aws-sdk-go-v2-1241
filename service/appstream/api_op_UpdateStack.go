@@ -47,6 +47,11 @@ type UpdateStackInput struct {
 	// The stack attributes to delete.
 	AttributesToDelete []types.StackAttribute
 
+	// Configuration for bidirectional URL redirection between the streaming session
+	// and the local client. Use HostToClient to redirect URLs from the remote desktop
+	// to the local browser.
+	ContentRedirection *types.ContentRedirection
+
 	// Deletes the storage connectors currently enabled for the stack.
 	//
 	// Deprecated: This member has been deprecated.

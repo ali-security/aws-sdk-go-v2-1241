@@ -39,6 +39,9 @@ type GetUserProfileInput struct {
 	// This member is required.
 	UserIdentifier *string
 
+	// The session name for IAM role sessions.
+	SessionName *string
+
 	// The type of the user profile.
 	Type types.UserProfileType
 

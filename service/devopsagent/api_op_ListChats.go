@@ -36,16 +36,18 @@ type ListChatsInput struct {
 	// This member is required.
 	AgentSpaceId *string
 
-	// The user identifier to list chats for
-	//
-	// This member is required.
-	UserId *string
-
 	// Maximum number of results to return
 	MaxResults *int32
 
 	// Token for pagination
 	NextToken *string
+
+	// The user identifier to list chats for. This field is deprecated and will be
+	// ignored — the service resolves user identity from the authenticated session.
+	//
+	// Deprecated: userId is managed by the service and should not be provided by the
+	// caller
+	UserId *string
 
 	noSmithyDocumentSerde
 }

@@ -53,6 +53,9 @@ type ListProjectsInput struct {
 	// ListProjects to list the next set of projects.
 	NextToken *string
 
+	// A parameter to filter projects by their category.
+	ProjectCategory *string
+
 	// The identifier of the Amazon DataZone user.
 	UserIdentifier *string
 

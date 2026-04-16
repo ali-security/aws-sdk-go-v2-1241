@@ -86,8 +86,8 @@ type SetUserPoolMfaConfigInput struct {
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
 	// The configuration of your user pool for passkey, or WebAuthn, authentication
-	// and registration. You can set this configuration independent of the MFA
-	// configuration options in this operation.
+	// and registration. Includes relying-party configuration, user-verification
+	// requirements, and whether passkeys can satisfy MFA requirements.
 	WebAuthnConfiguration *types.WebAuthnConfigurationType
 
 	noSmithyDocumentSerde
@@ -125,8 +125,8 @@ type SetUserPoolMfaConfigOutput struct {
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
 	// The configuration of your user pool for passkey, or WebAuthn, sign-in with
-	// authenticators like biometric and security-key devices. Includes relying-party
-	// configuration and settings for user-verification requirements.
+	// authenticators such as biometric and security-key devices. Includes
+	// relying-party configuration and settings for user-verification requirements.
 	WebAuthnConfiguration *types.WebAuthnConfigurationType
 
 	// Metadata pertaining to the operation's result.

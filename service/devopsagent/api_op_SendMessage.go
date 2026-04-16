@@ -48,13 +48,15 @@ type SendMessageInput struct {
 	// This member is required.
 	ExecutionId *string
 
-	// Required user identifier
-	//
-	// This member is required.
-	UserId *string
-
 	// Optional context for the message
 	Context *types.SendMessageContext
+
+	// User identifier. This field is deprecated and will be ignored — the service
+	// resolves user identity from the authenticated session.
+	//
+	// Deprecated: userId is managed by the service and should not be provided by the
+	// caller
+	UserId *string
 
 	noSmithyDocumentSerde
 }

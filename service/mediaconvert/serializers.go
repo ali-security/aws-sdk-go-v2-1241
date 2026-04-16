@@ -646,6 +646,11 @@ func awsRestjson1_serializeOpDocumentCreateQueueInput(v *CreateQueueInput, value
 		ok.String(*v.Description)
 	}
 
+	if v.MaximumConcurrentFeeds != nil {
+		ok := object.Key("maximumConcurrentFeeds")
+		ok.Integer(*v.MaximumConcurrentFeeds)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -2944,6 +2949,11 @@ func awsRestjson1_serializeOpDocumentUpdateQueueInput(v *UpdateQueueInput, value
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.MaximumConcurrentFeeds != nil {
+		ok := object.Key("maximumConcurrentFeeds")
+		ok.Integer(*v.MaximumConcurrentFeeds)
 	}
 
 	if v.ReservationPlanSettings != nil {
