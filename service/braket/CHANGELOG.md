@@ -1,3 +1,8 @@
+# v1.40.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2026-04-07)
 
 * **Feature**: Added support for t3, g6, and g6e instance types for Hybrid Jobs.

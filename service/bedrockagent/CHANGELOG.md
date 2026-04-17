@@ -1,3 +1,8 @@
+# v1.53.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2026-04-03)
 
 * **Feature**: Added strict parameter to ToolSpecification to allow users to enforce strict JSON schema adherence for tool input schemas.

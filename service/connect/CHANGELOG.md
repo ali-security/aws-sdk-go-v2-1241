@@ -1,3 +1,9 @@
+# v1.171.0 (2026-04-17)
+
+* **Feature**: Fixes in SDK for customers using TestCase APIs
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.170.0 (2026-04-16)
 
 * **Feature**: This release updates the Amazon Connect Rules CRUD APIs to support a new EventSourceName - OnEmailAnalysisAvailable. Use this event source to trigger rules when conversational analytics results are available for email contacts.

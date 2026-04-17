@@ -1,3 +1,8 @@
+# v1.55.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.0 (2026-04-08)
 
 * **Feature**: Adding EKS specific backup vault notification types for AWS Backup.

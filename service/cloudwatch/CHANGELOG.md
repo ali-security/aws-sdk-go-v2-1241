@@ -1,3 +1,8 @@
+# v1.56.2 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.1 (2026-04-16)
 
 * **Documentation**: Update documentation of alarm mute rules start and end date fields

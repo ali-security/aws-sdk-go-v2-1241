@@ -1,8 +1,0 @@
-{
-    "id": "e82ffd70-aa0a-413f-a501-6ae182dae627",
-    "type": "documentation",
-    "description": "Improving Documentation for Neptune",
-    "modules": [
-        "service/neptune"
-    ]
-}

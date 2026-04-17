@@ -1,8 +1,0 @@
-{
-    "id": "692c6958-22d9-4b9c-9472-37fdcec61035",
-    "type": "feature",
-    "description": "This release adds support for configurable spark properties for Cleanrooms PySpark workloads.",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

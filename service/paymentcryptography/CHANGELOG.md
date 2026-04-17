@@ -1,3 +1,8 @@
+# v1.28.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2026-04-03)
 
 * **Feature**: Adds optional support to retrieve previously generated import and export tokens to simplify import and export functions

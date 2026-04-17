@@ -1,8 +1,0 @@
-{
-    "id": "38aeff50-ce1c-44e4-90f0-8077a952b344",
-    "type": "feature",
-    "description": "Public release of dashboard customization summary, S3 Tables data source type, Athena cross-account connector, custom sorting for controls, and AI-powered analysis generation.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

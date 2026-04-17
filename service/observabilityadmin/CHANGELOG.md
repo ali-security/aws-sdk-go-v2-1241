@@ -1,3 +1,8 @@
+# v1.13.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.0 (2026-04-10)
 
 * **Feature**: CloudWatch Observability Admin adds support for multi-region telemetry evaluation and telemetry enablement rules.

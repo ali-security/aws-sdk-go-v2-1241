@@ -1,3 +1,29 @@
+# Release (2026-04-17)
+
+## General Highlights
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.43.0](service/cleanrooms/CHANGELOG.md#v1430-2026-04-17)
+  * **Feature**: This release adds support for configurable spark properties for Cleanrooms PySpark workloads.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.171.0](service/connect/CHANGELOG.md#v11710-2026-04-17)
+  * **Feature**: Fixes in SDK for customers using TestCase APIs
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.12.0](service/connectcampaignsv2/CHANGELOG.md#v1120-2026-04-17)
+  * **Feature**: This release adds support for campaign entry limits configuration and hourly refresh frequency in Amazon Connect Outbound Campaigns.
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.41.0](service/groundstation/CHANGELOG.md#v1410-2026-04-17)
+  * **Feature**: Adds support for updating contacts, listing antennas, and listing ground station reservations. New API operations - UpdateContact, ListContactVersions, DescribeContactVersion, ListAntennas, and ListGroundStationReservations.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.53.0](service/imagebuilder/CHANGELOG.md#v1530-2026-04-17)
+  * **Feature**: ImportDiskImage API adds registerImageOptions for Secure Boot control and custom UEFI data. It adds windowsConfiguration for selecting a specific edition from multi-image .wim files during ISO import.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.44.4](service/neptune/CHANGELOG.md#v1444-2026-04-17)
+  * **Documentation**: Improving Documentation for Neptune
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.107.0](service/quicksight/CHANGELOG.md#v11070-2026-04-17)
+  * **Feature**: Public release of dashboard customization summary, S3 Tables data source type, Athena cross-account connector, custom sorting for controls, and AI-powered analysis generation.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.241.0](service/sagemaker/CHANGELOG.md#v12410-2026-04-17)
+  * **Feature**: Adds support for providing NetworkInterface for efa enabled instances and Simplified cluster creation for Slurm-orchestrated clusters with optional Lifecycle Script (LCS) configuration.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.42.0](service/sts/CHANGELOG.md#v1420-2026-04-17)
+  * **Feature**: The STS client now supports configuring SigV4a through the auth scheme preference setting. SigV4a uses asymmetric cryptography, enabling customers using long-term IAM credentials to continue making STS API calls even when a region is isolated from the partition leader.
+
 # Release (2026-04-16)
 
 ## General Highlights

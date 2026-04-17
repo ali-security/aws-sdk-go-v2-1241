@@ -1,8 +1,0 @@
-{
-    "id": "c3c5eb0f-5b0b-469b-b548-6083bc2c15d9",
-    "type": "feature",
-    "description": "This release adds support for campaign entry limits configuration and hourly refresh frequency in Amazon Connect Outbound Campaigns.",
-    "modules": [
-        "service/connectcampaignsv2"
-    ]
-}
