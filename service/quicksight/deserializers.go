@@ -54543,6 +54543,15 @@ func awsRestjson1_deserializeDocumentAthenaParameters(v **types.AthenaParameters
 
 	for key, value := range shape {
 		switch key {
+		case "ConsumerAccountRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.ConsumerAccountRoleArn = ptr.String(jtv)
+			}
+
 		case "IdentityCenterConfiguration":
 			if err := awsRestjson1_deserializeDocumentIdentityCenterConfiguration(&sv.IdentityCenterConfiguration, value); err != nil {
 				return err
@@ -58737,6 +58746,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.Flow = types.CapabilityState(jtv)
+			}
+
+		case "GenerateAnalyses":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.GenerateAnalyses = types.CapabilityState(jtv)
 			}
 
 		case "GenericHTTPAction":
@@ -63718,6 +63736,81 @@ func awsRestjson1_deserializeDocumentContributorDimensionList(v *[]types.ColumnI
 		var col types.ColumnIdentifier
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentColumnIdentifier(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentControlSortConfiguration(v **types.ControlSortConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ControlSortConfiguration
+	if *v == nil {
+		sv = &types.ControlSortConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ControlColumnSort":
+			if err := awsRestjson1_deserializeDocumentAggregationSortConfiguration(&sv.ControlColumnSort, value); err != nil {
+				return err
+			}
+
+		case "SelectableValuesSort":
+			if err := awsRestjson1_deserializeDocumentSelectableValuesSort(&sv.SelectableValuesSort, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentControlSortConfigurationList(v *[]types.ControlSortConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ControlSortConfiguration
+	if *v == nil {
+		cv = []types.ControlSortConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ControlSortConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentControlSortConfiguration(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -69410,6 +69503,16 @@ loop:
 			uv = &types.DataSourceParametersMemberS3Parameters{Value: mv}
 			break loop
 
+		case "S3TablesParameters":
+			var mv types.S3TablesParameters
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3TablesParameters(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataSourceParametersMemberS3TablesParameters{Value: mv}
+			break loop
+
 		case "ServiceNowParameters":
 			var mv types.ServiceNowParameters
 			destAddr := &mv
@@ -71349,6 +71452,11 @@ func awsRestjson1_deserializeDocumentDefaultFilterDropDownControlOptions(v **typ
 				sv.CommitMode = types.CommitMode(jtv)
 			}
 
+		case "ControlSortConfigurations":
+			if err := awsRestjson1_deserializeDocumentControlSortConfigurationList(&sv.ControlSortConfigurations, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentDropDownControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -71399,6 +71507,11 @@ func awsRestjson1_deserializeDocumentDefaultFilterListControlOptions(v **types.D
 
 	for key, value := range shape {
 		switch key {
+		case "ControlSortConfigurations":
+			if err := awsRestjson1_deserializeDocumentControlSortConfigurationList(&sv.ControlSortConfigurations, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentListControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -74873,6 +74986,11 @@ func awsRestjson1_deserializeDocumentFilterDropDownControl(v **types.FilterDropD
 				sv.CommitMode = types.CommitMode(jtv)
 			}
 
+		case "ControlSortConfigurations":
+			if err := awsRestjson1_deserializeDocumentControlSortConfigurationList(&sv.ControlSortConfigurations, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentDropDownControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -75187,6 +75305,11 @@ func awsRestjson1_deserializeDocumentFilterListControl(v **types.FilterListContr
 		switch key {
 		case "CascadingControlConfiguration":
 			if err := awsRestjson1_deserializeDocumentCascadingControlConfiguration(&sv.CascadingControlConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ControlSortConfigurations":
+			if err := awsRestjson1_deserializeDocumentControlSortConfigurationList(&sv.ControlSortConfigurations, value); err != nil {
 				return err
 			}
 
@@ -91557,6 +91680,11 @@ func awsRestjson1_deserializeDocumentParameterDropDownControl(v **types.Paramete
 				sv.CommitMode = types.CommitMode(jtv)
 			}
 
+		case "ControlSortConfigurations":
+			if err := awsRestjson1_deserializeDocumentControlSortConfigurationList(&sv.ControlSortConfigurations, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentDropDownControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -91636,6 +91764,11 @@ func awsRestjson1_deserializeDocumentParameterListControl(v **types.ParameterLis
 		switch key {
 		case "CascadingControlConfiguration":
 			if err := awsRestjson1_deserializeDocumentCascadingControlConfiguration(&sv.CascadingControlConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ControlSortConfigurations":
+			if err := awsRestjson1_deserializeDocumentControlSortConfigurationList(&sv.ControlSortConfigurations, value); err != nil {
 				return err
 			}
 
@@ -99784,6 +99917,46 @@ func awsRestjson1_deserializeDocumentS3Source(v **types.S3Source, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentS3TablesParameters(v **types.S3TablesParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3TablesParameters
+	if *v == nil {
+		sv = &types.S3TablesParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TableBucketArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3TableBucketArn to be of type string, got %T instead", value)
+				}
+				sv.TableBucketArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSaaSTable(v **types.SaaSTable, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -100941,6 +101114,46 @@ func awsRestjson1_deserializeDocumentSecurityGroupIdList(v *[]string, value inte
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSelectableValuesSort(v **types.SelectableValuesSort, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SelectableValuesSort
+	if *v == nil {
+		sv = &types.SelectableValuesSort{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Direction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlSortDirection to be of type string, got %T instead", value)
+				}
+				sv.Direction = types.ControlSortDirection(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

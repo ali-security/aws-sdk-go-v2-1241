@@ -63,12 +63,12 @@ type FailoverGlobalClusterInput struct {
 	// If you don't specify AllowDataLoss , the global database cluster operation
 	// defaults to a switchover.
 	//
-	// Constraints:Can't be specified together with the Switchover parameter.
+	// Constraints: Can't be specified together with the Switchover parameter.
 	AllowDataLoss *bool
 
 	// Specifies whether to switch over this global database cluster.
 	//
-	// Constraints:Can't be specified together with the AllowDataLoss parameter.
+	// Constraints: Can't be specified together with the AllowDataLoss parameter.
 	Switchover *bool
 
 	noSmithyDocumentSerde

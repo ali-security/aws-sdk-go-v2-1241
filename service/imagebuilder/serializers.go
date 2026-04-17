@@ -3588,6 +3588,13 @@ func awsRestjson1_serializeOpDocumentImportDiskImageInput(v *ImportDiskImageInpu
 		ok.String(*v.Platform)
 	}
 
+	if v.RegisterImageOptions != nil {
+		ok := object.Key("registerImageOptions")
+		if err := awsRestjson1_serializeDocumentRegisterImageOptions(v.RegisterImageOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SemanticVersion != nil {
 		ok := object.Key("semanticVersion")
 		ok.String(*v.SemanticVersion)
@@ -3603,6 +3610,13 @@ func awsRestjson1_serializeOpDocumentImportDiskImageInput(v *ImportDiskImageInpu
 	if v.Uri != nil {
 		ok := object.Key("uri")
 		ok.String(*v.Uri)
+	}
+
+	if v.WindowsConfiguration != nil {
+		ok := object.Key("windowsConfiguration")
+		if err := awsRestjson1_serializeDocumentWindowsConfiguration(v.WindowsConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -8291,6 +8305,23 @@ func awsRestjson1_serializeDocumentPlacement(v *types.Placement, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRegisterImageOptions(v *types.RegisterImageOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecureBootEnabled != nil {
+		ok := object.Key("secureBootEnabled")
+		ok.Boolean(*v.SecureBootEnabled)
+	}
+
+	if v.UefiData != nil {
+		ok := object.Key("uefiData")
+		ok.String(*v.UefiData)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentResourceState(v *types.ResourceState, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8515,6 +8546,18 @@ func awsRestjson1_serializeDocumentTargetContainerRepository(v *types.TargetCont
 	if len(v.Service) > 0 {
 		ok := object.Key("service")
 		ok.String(string(v.Service))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWindowsConfiguration(v *types.WindowsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImageIndex != nil {
+		ok := object.Key("imageIndex")
+		ok.Long(*v.ImageIndex)
 	}
 
 	return nil

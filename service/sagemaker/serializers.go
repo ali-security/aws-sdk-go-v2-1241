@@ -25535,6 +25535,13 @@ func awsAwsjson11_serializeDocumentClusterInstanceGroupSpecification(v *types.Cl
 		ok.Integer(*v.MinInstanceCount)
 	}
 
+	if v.NetworkInterface != nil {
+		ok := object.Key("NetworkInterface")
+		if err := awsAwsjson11_serializeDocumentClusterNetworkInterface(v.NetworkInterface, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OnStartDeepHealthChecks != nil {
 		ok := object.Key("OnStartDeepHealthChecks")
 		if err := awsAwsjson11_serializeDocumentOnStartDeepHealthChecks(v.OnStartDeepHealthChecks, ok); err != nil {
@@ -25747,9 +25754,26 @@ func awsAwsjson11_serializeDocumentClusterLifeCycleConfig(v *types.ClusterLifeCy
 		ok.String(*v.OnCreate)
 	}
 
+	if v.OnInitComplete != nil {
+		ok := object.Key("OnInitComplete")
+		ok.String(*v.OnInitComplete)
+	}
+
 	if v.SourceS3Uri != nil {
 		ok := object.Key("SourceS3Uri")
 		ok.String(*v.SourceS3Uri)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterNetworkInterface(v *types.ClusterNetworkInterface, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.InterfaceType) > 0 {
+		ok := object.Key("InterfaceType")
+		ok.String(string(v.InterfaceType))
 	}
 
 	return nil

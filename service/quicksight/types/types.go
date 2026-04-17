@@ -1909,6 +1909,13 @@ type AssetOptions struct {
 // Parameters for Amazon Athena.
 type AthenaParameters struct {
 
+	// Use ConsumerAccountRoleArn to perform cross-account Athena access. This is an
+	// IAM role ARN in the same AWS account as the Athena resources you want to access.
+	// Provide this along with RoleArn to enable role-chaining, where Amazon Quick
+	// Sight first assumes the RoleArn and then assumes the ConsumerAccountRoleArn to
+	// access Athena resources.
+	ConsumerAccountRoleArn *string
+
 	// An optional parameter that configures IAM Identity Center authentication to
 	// grant Quick Sight access to your workgroup.
 	//
@@ -3335,6 +3342,9 @@ type Capabilities struct {
 
 	// The ability to perform flow-related actions.
 	Flow CapabilityState
+
+	// The ability to generate analysis using AI
+	GenerateAnalyses CapabilityState
 
 	// The ability to perform actions using REST API connection connectors.
 	GenericHTTPAction CapabilityState
@@ -4827,6 +4837,22 @@ type ContributionAnalysisTimeRanges struct {
 	noSmithyDocumentSerde
 }
 
+// The sort configuration for control values. This is a tagged union type. Specify
+// either SelectableValuesSort or ControlColumnSort , but not both.
+type ControlSortConfiguration struct {
+
+	// The sort configuration for controls that are tied to a dataset column. Use this
+	// option to sort control values by an aggregate of a column.
+	ControlColumnSort *AggregationSortConfiguration
+
+	// The sort configuration for user-specified values in the control. Use this
+	// option to sort values that are manually entered by users in a dropdown or list
+	// control.
+	SelectableValuesSort *SelectableValuesSort
+
+	noSmithyDocumentSerde
+}
+
 // The preference coordinate for the geocode preference.
 type Coordinate struct {
 
@@ -5295,6 +5321,19 @@ type Dashboard struct {
 
 	// Version.
 	Version *DashboardVersion
+
+	noSmithyDocumentSerde
+}
+
+// The dashboard customization summary configuration for an embedded Quick Sight
+// dashboard.
+type DashboardCustomizationSummaryConfigurations struct {
+
+	// The enabled status of the dashboard customization summary configuration for an
+	// embedded Quick Sight dashboard.
+	//
+	// This member is required.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -6744,6 +6783,7 @@ type DataSourceErrorInfo struct {
 //	DataSourceParametersMemberRedshiftParameters
 //	DataSourceParametersMemberS3KnowledgeBaseParameters
 //	DataSourceParametersMemberS3Parameters
+//	DataSourceParametersMemberS3TablesParameters
 //	DataSourceParametersMemberServiceNowParameters
 //	DataSourceParametersMemberSnowflakeParameters
 //	DataSourceParametersMemberSparkParameters
@@ -6963,6 +7003,15 @@ type DataSourceParametersMemberS3Parameters struct {
 }
 
 func (*DataSourceParametersMemberS3Parameters) isDataSourceParameters() {}
+
+// The parameters for S3 Tables.
+type DataSourceParametersMemberS3TablesParameters struct {
+	Value S3TablesParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberS3TablesParameters) isDataSourceParameters() {}
 
 // The parameters for ServiceNow.
 type DataSourceParametersMemberServiceNowParameters struct {
@@ -7657,6 +7706,10 @@ type DefaultFilterDropDownControlOptions struct {
 	// The visibility configuration of the Apply button on a FilterDropDownControl .
 	CommitMode CommitMode
 
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
 	// The display options of a control.
 	DisplayOptions *DropDownControlDisplayOptions
 
@@ -7675,6 +7728,10 @@ type DefaultFilterDropDownControlOptions struct {
 
 // The default options that correspond to the List filter control type.
 type DefaultFilterListControlOptions struct {
+
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
 
 	// The display options of a control.
 	DisplayOptions *ListControlDisplayOptions
@@ -8688,6 +8745,10 @@ type FilterDropDownControl struct {
 	// The visibility configuration of the Apply button on a FilterDropDownControl .
 	CommitMode CommitMode
 
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
 	// The display options of the FilterDropDownControl .
 	DisplayOptions *DropDownControlDisplayOptions
 
@@ -8797,6 +8858,10 @@ type FilterListControl struct {
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
+
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
 
 	// The display options of a control.
 	DisplayOptions *ListControlDisplayOptions
@@ -13577,6 +13642,10 @@ type ParameterDropDownControl struct {
 	// The visibility configuration of the Apply button on a ParameterDropDownControl .
 	CommitMode CommitMode
 
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
 	// The display options of a control.
 	DisplayOptions *DropDownControlDisplayOptions
 
@@ -13611,6 +13680,10 @@ type ParameterListControl struct {
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
+
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
 
 	// The display options of a control.
 	DisplayOptions *ListControlDisplayOptions
@@ -15702,6 +15775,10 @@ type RegisteredUserConsoleFeatureConfigurations struct {
 	// The Amazon Q configurations of an embedded Amazon Quick Sight console.
 	AmazonQInQuickSight *AmazonQInQuickSightConsoleConfigurations
 
+	// The dashboard customization summary configuration for an embedded Quick Sight
+	// console.
+	DashboardCustomizationSummary *DashboardCustomizationSummaryConfigurations
+
 	// The recent snapshots configuration for an embedded Quick Sight dashboard.
 	RecentSnapshots *RecentSnapshotsConfigurations
 
@@ -15747,6 +15824,10 @@ type RegisteredUserDashboardFeatureConfigurations struct {
 
 	// The bookmarks configuration for an embedded dashboard in Amazon Quick Sight.
 	Bookmarks *BookmarksConfigurations
+
+	// The dashboard customization summary configuration for an embedded Quick Sight
+	// dashboard.
+	DashboardCustomizationSummary *DashboardCustomizationSummaryConfigurations
 
 	// The recent snapshots configuration for an Quick Sight embedded dashboard
 	RecentSnapshots *RecentSnapshotsConfigurations
@@ -16352,6 +16433,15 @@ type S3Source struct {
 	noSmithyDocumentSerde
 }
 
+// The parameters for S3 Tables.
+type S3TablesParameters struct {
+
+	// The Amazon Resource Name (ARN) of the S3 Tables bucket.
+	TableBucketArn *string
+
+	noSmithyDocumentSerde
+}
+
 // A table from a Software-as-a-Service (SaaS) data source, including connection
 // details and column definitions.
 type SaaSTable struct {
@@ -16827,6 +16917,24 @@ type SectionStyle struct {
 	//
 	// There is no padding by default.
 	Padding *Spacing
+
+	noSmithyDocumentSerde
+}
+
+// The sort configuration for selectable values in a control.
+type SelectableValuesSort struct {
+
+	// The sort direction for the selectable values. Choose one of the following
+	// options:
+	//
+	//   - ASC : Sort in ascending order.
+	//
+	//   - DESC : Sort in descending order.
+	//
+	//   - USER_DEFINED_ORDER : Preserve the order in which the values were entered.
+	//
+	// This member is required.
+	Direction ControlSortDirection
 
 	noSmithyDocumentSerde
 }

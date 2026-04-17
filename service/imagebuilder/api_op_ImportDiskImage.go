@@ -85,8 +85,14 @@ type ImportDiskImageInput struct {
 	// Define logging configuration for the image build process.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
+	// Configures Secure Boot and UEFI settings for the imported image.
+	RegisterImageOptions *types.RegisterImageOptions
+
 	// Tags that are attached to image resources created from the import.
 	Tags map[string]string
+
+	// Specifies Windows settings for ISO imports.
+	WindowsConfiguration *types.WindowsConfiguration
 
 	noSmithyDocumentSerde
 }

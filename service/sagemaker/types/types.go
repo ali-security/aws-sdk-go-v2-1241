@@ -4082,6 +4082,9 @@ type ClusterInstanceGroupDetails struct {
 	// a SageMaker HyperPod cluster before it transitions to InService status.
 	MinCount *int32
 
+	// The network interface configuration for the instance group.
+	NetworkInterface *ClusterNetworkInterfaceDetails
+
 	// A flag indicating whether deep health checks should be performed when the
 	// cluster instance group is created or updated.
 	OnStartDeepHealthChecks []DeepHealthCheckType
@@ -4247,6 +4250,9 @@ type ClusterInstanceGroupSpecification struct {
 	// affects the initial transition to InService and does not guarantee maintaining
 	// this minimum afterward.
 	MinInstanceCount *int32
+
+	// The network interface configuration for the instance group.
+	NetworkInterface *ClusterNetworkInterface
 
 	// A flag indicating whether deep health checks should be performed when the
 	// cluster instance group is created or updated.
@@ -4511,6 +4517,10 @@ type ClusterLifeCycleConfig struct {
 	// This entrypoint script runs during cluster creation.
 	OnCreate *string
 
+	// The file name of the entrypoint script of lifecycle scripts under SourceS3Uri .
+	// This script runs on the node after the AMI-based initialization is complete.
+	OnInitComplete *string
+
 	// An Amazon S3 bucket path where your lifecycle scripts are stored.
 	//
 	// Make sure that the S3 bucket path starts with s3://sagemaker- . The [IAM role for SageMaker HyperPod] has the
@@ -4539,6 +4549,37 @@ type ClusterMetadata struct {
 	// The Service-Linked Role (SLR) associated with the cluster. This is created by
 	// HyperPod on your behalf and only applies for EKS orchestrated clusters.
 	SlrAccessEntry *string
+
+	noSmithyDocumentSerde
+}
+
+// The network interface configuration for a Amazon SageMaker HyperPod cluster
+// instance group.
+type ClusterNetworkInterface struct {
+
+	// The type of network interface for the instance group. Valid values:
+	//
+	//   - efa – An EFA with ENA interface, which provides both the EFA device for
+	//   low-latency, high-throughput communication and the ENA device for IP networking.
+	//
+	//   - efa-only – An EFA-only interface, which provides only the EFA device
+	//   capabilities without the ENA device for traditional IP networking.
+	//
+	// For more information, see [Elastic Fabric Adapter].
+	//
+	// [Elastic Fabric Adapter]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
+	InterfaceType ClusterInterfaceType
+
+	noSmithyDocumentSerde
+}
+
+// The network interface configuration details for a Amazon SageMaker HyperPod
+// cluster instance group.
+type ClusterNetworkInterfaceDetails struct {
+
+	// The type of network interface for the instance group. Valid values are efa and
+	// efa-only .
+	InterfaceType ClusterInterfaceType
 
 	noSmithyDocumentSerde
 }
@@ -4587,6 +4628,9 @@ type ClusterNodeDetails struct {
 
 	// The LifeCycle configuration applied to the instance.
 	LifeCycleConfig *ClusterLifeCycleConfig
+
+	// The network interface configuration for the cluster node.
+	NetworkInterface *ClusterNetworkInterfaceDetails
 
 	// A unique identifier for the node that persists throughout its lifecycle, from
 	// provisioning request to termination. This identifier can be used to track the

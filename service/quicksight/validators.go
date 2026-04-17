@@ -9572,6 +9572,45 @@ func validateContributorDimensionList(v []types.ColumnIdentifier) error {
 	}
 }
 
+func validateControlSortConfiguration(v *types.ControlSortConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ControlSortConfiguration"}
+	if v.SelectableValuesSort != nil {
+		if err := validateSelectableValuesSort(v.SelectableValuesSort); err != nil {
+			invalidParams.AddNested("SelectableValuesSort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ControlColumnSort != nil {
+		if err := validateAggregationSortConfiguration(v.ControlColumnSort); err != nil {
+			invalidParams.AddNested("ControlColumnSort", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateControlSortConfigurationList(v []types.ControlSortConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ControlSortConfigurationList"}
+	for i := range v {
+		if err := validateControlSortConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCoordinate(v *types.Coordinate) error {
 	if v == nil {
 		return nil
@@ -9960,6 +9999,18 @@ func validateCustomValuesConfiguration(v *types.CustomValuesConfiguration) error
 	if v.CustomValues == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomValues"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDashboardCustomizationSummaryConfigurations(v *types.DashboardCustomizationSummaryConfigurations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DashboardCustomizationSummaryConfigurations"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -11351,9 +11402,53 @@ func validateDefaultFilterControlOptions(v *types.DefaultFilterControlOptions) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DefaultFilterControlOptions"}
+	if v.DefaultListOptions != nil {
+		if err := validateDefaultFilterListControlOptions(v.DefaultListOptions); err != nil {
+			invalidParams.AddNested("DefaultListOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DefaultDropdownOptions != nil {
+		if err := validateDefaultFilterDropDownControlOptions(v.DefaultDropdownOptions); err != nil {
+			invalidParams.AddNested("DefaultDropdownOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.DefaultSliderOptions != nil {
 		if err := validateDefaultSliderControlOptions(v.DefaultSliderOptions); err != nil {
 			invalidParams.AddNested("DefaultSliderOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDefaultFilterDropDownControlOptions(v *types.DefaultFilterDropDownControlOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DefaultFilterDropDownControlOptions"}
+	if v.ControlSortConfigurations != nil {
+		if err := validateControlSortConfigurationList(v.ControlSortConfigurations); err != nil {
+			invalidParams.AddNested("ControlSortConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDefaultFilterListControlOptions(v *types.DefaultFilterListControlOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DefaultFilterListControlOptions"}
+	if v.ControlSortConfigurations != nil {
+		if err := validateControlSortConfigurationList(v.ControlSortConfigurations); err != nil {
+			invalidParams.AddNested("ControlSortConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -12390,6 +12485,11 @@ func validateFilterDropDownControl(v *types.FilterDropDownControl) error {
 			invalidParams.AddNested("CascadingControlConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ControlSortConfigurations != nil {
+		if err := validateControlSortConfigurationList(v.ControlSortConfigurations); err != nil {
+			invalidParams.AddNested("ControlSortConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -12495,6 +12595,11 @@ func validateFilterListControl(v *types.FilterListControl) error {
 	if v.CascadingControlConfiguration != nil {
 		if err := validateCascadingControlConfiguration(v.CascadingControlConfiguration); err != nil {
 			invalidParams.AddNested("CascadingControlConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ControlSortConfigurations != nil {
+		if err := validateControlSortConfigurationList(v.ControlSortConfigurations); err != nil {
+			invalidParams.AddNested("ControlSortConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -16882,6 +16987,11 @@ func validateParameterDropDownControl(v *types.ParameterDropDownControl) error {
 			invalidParams.AddNested("CascadingControlConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ControlSortConfigurations != nil {
+		if err := validateControlSortConfigurationList(v.ControlSortConfigurations); err != nil {
+			invalidParams.AddNested("ControlSortConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -16911,6 +17021,11 @@ func validateParameterListControl(v *types.ParameterListControl) error {
 	if v.CascadingControlConfiguration != nil {
 		if err := validateCascadingControlConfiguration(v.CascadingControlConfiguration); err != nil {
 			invalidParams.AddNested("CascadingControlConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ControlSortConfigurations != nil {
+		if err := validateControlSortConfigurationList(v.ControlSortConfigurations); err != nil {
+			invalidParams.AddNested("ControlSortConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -18672,6 +18787,11 @@ func validateRegisteredUserConsoleFeatureConfigurations(v *types.RegisteredUserC
 			invalidParams.AddNested("ThresholdAlerts", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DashboardCustomizationSummary != nil {
+		if err := validateDashboardCustomizationSummaryConfigurations(v.DashboardCustomizationSummary); err != nil {
+			invalidParams.AddNested("DashboardCustomizationSummary", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -18737,6 +18857,11 @@ func validateRegisteredUserDashboardFeatureConfigurations(v *types.RegisteredUse
 	if v.ThresholdAlerts != nil {
 		if err := validateThresholdAlertsConfigurations(v.ThresholdAlerts); err != nil {
 			invalidParams.AddNested("ThresholdAlerts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DashboardCustomizationSummary != nil {
+		if err := validateDashboardCustomizationSummaryConfigurations(v.DashboardCustomizationSummary); err != nil {
+			invalidParams.AddNested("DashboardCustomizationSummary", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -19573,6 +19698,21 @@ func validateSectionLayoutConfiguration(v *types.SectionLayoutConfiguration) err
 		if err := validateFreeFormSectionLayoutConfiguration(v.FreeFormLayout); err != nil {
 			invalidParams.AddNested("FreeFormLayout", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSelectableValuesSort(v *types.SelectableValuesSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SelectableValuesSort"}
+	if len(v.Direction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Direction"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

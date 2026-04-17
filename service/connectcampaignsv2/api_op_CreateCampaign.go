@@ -53,6 +53,9 @@ type CreateCampaignInput struct {
 	// Amazon Resource Names(ARN)
 	ConnectCampaignFlowArn *string
 
+	// Campaign entry limits config
+	EntryLimitsConfig *types.EntryLimitsConfig
+
 	// Campaign schedule
 	Schedule *types.Schedule
 

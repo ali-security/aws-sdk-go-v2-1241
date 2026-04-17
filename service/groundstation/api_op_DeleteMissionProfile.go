@@ -26,6 +26,7 @@ func (c *Client) DeleteMissionProfile(ctx context.Context, params *DeleteMission
 	return out, nil
 }
 
+// Input for the DeleteMissionProfile operation.
 type DeleteMissionProfileInput struct {
 
 	// UUID of a mission profile.
@@ -36,6 +37,7 @@ type DeleteMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response containing the ID of a mission profile.
 type DeleteMissionProfileOutput struct {
 
 	// UUID of a mission profile.

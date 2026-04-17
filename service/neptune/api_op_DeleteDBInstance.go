@@ -57,7 +57,7 @@ type DeleteDBInstanceInput struct {
 	//  The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot
 	// is set to false .
 	//
-	// Specifying this parameter and also setting the SkipFinalShapshot parameter to
+	// Specifying this parameter and also setting the SkipFinalSnapshot parameter to
 	// true results in an error.
 	//
 	// Constraints:

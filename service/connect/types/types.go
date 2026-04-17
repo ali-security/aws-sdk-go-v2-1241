@@ -10132,7 +10132,8 @@ type TestCase struct {
 	// The identifier of the test case.
 	Id *string
 
-	// Defines the test attributes for precise data representation.
+	// Defines the test attributes for precise data representation. The value must be
+	// a valid JSON string.
 	InitializationData *string
 
 	// The region in which the test case was last modified.

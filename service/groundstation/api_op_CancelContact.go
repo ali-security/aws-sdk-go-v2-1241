@@ -35,6 +35,7 @@ func (c *Client) CancelContact(ctx context.Context, params *CancelContactInput, 
 	return out, nil
 }
 
+// Input for the CancelContact operation.
 type CancelContactInput struct {
 
 	// UUID of a contact.
@@ -45,10 +46,14 @@ type CancelContactInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response containing the ID of a contact.
 type CancelContactOutput struct {
 
 	// UUID of a contact.
 	ContactId *string
+
+	// Version ID of a contact.
+	VersionId *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

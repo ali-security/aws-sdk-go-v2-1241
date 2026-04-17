@@ -50080,6 +50080,11 @@ func awsAwsjson11_deserializeDocumentClusterInstanceGroupDetails(v **types.Clust
 				sv.MinCount = ptr.Int32(int32(i64))
 			}
 
+		case "NetworkInterface":
+			if err := awsAwsjson11_deserializeDocumentClusterNetworkInterfaceDetails(&sv.NetworkInterface, value); err != nil {
+				return err
+			}
+
 		case "OnStartDeepHealthChecks":
 			if err := awsAwsjson11_deserializeDocumentOnStartDeepHealthChecks(&sv.OnStartDeepHealthChecks, value); err != nil {
 				return err
@@ -50846,6 +50851,15 @@ func awsAwsjson11_deserializeDocumentClusterLifeCycleConfig(v **types.ClusterLif
 				sv.OnCreate = ptr.String(jtv)
 			}
 
+		case "OnInitComplete":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterLifeCycleConfigFileName to be of type string, got %T instead", value)
+				}
+				sv.OnInitComplete = ptr.String(jtv)
+			}
+
 		case "SourceS3Uri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -50907,6 +50921,46 @@ func awsAwsjson11_deserializeDocumentClusterMetadata(v **types.ClusterMetadata, 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.SlrAccessEntry = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterNetworkInterfaceDetails(v **types.ClusterNetworkInterfaceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterNetworkInterfaceDetails
+	if *v == nil {
+		sv = &types.ClusterNetworkInterfaceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InterfaceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterInterfaceType to be of type string, got %T instead", value)
+				}
+				sv.InterfaceType = types.ClusterInterfaceType(jtv)
 			}
 
 		default:
@@ -51043,6 +51097,11 @@ func awsAwsjson11_deserializeDocumentClusterNodeDetails(v **types.ClusterNodeDet
 
 		case "LifeCycleConfig":
 			if err := awsAwsjson11_deserializeDocumentClusterLifeCycleConfig(&sv.LifeCycleConfig, value); err != nil {
+				return err
+			}
+
+		case "NetworkInterface":
+			if err := awsAwsjson11_deserializeDocumentClusterNetworkInterfaceDetails(&sv.NetworkInterface, value); err != nil {
 				return err
 			}
 

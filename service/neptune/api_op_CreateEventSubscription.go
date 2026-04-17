@@ -60,7 +60,7 @@ type CreateEventSubscriptionInput struct {
 	SubscriptionName *string
 
 	//  A Boolean value; set to true to activate the subscription, set to false to
-	// create the subscription but not active it.
+	// create the subscription but not activate it.
 	Enabled *bool
 
 	//  A list of event categories for a SourceType that you want to subscribe to. You

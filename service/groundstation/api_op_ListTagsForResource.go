@@ -26,6 +26,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 	return out, nil
 }
 
+// Input for the ListTagsForResource operation.
 type ListTagsForResourceInput struct {
 
 	// ARN of a resource.
@@ -36,6 +37,7 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the ListTagsForResource operation.
 type ListTagsForResourceOutput struct {
 
 	// Tags assigned to a resource.

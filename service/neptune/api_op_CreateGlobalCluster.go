@@ -42,7 +42,7 @@ type CreateGlobalClusterInput struct {
 	// This member is required.
 	GlobalClusterIdentifier *string
 
-	// The name for the new global database (up to 64 alpha-numeric characters.
+	// The name for the new global database (up to 64 alpha-numeric characters).
 	DatabaseName *string
 
 	// The deletion protection setting for the new global database. The global

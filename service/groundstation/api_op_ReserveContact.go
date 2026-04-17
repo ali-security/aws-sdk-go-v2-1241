@@ -28,6 +28,7 @@ func (c *Client) ReserveContact(ctx context.Context, params *ReserveContactInput
 	return out, nil
 }
 
+// Input for the ReserveContact operation.
 type ReserveContactInput struct {
 
 	// End time of a contact in UTC.
@@ -62,10 +63,14 @@ type ReserveContactInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response containing the ID of a contact.
 type ReserveContactOutput struct {
 
 	// UUID of a contact.
 	ContactId *string
+
+	// Version ID of a contact.
+	VersionId *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

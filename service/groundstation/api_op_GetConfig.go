@@ -29,6 +29,7 @@ func (c *Client) GetConfig(ctx context.Context, params *GetConfigInput, optFns .
 	return out, nil
 }
 
+// Input for the GetConfig operation.
 type GetConfigInput struct {
 
 	// UUID of a Config .
@@ -44,6 +45,7 @@ type GetConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the GetConfig operation.
 type GetConfigOutput struct {
 
 	// ARN of a Config

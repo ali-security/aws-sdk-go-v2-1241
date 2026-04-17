@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
 // Lists all test case executions and allows filtering by test case id, test case
@@ -38,7 +37,7 @@ type ListTestCaseExecutionsInput struct {
 	InstanceId *string
 
 	// Filter executions that started before this time.
-	EndTime *time.Time
+	EndTime *int64
 
 	// The maximum number of results to return per page.
 	MaxResults *int32
@@ -48,7 +47,7 @@ type ListTestCaseExecutionsInput struct {
 	NextToken *string
 
 	// Filter executions that started after this time.
-	StartTime *time.Time
+	StartTime *int64
 
 	// Filter executions by status.
 	Status types.TestCaseExecutionStatus

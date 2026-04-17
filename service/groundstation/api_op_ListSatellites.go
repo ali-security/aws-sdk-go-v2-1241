@@ -27,6 +27,7 @@ func (c *Client) ListSatellites(ctx context.Context, params *ListSatellitesInput
 	return out, nil
 }
 
+// Input for the ListSatellites operation.
 type ListSatellitesInput struct {
 
 	// Maximum number of satellites returned.
@@ -39,6 +40,7 @@ type ListSatellitesInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the ListSatellites operation.
 type ListSatellitesOutput struct {
 
 	// Next token that can be supplied in the next call to get the next page of

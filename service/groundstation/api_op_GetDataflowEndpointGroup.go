@@ -27,6 +27,7 @@ func (c *Client) GetDataflowEndpointGroup(ctx context.Context, params *GetDatafl
 	return out, nil
 }
 
+// Input for the GetDataflowEndpointGroup operation.
 type GetDataflowEndpointGroupInput struct {
 
 	// UUID of a dataflow endpoint group.
@@ -37,6 +38,7 @@ type GetDataflowEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the GetDataflowEndpointGroup operation.
 type GetDataflowEndpointGroupOutput struct {
 
 	// Amount of time, in seconds, after a contact ends that the Ground Station

@@ -29,6 +29,7 @@ func (c *Client) CreateConfig(ctx context.Context, params *CreateConfigInput, op
 	return out, nil
 }
 
+// Input for the CreateConfig operation.
 type CreateConfigInput struct {
 
 	// Parameters of a Config .
@@ -47,6 +48,7 @@ type CreateConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response containing the ARN, ID, and type of a Config .
 type CreateConfigOutput struct {
 
 	// ARN of a Config .

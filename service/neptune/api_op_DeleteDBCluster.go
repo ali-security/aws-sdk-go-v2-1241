@@ -48,7 +48,7 @@ type DeleteDBClusterInput struct {
 	//  The DB cluster snapshot identifier of the new DB cluster snapshot created when
 	// SkipFinalSnapshot is set to false .
 	//
-	// Specifying this parameter and also setting the SkipFinalShapshot parameter to
+	// Specifying this parameter and also setting the SkipFinalSnapshot parameter to
 	// true results in an error.
 	//
 	// Constraints:

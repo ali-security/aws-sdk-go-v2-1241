@@ -2159,6 +2159,25 @@ func (ClusterInstanceType) Values() []ClusterInstanceType {
 	}
 }
 
+type ClusterInterfaceType string
+
+// Enum values for ClusterInterfaceType
+const (
+	ClusterInterfaceTypeEfa     ClusterInterfaceType = "efa"
+	ClusterInterfaceTypeEfaOnly ClusterInterfaceType = "efa-only"
+)
+
+// Values returns all known values for ClusterInterfaceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterInterfaceType) Values() []ClusterInterfaceType {
+	return []ClusterInterfaceType{
+		"efa",
+		"efa-only",
+	}
+}
+
 type ClusterKubernetesTaintEffect string
 
 // Enum values for ClusterKubernetesTaintEffect

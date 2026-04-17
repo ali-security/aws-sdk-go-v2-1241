@@ -25106,6 +25106,11 @@ func awsRestjson1_serializeDocumentAthenaParameters(v *types.AthenaParameters, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.ConsumerAccountRoleArn != nil {
+		ok := object.Key("ConsumerAccountRoleArn")
+		ok.String(*v.ConsumerAccountRoleArn)
+	}
+
 	if v.IdentityCenterConfiguration != nil {
 		ok := object.Key("IdentityCenterConfiguration")
 		if err := awsRestjson1_serializeDocumentIdentityCenterConfiguration(v.IdentityCenterConfiguration, ok); err != nil {
@@ -27258,6 +27263,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	if len(v.Flow) > 0 {
 		ok := object.Key("Flow")
 		ok.String(string(v.Flow))
+	}
+
+	if len(v.GenerateAnalyses) > 0 {
+		ok := object.Key("GenerateAnalyses")
+		ok.String(string(v.GenerateAnalyses))
 	}
 
 	if len(v.GenericHTTPAction) > 0 {
@@ -29781,6 +29791,40 @@ func awsRestjson1_serializeDocumentContributorDimensionList(v []types.ColumnIden
 	return nil
 }
 
+func awsRestjson1_serializeDocumentControlSortConfiguration(v *types.ControlSortConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ControlColumnSort != nil {
+		ok := object.Key("ControlColumnSort")
+		if err := awsRestjson1_serializeDocumentAggregationSortConfiguration(v.ControlColumnSort, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SelectableValuesSort != nil {
+		ok := object.Key("SelectableValuesSort")
+		if err := awsRestjson1_serializeDocumentSelectableValuesSort(v.SelectableValuesSort, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentControlSortConfigurationList(v []types.ControlSortConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentControlSortConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCoordinate(v *types.Coordinate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -30353,6 +30397,18 @@ func awsRestjson1_serializeDocumentCustomValuesConfiguration(v *types.CustomValu
 	if v.IncludeNullValue != nil {
 		ok := object.Key("IncludeNullValue")
 		ok.Boolean(*v.IncludeNullValue)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDashboardCustomizationSummaryConfigurations(v *types.DashboardCustomizationSummaryConfigurations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
 	}
 
 	return nil
@@ -32084,6 +32140,12 @@ func awsRestjson1_serializeDocumentDataSourceParameters(v types.DataSourceParame
 			return err
 		}
 
+	case *types.DataSourceParametersMemberS3TablesParameters:
+		av := object.Key("S3TablesParameters")
+		if err := awsRestjson1_serializeDocumentS3TablesParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.DataSourceParametersMemberServiceNowParameters:
 		av := object.Key("ServiceNowParameters")
 		if err := awsRestjson1_serializeDocumentServiceNowParameters(&uv.Value, av); err != nil {
@@ -32956,6 +33018,13 @@ func awsRestjson1_serializeDocumentDefaultFilterDropDownControlOptions(v *types.
 		ok.String(string(v.CommitMode))
 	}
 
+	if v.ControlSortConfigurations != nil {
+		ok := object.Key("ControlSortConfigurations")
+		if err := awsRestjson1_serializeDocumentControlSortConfigurationList(v.ControlSortConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
 		if err := awsRestjson1_serializeDocumentDropDownControlDisplayOptions(v.DisplayOptions, ok); err != nil {
@@ -32981,6 +33050,13 @@ func awsRestjson1_serializeDocumentDefaultFilterDropDownControlOptions(v *types.
 func awsRestjson1_serializeDocumentDefaultFilterListControlOptions(v *types.DefaultFilterListControlOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ControlSortConfigurations != nil {
+		ok := object.Key("ControlSortConfigurations")
+		if err := awsRestjson1_serializeDocumentControlSortConfigurationList(v.ControlSortConfigurations, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
@@ -34482,6 +34558,13 @@ func awsRestjson1_serializeDocumentFilterDropDownControl(v *types.FilterDropDown
 		ok.String(string(v.CommitMode))
 	}
 
+	if v.ControlSortConfigurations != nil {
+		ok := object.Key("ControlSortConfigurations")
+		if err := awsRestjson1_serializeDocumentControlSortConfigurationList(v.ControlSortConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
 		if err := awsRestjson1_serializeDocumentDropDownControlDisplayOptions(v.DisplayOptions, ok); err != nil {
@@ -34628,6 +34711,13 @@ func awsRestjson1_serializeDocumentFilterListControl(v *types.FilterListControl,
 	if v.CascadingControlConfiguration != nil {
 		ok := object.Key("CascadingControlConfiguration")
 		if err := awsRestjson1_serializeDocumentCascadingControlConfiguration(v.CascadingControlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ControlSortConfigurations != nil {
+		ok := object.Key("ControlSortConfigurations")
+		if err := awsRestjson1_serializeDocumentControlSortConfigurationList(v.ControlSortConfigurations, ok); err != nil {
 			return err
 		}
 	}
@@ -41626,6 +41716,13 @@ func awsRestjson1_serializeDocumentParameterDropDownControl(v *types.ParameterDr
 		ok.String(string(v.CommitMode))
 	}
 
+	if v.ControlSortConfigurations != nil {
+		ok := object.Key("ControlSortConfigurations")
+		if err := awsRestjson1_serializeDocumentControlSortConfigurationList(v.ControlSortConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
 		if err := awsRestjson1_serializeDocumentDropDownControlDisplayOptions(v.DisplayOptions, ok); err != nil {
@@ -41670,6 +41767,13 @@ func awsRestjson1_serializeDocumentParameterListControl(v *types.ParameterListCo
 	if v.CascadingControlConfiguration != nil {
 		ok := object.Key("CascadingControlConfiguration")
 		if err := awsRestjson1_serializeDocumentCascadingControlConfiguration(v.CascadingControlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ControlSortConfigurations != nil {
+		ok := object.Key("ControlSortConfigurations")
+		if err := awsRestjson1_serializeDocumentControlSortConfigurationList(v.ControlSortConfigurations, ok); err != nil {
 			return err
 		}
 	}
@@ -44463,6 +44567,13 @@ func awsRestjson1_serializeDocumentRegisteredUserConsoleFeatureConfigurations(v 
 		}
 	}
 
+	if v.DashboardCustomizationSummary != nil {
+		ok := object.Key("DashboardCustomizationSummary")
+		if err := awsRestjson1_serializeDocumentDashboardCustomizationSummaryConfigurations(v.DashboardCustomizationSummary, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RecentSnapshots != nil {
 		ok := object.Key("RecentSnapshots")
 		if err := awsRestjson1_serializeDocumentRecentSnapshotsConfigurations(v.RecentSnapshots, ok); err != nil {
@@ -44534,6 +44645,13 @@ func awsRestjson1_serializeDocumentRegisteredUserDashboardFeatureConfigurations(
 	if v.Bookmarks != nil {
 		ok := object.Key("Bookmarks")
 		if err := awsRestjson1_serializeDocumentBookmarksConfigurations(v.Bookmarks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DashboardCustomizationSummary != nil {
+		ok := object.Key("DashboardCustomizationSummary")
+		if err := awsRestjson1_serializeDocumentDashboardCustomizationSummaryConfigurations(v.DashboardCustomizationSummary, ok); err != nil {
 			return err
 		}
 	}
@@ -45202,6 +45320,18 @@ func awsRestjson1_serializeDocumentS3Source(v *types.S3Source, value smithyjson.
 		if err := awsRestjson1_serializeDocumentUploadSettings(v.UploadSettings, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3TablesParameters(v *types.S3TablesParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TableBucketArn != nil {
+		ok := object.Key("TableBucketArn")
+		ok.String(*v.TableBucketArn)
 	}
 
 	return nil
@@ -45892,6 +46022,18 @@ func awsRestjson1_serializeDocumentSecurityGroupIdList(v []string, value smithyj
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSelectableValuesSort(v *types.SelectableValuesSort, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Direction) > 0 {
+		ok := object.Key("Direction")
+		ok.String(string(v.Direction))
+	}
+
 	return nil
 }
 

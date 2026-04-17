@@ -1427,6 +1427,27 @@ func (ContributionAnalysisSortType) Values() []ContributionAnalysisSortType {
 	}
 }
 
+type ControlSortDirection string
+
+// Enum values for ControlSortDirection
+const (
+	ControlSortDirectionAsc              ControlSortDirection = "ASC"
+	ControlSortDirectionDesc             ControlSortDirection = "DESC"
+	ControlSortDirectionUserDefinedOrder ControlSortDirection = "USER_DEFINED_ORDER"
+)
+
+// Values returns all known values for ControlSortDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ControlSortDirection) Values() []ControlSortDirection {
+	return []ControlSortDirection{
+		"ASC",
+		"DESC",
+		"USER_DEFINED_ORDER",
+	}
+}
+
 type CrossDatasetTypes string
 
 // Enum values for CrossDatasetTypes
@@ -1980,6 +2001,7 @@ const (
 	DataSourceTypePresto              DataSourceType = "PRESTO"
 	DataSourceTypeRedshift            DataSourceType = "REDSHIFT"
 	DataSourceTypeS3                  DataSourceType = "S3"
+	DataSourceTypeS3Tables            DataSourceType = "S3_TABLES"
 	DataSourceTypeSalesforce          DataSourceType = "SALESFORCE"
 	DataSourceTypeServicenow          DataSourceType = "SERVICENOW"
 	DataSourceTypeSnowflake           DataSourceType = "SNOWFLAKE"
@@ -2025,6 +2047,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"PRESTO",
 		"REDSHIFT",
 		"S3",
+		"S3_TABLES",
 		"SALESFORCE",
 		"SERVICENOW",
 		"SNOWFLAKE",

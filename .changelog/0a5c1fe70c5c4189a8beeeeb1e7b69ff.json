@@ -1,0 +1,8 @@
+{
+    "id": "0a5c1fe7-0c5c-4189-a8be-eeeb1e7b69ff",
+    "type": "feature",
+    "description": "Adds support for updating contacts, listing antennas, and listing ground station reservations. New API operations - UpdateContact, ListContactVersions, DescribeContactVersion, ListAntennas, and ListGroundStationReservations.",
+    "modules": [
+        "service/groundstation"
+    ]
+}

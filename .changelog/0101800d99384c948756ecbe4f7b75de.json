@@ -1,0 +1,8 @@
+{
+    "id": "0101800d-9938-4c94-8756-ecbe4f7b75de",
+    "type": "feature",
+    "description": "Adds support for providing NetworkInterface for efa enabled instances and Simplified cluster creation for Slurm-orchestrated clusters with optional Lifecycle Script (LCS) configuration.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

@@ -21883,7 +21883,7 @@ func awsRestjson1_serializeOpHttpBindingsListTestCaseExecutionsInput(v *ListTest
 	}
 
 	if v.EndTime != nil {
-		encoder.SetQuery("endTime").String(smithytime.FormatDateTime(*v.EndTime))
+		encoder.SetQuery("endTime").Long(*v.EndTime)
 	}
 
 	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
@@ -21904,7 +21904,7 @@ func awsRestjson1_serializeOpHttpBindingsListTestCaseExecutionsInput(v *ListTest
 	}
 
 	if v.StartTime != nil {
-		encoder.SetQuery("startTime").String(smithytime.FormatDateTime(*v.StartTime))
+		encoder.SetQuery("startTime").Long(*v.StartTime)
 	}
 
 	if len(v.Status) > 0 {

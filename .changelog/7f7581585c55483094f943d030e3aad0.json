@@ -1,0 +1,8 @@
+{
+    "id": "7f758158-5c55-4830-94f9-43d030e3aad0",
+    "type": "feature",
+    "description": "ImportDiskImage API adds registerImageOptions for Secure Boot control and custom UEFI data. It adds windowsConfiguration for selecting a specific edition from multi-image .wim files during ISO import.",
+    "modules": [
+        "service/imagebuilder"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "70ac9b86-c9e4-484b-8069-d93d3a1df7d5",
+    "type": "feature",
+    "description": "Fixes in SDK for customers using TestCase APIs",
+    "modules": [
+        "service/connect"
+    ]
+}

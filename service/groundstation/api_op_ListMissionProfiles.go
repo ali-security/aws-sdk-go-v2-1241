@@ -27,6 +27,7 @@ func (c *Client) ListMissionProfiles(ctx context.Context, params *ListMissionPro
 	return out, nil
 }
 
+// Input for the ListMissionProfiles operation.
 type ListMissionProfilesInput struct {
 
 	// Maximum number of mission profiles returned.
@@ -39,6 +40,7 @@ type ListMissionProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the ListMissionProfiles operation.
 type ListMissionProfilesOutput struct {
 
 	// List of mission profiles.
