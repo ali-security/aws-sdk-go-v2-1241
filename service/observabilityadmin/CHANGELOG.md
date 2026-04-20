@@ -1,3 +1,7 @@
+# v1.14.0 (2026-04-20)
+
+* **Feature**: Enablement for Security Hub v2 via Observability Admin Telemetry Rule for account and organization level.
+
 # v1.13.1 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

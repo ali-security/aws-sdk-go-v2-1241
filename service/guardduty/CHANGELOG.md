@@ -1,3 +1,7 @@
+# v1.75.2 (2026-04-20)
+
+* **Documentation**: Expanded support for new suppression rule fields.
+
 # v1.75.1 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

@@ -1,3 +1,7 @@
+# v1.7.0 (2026-04-20)
+
+* **Feature**: Amazon EVS now allows you to create connectors to your vCenter appliances and create Windows Server entitlements for virtual machines running in your EVS environments
+
 # v1.6.5 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

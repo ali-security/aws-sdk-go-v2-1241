@@ -1,3 +1,23 @@
+# Release (2026-04-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.20.0](service/applicationsignals/CHANGELOG.md#v1200-2026-04-20)
+  * **Feature**: Releasing Second phase of SLO Recommendations where you can create recommended SLOs out-of-the box using CreateSLO API
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.30.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1300-2026-04-20)
+  * **Feature**: Supporting listingMode for AgentCore Gateway MCP server targets
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.298.0](service/ec2/CHANGELOG.md#v12980-2026-04-20)
+  * **Feature**: Added Transit Gateway Integration into AWS Client VPN.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.7.0](service/evs/CHANGELOG.md#v170-2026-04-20)
+  * **Feature**: Amazon EVS now allows you to create connectors to your vCenter appliances and create Windows Server entitlements for virtual machines running in your EVS environments
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.75.2](service/guardduty/CHANGELOG.md#v1752-2026-04-20)
+  * **Documentation**: Expanded support for new suppression rule fields.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.50.0](service/kafka/CHANGELOG.md#v1500-2026-04-20)
+  * **Feature**: Amazon MSK Replicator now supports data migration from external Apache Kafka clusters to Amazon MSK Express brokers. This release adds SaslScram authentication with TLS encryption, enhanced consumer offset synchronization, and customer log forwarding for troubleshooting.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.51.0](service/location/CHANGELOG.md#v1510-2026-04-20)
+  * **Feature**: This release adds support for new Job APIs for bulk workloads. The initial job type supported is Address Validation. The new APIs added are StartJob, CancelJob, ListJobs, and GetJob.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.14.0](service/observabilityadmin/CHANGELOG.md#v1140-2026-04-20)
+  * **Feature**: Enablement for Security Hub v2 via Observability Admin Telemetry Rule for account and organization level.
+
 # Release (2026-04-17)
 
 ## General Highlights

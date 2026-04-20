@@ -1,3 +1,7 @@
+# v1.51.0 (2026-04-20)
+
+* **Feature**: This release adds support for new Job APIs for bulk workloads. The initial job type supported is Address Validation. The new APIs added are StartJob, CancelJob, ListJobs, and GetJob.
+
 # v1.50.14 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

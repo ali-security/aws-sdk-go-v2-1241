@@ -1,8 +1,0 @@
-{
-    "id": "2defa4bd-c5f0-41ec-973c-25e88886ae9e",
-    "type": "feature",
-    "description": "Releasing Second phase of SLO Recommendations where you can create recommended SLOs out-of-the box using CreateSLO API",
-    "modules": [
-        "service/applicationsignals"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.30.0 (2026-04-20)
+
+* **Feature**: Supporting listingMode for AgentCore Gateway MCP server targets
+
 # v1.29.1 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

@@ -1,8 +1,0 @@
-{
-    "id": "8b6efa04-cc9d-4841-a19d-1bf99093872f",
-    "type": "feature",
-    "description": "Added Transit Gateway Integration into AWS Client VPN.",
-    "modules": [
-        "service/ec2"
-    ]
-}
