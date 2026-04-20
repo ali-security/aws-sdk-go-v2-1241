@@ -1,0 +1,8 @@
+{
+    "id": "cbf867dd-7bcd-49e1-bfdc-944bc3812bbf",
+    "type": "documentation",
+    "description": "Expanded support for new suppression rule fields.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

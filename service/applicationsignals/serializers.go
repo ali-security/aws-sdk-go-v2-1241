@@ -282,6 +282,11 @@ func awsRestjson1_serializeOpDocumentCreateServiceLevelObjectiveInput(v *CreateS
 		}
 	}
 
+	if v.CreateRecommendedSlo {
+		ok := object.Key("CreateRecommendedSlo")
+		ok.Boolean(v.CreateRecommendedSlo)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)

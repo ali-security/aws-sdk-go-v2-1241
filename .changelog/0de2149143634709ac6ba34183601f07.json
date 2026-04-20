@@ -1,0 +1,8 @@
+{
+    "id": "0de21491-4363-4709-ac6b-a34183601f07",
+    "type": "feature",
+    "description": "This release adds support for new Job APIs for bulk workloads. The initial job type supported is Address Validation. The new APIs added are StartJob, CancelJob, ListJobs, and GetJob.",
+    "modules": [
+        "service/location"
+    ]
+}

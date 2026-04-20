@@ -4062,6 +4062,11 @@ func awsRestjson1_serializeDocumentTelemetryRule(v *types.TelemetryRule, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowFieldUpdates != nil {
+		ok := object.Key("AllowFieldUpdates")
+		ok.Boolean(*v.AllowFieldUpdates)
+	}
+
 	if v.AllRegions != nil {
 		ok := object.Key("AllRegions")
 		ok.Boolean(*v.AllRegions)

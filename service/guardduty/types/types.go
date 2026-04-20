@@ -484,11 +484,15 @@ type Condition struct {
 	// Represents the equal condition to be applied to a single field when querying
 	// for findings.
 	//
+	// Max values: 50
+	//
 	// Deprecated: This member has been deprecated.
 	Eq []string
 
 	// Represents an equal condition to be applied to a single field when querying for
 	// findings.
+	//
+	// Max values: 50
 	Equals []string
 
 	// Represents a greater than condition to be applied to a single field when
@@ -541,11 +545,15 @@ type Condition struct {
 	// Represents the not equal condition to be applied to a single field when
 	// querying for findings.
 	//
+	// Max values: 50
+	//
 	// Deprecated: This member has been deprecated.
 	Neq []string
 
 	// Represents a not equal condition to be applied to a single field when querying
 	// for findings.
+	//
+	// Max values: 50
 	NotEquals []string
 
 	// Represents the not match condition to be applied to a single field when

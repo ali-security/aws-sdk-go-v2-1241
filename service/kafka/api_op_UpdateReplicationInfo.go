@@ -41,18 +41,23 @@ type UpdateReplicationInfoInput struct {
 	// This member is required.
 	ReplicatorArn *string
 
-	// The ARN of the source Kafka cluster.
-	//
-	// This member is required.
-	SourceKafkaClusterArn *string
-
-	// The ARN of the target Kafka cluster.
-	//
-	// This member is required.
-	TargetKafkaClusterArn *string
-
 	// Updated consumer group replication information.
 	ConsumerGroupReplication *types.ConsumerGroupReplicationUpdate
+
+	// Configuration for delivering replicator logs to customer destinations.
+	LogDelivery *types.LogDelivery
+
+	// The ARN of the source Kafka cluster.
+	SourceKafkaClusterArn *string
+
+	// The ID of the source Kafka cluster.
+	SourceKafkaClusterId *string
+
+	// The ARN of the target Kafka cluster.
+	TargetKafkaClusterArn *string
+
+	// The ID of the target Kafka cluster.
+	TargetKafkaClusterId *string
 
 	// Updated topic replication information.
 	TopicReplication *types.TopicReplicationUpdate

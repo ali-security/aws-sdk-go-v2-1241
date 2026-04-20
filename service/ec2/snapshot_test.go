@@ -98,6 +98,18 @@ func TestCheckSnapshot_AcceptReservedInstancesExchangeQuote(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AcceptTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcceptTransitGatewayClientVpnAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AcceptTransitGatewayMulticastDomainAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AcceptTransitGatewayMulticastDomainAssociations(context.Background(), nil, func(o *Options) {
@@ -2803,6 +2815,18 @@ func TestCheckSnapshot_DeleteTransitGateway(t *testing.T) {
 	_, err := svc.DeleteTransitGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTransitGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTransitGatewayClientVpnAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8438,6 +8462,18 @@ func TestCheckSnapshot_RejectCapacityReservationBillingOwnership(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RejectTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RejectTransitGatewayClientVpnAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RejectTransitGatewayMulticastDomainAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RejectTransitGatewayMulticastDomainAssociations(context.Background(), nil, func(o *Options) {
@@ -9186,6 +9222,18 @@ func TestUpdateSnapshot_AcceptReservedInstancesExchangeQuote(t *testing.T) {
 	_, err := svc.AcceptReservedInstancesExchangeQuote(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AcceptReservedInstancesExchangeQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AcceptTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcceptTransitGatewayClientVpnAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11898,6 +11946,18 @@ func TestUpdateSnapshot_DeleteTransitGateway(t *testing.T) {
 	_, err := svc.DeleteTransitGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTransitGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTransitGatewayClientVpnAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -17526,6 +17586,18 @@ func TestUpdateSnapshot_RejectCapacityReservationBillingOwnership(t *testing.T) 
 	_, err := svc.RejectCapacityReservationBillingOwnership(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RejectCapacityReservationBillingOwnership")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RejectTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RejectTransitGatewayClientVpnAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

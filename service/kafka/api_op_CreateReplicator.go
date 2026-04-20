@@ -55,6 +55,9 @@ type CreateReplicatorInput struct {
 	// A summary description of the replicator.
 	Description *string
 
+	// Configuration for delivering replicator logs to customer destinations.
+	LogDelivery *types.LogDelivery
+
 	// List of tags to attach to created Replicator.
 	Tags map[string]string
 

@@ -52,6 +52,9 @@ type DescribeReplicatorOutput struct {
 	// Kafka Clusters used in setting up sources / targets for replication.
 	KafkaClusters []types.KafkaClusterDescription
 
+	// Configuration for log delivery.
+	LogDelivery *types.LogDelivery
+
 	// A list of replication configurations, where each configuration targets a given
 	// source cluster to target cluster replication flow.
 	ReplicationInfoList []types.ReplicationInfoDescription

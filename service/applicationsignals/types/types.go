@@ -1289,23 +1289,23 @@ type ServiceLevelIndicator struct {
 // metric that a period-based SLO is to monitor.
 type ServiceLevelIndicatorConfig struct {
 
+	// Use this structure to specify the metric to be used for the SLO.
+	//
+	// This member is required.
+	SliMetricConfig *ServiceLevelIndicatorMetricConfig
+
 	// The arithmetic operation to use when comparing the specified metric to the
 	// threshold.
 	//
-	// This member is required.
+	// This is not required if CreateRecommendedSlo is set to true .
 	ComparisonOperator ServiceLevelIndicatorComparisonOperator
 
 	// This parameter is used only when a request-based SLO tracks the Latency metric.
 	// Specify the threshold value that the observed Latency metric values are to be
 	// compared to.
 	//
-	// This member is required.
+	// This is not required if CreateRecommendedSlo is set to true .
 	MetricThreshold *float64
-
-	// Use this structure to specify the metric to be used for the SLO.
-	//
-	// This member is required.
-	SliMetricConfig *ServiceLevelIndicatorMetricConfig
 
 	noSmithyDocumentSerde
 }

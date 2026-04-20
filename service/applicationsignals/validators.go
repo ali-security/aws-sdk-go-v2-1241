@@ -1032,12 +1032,6 @@ func validateServiceLevelIndicatorConfig(v *types.ServiceLevelIndicatorConfig) e
 			invalidParams.AddNested("SliMetricConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.MetricThreshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricThreshold"))
-	}
-	if len(v.ComparisonOperator) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

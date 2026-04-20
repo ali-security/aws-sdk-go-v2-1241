@@ -1,0 +1,8 @@
+{
+    "id": "40588712-acf6-425c-8736-e7310a96e962",
+    "type": "feature",
+    "description": "Amazon EVS now allows you to create connectors to your vCenter appliances and create Windows Server entitlements for virtual machines running in your EVS environments",
+    "modules": [
+        "service/evs"
+    ]
+}

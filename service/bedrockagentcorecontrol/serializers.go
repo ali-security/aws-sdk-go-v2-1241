@@ -11094,6 +11094,11 @@ func awsRestjson1_serializeDocumentMcpServerTargetConfiguration(v *types.McpServ
 		ok.String(*v.Endpoint)
 	}
 
+	if len(v.ListingMode) > 0 {
+		ok := object.Key("listingMode")
+		ok.String(string(v.ListingMode))
+	}
+
 	if v.McpToolSchema != nil {
 		ok := object.Key("mcpToolSchema")
 		if err := awsRestjson1_serializeDocumentMcpToolSchemaConfiguration(v.McpToolSchema, ok); err != nil {

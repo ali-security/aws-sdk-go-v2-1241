@@ -1,0 +1,8 @@
+{
+    "id": "038ce445-77a3-49ed-b836-bdc9363665c6",
+    "type": "feature",
+    "description": "Supporting listingMode for AgentCore Gateway MCP server targets",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

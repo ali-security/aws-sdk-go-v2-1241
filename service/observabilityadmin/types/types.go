@@ -748,6 +748,15 @@ type TelemetryRule struct {
 	// to them. Mutually exclusive with Regions .
 	AllRegions *bool
 
+	//  If set to true , Amazon CloudWatch Observability Admin detects and remediates
+	// configuration drift in telemetry resources that it manages. For example, if a
+	// VPC flow log's format, traffic type, or aggregation interval no longer matches
+	// the rule's destination configuration, the flow log is replaced with one that
+	// matches. Only Observability Admin-managed resources are updated;
+	// customer-created resources are never modified. Currently supported for
+	// AWS::EC2::VPC resources (VPC flow logs).
+	AllowFieldUpdates *bool
+
 	//  Configuration specifying where and how the telemetry data should be delivered.
 	DestinationConfiguration *TelemetryDestinationConfiguration
 

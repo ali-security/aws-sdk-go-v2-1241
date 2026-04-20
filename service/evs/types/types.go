@@ -54,6 +54,67 @@ type ConnectivityInfo struct {
 	noSmithyDocumentSerde
 }
 
+// An object that represents a connector for an Amazon EVS environment. A
+// connector establishes a vCenter connection using the credentials stored in
+// Amazon Web Services Secrets Manager.
+type Connector struct {
+
+	// The fully qualified domain name (FQDN) of the VCF appliance that the connector
+	// connects to.
+	ApplianceFqdn *string
+
+	// A list of checks that are run on the connector.
+	Checks []ConnectorCheck
+
+	// The unique ID of the connector.
+	ConnectorId *string
+
+	// The date and time that the connector was created.
+	CreatedAt *time.Time
+
+	// The unique ID of the environment that the connector belongs to.
+	EnvironmentId *string
+
+	// The date and time that the connector was modified.
+	ModifiedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that stores the credentials for the VCF appliance.
+	SecretArn *string
+
+	// The state of the connector.
+	State ConnectorState
+
+	// A detailed description of the connector state.
+	StateDetails *string
+
+	// The status of the connector.
+	Status CheckResult
+
+	// The type of the connector.
+	Type ConnectorType
+
+	noSmithyDocumentSerde
+}
+
+// A check on a connector to identify connectivity health.
+type ConnectorCheck struct {
+
+	// The time when connector health began to be impaired.
+	ImpairedSince *time.Time
+
+	// The date and time of the last check attempt.
+	LastCheckAttempt *time.Time
+
+	// The check result.
+	Result CheckResult
+
+	// The check type.
+	Type CheckType
+
+	noSmithyDocumentSerde
+}
+
 // An Elastic IP address association with the elastic network interface in the
 // VLAN subnet.
 type EipAssociation struct {
@@ -198,6 +259,22 @@ type EnvironmentSummary struct {
 
 	// The VCF version of the environment.
 	VcfVersion VcfVersion
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains error details for an entitlement.
+type ErrorDetail struct {
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The error message.
+	//
+	// This member is required.
+	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -627,6 +704,43 @@ type Vlan struct {
 
 	//  The state of the VLAN.
 	VlanState VlanState
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents a Windows Server License entitlement for a virtual
+// machine in an Amazon EVS environment.
+type VmEntitlement struct {
+
+	// The unique ID of the connector associated with the entitlement.
+	ConnectorId *string
+
+	// The unique ID of the environment.
+	EnvironmentId *string
+
+	// The error details associated with the entitlement, if applicable.
+	ErrorDetail *ErrorDetail
+
+	// The date and time that the entitlement was last synced.
+	LastSyncedAt *time.Time
+
+	// The date and time that the entitlement started.
+	StartedAt *time.Time
+
+	// The status of the entitlement.
+	Status EntitlementStatus
+
+	// The date and time that the entitlement stopped.
+	StoppedAt *time.Time
+
+	// The type of entitlement.
+	Type EntitlementType
+
+	// The unique ID of the virtual machine.
+	VmId *string
+
+	// The name of the virtual machine.
+	VmName *string
 
 	noSmithyDocumentSerde
 }

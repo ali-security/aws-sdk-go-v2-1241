@@ -709,6 +709,25 @@ func (KeyType) Values() []KeyType {
 	}
 }
 
+type ListingMode string
+
+// Enum values for ListingMode
+const (
+	ListingModeDefault ListingMode = "DEFAULT"
+	ListingModeDynamic ListingMode = "DYNAMIC"
+)
+
+// Values returns all known values for ListingMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListingMode) Values() []ListingMode {
+	return []ListingMode{
+		"DEFAULT",
+		"DYNAMIC",
+	}
+}
+
 type MemoryStatus string
 
 // Enum values for MemoryStatus

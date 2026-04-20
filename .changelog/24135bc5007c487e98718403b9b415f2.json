@@ -1,0 +1,8 @@
+{
+    "id": "24135bc5-007c-487e-9871-8403b9b415f2",
+    "type": "feature",
+    "description": "Enablement for Security Hub v2 via Observability Admin Telemetry Rule for account and organization level.",
+    "modules": [
+        "service/observabilityadmin"
+    ]
+}

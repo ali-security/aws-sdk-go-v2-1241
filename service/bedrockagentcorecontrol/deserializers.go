@@ -27141,6 +27141,15 @@ func awsRestjson1_deserializeDocumentMcpServerTargetConfiguration(v **types.McpS
 				sv.Endpoint = ptr.String(jtv)
 			}
 
+		case "listingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ListingMode to be of type string, got %T instead", value)
+				}
+				sv.ListingMode = types.ListingMode(jtv)
+			}
+
 		case "mcpToolSchema":
 			if err := awsRestjson1_deserializeDocumentMcpToolSchemaConfiguration(&sv.McpToolSchema, value); err != nil {
 				return err

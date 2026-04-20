@@ -2583,6 +2583,11 @@ type McpServerTargetConfiguration struct {
 	// This member is required.
 	Endpoint *string
 
+	// The listing mode for the MCP server target configuration. MCP resources for
+	// default targets are cached at the control plane for faster access. MCP resources
+	// for dynamic targets will be dynamically retrieved when listing tools.
+	ListingMode ListingMode
+
 	// The tool schema configuration for the MCP server target. Supported only when
 	// the credential provider is configured with an authorization code grant type.
 	// Dynamic tool discovery/synchronization will be disabled when target is

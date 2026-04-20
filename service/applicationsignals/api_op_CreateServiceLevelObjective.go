@@ -121,6 +121,13 @@ type CreateServiceLevelObjectiveInput struct {
 	// the attainment goal of the SLO.
 	BurnRateConfigurations []types.BurnRateConfiguration
 
+	// Set this to true to create a recommended SLO out of the box. When set to true ,
+	// you don't need to specify the MetricThreshold or ComparisonOperator in the
+	// SliConfig or RequestBasedSliConfig . The default value is false .
+	//
+	// This is supported for SLOs on a service, service operation, or a dependency.
+	CreateRecommendedSlo bool
+
 	// An optional description for this SLO.
 	Description *string
 

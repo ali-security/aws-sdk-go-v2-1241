@@ -264,6 +264,7 @@ const (
 	ResourceTypeAwsBedrockAgentcoreMemory          ResourceType = "AWS::BedrockAgentCore::Memory"
 	ResourceTypeAwsSecurityHub                     ResourceType = "AWS::SecurityHub::Hub"
 	ResourceTypeAwsCloudfrontDistribution          ResourceType = "AWS::CloudFront::Distribution"
+	ResourceTypeAwsSecurityHubHubv2                ResourceType = "AWS::SecurityHub::HubV2"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -287,6 +288,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::BedrockAgentCore::Memory",
 		"AWS::SecurityHub::Hub",
 		"AWS::CloudFront::Distribution",
+		"AWS::SecurityHub::HubV2",
 	}
 }
 
