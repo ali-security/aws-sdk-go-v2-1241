@@ -41,7 +41,6 @@ dependencies {
 	implementation("software.amazon.smithy:smithy-cli:$smithyVersion")
     implementation("software.amazon.smithy:smithy-protocol-tests:$smithyVersion")
     implementation("software.amazon.smithy:smithy-aws-protocol-tests:$smithyVersion")
-    implementation("software.amazon.smithy:smithy-rules-engine-tests:$smithyVersion")
     implementation(project(":smithy-aws-go-codegen"))
 }
 
@@ -67,6 +66,7 @@ val excludedServices = setOf(
 
 // Override (projectionName, moduleSuffix) for services where auto-derivation
 // doesn't match the existing convention.
+// Pair(projection-name, folder-name)
 val overrides = mapOf(
     "aws.protocoltests.ec2#AwsEc2" to Pair("aws-ec2", "ec2query"),
     "aws.protocoltests.json#JsonProtocol" to Pair("aws-json", "jsonrpc"),
@@ -77,6 +77,9 @@ val overrides = mapOf(
     "aws.protocoltests.restxml.xmlns#RestXmlWithNamespace" to Pair("aws-restxml-with-namespace", "restxmlwithnamespace"),
     "smithy.protocoltests.rpcv2Cbor#RpcV2Protocol" to Pair("smithy-rpcv2-cbor", "smithyrpcv2cbor"),
     "aws.protocoltests.json#Json10QueryCompatible" to Pair("aws-json-10-querycompatible", "jsonrpc10querycompatible"),
+    "aws.protocoltests.json10#QueryCompatibleJsonRpc10" to Pair("querycompatiblejsonrpc10", "querycompatiblejsonrpc10"),
+    "aws.protocoltests.rpcv2cbor#NonQueryCompatibleRpcV2Protocol" to Pair("nonquerycompatiblerpcv2protocol", "nonquerycompatiblerpcv2protocol"),
+    "aws.protocoltests.rpcv2cbor#QueryCompatibleRpcV2Protocol" to Pair("querycompatiblerpcv2protocol", "querycompatiblerpcv2protocol"),
     "smithy.protocoltests.rpcv2Cbor#RpcV2CborQueryCompatible" to Pair("smithy-rpcv2-cbor-querycompatible", "smithyrpcv2cborquerycompatible"),
 )
 
@@ -141,12 +144,28 @@ tasks["build"]
     .dependsOn(tasks["generate-smithy-build"])
     .finalizedBy(tasks["buildSdk"])
 
+val protocolTestDir = file("$rootDir/../internal/protocoltest")
+val manualDir = file("${project.projectDir}/manual")
+
+tasks.create<Delete>("cleanProtocolTests") {
+    dependsOn("buildSdk")
+    delete(protocolTestDir)
+}
+
 // ensure built artifacts are put into the SDK's folders
 tasks.create<Exec>("copyGoCodegen") {
-    dependsOn("buildSdk")
+    dependsOn("cleanProtocolTests")
     commandLine("$rootDir/copy_go_codegen.sh", "$rootDir/..", (tasks["buildSdk"] as SmithyBuild).outputDirectory.absolutePath)
 }
+
+tasks.create<Copy>("copyManualFiles") {
+    dependsOn("copyGoCodegen")
+    from(manualDir)
+    into(protocolTestDir)
+}
+
 tasks["buildSdk"].finalizedBy(tasks["copyGoCodegen"])
+tasks["copyGoCodegen"].finalizedBy(tasks["copyManualFiles"])
 
 java.sourceSets["main"].java {
     srcDirs("models")
