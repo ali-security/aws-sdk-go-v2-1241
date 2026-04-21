@@ -99,11 +99,11 @@ func (c *Client) addOperationCreateVpcPeeringConnectionMiddlewares(stack *middle
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateVpcPeeringConnection{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateVpcPeeringConnection{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateVpcPeeringConnection{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateVpcPeeringConnection{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -154,6 +154,9 @@ func (c *Client) addOperationCreateVpcPeeringConnectionMiddlewares(stack *middle
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

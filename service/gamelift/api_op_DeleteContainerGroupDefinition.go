@@ -90,11 +90,11 @@ func (c *Client) addOperationDeleteContainerGroupDefinitionMiddlewares(stack *mi
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteContainerGroupDefinition{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteContainerGroupDefinition{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteContainerGroupDefinition{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteContainerGroupDefinition{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -145,6 +145,9 @@ func (c *Client) addOperationDeleteContainerGroupDefinitionMiddlewares(stack *mi
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

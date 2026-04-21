@@ -68,11 +68,11 @@ func (c *Client) addOperationInferRxNormMiddlewares(stack *middleware.Stack, opt
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInferRxNorm{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpInferRxNorm{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpInferRxNorm{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpInferRxNorm{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -123,6 +123,9 @@ func (c *Client) addOperationInferRxNormMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

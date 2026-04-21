@@ -93,11 +93,11 @@ func (c *Client) addOperationStartFleetActionsMiddlewares(stack *middleware.Stac
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartFleetActions{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartFleetActions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartFleetActions{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartFleetActions{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -148,6 +148,9 @@ func (c *Client) addOperationStartFleetActionsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

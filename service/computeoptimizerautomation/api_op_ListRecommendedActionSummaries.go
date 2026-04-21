@@ -68,11 +68,11 @@ func (c *Client) addOperationListRecommendedActionSummariesMiddlewares(stack *mi
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRecommendedActionSummaries{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListRecommendedActionSummaries{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRecommendedActionSummaries{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListRecommendedActionSummaries{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -123,6 +123,9 @@ func (c *Client) addOperationListRecommendedActionSummariesMiddlewares(stack *mi
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

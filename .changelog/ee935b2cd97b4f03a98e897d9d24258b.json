@@ -1,0 +1,8 @@
+{
+    "id": "ee935b2c-d97b-4f03-a98e-897d9d24258b",
+    "type": "feature",
+    "description": "Adding dutch language support for Cognito Managed Login and Terms on Console",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

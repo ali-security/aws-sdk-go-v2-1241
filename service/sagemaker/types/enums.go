@@ -130,6 +130,229 @@ func (AggregationTransformationValue) Values() []AggregationTransformationValue 
 	}
 }
 
+type AIBenchmarkJobStatus string
+
+// Enum values for AIBenchmarkJobStatus
+const (
+	AIBenchmarkJobStatusInProgress AIBenchmarkJobStatus = "InProgress"
+	AIBenchmarkJobStatusCompleted  AIBenchmarkJobStatus = "Completed"
+	AIBenchmarkJobStatusFailed     AIBenchmarkJobStatus = "Failed"
+	AIBenchmarkJobStatusStopping   AIBenchmarkJobStatus = "Stopping"
+	AIBenchmarkJobStatusStopped    AIBenchmarkJobStatus = "Stopped"
+)
+
+// Values returns all known values for AIBenchmarkJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIBenchmarkJobStatus) Values() []AIBenchmarkJobStatus {
+	return []AIBenchmarkJobStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+		"Stopping",
+		"Stopped",
+	}
+}
+
+type AICapacityReservationPreference string
+
+// Enum values for AICapacityReservationPreference
+const (
+	AICapacityReservationPreferenceCapacityReservationsOnly AICapacityReservationPreference = "capacity-reservations-only"
+)
+
+// Values returns all known values for AICapacityReservationPreference. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AICapacityReservationPreference) Values() []AICapacityReservationPreference {
+	return []AICapacityReservationPreference{
+		"capacity-reservations-only",
+	}
+}
+
+type AIRecommendationInferenceFramework string
+
+// Enum values for AIRecommendationInferenceFramework
+const (
+	AIRecommendationInferenceFrameworkLmi  AIRecommendationInferenceFramework = "LMI"
+	AIRecommendationInferenceFrameworkVllm AIRecommendationInferenceFramework = "VLLM"
+)
+
+// Values returns all known values for AIRecommendationInferenceFramework. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIRecommendationInferenceFramework) Values() []AIRecommendationInferenceFramework {
+	return []AIRecommendationInferenceFramework{
+		"LMI",
+		"VLLM",
+	}
+}
+
+type AIRecommendationInstanceType string
+
+// Enum values for AIRecommendationInstanceType
+const (
+	AIRecommendationInstanceTypeMlG5Xlarge     AIRecommendationInstanceType = "ml.g5.xlarge"
+	AIRecommendationInstanceTypeMlG52xlarge    AIRecommendationInstanceType = "ml.g5.2xlarge"
+	AIRecommendationInstanceTypeMlG54xlarge    AIRecommendationInstanceType = "ml.g5.4xlarge"
+	AIRecommendationInstanceTypeMlG58xlarge    AIRecommendationInstanceType = "ml.g5.8xlarge"
+	AIRecommendationInstanceTypeMlG512xlarge   AIRecommendationInstanceType = "ml.g5.12xlarge"
+	AIRecommendationInstanceTypeMlG516xlarge   AIRecommendationInstanceType = "ml.g5.16xlarge"
+	AIRecommendationInstanceTypeMlG524xlarge   AIRecommendationInstanceType = "ml.g5.24xlarge"
+	AIRecommendationInstanceTypeMlG548xlarge   AIRecommendationInstanceType = "ml.g5.48xlarge"
+	AIRecommendationInstanceTypeMlG6Xlarge     AIRecommendationInstanceType = "ml.g6.xlarge"
+	AIRecommendationInstanceTypeMlG62xlarge    AIRecommendationInstanceType = "ml.g6.2xlarge"
+	AIRecommendationInstanceTypeMlG64xlarge    AIRecommendationInstanceType = "ml.g6.4xlarge"
+	AIRecommendationInstanceTypeMlG68xlarge    AIRecommendationInstanceType = "ml.g6.8xlarge"
+	AIRecommendationInstanceTypeMlG612xlarge   AIRecommendationInstanceType = "ml.g6.12xlarge"
+	AIRecommendationInstanceTypeMlG616xlarge   AIRecommendationInstanceType = "ml.g6.16xlarge"
+	AIRecommendationInstanceTypeMlG624xlarge   AIRecommendationInstanceType = "ml.g6.24xlarge"
+	AIRecommendationInstanceTypeMlG648xlarge   AIRecommendationInstanceType = "ml.g6.48xlarge"
+	AIRecommendationInstanceTypeMlG6eXlarge    AIRecommendationInstanceType = "ml.g6e.xlarge"
+	AIRecommendationInstanceTypeMlG6e2xlarge   AIRecommendationInstanceType = "ml.g6e.2xlarge"
+	AIRecommendationInstanceTypeMlG6e4xlarge   AIRecommendationInstanceType = "ml.g6e.4xlarge"
+	AIRecommendationInstanceTypeMlG6e8xlarge   AIRecommendationInstanceType = "ml.g6e.8xlarge"
+	AIRecommendationInstanceTypeMlG6e12xlarge  AIRecommendationInstanceType = "ml.g6e.12xlarge"
+	AIRecommendationInstanceTypeMlG6e16xlarge  AIRecommendationInstanceType = "ml.g6e.16xlarge"
+	AIRecommendationInstanceTypeMlG6e24xlarge  AIRecommendationInstanceType = "ml.g6e.24xlarge"
+	AIRecommendationInstanceTypeMlG6e48xlarge  AIRecommendationInstanceType = "ml.g6e.48xlarge"
+	AIRecommendationInstanceTypeMlG7e2xlarge   AIRecommendationInstanceType = "ml.g7e.2xlarge"
+	AIRecommendationInstanceTypeMlG7e4xlarge   AIRecommendationInstanceType = "ml.g7e.4xlarge"
+	AIRecommendationInstanceTypeMlG7e8xlarge   AIRecommendationInstanceType = "ml.g7e.8xlarge"
+	AIRecommendationInstanceTypeMlG7e12xlarge  AIRecommendationInstanceType = "ml.g7e.12xlarge"
+	AIRecommendationInstanceTypeMlG7e24xlarge  AIRecommendationInstanceType = "ml.g7e.24xlarge"
+	AIRecommendationInstanceTypeMlG7e48xlarge  AIRecommendationInstanceType = "ml.g7e.48xlarge"
+	AIRecommendationInstanceTypeMlP32xlarge    AIRecommendationInstanceType = "ml.p3.2xlarge"
+	AIRecommendationInstanceTypeMlP38xlarge    AIRecommendationInstanceType = "ml.p3.8xlarge"
+	AIRecommendationInstanceTypeMlP316xlarge   AIRecommendationInstanceType = "ml.p3.16xlarge"
+	AIRecommendationInstanceTypeMlP4d24xlarge  AIRecommendationInstanceType = "ml.p4d.24xlarge"
+	AIRecommendationInstanceTypeMlP4de24xlarge AIRecommendationInstanceType = "ml.p4de.24xlarge"
+	AIRecommendationInstanceTypeMlP54xlarge    AIRecommendationInstanceType = "ml.p5.4xlarge"
+	AIRecommendationInstanceTypeMlP548xlarge   AIRecommendationInstanceType = "ml.p5.48xlarge"
+	AIRecommendationInstanceTypeMlP5e48xlarge  AIRecommendationInstanceType = "ml.p5e.48xlarge"
+	AIRecommendationInstanceTypeMlP5en48xlarge AIRecommendationInstanceType = "ml.p5en.48xlarge"
+)
+
+// Values returns all known values for AIRecommendationInstanceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIRecommendationInstanceType) Values() []AIRecommendationInstanceType {
+	return []AIRecommendationInstanceType{
+		"ml.g5.xlarge",
+		"ml.g5.2xlarge",
+		"ml.g5.4xlarge",
+		"ml.g5.8xlarge",
+		"ml.g5.12xlarge",
+		"ml.g5.16xlarge",
+		"ml.g5.24xlarge",
+		"ml.g5.48xlarge",
+		"ml.g6.xlarge",
+		"ml.g6.2xlarge",
+		"ml.g6.4xlarge",
+		"ml.g6.8xlarge",
+		"ml.g6.12xlarge",
+		"ml.g6.16xlarge",
+		"ml.g6.24xlarge",
+		"ml.g6.48xlarge",
+		"ml.g6e.xlarge",
+		"ml.g6e.2xlarge",
+		"ml.g6e.4xlarge",
+		"ml.g6e.8xlarge",
+		"ml.g6e.12xlarge",
+		"ml.g6e.16xlarge",
+		"ml.g6e.24xlarge",
+		"ml.g6e.48xlarge",
+		"ml.g7e.2xlarge",
+		"ml.g7e.4xlarge",
+		"ml.g7e.8xlarge",
+		"ml.g7e.12xlarge",
+		"ml.g7e.24xlarge",
+		"ml.g7e.48xlarge",
+		"ml.p3.2xlarge",
+		"ml.p3.8xlarge",
+		"ml.p3.16xlarge",
+		"ml.p4d.24xlarge",
+		"ml.p4de.24xlarge",
+		"ml.p5.4xlarge",
+		"ml.p5.48xlarge",
+		"ml.p5e.48xlarge",
+		"ml.p5en.48xlarge",
+	}
+}
+
+type AIRecommendationJobStatus string
+
+// Enum values for AIRecommendationJobStatus
+const (
+	AIRecommendationJobStatusInProgress AIRecommendationJobStatus = "InProgress"
+	AIRecommendationJobStatusCompleted  AIRecommendationJobStatus = "Completed"
+	AIRecommendationJobStatusFailed     AIRecommendationJobStatus = "Failed"
+	AIRecommendationJobStatusStopping   AIRecommendationJobStatus = "Stopping"
+	AIRecommendationJobStatusStopped    AIRecommendationJobStatus = "Stopped"
+)
+
+// Values returns all known values for AIRecommendationJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIRecommendationJobStatus) Values() []AIRecommendationJobStatus {
+	return []AIRecommendationJobStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+		"Stopping",
+		"Stopped",
+	}
+}
+
+type AIRecommendationMetric string
+
+// Enum values for AIRecommendationMetric
+const (
+	AIRecommendationMetricTtftMs     AIRecommendationMetric = "ttft-ms"
+	AIRecommendationMetricThroughput AIRecommendationMetric = "throughput"
+	AIRecommendationMetricCost       AIRecommendationMetric = "cost"
+)
+
+// Values returns all known values for AIRecommendationMetric. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIRecommendationMetric) Values() []AIRecommendationMetric {
+	return []AIRecommendationMetric{
+		"ttft-ms",
+		"throughput",
+		"cost",
+	}
+}
+
+type AIRecommendationOptimizationType string
+
+// Enum values for AIRecommendationOptimizationType
+const (
+	AIRecommendationOptimizationTypeSpeculativeDecoding AIRecommendationOptimizationType = "SpeculativeDecoding"
+	AIRecommendationOptimizationTypeKernelTuning        AIRecommendationOptimizationType = "KernelTuning"
+)
+
+// Values returns all known values for AIRecommendationOptimizationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AIRecommendationOptimizationType) Values() []AIRecommendationOptimizationType {
+	return []AIRecommendationOptimizationType{
+		"SpeculativeDecoding",
+		"KernelTuning",
+	}
+}
+
 type AlgorithmSortBy string
 
 // Enum values for AlgorithmSortBy
@@ -4528,6 +4751,68 @@ func (LineageType) Values() []LineageType {
 	}
 }
 
+type ListAIBenchmarkJobsSortBy string
+
+// Enum values for ListAIBenchmarkJobsSortBy
+const (
+	ListAIBenchmarkJobsSortByName         ListAIBenchmarkJobsSortBy = "Name"
+	ListAIBenchmarkJobsSortByCreationTime ListAIBenchmarkJobsSortBy = "CreationTime"
+	ListAIBenchmarkJobsSortByStatus       ListAIBenchmarkJobsSortBy = "Status"
+)
+
+// Values returns all known values for ListAIBenchmarkJobsSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListAIBenchmarkJobsSortBy) Values() []ListAIBenchmarkJobsSortBy {
+	return []ListAIBenchmarkJobsSortBy{
+		"Name",
+		"CreationTime",
+		"Status",
+	}
+}
+
+type ListAIRecommendationJobsSortBy string
+
+// Enum values for ListAIRecommendationJobsSortBy
+const (
+	ListAIRecommendationJobsSortByName         ListAIRecommendationJobsSortBy = "Name"
+	ListAIRecommendationJobsSortByCreationTime ListAIRecommendationJobsSortBy = "CreationTime"
+	ListAIRecommendationJobsSortByStatus       ListAIRecommendationJobsSortBy = "Status"
+)
+
+// Values returns all known values for ListAIRecommendationJobsSortBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListAIRecommendationJobsSortBy) Values() []ListAIRecommendationJobsSortBy {
+	return []ListAIRecommendationJobsSortBy{
+		"Name",
+		"CreationTime",
+		"Status",
+	}
+}
+
+type ListAIWorkloadConfigsSortBy string
+
+// Enum values for ListAIWorkloadConfigsSortBy
+const (
+	ListAIWorkloadConfigsSortByName         ListAIWorkloadConfigsSortBy = "Name"
+	ListAIWorkloadConfigsSortByCreationTime ListAIWorkloadConfigsSortBy = "CreationTime"
+)
+
+// Values returns all known values for ListAIWorkloadConfigsSortBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ListAIWorkloadConfigsSortBy) Values() []ListAIWorkloadConfigsSortBy {
+	return []ListAIWorkloadConfigsSortBy{
+		"Name",
+		"CreationTime",
+	}
+}
+
 type ListCompilationJobsSortBy string
 
 // Enum values for ListCompilationJobsSortBy
@@ -5911,6 +6196,12 @@ const (
 	OptimizationJobDeploymentInstanceTypeMlP548xlarge    OptimizationJobDeploymentInstanceType = "ml.p5.48xlarge"
 	OptimizationJobDeploymentInstanceTypeMlP5e48xlarge   OptimizationJobDeploymentInstanceType = "ml.p5e.48xlarge"
 	OptimizationJobDeploymentInstanceTypeMlP5en48xlarge  OptimizationJobDeploymentInstanceType = "ml.p5en.48xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dnXlarge    OptimizationJobDeploymentInstanceType = "ml.g4dn.xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn2xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.2xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn4xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.4xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn8xlarge   OptimizationJobDeploymentInstanceType = "ml.g4dn.8xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn12xlarge  OptimizationJobDeploymentInstanceType = "ml.g4dn.12xlarge"
+	OptimizationJobDeploymentInstanceTypeMlG4dn16xlarge  OptimizationJobDeploymentInstanceType = "ml.g4dn.16xlarge"
 	OptimizationJobDeploymentInstanceTypeMlG5Xlarge      OptimizationJobDeploymentInstanceType = "ml.g5.xlarge"
 	OptimizationJobDeploymentInstanceTypeMlG52xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.2xlarge"
 	OptimizationJobDeploymentInstanceTypeMlG54xlarge     OptimizationJobDeploymentInstanceType = "ml.g5.4xlarge"
@@ -5956,6 +6247,12 @@ func (OptimizationJobDeploymentInstanceType) Values() []OptimizationJobDeploymen
 		"ml.p5.48xlarge",
 		"ml.p5e.48xlarge",
 		"ml.p5en.48xlarge",
+		"ml.g4dn.xlarge",
+		"ml.g4dn.2xlarge",
+		"ml.g4dn.4xlarge",
+		"ml.g4dn.8xlarge",
+		"ml.g4dn.12xlarge",
+		"ml.g4dn.16xlarge",
 		"ml.g5.xlarge",
 		"ml.g5.2xlarge",
 		"ml.g5.4xlarge",

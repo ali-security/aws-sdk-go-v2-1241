@@ -131,11 +131,11 @@ func (c *Client) addOperationExportEBSVolumeRecommendationsMiddlewares(stack *mi
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExportEBSVolumeRecommendations{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpExportEBSVolumeRecommendations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpExportEBSVolumeRecommendations{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpExportEBSVolumeRecommendations{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -186,6 +186,9 @@ func (c *Client) addOperationExportEBSVolumeRecommendationsMiddlewares(stack *mi
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

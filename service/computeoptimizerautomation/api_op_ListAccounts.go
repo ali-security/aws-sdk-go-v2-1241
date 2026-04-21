@@ -63,11 +63,11 @@ func (c *Client) addOperationListAccountsMiddlewares(stack *middleware.Stack, op
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAccounts{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAccounts{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAccounts{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAccounts{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -118,6 +118,9 @@ func (c *Client) addOperationListAccountsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

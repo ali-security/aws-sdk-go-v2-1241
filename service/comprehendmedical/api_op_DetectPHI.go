@@ -71,11 +71,11 @@ func (c *Client) addOperationDetectPHIMiddlewares(stack *middleware.Stack, optio
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectPHI{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDetectPHI{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectPHI{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDetectPHI{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -126,6 +126,9 @@ func (c *Client) addOperationDetectPHIMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

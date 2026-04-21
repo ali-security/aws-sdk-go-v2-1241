@@ -1,0 +1,8 @@
+{
+    "id": "44854d91-2311-4cd9-86a8-47c22fe2a6bc",
+    "type": "feature",
+    "description": "Support for new types of partner managed rulegroups for Network Firewall Service",
+    "modules": [
+        "service/networkfirewall"
+    ]
+}

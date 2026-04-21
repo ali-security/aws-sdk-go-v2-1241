@@ -52,11 +52,11 @@ func (c *Client) addOperationStopSNOMEDCTInferenceJobMiddlewares(stack *middlewa
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopSNOMEDCTInferenceJob{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopSNOMEDCTInferenceJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopSNOMEDCTInferenceJob{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopSNOMEDCTInferenceJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -107,6 +107,9 @@ func (c *Client) addOperationStopSNOMEDCTInferenceJobMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

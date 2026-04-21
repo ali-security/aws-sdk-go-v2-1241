@@ -51,11 +51,11 @@ func (c *Client) addOperationStopEntitiesDetectionV2JobMiddlewares(stack *middle
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEntitiesDetectionV2Job{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStopEntitiesDetectionV2Job{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopEntitiesDetectionV2Job{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStopEntitiesDetectionV2Job{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -106,6 +106,9 @@ func (c *Client) addOperationStopEntitiesDetectionV2JobMiddlewares(stack *middle
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

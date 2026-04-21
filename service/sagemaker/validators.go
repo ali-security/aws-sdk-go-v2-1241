@@ -210,6 +210,66 @@ func (m *validateOpCreateAction) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAIBenchmarkJob struct {
+}
+
+func (*validateOpCreateAIBenchmarkJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAIBenchmarkJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAIBenchmarkJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAIBenchmarkJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAIRecommendationJob struct {
+}
+
+func (*validateOpCreateAIRecommendationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAIRecommendationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAIRecommendationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAIRecommendationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAIWorkloadConfig struct {
+}
+
+func (*validateOpCreateAIWorkloadConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAIWorkloadConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAIWorkloadConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAIWorkloadConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAlgorithm struct {
 }
 
@@ -1570,6 +1630,66 @@ func (m *validateOpDeleteAction) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAIBenchmarkJob struct {
+}
+
+func (*validateOpDeleteAIBenchmarkJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAIBenchmarkJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAIBenchmarkJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAIBenchmarkJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAIRecommendationJob struct {
+}
+
+func (*validateOpDeleteAIRecommendationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAIRecommendationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAIRecommendationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAIRecommendationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAIWorkloadConfig struct {
+}
+
+func (*validateOpDeleteAIWorkloadConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAIWorkloadConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAIWorkloadConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAIWorkloadConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAlgorithm struct {
 }
 
@@ -2745,6 +2865,66 @@ func (m *validateOpDescribeAction) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAIBenchmarkJob struct {
+}
+
+func (*validateOpDescribeAIBenchmarkJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAIBenchmarkJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAIBenchmarkJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAIBenchmarkJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAIRecommendationJob struct {
+}
+
+func (*validateOpDescribeAIRecommendationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAIRecommendationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAIRecommendationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAIRecommendationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAIWorkloadConfig struct {
+}
+
+func (*validateOpDescribeAIWorkloadConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAIWorkloadConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAIWorkloadConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAIWorkloadConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -5050,6 +5230,46 @@ func (m *validateOpStartSession) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopAIBenchmarkJob struct {
+}
+
+func (*validateOpStopAIBenchmarkJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopAIBenchmarkJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopAIBenchmarkJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopAIBenchmarkJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopAIRecommendationJob struct {
+}
+
+func (*validateOpStopAIRecommendationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopAIRecommendationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopAIRecommendationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopAIRecommendationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopAutoMLJob struct {
 }
 
@@ -6310,6 +6530,18 @@ func addOpCreateActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAction{}, middleware.After)
 }
 
+func addOpCreateAIBenchmarkJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAIBenchmarkJob{}, middleware.After)
+}
+
+func addOpCreateAIRecommendationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAIRecommendationJob{}, middleware.After)
+}
+
+func addOpCreateAIWorkloadConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAIWorkloadConfig{}, middleware.After)
+}
+
 func addOpCreateAlgorithmValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAlgorithm{}, middleware.After)
 }
@@ -6582,6 +6814,18 @@ func addOpDeleteActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAction{}, middleware.After)
 }
 
+func addOpDeleteAIBenchmarkJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAIBenchmarkJob{}, middleware.After)
+}
+
+func addOpDeleteAIRecommendationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAIRecommendationJob{}, middleware.After)
+}
+
+func addOpDeleteAIWorkloadConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAIWorkloadConfig{}, middleware.After)
+}
+
 func addOpDeleteAlgorithmValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlgorithm{}, middleware.After)
 }
@@ -6816,6 +7060,18 @@ func addOpDeregisterDevicesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAction{}, middleware.After)
+}
+
+func addOpDescribeAIBenchmarkJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAIBenchmarkJob{}, middleware.After)
+}
+
+func addOpDescribeAIRecommendationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAIRecommendationJob{}, middleware.After)
+}
+
+func addOpDescribeAIWorkloadConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAIWorkloadConfig{}, middleware.After)
 }
 
 func addOpDescribeAlgorithmValidationMiddleware(stack *middleware.Stack) error {
@@ -7278,6 +7534,14 @@ func addOpStartSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartSession{}, middleware.After)
 }
 
+func addOpStopAIBenchmarkJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopAIBenchmarkJob{}, middleware.After)
+}
+
+func addOpStopAIRecommendationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopAIRecommendationJob{}, middleware.After)
+}
+
 func addOpStopAutoMLJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopAutoMLJob{}, middleware.After)
 }
@@ -7693,6 +7957,265 @@ func validateAdditionalS3DataSource(v *types.AdditionalS3DataSource) error {
 	if len(v.S3DataType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("S3DataType"))
 	}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIBenchmarkEndpoint(v *types.AIBenchmarkEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIBenchmarkEndpoint"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.InferenceComponents != nil {
+		if err := validateAIBenchmarkInferenceComponentList(v.InferenceComponents); err != nil {
+			invalidParams.AddNested("InferenceComponents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIBenchmarkInferenceComponent(v *types.AIBenchmarkInferenceComponent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIBenchmarkInferenceComponent"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIBenchmarkInferenceComponentList(v []types.AIBenchmarkInferenceComponent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIBenchmarkInferenceComponentList"}
+	for i := range v {
+		if err := validateAIBenchmarkInferenceComponent(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIBenchmarkNetworkConfig(v *types.AIBenchmarkNetworkConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIBenchmarkNetworkConfig"}
+	if v.VpcConfig != nil {
+		if err := validateVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIBenchmarkOutputConfig(v *types.AIBenchmarkOutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIBenchmarkOutputConfig"}
+	if v.S3OutputLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputLocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIBenchmarkTarget(v types.AIBenchmarkTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIBenchmarkTarget"}
+	switch uv := v.(type) {
+	case *types.AIBenchmarkTargetMemberEndpoint:
+		if err := validateAIBenchmarkEndpoint(&uv.Value); err != nil {
+			invalidParams.AddNested("[Endpoint]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIDatasetConfig(v types.AIDatasetConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIDatasetConfig"}
+	switch uv := v.(type) {
+	case *types.AIDatasetConfigMemberInputDataConfig:
+		if err := validateAIWorkloadInputDataConfigList(uv.Value); err != nil {
+			invalidParams.AddNested("[InputDataConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIRecommendationConstraint(v *types.AIRecommendationConstraint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIRecommendationConstraint"}
+	if len(v.Metric) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Metric"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIRecommendationConstraintList(v []types.AIRecommendationConstraint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIRecommendationConstraintList"}
+	for i := range v {
+		if err := validateAIRecommendationConstraint(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIRecommendationPerformanceTarget(v *types.AIRecommendationPerformanceTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIRecommendationPerformanceTarget"}
+	if v.Constraints == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Constraints"))
+	} else if v.Constraints != nil {
+		if err := validateAIRecommendationConstraintList(v.Constraints); err != nil {
+			invalidParams.AddNested("Constraints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIWorkloadConfigs(v *types.AIWorkloadConfigs) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIWorkloadConfigs"}
+	if v.WorkloadSpec == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkloadSpec"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIWorkloadDataSource(v *types.AIWorkloadDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIWorkloadDataSource"}
+	if v.S3DataSource != nil {
+		if err := validateAIWorkloadS3DataSource(v.S3DataSource); err != nil {
+			invalidParams.AddNested("S3DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIWorkloadInputDataConfig(v *types.AIWorkloadInputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIWorkloadInputDataConfig"}
+	if v.ChannelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
+	}
+	if v.DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
+	} else if v.DataSource != nil {
+		if err := validateAIWorkloadDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIWorkloadInputDataConfigList(v []types.AIWorkloadInputDataConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIWorkloadInputDataConfigList"}
+	for i := range v {
+		if err := validateAIWorkloadInputDataConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAIWorkloadS3DataSource(v *types.AIWorkloadS3DataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AIWorkloadS3DataSource"}
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
@@ -12188,6 +12711,11 @@ func validateModelPackageContainerDefinition(v *types.ModelPackageContainerDefin
 			invalidParams.AddNested("ModelInput", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AdditionalModelDataSources != nil {
+		if err := validateAdditionalModelDataSources(v.AdditionalModelDataSources); err != nil {
+			invalidParams.AddNested("AdditionalModelDataSources", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AdditionalS3DataSource != nil {
 		if err := validateAdditionalS3DataSource(v.AdditionalS3DataSource); err != nil {
 			invalidParams.AddNested("AdditionalS3DataSource", err.(smithy.InvalidParamsError))
@@ -15449,6 +15977,120 @@ func validateOpCreateActionInput(v *CreateActionInput) error {
 	}
 }
 
+func validateOpCreateAIBenchmarkJobInput(v *CreateAIBenchmarkJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAIBenchmarkJobInput"}
+	if v.AIBenchmarkJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIBenchmarkJobName"))
+	}
+	if v.BenchmarkTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BenchmarkTarget"))
+	} else if v.BenchmarkTarget != nil {
+		if err := validateAIBenchmarkTarget(v.BenchmarkTarget); err != nil {
+			invalidParams.AddNested("BenchmarkTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateAIBenchmarkOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AIWorkloadConfigIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIWorkloadConfigIdentifier"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.NetworkConfig != nil {
+		if err := validateAIBenchmarkNetworkConfig(v.NetworkConfig); err != nil {
+			invalidParams.AddNested("NetworkConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAIRecommendationJobInput(v *CreateAIRecommendationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAIRecommendationJobInput"}
+	if v.AIRecommendationJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIRecommendationJobName"))
+	}
+	if v.ModelSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelSource"))
+	}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	}
+	if v.AIWorkloadConfigIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIWorkloadConfigIdentifier"))
+	}
+	if v.PerformanceTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PerformanceTarget"))
+	} else if v.PerformanceTarget != nil {
+		if err := validateAIRecommendationPerformanceTarget(v.PerformanceTarget); err != nil {
+			invalidParams.AddNested("PerformanceTarget", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAIWorkloadConfigInput(v *CreateAIWorkloadConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAIWorkloadConfigInput"}
+	if v.AIWorkloadConfigName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIWorkloadConfigName"))
+	}
+	if v.DatasetConfig != nil {
+		if err := validateAIDatasetConfig(v.DatasetConfig); err != nil {
+			invalidParams.AddNested("DatasetConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AIWorkloadConfigs != nil {
+		if err := validateAIWorkloadConfigs(v.AIWorkloadConfigs); err != nil {
+			invalidParams.AddNested("AIWorkloadConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAlgorithmInput(v *CreateAlgorithmInput) error {
 	if v == nil {
 		return nil
@@ -17816,6 +18458,51 @@ func validateOpDeleteActionInput(v *DeleteActionInput) error {
 	}
 }
 
+func validateOpDeleteAIBenchmarkJobInput(v *DeleteAIBenchmarkJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAIBenchmarkJobInput"}
+	if v.AIBenchmarkJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIBenchmarkJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAIRecommendationJobInput(v *DeleteAIRecommendationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAIRecommendationJobInput"}
+	if v.AIRecommendationJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIRecommendationJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAIWorkloadConfigInput(v *DeleteAIWorkloadConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAIWorkloadConfigInput"}
+	if v.AIWorkloadConfigName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIWorkloadConfigName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAlgorithmInput(v *DeleteAlgorithmInput) error {
 	if v == nil {
 		return nil
@@ -18737,6 +19424,51 @@ func validateOpDescribeActionInput(v *DescribeActionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeActionInput"}
 	if v.ActionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAIBenchmarkJobInput(v *DescribeAIBenchmarkJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAIBenchmarkJobInput"}
+	if v.AIBenchmarkJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIBenchmarkJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAIRecommendationJobInput(v *DescribeAIRecommendationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAIRecommendationJobInput"}
+	if v.AIRecommendationJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIRecommendationJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAIWorkloadConfigInput(v *DescribeAIWorkloadConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAIWorkloadConfigInput"}
+	if v.AIWorkloadConfigName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIWorkloadConfigName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -20609,6 +21341,36 @@ func validateOpStartSessionInput(v *StartSessionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartSessionInput"}
 	if v.ResourceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopAIBenchmarkJobInput(v *StopAIBenchmarkJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopAIBenchmarkJobInput"}
+	if v.AIBenchmarkJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIBenchmarkJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopAIRecommendationJobInput(v *StopAIRecommendationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopAIRecommendationJobInput"}
+	if v.AIRecommendationJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AIRecommendationJobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

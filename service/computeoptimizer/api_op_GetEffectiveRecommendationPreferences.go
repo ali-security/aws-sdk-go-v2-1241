@@ -36,8 +36,8 @@ func (c *Client) GetEffectiveRecommendationPreferences(ctx context.Context, para
 type GetEffectiveRecommendationPreferencesInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource for which to confirm effective
-	// recommendation preferences. Only EC2 instance and Amazon EC2 Auto Scaling group
-	// ARNs are currently supported.
+	// recommendation preferences. Only EC2 instance and Auto Scaling group ARNs are
+	// currently supported.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -124,11 +124,11 @@ func (c *Client) addOperationGetEffectiveRecommendationPreferencesMiddlewares(st
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetEffectiveRecommendationPreferences{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetEffectiveRecommendationPreferences{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetEffectiveRecommendationPreferences{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetEffectiveRecommendationPreferences{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -179,6 +179,9 @@ func (c *Client) addOperationGetEffectiveRecommendationPreferencesMiddlewares(st
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

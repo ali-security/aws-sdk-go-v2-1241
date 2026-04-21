@@ -18,8 +18,7 @@ import (
 //   - Amazon EC2 instances in an account that are Underprovisioned ,
 //     Overprovisioned , or Optimized .
 //
-//   - EC2Amazon EC2 Auto Scaling groups in an account that are NotOptimized , or
-//     Optimized .
+//   - EC2Auto Scaling groups in an account that are NotOptimized , or Optimized .
 //
 //   - Amazon EBS volumes in an account that are NotOptimized , or Optimized .
 //
@@ -93,11 +92,11 @@ func (c *Client) addOperationGetRecommendationSummariesMiddlewares(stack *middle
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRecommendationSummaries{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetRecommendationSummaries{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRecommendationSummaries{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetRecommendationSummaries{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -148,6 +147,9 @@ func (c *Client) addOperationGetRecommendationSummariesMiddlewares(stack *middle
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

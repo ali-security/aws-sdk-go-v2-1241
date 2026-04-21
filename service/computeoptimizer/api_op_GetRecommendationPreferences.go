@@ -16,7 +16,7 @@ import (
 //
 // Use the scope parameter to specify which preferences to return. You can specify
 // to return preferences for an organization, a specific account ID, or a specific
-// EC2 instance or Amazon EC2 Auto Scaling group Amazon Resource Name (ARN).
+// EC2 instance or Auto Scaling group Amazon Resource Name (ARN).
 //
 // For more information, see [Activating enhanced infrastructure metrics] in the Compute Optimizer User Guide.
 //
@@ -42,8 +42,8 @@ type GetRecommendationPreferencesInput struct {
 	// preferences.
 	//
 	// The Ec2Instance option encompasses standalone instances and instances that are
-	// part of Amazon EC2 Auto Scaling groups. The AutoScalingGroup option encompasses
-	// only instances that are part of an Amazon EC2 Auto Scaling group.
+	// part of Auto Scaling groups. The AutoScalingGroup option encompasses only
+	// instances that are part of an Auto Scaling group.
 	//
 	// This member is required.
 	ResourceType types.ResourceType
@@ -91,11 +91,11 @@ func (c *Client) addOperationGetRecommendationPreferencesMiddlewares(stack *midd
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRecommendationPreferences{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetRecommendationPreferences{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRecommendationPreferences{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetRecommendationPreferences{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -146,6 +146,9 @@ func (c *Client) addOperationGetRecommendationPreferencesMiddlewares(stack *midd
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
