@@ -1,3 +1,7 @@
+# v1.60.0 (2026-04-21)
+
+* **Feature**: Support for new types of partner managed rulegroups for Network Firewall Service
+
 # v1.59.8 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

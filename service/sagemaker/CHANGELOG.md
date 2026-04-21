@@ -1,3 +1,7 @@
+# v1.242.0 (2026-04-21)
+
+* **Feature**: SageMaker AI now supports generative AI inference recommendations. Provide your model and workload, and SageMaker AI optimizes configurations, benchmarks them on real GPUs, and returns deployment-ready recommendations with validated metrics, accelerating the path to production from weeks to hours.
+
 # v1.241.0 (2026-04-17)
 
 * **Feature**: Adds support for providing NetworkInterface for efa enabled instances and Simplified cluster creation for Slurm-orchestrated clusters with optional Lifecycle Script (LCS) configuration.

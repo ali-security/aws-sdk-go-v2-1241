@@ -1,3 +1,23 @@
+# Release (2026-04-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.32.0](service/comprehendmedical/CHANGELOG.md#v1320-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.50.0](service/computeoptimizer/CHANGELOG.md#v1500-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.0. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation`: [v1.1.0](service/computeoptimizerautomation/CHANGELOG.md#v110-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.0. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.53.0](service/gamelift/CHANGELOG.md#v1530-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.37.0](service/marketplaceentitlementservice/CHANGELOG.md#v1370-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.60.0](service/networkfirewall/CHANGELOG.md#v1600-2026-04-21)
+  * **Feature**: Support for new types of partner managed rulegroups for Network Firewall Service
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.242.0](service/sagemaker/CHANGELOG.md#v12420-2026-04-21)
+  * **Feature**: SageMaker AI now supports generative AI inference recommendations. Provide your model and workload, and SageMaker AI optimizes configurations, benchmarks them on real GPUs, and returns deployment-ready recommendations with validated metrics, accelerating the path to production from weeks to hours.
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.36.0](service/snowball/CHANGELOG.md#v1360-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+
 # Release (2026-04-20)
 
 ## Module Highlights
