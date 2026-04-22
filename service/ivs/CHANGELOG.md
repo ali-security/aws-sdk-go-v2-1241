@@ -1,3 +1,7 @@
+# v1.49.0 (2026-04-22)
+
+* **Feature**: Adds support for Amazon IVS server-side ad insertion
+
 # v1.48.15 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

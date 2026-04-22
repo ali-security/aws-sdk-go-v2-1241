@@ -1,3 +1,7 @@
+# v1.64.0 (2026-04-22)
+
+* **Feature**: Support of S3Files volume type, container start and stop timeouts.
+
 # v1.63.3 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

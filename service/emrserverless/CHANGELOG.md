@@ -1,3 +1,7 @@
+# v1.40.0 (2026-04-22)
+
+* **Feature**: This release adds support for Spark connect sessions starting with release label emr-7.13.0.
+
 # v1.39.7 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

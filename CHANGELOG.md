@@ -1,3 +1,34 @@
+# Release (2026-04-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.64.0](service/batch/CHANGELOG.md#v1640-2026-04-22)
+  * **Feature**: Support of S3Files volume type, container start and stop timeouts.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.22.0](service/bedrockagentcore/CHANGELOG.md#v1220-2026-04-22)
+  * **Feature**: Adds support for Amazon Bedrock AgentCore Harness data plane APIs, enabling customers to invoke managed agent loops and execute commands on live agent sessions with streaming responses.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.31.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1310-2026-04-22)
+  * **Feature**: Adds support for Amazon Bedrock AgentCore Harness control plane APIs, enabling customers to create, manage, and configure managed agent loops with customizable models, tools, memory, and isolated execution environments.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.299.0](service/ec2/CHANGELOG.md#v12990-2026-04-22)
+  * **Feature**: Managed resource visibility settings control whether resources that AWS services provision on your behalf within your AWS account appear in your Amazon console views and API list operations.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.79.0](service/ecs/CHANGELOG.md#v1790-2026-04-22)
+  * **Feature**: GPU health monitoring and auto-repair for ECS Managed Instances
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.40.0](service/emrserverless/CHANGELOG.md#v1400-2026-04-22)
+  * **Feature**: This release adds support for Spark connect sessions starting with release label emr-7.13.0.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.55.0](service/iotwireless/CHANGELOG.md#v1550-2026-04-22)
+  * **Feature**: Enable customers to optionally specify a desired confidence level for Cellular and WiFi position estimates. Customers can use this to trade off confidence level and radius of uncertainty based on their needs.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.49.0](service/ivs/CHANGELOG.md#v1490-2026-04-22)
+  * **Feature**: Adds support for Amazon IVS server-side ad insertion
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.90.0](service/lambda/CHANGELOG.md#v1900-2026-04-22)
+  * **Feature**: Add Ruby 4.0 (ruby4.0) support to AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.65.0](service/opensearch/CHANGELOG.md#v1650-2026-04-22)
+  * **Feature**: Adds support for RollbackServiceSoftwareUpdate API
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.100.0](service/s3/CHANGELOG.md#v11000-2026-04-22)
+  * **Feature**: This release adds five additional checksum algorithms for S3 data integrity (MD5, SHA-512, XXHash3, XXHash64, XXHash128) and support for S3 Inventory on directory buckets (S3 Express One Zone).
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.70.0](service/s3control/CHANGELOG.md#v1700-2026-04-22)
+  * **Feature**: This release adds support for five additional checksum algorithms for data integrity checking in Amazon S3 - MD5, SHA-512, XXHash3, XXHash64, and XXHash128.
+
 # Release (2026-04-21)
 
 ## Module Highlights

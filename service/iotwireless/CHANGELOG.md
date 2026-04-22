@@ -1,3 +1,7 @@
+# v1.55.0 (2026-04-22)
+
+* **Feature**: Enable customers to optionally specify a desired confidence level for Cellular and WiFi position estimates. Customers can use this to trade off confidence level and radius of uncertainty based on their needs.
+
 # v1.54.10 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

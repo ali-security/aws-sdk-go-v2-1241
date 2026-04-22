@@ -1,8 +1,0 @@
-{
-    "id": "24e2d998-c7aa-4ebd-a00a-50996e0043f5",
-    "type": "feature",
-    "description": "GPU health monitoring and auto-repair for ECS Managed Instances",
-    "modules": [
-        "service/ecs"
-    ]
-}

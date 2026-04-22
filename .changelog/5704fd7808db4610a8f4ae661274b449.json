@@ -1,8 +1,0 @@
-{
-    "id": "5704fd78-08db-4610-a8f4-ae661274b449",
-    "type": "feature",
-    "description": "Adds support for RollbackServiceSoftwareUpdate API",
-    "modules": [
-        "service/opensearch"
-    ]
-}

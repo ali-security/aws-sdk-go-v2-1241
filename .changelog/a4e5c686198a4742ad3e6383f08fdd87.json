@@ -1,8 +1,0 @@
-{
-    "id": "a4e5c686-198a-4742-ad3e-6383f08fdd87",
-    "type": "feature",
-    "description": "Add Ruby 4.0 (ruby4.0) support to AWS Lambda.",
-    "modules": [
-        "service/lambda"
-    ]
-}

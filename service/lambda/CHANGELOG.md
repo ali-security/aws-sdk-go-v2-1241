@@ -1,3 +1,7 @@
+# v1.90.0 (2026-04-22)
+
+* **Feature**: Add Ruby 4.0 (ruby4.0) support to AWS Lambda.
+
 # v1.89.1 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

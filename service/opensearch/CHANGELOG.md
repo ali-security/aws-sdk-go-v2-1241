@@ -1,3 +1,7 @@
+# v1.65.0 (2026-04-22)
+
+* **Feature**: Adds support for RollbackServiceSoftwareUpdate API
+
 # v1.64.1 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

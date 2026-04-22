@@ -1,3 +1,7 @@
+# v1.70.0 (2026-04-22)
+
+* **Feature**: This release adds support for five additional checksum algorithms for data integrity checking in Amazon S3 - MD5, SHA-512, XXHash3, XXHash64, and XXHash128.
+
 # v1.69.1 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

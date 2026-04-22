@@ -1,3 +1,7 @@
+# v1.22.0 (2026-04-22)
+
+* **Feature**: Adds support for Amazon Bedrock AgentCore Harness data plane APIs, enabling customers to invoke managed agent loops and execute commands on live agent sessions with streaming responses.
+
 # v1.21.1 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

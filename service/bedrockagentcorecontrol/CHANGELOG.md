@@ -1,3 +1,7 @@
+# v1.31.0 (2026-04-22)
+
+* **Feature**: Adds support for Amazon Bedrock AgentCore Harness control plane APIs, enabling customers to create, manage, and configure managed agent loops with customizable models, tools, memory, and isolated execution environments.
+
 # v1.30.0 (2026-04-20)
 
 * **Feature**: Supporting listingMode for AgentCore Gateway MCP server targets
