@@ -36,6 +36,9 @@ type UpdateChannelInput struct {
 	// This member is required.
 	Arn *string
 
+	// ARN of the ad configuration associated with the channel.
+	AdConfigurationArn *string
+
 	// Whether the channel is private (enabled for playback authorization).
 	Authorized bool
 

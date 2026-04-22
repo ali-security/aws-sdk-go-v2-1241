@@ -190,6 +190,26 @@ func (m *validateOpCreateGatewayTarget) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateHarness struct {
+}
+
+func (*validateOpCreateHarness) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateHarness) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateHarnessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateHarnessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMemory struct {
 }
 
@@ -525,6 +545,26 @@ func (m *validateOpDeleteGatewayTarget) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteGatewayTargetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteHarness struct {
+}
+
+func (*validateOpDeleteHarness) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteHarness) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteHarnessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteHarnessInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -885,6 +925,26 @@ func (m *validateOpGetGatewayTarget) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetGatewayTargetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetHarness struct {
+}
+
+func (*validateOpGetHarness) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetHarness) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetHarnessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetHarnessInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1510,6 +1570,26 @@ func (m *validateOpUpdateGatewayTarget) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateHarness struct {
+}
+
+func (*validateOpUpdateHarness) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateHarness) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateHarnessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateHarnessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMemory struct {
 }
 
@@ -1726,6 +1806,10 @@ func addOpCreateGatewayTargetValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateGatewayTarget{}, middleware.After)
 }
 
+func addOpCreateHarnessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateHarness{}, middleware.After)
+}
+
 func addOpCreateMemoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMemory{}, middleware.After)
 }
@@ -1792,6 +1876,10 @@ func addOpDeleteGatewayValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteGatewayTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGatewayTarget{}, middleware.After)
+}
+
+func addOpDeleteHarnessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteHarness{}, middleware.After)
 }
 
 func addOpDeleteMemoryValidationMiddleware(stack *middleware.Stack) error {
@@ -1864,6 +1952,10 @@ func addOpGetGatewayValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetGatewayTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGatewayTarget{}, middleware.After)
+}
+
+func addOpGetHarnessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetHarness{}, middleware.After)
 }
 
 func addOpGetMemoryValidationMiddleware(stack *middleware.Stack) error {
@@ -1988,6 +2080,10 @@ func addOpUpdateGatewayValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateGatewayTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateGatewayTarget{}, middleware.After)
+}
+
+func addOpUpdateHarnessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateHarness{}, middleware.After)
 }
 
 func addOpUpdateMemoryValidationMiddleware(stack *middleware.Stack) error {
@@ -3246,6 +3342,333 @@ func validateGoogleOauth2ProviderConfigInput(v *types.GoogleOauth2ProviderConfig
 	}
 	if v.ClientSecret == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessAgentCoreGatewayConfig(v *types.HarnessAgentCoreGatewayConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessAgentCoreGatewayConfig"}
+	if v.GatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
+	}
+	if v.OutboundAuth != nil {
+		if err := validateHarnessGatewayOutboundAuth(v.OutboundAuth); err != nil {
+			invalidParams.AddNested("OutboundAuth", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessAgentCoreMemoryConfiguration(v *types.HarnessAgentCoreMemoryConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessAgentCoreMemoryConfiguration"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessAgentCoreRuntimeEnvironmentRequest(v *types.HarnessAgentCoreRuntimeEnvironmentRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessAgentCoreRuntimeEnvironmentRequest"}
+	if v.NetworkConfiguration != nil {
+		if err := validateNetworkConfiguration(v.NetworkConfiguration); err != nil {
+			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FilesystemConfigurations != nil {
+		if err := validateFilesystemConfigurations(v.FilesystemConfigurations); err != nil {
+			invalidParams.AddNested("FilesystemConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessBedrockModelConfig(v *types.HarnessBedrockModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessBedrockModelConfig"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessEnvironmentArtifact(v types.HarnessEnvironmentArtifact) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessEnvironmentArtifact"}
+	switch uv := v.(type) {
+	case *types.HarnessEnvironmentArtifactMemberContainerConfiguration:
+		if err := validateContainerConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[containerConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessEnvironmentProviderRequest(v types.HarnessEnvironmentProviderRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessEnvironmentProviderRequest"}
+	switch uv := v.(type) {
+	case *types.HarnessEnvironmentProviderRequestMemberAgentCoreRuntimeEnvironment:
+		if err := validateHarnessAgentCoreRuntimeEnvironmentRequest(&uv.Value); err != nil {
+			invalidParams.AddNested("[agentCoreRuntimeEnvironment]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessGatewayOutboundAuth(v types.HarnessGatewayOutboundAuth) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessGatewayOutboundAuth"}
+	switch uv := v.(type) {
+	case *types.HarnessGatewayOutboundAuthMemberOauth:
+		if err := validateOAuthCredentialProvider(&uv.Value); err != nil {
+			invalidParams.AddNested("[oauth]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessGeminiModelConfig(v *types.HarnessGeminiModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessGeminiModelConfig"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if v.ApiKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessInlineFunctionConfig(v *types.HarnessInlineFunctionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessInlineFunctionConfig"}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.InputSchema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputSchema"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessMemoryConfiguration(v types.HarnessMemoryConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessMemoryConfiguration"}
+	switch uv := v.(type) {
+	case *types.HarnessMemoryConfigurationMemberAgentCoreMemoryConfiguration:
+		if err := validateHarnessAgentCoreMemoryConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[agentCoreMemoryConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessModelConfiguration(v types.HarnessModelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessModelConfiguration"}
+	switch uv := v.(type) {
+	case *types.HarnessModelConfigurationMemberBedrockModelConfig:
+		if err := validateHarnessBedrockModelConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[bedrockModelConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.HarnessModelConfigurationMemberGeminiModelConfig:
+		if err := validateHarnessGeminiModelConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[geminiModelConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.HarnessModelConfigurationMemberOpenAiModelConfig:
+		if err := validateHarnessOpenAiModelConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[openAiModelConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessOpenAiModelConfig(v *types.HarnessOpenAiModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessOpenAiModelConfig"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if v.ApiKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiKeyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessRemoteMcpConfig(v *types.HarnessRemoteMcpConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessRemoteMcpConfig"}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessTool(v *types.HarnessTool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessTool"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Config != nil {
+		if err := validateHarnessToolConfiguration(v.Config); err != nil {
+			invalidParams.AddNested("Config", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessToolConfiguration(v types.HarnessToolConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessToolConfiguration"}
+	switch uv := v.(type) {
+	case *types.HarnessToolConfigurationMemberAgentCoreGateway:
+		if err := validateHarnessAgentCoreGatewayConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[agentCoreGateway]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.HarnessToolConfigurationMemberInlineFunction:
+		if err := validateHarnessInlineFunctionConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[inlineFunction]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.HarnessToolConfigurationMemberRemoteMcp:
+		if err := validateHarnessRemoteMcpConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[remoteMcp]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessTools(v []types.HarnessTool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessTools"}
+	for i := range v {
+		if err := validateHarnessTool(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessTruncationConfiguration(v *types.HarnessTruncationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessTruncationConfiguration"}
+	if len(v.Strategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Strategy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4663,6 +5086,40 @@ func validateUpdatedAuthorizerConfiguration(v *types.UpdatedAuthorizerConfigurat
 	}
 }
 
+func validateUpdatedHarnessEnvironmentArtifact(v *types.UpdatedHarnessEnvironmentArtifact) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedHarnessEnvironmentArtifact"}
+	if v.OptionalValue != nil {
+		if err := validateHarnessEnvironmentArtifact(v.OptionalValue); err != nil {
+			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdatedHarnessMemoryConfiguration(v *types.UpdatedHarnessMemoryConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatedHarnessMemoryConfiguration"}
+	if v.OptionalValue != nil {
+		if err := validateHarnessMemoryConfiguration(v.OptionalValue); err != nil {
+			invalidParams.AddNested("OptionalValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdatedSynchronizationConfiguration(v *types.UpdatedSynchronizationConfiguration) error {
 	if v == nil {
 		return nil
@@ -5037,6 +5494,59 @@ func validateOpCreateGatewayTargetInput(v *CreateGatewayTargetInput) error {
 	}
 }
 
+func validateOpCreateHarnessInput(v *CreateHarnessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateHarnessInput"}
+	if v.HarnessName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarnessName"))
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.Environment != nil {
+		if err := validateHarnessEnvironmentProviderRequest(v.Environment); err != nil {
+			invalidParams.AddNested("Environment", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnvironmentArtifact != nil {
+		if err := validateHarnessEnvironmentArtifact(v.EnvironmentArtifact); err != nil {
+			invalidParams.AddNested("EnvironmentArtifact", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AuthorizerConfiguration != nil {
+		if err := validateAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
+			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Model != nil {
+		if err := validateHarnessModelConfiguration(v.Model); err != nil {
+			invalidParams.AddNested("Model", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tools != nil {
+		if err := validateHarnessTools(v.Tools); err != nil {
+			invalidParams.AddNested("Tools", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Memory != nil {
+		if err := validateHarnessMemoryConfiguration(v.Memory); err != nil {
+			invalidParams.AddNested("Memory", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Truncation != nil {
+		if err := validateHarnessTruncationConfiguration(v.Truncation); err != nil {
+			invalidParams.AddNested("Truncation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMemoryInput(v *CreateMemoryInput) error {
 	if v == nil {
 		return nil
@@ -5370,6 +5880,21 @@ func validateOpDeleteGatewayTargetInput(v *DeleteGatewayTargetInput) error {
 	}
 }
 
+func validateOpDeleteHarnessInput(v *DeleteHarnessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteHarnessInput"}
+	if v.HarnessId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarnessId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMemoryInput(v *DeleteMemoryInput) error {
 	if v == nil {
 		return nil
@@ -5644,6 +6169,21 @@ func validateOpGetGatewayTargetInput(v *GetGatewayTargetInput) error {
 	}
 	if v.TargetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetHarnessInput(v *GetHarnessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetHarnessInput"}
+	if v.HarnessId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarnessId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6246,6 +6786,56 @@ func validateOpUpdateGatewayTargetInput(v *UpdateGatewayTargetInput) error {
 	if v.PrivateEndpoint != nil {
 		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
 			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateHarnessInput(v *UpdateHarnessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateHarnessInput"}
+	if v.HarnessId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HarnessId"))
+	}
+	if v.Environment != nil {
+		if err := validateHarnessEnvironmentProviderRequest(v.Environment); err != nil {
+			invalidParams.AddNested("Environment", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnvironmentArtifact != nil {
+		if err := validateUpdatedHarnessEnvironmentArtifact(v.EnvironmentArtifact); err != nil {
+			invalidParams.AddNested("EnvironmentArtifact", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AuthorizerConfiguration != nil {
+		if err := validateUpdatedAuthorizerConfiguration(v.AuthorizerConfiguration); err != nil {
+			invalidParams.AddNested("AuthorizerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Model != nil {
+		if err := validateHarnessModelConfiguration(v.Model); err != nil {
+			invalidParams.AddNested("Model", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tools != nil {
+		if err := validateHarnessTools(v.Tools); err != nil {
+			invalidParams.AddNested("Tools", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Memory != nil {
+		if err := validateUpdatedHarnessMemoryConfiguration(v.Memory); err != nil {
+			invalidParams.AddNested("Memory", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Truncation != nil {
+		if err := validateHarnessTruncationConfiguration(v.Truncation); err != nil {
+			invalidParams.AddNested("Truncation", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

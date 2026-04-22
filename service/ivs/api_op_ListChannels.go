@@ -33,6 +33,9 @@ func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, op
 
 type ListChannelsInput struct {
 
+	// Filters the channel list to match the specified ad configuration ARN.
+	FilterByAdConfigurationArn *string
+
 	// Filters the channel list to match the specified name.
 	FilterByName *string
 

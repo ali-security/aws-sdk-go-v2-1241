@@ -1,0 +1,8 @@
+{
+    "id": "dd2b2f97-44f5-4e0f-9288-0b60d679e8fd",
+    "type": "feature",
+    "description": "Adds support for Amazon Bedrock AgentCore Harness control plane APIs, enabling customers to create, manage, and configure managed agent loops with customizable models, tools, memory, and isolated execution environments.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

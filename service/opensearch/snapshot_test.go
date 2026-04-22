@@ -962,6 +962,18 @@ func TestCheckSnapshot_RevokeVpcEndpointAccess(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RollbackServiceSoftwareUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RollbackServiceSoftwareUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RollbackServiceSoftwareUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartDomainMaintenance(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartDomainMaintenance(context.Background(), nil, func(o *Options) {
@@ -1998,6 +2010,18 @@ func TestUpdateSnapshot_RevokeVpcEndpointAccess(t *testing.T) {
 	_, err := svc.RevokeVpcEndpointAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RevokeVpcEndpointAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RollbackServiceSoftwareUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RollbackServiceSoftwareUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RollbackServiceSoftwareUpdate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -83,6 +83,7 @@
         "api_op_RejectInboundConnection.go",
         "api_op_RemoveTags.go",
         "api_op_RevokeVpcEndpointAccess.go",
+        "api_op_RollbackServiceSoftwareUpdate.go",
         "api_op_StartDomainMaintenance.go",
         "api_op_StartServiceSoftwareUpdate.go",
         "api_op_UpdateApplication.go",

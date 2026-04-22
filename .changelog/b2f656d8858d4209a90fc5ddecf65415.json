@@ -1,0 +1,8 @@
+{
+    "id": "b2f656d8-858d-4209-a90f-c5ddecf65415",
+    "type": "feature",
+    "description": "Support of S3Files volume type, container start and stop timeouts.",
+    "modules": [
+        "service/batch"
+    ]
+}

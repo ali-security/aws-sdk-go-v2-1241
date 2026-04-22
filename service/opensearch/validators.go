@@ -1270,6 +1270,26 @@ func (m *validateOpRevokeVpcEndpointAccess) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRollbackServiceSoftwareUpdate struct {
+}
+
+func (*validateOpRollbackServiceSoftwareUpdate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRollbackServiceSoftwareUpdate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RollbackServiceSoftwareUpdateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRollbackServiceSoftwareUpdateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartDomainMaintenance struct {
 }
 
@@ -1760,6 +1780,10 @@ func addOpRemoveTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRevokeVpcEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeVpcEndpointAccess{}, middleware.After)
+}
+
+func addOpRollbackServiceSoftwareUpdateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRollbackServiceSoftwareUpdate{}, middleware.After)
 }
 
 func addOpStartDomainMaintenanceValidationMiddleware(stack *middleware.Stack) error {
@@ -3359,6 +3383,21 @@ func validateOpRevokeVpcEndpointAccessInput(v *RevokeVpcEndpointAccessInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RevokeVpcEndpointAccessInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRollbackServiceSoftwareUpdateInput(v *RollbackServiceSoftwareUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RollbackServiceSoftwareUpdateInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}

@@ -15923,8 +15923,127 @@ func TestEndpointCase347(t *testing.T) {
 	}
 }
 
-// Data Plane with short AZ and dualstack
+// Data Plane with bucket containing delimiters
 func TestEndpointCase348(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                      ptr.String("us-east-1"),
+		Bucket:                      ptr.String("my--s3--bucket--abcd-ab1--x-s3"),
+		UseFIPS:                     ptr.Bool(false),
+		UseDualStack:                ptr.Bool(false),
+		Accelerate:                  ptr.Bool(false),
+		UseS3ExpressControlEndpoint: ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://my--s3--bucket--abcd-ab1--x-s3.s3express-abcd-ab1.us-east-1.amazonaws.com")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "sigv4-s3express",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3express")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
+				},
+			})
+			out.Set("backend", "S3Express")
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Control plane with with bucket containing delimiters
+func TestEndpointCase349(t *testing.T) {
+	var params = EndpointParameters{
+		Region:                      ptr.String("us-east-1"),
+		Bucket:                      ptr.String("my--s3--bucket--abcd-ab1--x-s3"),
+		UseFIPS:                     ptr.Bool(false),
+		UseDualStack:                ptr.Bool(false),
+		Accelerate:                  ptr.Bool(false),
+		UseS3ExpressControlEndpoint: ptr.Bool(true),
+		DisableS3ExpressSessionAuth: ptr.Bool(false),
+	}
+
+	resolver := NewDefaultEndpointResolverV2()
+	result, err := resolver.ResolveEndpoint(context.Background(), params)
+	_, _ = result, err
+
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	uri, _ := url.Parse("https://s3express-control.us-east-1.amazonaws.com/my--s3--bucket--abcd-ab1--x-s3")
+
+	expectEndpoint := smithyendpoints.Endpoint{
+		URI:     *uri,
+		Headers: http.Header{},
+		Properties: func() smithy.Properties {
+			var out smithy.Properties
+			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+				{
+					SchemeID: "aws.auth#sigv4",
+					SignerProperties: func() smithy.Properties {
+						var sp smithy.Properties
+						smithyhttp.SetSigV4SigningName(&sp, "s3express")
+						smithyhttp.SetSigV4ASigningName(&sp, "s3express")
+
+						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
+
+						smithyhttp.SetDisableDoubleEncoding(&sp, true)
+						return sp
+					}(),
+				},
+			})
+			out.Set("backend", "S3Express")
+			return out
+		}(),
+	}
+
+	if e, a := expectEndpoint.URI, result.URI; e != a {
+		t.Errorf("expect %v URI, got %v", e, a)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
+	}
+
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
+	}
+}
+
+// Data Plane with short AZ and dualstack
+func TestEndpointCase350(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -15983,7 +16102,7 @@ func TestEndpointCase348(t *testing.T) {
 }
 
 // Data Plane with short AZ and FIPS with dualstack
-func TestEndpointCase349(t *testing.T) {
+func TestEndpointCase351(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -16042,7 +16161,7 @@ func TestEndpointCase349(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short AZ and dualstack
-func TestEndpointCase350(t *testing.T) {
+func TestEndpointCase352(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -16101,7 +16220,7 @@ func TestEndpointCase350(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with short AZ and FIPS with dualstack
-func TestEndpointCase351(t *testing.T) {
+func TestEndpointCase353(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az1--x-s3"),
@@ -16160,7 +16279,7 @@ func TestEndpointCase351(t *testing.T) {
 }
 
 // Data Plane with zone and dualstack
-func TestEndpointCase352(t *testing.T) {
+func TestEndpointCase354(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az12--x-s3"),
@@ -16219,7 +16338,7 @@ func TestEndpointCase352(t *testing.T) {
 }
 
 // Data Plane with zone and FIPS with dualstack
-func TestEndpointCase353(t *testing.T) {
+func TestEndpointCase355(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az12--x-s3"),
@@ -16278,7 +16397,7 @@ func TestEndpointCase353(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with zone and dualstack
-func TestEndpointCase354(t *testing.T) {
+func TestEndpointCase356(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az12--x-s3"),
@@ -16337,7 +16456,7 @@ func TestEndpointCase354(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with 9-char zone and FIPS with dualstack
-func TestEndpointCase355(t *testing.T) {
+func TestEndpointCase357(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--usw2-az12--x-s3"),
@@ -16396,7 +16515,7 @@ func TestEndpointCase355(t *testing.T) {
 }
 
 // Data Plane with 13-char zone and dualstack
-func TestEndpointCase356(t *testing.T) {
+func TestEndpointCase358(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -16455,7 +16574,7 @@ func TestEndpointCase356(t *testing.T) {
 }
 
 // Data Plane with 13-char zone and FIPS with dualstack
-func TestEndpointCase357(t *testing.T) {
+func TestEndpointCase359(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -16514,7 +16633,7 @@ func TestEndpointCase357(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with 13-char zone and dualstack
-func TestEndpointCase358(t *testing.T) {
+func TestEndpointCase360(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -16573,7 +16692,7 @@ func TestEndpointCase358(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with 13-char zone and FIPS with dualstack
-func TestEndpointCase359(t *testing.T) {
+func TestEndpointCase361(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test-zone-ab1--x-s3"),
@@ -16632,7 +16751,7 @@ func TestEndpointCase359(t *testing.T) {
 }
 
 // Data Plane with 14-char zone and dualstack
-func TestEndpointCase360(t *testing.T) {
+func TestEndpointCase362(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -16691,7 +16810,7 @@ func TestEndpointCase360(t *testing.T) {
 }
 
 // Data Plane with 14-char zone and FIPS with dualstack
-func TestEndpointCase361(t *testing.T) {
+func TestEndpointCase363(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -16750,7 +16869,7 @@ func TestEndpointCase361(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with 14-char zone and dualstack
-func TestEndpointCase362(t *testing.T) {
+func TestEndpointCase364(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -16809,7 +16928,7 @@ func TestEndpointCase362(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with 14-char zone and FIPS with dualstack
-func TestEndpointCase363(t *testing.T) {
+func TestEndpointCase365(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-zone-ab1--x-s3"),
@@ -16868,7 +16987,7 @@ func TestEndpointCase363(t *testing.T) {
 }
 
 // Data Plane with long zone (20 cha) and dualstack
-func TestEndpointCase364(t *testing.T) {
+func TestEndpointCase366(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -16927,7 +17046,7 @@ func TestEndpointCase364(t *testing.T) {
 }
 
 // Data Plane with long zone (20 char) and FIPS with dualstack
-func TestEndpointCase365(t *testing.T) {
+func TestEndpointCase367(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -16986,7 +17105,7 @@ func TestEndpointCase365(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long zone (20 char) and dualstack
-func TestEndpointCase366(t *testing.T) {
+func TestEndpointCase368(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -17045,7 +17164,7 @@ func TestEndpointCase366(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with long zone (20 char) and FIPS with dualstack
-func TestEndpointCase367(t *testing.T) {
+func TestEndpointCase369(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("mybucket--test1-long1-zone-ab1--x-s3"),
@@ -17104,7 +17223,7 @@ func TestEndpointCase367(t *testing.T) {
 }
 
 // Control plane and FIPS with dualstack
-func TestEndpointCase368(t *testing.T) {
+func TestEndpointCase370(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("mybucket--test-ab1--x-s3"),
@@ -17163,7 +17282,7 @@ func TestEndpointCase368(t *testing.T) {
 }
 
 // Data plane with zone and dualstack and AP
-func TestEndpointCase369(t *testing.T) {
+func TestEndpointCase371(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -17222,7 +17341,7 @@ func TestEndpointCase369(t *testing.T) {
 }
 
 // Data plane with zone and FIPS with dualstack and AP
-func TestEndpointCase370(t *testing.T) {
+func TestEndpointCase372(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -17281,7 +17400,7 @@ func TestEndpointCase370(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with zone and dualstack and AP
-func TestEndpointCase371(t *testing.T) {
+func TestEndpointCase373(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -17340,7 +17459,7 @@ func TestEndpointCase371(t *testing.T) {
 }
 
 // Data Plane AP sigv4 auth with zone and FIPS with dualstack
-func TestEndpointCase372(t *testing.T) {
+func TestEndpointCase374(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az1--xa-s3"),
@@ -17399,7 +17518,7 @@ func TestEndpointCase372(t *testing.T) {
 }
 
 // Data Plane with zone (9 char) and AP with dualstack
-func TestEndpointCase373(t *testing.T) {
+func TestEndpointCase375(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az12--xa-s3"),
@@ -17458,7 +17577,7 @@ func TestEndpointCase373(t *testing.T) {
 }
 
 // Data Plane with zone (9 char) and FIPS with AP and dualstack
-func TestEndpointCase374(t *testing.T) {
+func TestEndpointCase376(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az12--xa-s3"),
@@ -17517,7 +17636,7 @@ func TestEndpointCase374(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with (9 char) zone and dualstack with AP
-func TestEndpointCase375(t *testing.T) {
+func TestEndpointCase377(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az12--xa-s3"),
@@ -17576,7 +17695,7 @@ func TestEndpointCase375(t *testing.T) {
 }
 
 // Access Point sigv4 auth with (9 char) zone and FIPS with dualstack
-func TestEndpointCase376(t *testing.T) {
+func TestEndpointCase378(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--usw2-az12--xa-s3"),
@@ -17635,7 +17754,7 @@ func TestEndpointCase376(t *testing.T) {
 }
 
 // Data Plane with zone (13 char) and AP with dualstack
-func TestEndpointCase377(t *testing.T) {
+func TestEndpointCase379(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -17694,7 +17813,7 @@ func TestEndpointCase377(t *testing.T) {
 }
 
 // Data Plane with zone (13 char) and AP with FIPS and dualstack
-func TestEndpointCase378(t *testing.T) {
+func TestEndpointCase380(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -17753,7 +17872,7 @@ func TestEndpointCase378(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with (13 char) zone with AP and dualstack
-func TestEndpointCase379(t *testing.T) {
+func TestEndpointCase381(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -17812,7 +17931,7 @@ func TestEndpointCase379(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with (13 char) zone with AP and FIPS and dualstack
-func TestEndpointCase380(t *testing.T) {
+func TestEndpointCase382(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test-zone-ab1--xa-s3"),
@@ -17871,7 +17990,7 @@ func TestEndpointCase380(t *testing.T) {
 }
 
 // Data Plane with (14 char) zone and AP with dualstack
-func TestEndpointCase381(t *testing.T) {
+func TestEndpointCase383(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -17930,7 +18049,7 @@ func TestEndpointCase381(t *testing.T) {
 }
 
 // Data Plane with (14 char) zone and AP with FIPS and dualstack
-func TestEndpointCase382(t *testing.T) {
+func TestEndpointCase384(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -17989,7 +18108,7 @@ func TestEndpointCase382(t *testing.T) {
 }
 
 // Data Plane sigv4 auth with (14 char) zone and AP with dualstack
-func TestEndpointCase383(t *testing.T) {
+func TestEndpointCase385(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -18048,7 +18167,7 @@ func TestEndpointCase383(t *testing.T) {
 }
 
 // Data Plane with (14 char) zone and AP with FIPS and dualstack
-func TestEndpointCase384(t *testing.T) {
+func TestEndpointCase386(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-zone-ab1--xa-s3"),
@@ -18107,7 +18226,7 @@ func TestEndpointCase384(t *testing.T) {
 }
 
 // Data Plane with (20 char) zone and AP with dualstack
-func TestEndpointCase385(t *testing.T) {
+func TestEndpointCase387(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -18166,7 +18285,7 @@ func TestEndpointCase385(t *testing.T) {
 }
 
 // Data Plane with (20 char) zone and AP with FIPS and dualstack
-func TestEndpointCase386(t *testing.T) {
+func TestEndpointCase388(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -18225,7 +18344,7 @@ func TestEndpointCase386(t *testing.T) {
 }
 
 // Data plane AP with sigv4 and dualstack
-func TestEndpointCase387(t *testing.T) {
+func TestEndpointCase389(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -18284,7 +18403,7 @@ func TestEndpointCase387(t *testing.T) {
 }
 
 // Data plane AP sigv4 with fips and dualstack
-func TestEndpointCase388(t *testing.T) {
+func TestEndpointCase390(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-west-2"),
 		Bucket:                      ptr.String("myaccesspoint--test1-long1-zone-ab1--xa-s3"),
@@ -18343,7 +18462,7 @@ func TestEndpointCase388(t *testing.T) {
 }
 
 // Control plane with dualstack and bucket
-func TestEndpointCase389(t *testing.T) {
+func TestEndpointCase391(t *testing.T) {
 	var params = EndpointParameters{
 		Region:                      ptr.String("us-east-1"),
 		Bucket:                      ptr.String("mybucket--test-ab1--x-s3"),

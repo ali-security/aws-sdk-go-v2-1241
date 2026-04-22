@@ -1,0 +1,8 @@
+{
+    "id": "ba040f01-2b97-43b6-ac39-85c6c09cb30f",
+    "type": "feature",
+    "description": "This release adds support for Spark connect sessions starting with release label emr-7.13.0.",
+    "modules": [
+        "service/emrserverless"
+    ]
+}

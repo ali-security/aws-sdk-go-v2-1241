@@ -32,6 +32,10 @@ func (c *Client) GetPositionEstimate(ctx context.Context, params *GetPositionEst
 
 type GetPositionEstimateInput struct {
 
+	// Optional configuration to customize position estimates. If not provided,
+	// defaults are applied.
+	AdvancedConfiguration *types.AdvancedConfiguration
+
 	// Retrieves an estimated device position by resolving measurement data from
 	// cellular radio towers. The position is resolved using HERE's cellular-based
 	// solver.

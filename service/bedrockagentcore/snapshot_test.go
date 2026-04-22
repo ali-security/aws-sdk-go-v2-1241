@@ -326,6 +326,18 @@ func TestCheckSnapshot_InvokeCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_InvokeHarness(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeHarness(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InvokeHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListActors(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListActors(context.Background(), nil, func(o *Options) {
@@ -786,6 +798,18 @@ func TestUpdateSnapshot_InvokeCodeInterpreter(t *testing.T) {
 	_, err := svc.InvokeCodeInterpreter(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "InvokeCodeInterpreter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_InvokeHarness(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeHarness(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InvokeHarness")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

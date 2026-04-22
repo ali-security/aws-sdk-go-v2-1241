@@ -1098,6 +1098,823 @@ type FilterInput struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for AgentCore Browser.
+type HarnessAgentCoreBrowserConfig struct {
+
+	// If not populated, the built-in Browser ARN is used.
+	BrowserArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for AgentCore Code Interpreter.
+type HarnessAgentCoreCodeInterpreterConfig struct {
+
+	// If not populated, the built-in Code Interpreter ARN is used.
+	CodeInterpreterArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for AgentCore Gateway.
+type HarnessAgentCoreGatewayConfig struct {
+
+	// The ARN of the desired AgentCore Gateway.
+	//
+	// This member is required.
+	GatewayArn *string
+
+	// How Loopy authenticates to this Gateway. Defaults to AWS_IAM (SigV4) if omitted.
+	OutboundAuth HarnessGatewayOutboundAuth
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for an Amazon Bedrock model provider.
+type HarnessBedrockModelConfig struct {
+
+	// The Bedrock model ID.
+	//
+	// This member is required.
+	ModelId *string
+
+	// The maximum number of tokens to allow in the generated response per iteration.
+	MaxTokens *int32
+
+	// The temperature to set when calling the model.
+	Temperature *float32
+
+	// The topP set when calling the model.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// A content block within a message.
+//
+// The following types satisfy this interface:
+//
+//	HarnessContentBlockMemberReasoningContent
+//	HarnessContentBlockMemberText
+//	HarnessContentBlockMemberToolResult
+//	HarnessContentBlockMemberToolUse
+type HarnessContentBlock interface {
+	isHarnessContentBlock()
+}
+
+// Model reasoning content.
+type HarnessContentBlockMemberReasoningContent struct {
+	Value HarnessReasoningContentBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockMemberReasoningContent) isHarnessContentBlock() {}
+
+// Text content.
+type HarnessContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockMemberText) isHarnessContentBlock() {}
+
+// A tool execution result.
+type HarnessContentBlockMemberToolResult struct {
+	Value HarnessToolResultBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockMemberToolResult) isHarnessContentBlock() {}
+
+// A tool use request from the model.
+type HarnessContentBlockMemberToolUse struct {
+	Value HarnessToolUseBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockMemberToolUse) isHarnessContentBlock() {}
+
+// A delta update to a content block.
+//
+// The following types satisfy this interface:
+//
+//	HarnessContentBlockDeltaMemberReasoningContent
+//	HarnessContentBlockDeltaMemberText
+//	HarnessContentBlockDeltaMemberToolResult
+//	HarnessContentBlockDeltaMemberToolUse
+type HarnessContentBlockDelta interface {
+	isHarnessContentBlockDelta()
+}
+
+// A reasoning content delta.
+type HarnessContentBlockDeltaMemberReasoningContent struct {
+	Value HarnessReasoningContentBlockDelta
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockDeltaMemberReasoningContent) isHarnessContentBlockDelta() {}
+
+// A text delta.
+type HarnessContentBlockDeltaMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockDeltaMemberText) isHarnessContentBlockDelta() {}
+
+// A tool result delta.
+type HarnessContentBlockDeltaMemberToolResult struct {
+	Value []HarnessToolResultBlockDelta
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockDeltaMemberToolResult) isHarnessContentBlockDelta() {}
+
+// A tool use input delta.
+type HarnessContentBlockDeltaMemberToolUse struct {
+	Value HarnessToolUseBlockDelta
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockDeltaMemberToolUse) isHarnessContentBlockDelta() {}
+
+// Event containing a delta update to a content block.
+type HarnessContentBlockDeltaEvent struct {
+
+	// The index of the content block being updated.
+	//
+	// This member is required.
+	ContentBlockIndex *int32
+
+	// The delta payload.
+	//
+	// This member is required.
+	Delta HarnessContentBlockDelta
+
+	noSmithyDocumentSerde
+}
+
+// The start payload for a content block.
+//
+// The following types satisfy this interface:
+//
+//	HarnessContentBlockStartMemberToolResult
+//	HarnessContentBlockStartMemberToolUse
+type HarnessContentBlockStart interface {
+	isHarnessContentBlockStart()
+}
+
+// Start of a tool result content block.
+type HarnessContentBlockStartMemberToolResult struct {
+	Value HarnessToolResultBlockStart
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockStartMemberToolResult) isHarnessContentBlockStart() {}
+
+// Start of a tool use content block.
+type HarnessContentBlockStartMemberToolUse struct {
+	Value HarnessToolUseBlockStart
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockStartMemberToolUse) isHarnessContentBlockStart() {}
+
+// Event indicating the start of a content block.
+type HarnessContentBlockStartEvent struct {
+
+	// The index of the content block within the message.
+	//
+	// This member is required.
+	ContentBlockIndex *int32
+
+	// The content block start payload.
+	//
+	// This member is required.
+	Start HarnessContentBlockStart
+
+	noSmithyDocumentSerde
+}
+
+// Event indicating the end of a content block.
+type HarnessContentBlockStopEvent struct {
+
+	// The index of the content block that ended.
+	//
+	// This member is required.
+	ContentBlockIndex *int32
+
+	noSmithyDocumentSerde
+}
+
+// Authentication method for calling a Gateway.
+//
+// The following types satisfy this interface:
+//
+//	HarnessGatewayOutboundAuthMemberAwsIam
+//	HarnessGatewayOutboundAuthMemberNone
+//	HarnessGatewayOutboundAuthMemberOauth
+type HarnessGatewayOutboundAuth interface {
+	isHarnessGatewayOutboundAuth()
+}
+
+// SigV4-sign requests using the agent's execution role.
+type HarnessGatewayOutboundAuthMemberAwsIam struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessGatewayOutboundAuthMemberAwsIam) isHarnessGatewayOutboundAuth() {}
+
+// No authentication.
+type HarnessGatewayOutboundAuthMemberNone struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessGatewayOutboundAuthMemberNone) isHarnessGatewayOutboundAuth() {}
+
+// OAuth 2.0 authentication via AgentCore Identity.
+type HarnessGatewayOutboundAuthMemberOauth struct {
+	Value OAuthCredentialProvider
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessGatewayOutboundAuthMemberOauth) isHarnessGatewayOutboundAuth() {}
+
+// Configuration for a Google Gemini model provider. Requires an API key stored in
+// AgentCore Identity.
+type HarnessGeminiModelConfig struct {
+
+	// The ARN of your Gemini API key on AgentCore Identity.
+	//
+	// This member is required.
+	ApiKeyArn *string
+
+	// The Gemini model ID.
+	//
+	// This member is required.
+	ModelId *string
+
+	// The maximum number of tokens to allow in the generated response per iteration.
+	MaxTokens *int32
+
+	// The temperature to set when calling the model.
+	Temperature *float32
+
+	// The topK set when calling the model.
+	TopK *int32
+
+	// The topP set when calling the model.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for an inline function tool. When the agent calls this tool, the
+// tool call is returned to the caller for external execution.
+type HarnessInlineFunctionConfig struct {
+
+	// Description of what the tool does, provided to the model.
+	//
+	// This member is required.
+	Description *string
+
+	// JSON Schema describing the tool's input parameters.
+	//
+	// This member is required.
+	InputSchema document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// A message in the conversation.
+type HarnessMessage struct {
+
+	// The content blocks of the message.
+	//
+	// This member is required.
+	Content []HarnessContentBlock
+
+	// The role of the message sender.
+	//
+	// This member is required.
+	Role HarnessConversationRole
+
+	noSmithyDocumentSerde
+}
+
+// Event indicating the start of a message.
+type HarnessMessageStartEvent struct {
+
+	// The role of the message sender.
+	//
+	// This member is required.
+	Role HarnessConversationRole
+
+	noSmithyDocumentSerde
+}
+
+// Event indicating the end of a message.
+type HarnessMessageStopEvent struct {
+
+	// The reason the agent stopped generating.
+	//
+	// This member is required.
+	StopReason HarnessStopReason
+
+	noSmithyDocumentSerde
+}
+
+// Token usage and latency metrics for the invocation.
+type HarnessMetadataEvent struct {
+
+	// Latency metrics.
+	//
+	// This member is required.
+	Metrics *HarnessStreamMetrics
+
+	// Token usage counts.
+	//
+	// This member is required.
+	Usage *HarnessTokenUsage
+
+	noSmithyDocumentSerde
+}
+
+// Specification of which model to use.
+//
+// The following types satisfy this interface:
+//
+//	HarnessModelConfigurationMemberBedrockModelConfig
+//	HarnessModelConfigurationMemberGeminiModelConfig
+//	HarnessModelConfigurationMemberOpenAiModelConfig
+type HarnessModelConfiguration interface {
+	isHarnessModelConfiguration()
+}
+
+// Configuration for an Amazon Bedrock model.
+type HarnessModelConfigurationMemberBedrockModelConfig struct {
+	Value HarnessBedrockModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessModelConfigurationMemberBedrockModelConfig) isHarnessModelConfiguration() {}
+
+// Configuration for a Google Gemini model.
+type HarnessModelConfigurationMemberGeminiModelConfig struct {
+	Value HarnessGeminiModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessModelConfigurationMemberGeminiModelConfig) isHarnessModelConfiguration() {}
+
+// Configuration for an OpenAI model.
+type HarnessModelConfigurationMemberOpenAiModelConfig struct {
+	Value HarnessOpenAiModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessModelConfigurationMemberOpenAiModelConfig) isHarnessModelConfiguration() {}
+
+// Configuration for an OpenAI model provider. Requires an API key stored in
+// AgentCore Identity.
+type HarnessOpenAiModelConfig struct {
+
+	// The ARN of your OpenAI API key on AgentCore Identity.
+	//
+	// This member is required.
+	ApiKeyArn *string
+
+	// The OpenAI model ID.
+	//
+	// This member is required.
+	ModelId *string
+
+	// The maximum number of tokens to allow in the generated response per iteration.
+	MaxTokens *int32
+
+	// The temperature to set when calling the model.
+	Temperature *float32
+
+	// The topP set when calling the model.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// Reasoning content from the model.
+//
+// The following types satisfy this interface:
+//
+//	HarnessReasoningContentBlockMemberReasoningText
+//	HarnessReasoningContentBlockMemberRedactedContent
+type HarnessReasoningContentBlock interface {
+	isHarnessReasoningContentBlock()
+}
+
+// The reasoning text.
+type HarnessReasoningContentBlockMemberReasoningText struct {
+	Value HarnessReasoningTextBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessReasoningContentBlockMemberReasoningText) isHarnessReasoningContentBlock() {}
+
+// Redacted reasoning content.
+type HarnessReasoningContentBlockMemberRedactedContent struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessReasoningContentBlockMemberRedactedContent) isHarnessReasoningContentBlock() {}
+
+// A delta update to a reasoning content block.
+//
+// The following types satisfy this interface:
+//
+//	HarnessReasoningContentBlockDeltaMemberRedactedContent
+//	HarnessReasoningContentBlockDeltaMemberSignature
+//	HarnessReasoningContentBlockDeltaMemberText
+type HarnessReasoningContentBlockDelta interface {
+	isHarnessReasoningContentBlockDelta()
+}
+
+// Redacted reasoning content.
+type HarnessReasoningContentBlockDeltaMemberRedactedContent struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessReasoningContentBlockDeltaMemberRedactedContent) isHarnessReasoningContentBlockDelta() {
+}
+
+// Signature for the reasoning content.
+type HarnessReasoningContentBlockDeltaMemberSignature struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessReasoningContentBlockDeltaMemberSignature) isHarnessReasoningContentBlockDelta() {}
+
+// Reasoning text delta.
+type HarnessReasoningContentBlockDeltaMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessReasoningContentBlockDeltaMemberText) isHarnessReasoningContentBlockDelta() {}
+
+// A block of reasoning text from the model.
+type HarnessReasoningTextBlock struct {
+
+	// The reasoning text.
+	//
+	// This member is required.
+	Text *string
+
+	// Signature for verifying the reasoning content.
+	Signature *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for connecting to a remote MCP server.
+type HarnessRemoteMcpConfig struct {
+
+	// URL of the MCP endpoint.
+	//
+	// This member is required.
+	Url *string
+
+	// Map of key/value pairs for HTTP headers.
+	Headers map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A skill available to the agent.
+//
+// The following types satisfy this interface:
+//
+//	HarnessSkillMemberPath
+type HarnessSkill interface {
+	isHarnessSkill()
+}
+
+// The filesystem path to the skill definition.
+type HarnessSkillMemberPath struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberPath) isHarnessSkill() {}
+
+// Latency metrics for the invocation.
+type HarnessStreamMetrics struct {
+
+	// The end-to-end latency of the invocation in milliseconds.
+	//
+	// This member is required.
+	LatencyMs *int64
+
+	noSmithyDocumentSerde
+}
+
+// A content block in the system prompt.
+//
+// The following types satisfy this interface:
+//
+//	HarnessSystemContentBlockMemberText
+type HarnessSystemContentBlock interface {
+	isHarnessSystemContentBlock()
+}
+
+// The text content of the system prompt block.
+type HarnessSystemContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSystemContentBlockMemberText) isHarnessSystemContentBlock() {}
+
+// Token usage counts for the invocation.
+type HarnessTokenUsage struct {
+
+	// The number of input tokens consumed.
+	//
+	// This member is required.
+	InputTokens *int32
+
+	// The number of output tokens generated.
+	//
+	// This member is required.
+	OutputTokens *int32
+
+	// The total number of tokens consumed.
+	//
+	// This member is required.
+	TotalTokens *int32
+
+	// The number of input tokens read from cache.
+	CacheReadInputTokens *int32
+
+	// The number of input tokens written to cache.
+	CacheWriteInputTokens *int32
+
+	noSmithyDocumentSerde
+}
+
+// A tool available to the agent loop.
+type HarnessTool struct {
+
+	// The type of tool.
+	//
+	// This member is required.
+	Type HarnessToolType
+
+	// Tool-specific configuration.
+	Config HarnessToolConfiguration
+
+	// Unique name for the tool. If not provided, a name will be inferred or generated.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration union for different tool types.
+//
+// The following types satisfy this interface:
+//
+//	HarnessToolConfigurationMemberAgentCoreBrowser
+//	HarnessToolConfigurationMemberAgentCoreCodeInterpreter
+//	HarnessToolConfigurationMemberAgentCoreGateway
+//	HarnessToolConfigurationMemberInlineFunction
+//	HarnessToolConfigurationMemberRemoteMcp
+type HarnessToolConfiguration interface {
+	isHarnessToolConfiguration()
+}
+
+// Configuration for AgentCore Browser.
+type HarnessToolConfigurationMemberAgentCoreBrowser struct {
+	Value HarnessAgentCoreBrowserConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolConfigurationMemberAgentCoreBrowser) isHarnessToolConfiguration() {}
+
+// Configuration for AgentCore Code Interpreter.
+type HarnessToolConfigurationMemberAgentCoreCodeInterpreter struct {
+	Value HarnessAgentCoreCodeInterpreterConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolConfigurationMemberAgentCoreCodeInterpreter) isHarnessToolConfiguration() {}
+
+// Configuration for AgentCore Gateway.
+type HarnessToolConfigurationMemberAgentCoreGateway struct {
+	Value HarnessAgentCoreGatewayConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolConfigurationMemberAgentCoreGateway) isHarnessToolConfiguration() {}
+
+// Configuration for an inline function tool.
+type HarnessToolConfigurationMemberInlineFunction struct {
+	Value HarnessInlineFunctionConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolConfigurationMemberInlineFunction) isHarnessToolConfiguration() {}
+
+// Configuration for remote MCP server.
+type HarnessToolConfigurationMemberRemoteMcp struct {
+	Value HarnessRemoteMcpConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolConfigurationMemberRemoteMcp) isHarnessToolConfiguration() {}
+
+// The result of a tool execution.
+type HarnessToolResultBlock struct {
+
+	// The content of the tool result.
+	//
+	// This member is required.
+	Content []HarnessToolResultContentBlock
+
+	// The tool use ID that this result corresponds to.
+	//
+	// This member is required.
+	ToolUseId *string
+
+	// The status of the tool execution.
+	Status HarnessToolUseStatus
+
+	// The type of tool use that produced this result.
+	Type HarnessToolUseType
+
+	noSmithyDocumentSerde
+}
+
+// A delta update to a tool result content block.
+//
+// The following types satisfy this interface:
+//
+//	HarnessToolResultBlockDeltaMemberJson
+//	HarnessToolResultBlockDeltaMemberText
+type HarnessToolResultBlockDelta interface {
+	isHarnessToolResultBlockDelta()
+}
+
+// A JSON tool result delta.
+type HarnessToolResultBlockDeltaMemberJson struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolResultBlockDeltaMemberJson) isHarnessToolResultBlockDelta() {}
+
+// A text tool result delta.
+type HarnessToolResultBlockDeltaMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolResultBlockDeltaMemberText) isHarnessToolResultBlockDelta() {}
+
+// Start payload for a tool result content block.
+type HarnessToolResultBlockStart struct {
+
+	// The tool use ID that this result corresponds to.
+	//
+	// This member is required.
+	ToolUseId *string
+
+	// The status of the tool execution.
+	Status HarnessToolUseStatus
+
+	noSmithyDocumentSerde
+}
+
+// A content block within a tool result.
+//
+// The following types satisfy this interface:
+//
+//	HarnessToolResultContentBlockMemberJson
+//	HarnessToolResultContentBlockMemberText
+type HarnessToolResultContentBlock interface {
+	isHarnessToolResultContentBlock()
+}
+
+// JSON content.
+type HarnessToolResultContentBlockMemberJson struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolResultContentBlockMemberJson) isHarnessToolResultContentBlock() {}
+
+// Text content.
+type HarnessToolResultContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolResultContentBlockMemberText) isHarnessToolResultContentBlock() {}
+
+// A tool use request from the model.
+type HarnessToolUseBlock struct {
+
+	// The JSON input to pass to the tool.
+	//
+	// This member is required.
+	Input document.Interface
+
+	// The name of the tool to call.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique ID of this tool use.
+	//
+	// This member is required.
+	ToolUseId *string
+
+	// The name of the MCP server providing this tool.
+	ServerName *string
+
+	// The type of tool use.
+	Type HarnessToolUseType
+
+	noSmithyDocumentSerde
+}
+
+// Delta payload for tool use input.
+type HarnessToolUseBlockDelta struct {
+
+	// The partial JSON input for the tool call.
+	//
+	// This member is required.
+	Input *string
+
+	noSmithyDocumentSerde
+}
+
+// Start payload for a tool use content block.
+type HarnessToolUseBlockStart struct {
+
+	// The name of the tool being called.
+	//
+	// This member is required.
+	Name *string
+
+	// The unique ID of this tool use.
+	//
+	// This member is required.
+	ToolUseId *string
+
+	// The name of the MCP server providing this tool.
+	ServerName *string
+
+	// The type of tool use.
+	Type HarnessToolUseType
+
+	noSmithyDocumentSerde
+}
+
 // A block of input content.
 type InputContentBlock struct {
 
@@ -1153,6 +1970,74 @@ type InvokeAgentRuntimeCommandStreamOutputMemberChunk struct {
 }
 
 func (*InvokeAgentRuntimeCommandStreamOutputMemberChunk) isInvokeAgentRuntimeCommandStreamOutput() {}
+
+// The streaming events returned by a harness invocation.
+//
+// The following types satisfy this interface:
+//
+//	InvokeHarnessStreamOutputMemberContentBlockDelta
+//	InvokeHarnessStreamOutputMemberContentBlockStart
+//	InvokeHarnessStreamOutputMemberContentBlockStop
+//	InvokeHarnessStreamOutputMemberMessageStart
+//	InvokeHarnessStreamOutputMemberMessageStop
+//	InvokeHarnessStreamOutputMemberMetadata
+type InvokeHarnessStreamOutput interface {
+	isInvokeHarnessStreamOutput()
+}
+
+// A delta update to the current content block.
+type InvokeHarnessStreamOutputMemberContentBlockDelta struct {
+	Value HarnessContentBlockDeltaEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*InvokeHarnessStreamOutputMemberContentBlockDelta) isInvokeHarnessStreamOutput() {}
+
+// Indicates the start of a new content block.
+type InvokeHarnessStreamOutputMemberContentBlockStart struct {
+	Value HarnessContentBlockStartEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*InvokeHarnessStreamOutputMemberContentBlockStart) isInvokeHarnessStreamOutput() {}
+
+// Indicates the end of the current content block.
+type InvokeHarnessStreamOutputMemberContentBlockStop struct {
+	Value HarnessContentBlockStopEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*InvokeHarnessStreamOutputMemberContentBlockStop) isInvokeHarnessStreamOutput() {}
+
+// Indicates the start of a new message from the agent.
+type InvokeHarnessStreamOutputMemberMessageStart struct {
+	Value HarnessMessageStartEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*InvokeHarnessStreamOutputMemberMessageStart) isInvokeHarnessStreamOutput() {}
+
+// Indicates the end of the current message.
+type InvokeHarnessStreamOutputMemberMessageStop struct {
+	Value HarnessMessageStopEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*InvokeHarnessStreamOutputMemberMessageStop) isInvokeHarnessStreamOutput() {}
+
+// Token usage and latency metrics for the invocation.
+type InvokeHarnessStreamOutputMemberMetadata struct {
+	Value HarnessMetadataEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*InvokeHarnessStreamOutputMemberMetadata) isInvokeHarnessStreamOutput() {}
 
 // Arguments for a key press action.
 type KeyPressArguments struct {
@@ -1662,6 +2547,32 @@ type MouseScrollResult struct {
 
 	// The error message. Present only when the action failed.
 	Error *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for an OAuth 2.0 credential provider used to authenticate tool
+// calls.
+type OAuthCredentialProvider struct {
+
+	// The ARN of the OAuth 2.0 credential provider in AgentCore Identity.
+	//
+	// This member is required.
+	ProviderArn *string
+
+	// The OAuth 2.0 scopes to request when obtaining an access token.
+	//
+	// This member is required.
+	Scopes []string
+
+	// Additional custom parameters to include in the OAuth 2.0 token request.
+	CustomParameters map[string]string
+
+	// The default return URL for the OAuth 2.0 authorization flow.
+	DefaultReturnUrl *string
+
+	// The OAuth 2.0 grant type to use for authentication.
+	GrantType OAuthGrantType
 
 	noSmithyDocumentSerde
 }
@@ -2274,6 +3185,10 @@ type ViewPort struct {
 	noSmithyDocumentSerde
 }
 
+type Unit struct {
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -2295,7 +3210,20 @@ func (*UnknownUnionMember) isEvaluationContent()                     {}
 func (*UnknownUnionMember) isEvaluationInput()                       {}
 func (*UnknownUnionMember) isEvaluationTarget()                      {}
 func (*UnknownUnionMember) isExtractionJobMessages()                 {}
+func (*UnknownUnionMember) isHarnessContentBlock()                   {}
+func (*UnknownUnionMember) isHarnessContentBlockDelta()              {}
+func (*UnknownUnionMember) isHarnessContentBlockStart()              {}
+func (*UnknownUnionMember) isHarnessGatewayOutboundAuth()            {}
+func (*UnknownUnionMember) isHarnessModelConfiguration()             {}
+func (*UnknownUnionMember) isHarnessReasoningContentBlock()          {}
+func (*UnknownUnionMember) isHarnessReasoningContentBlockDelta()     {}
+func (*UnknownUnionMember) isHarnessSkill()                          {}
+func (*UnknownUnionMember) isHarnessSystemContentBlock()             {}
+func (*UnknownUnionMember) isHarnessToolConfiguration()              {}
+func (*UnknownUnionMember) isHarnessToolResultBlockDelta()           {}
+func (*UnknownUnionMember) isHarnessToolResultContentBlock()         {}
 func (*UnknownUnionMember) isInvokeAgentRuntimeCommandStreamOutput() {}
+func (*UnknownUnionMember) isInvokeHarnessStreamOutput()             {}
 func (*UnknownUnionMember) isLeftExpression()                        {}
 func (*UnknownUnionMember) isMemoryContent()                         {}
 func (*UnknownUnionMember) isMetadataValue()                         {}

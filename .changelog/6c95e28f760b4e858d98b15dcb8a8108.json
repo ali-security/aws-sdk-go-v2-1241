@@ -1,0 +1,8 @@
+{
+    "id": "6c95e28f-760b-4e85-8d98-b15dcb8a8108",
+    "type": "feature",
+    "description": "This release adds support for five additional checksum algorithms for data integrity checking in Amazon S3 - MD5, SHA-512, XXHash3, XXHash64, and XXHash128.",
+    "modules": [
+        "service/s3control"
+    ]
+}

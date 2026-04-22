@@ -2180,6 +2180,704 @@ type GoogleOauth2ProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+// Representation of a Harness.
+type Harness struct {
+
+	// The allowed tools of the Harness. All tools are allowed by default.
+	//
+	// This member is required.
+	AllowedTools []string
+
+	// The ARN of the Harness.
+	//
+	// This member is required.
+	Arn *string
+
+	// The createdAt time of the Harness.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The compute environment on which the Harness runs.
+	//
+	// This member is required.
+	Environment HarnessEnvironmentProvider
+
+	// IAM role the Harness assumes when running.
+	//
+	// This member is required.
+	ExecutionRoleArn *string
+
+	// The ID of the Harness.
+	//
+	// This member is required.
+	HarnessId *string
+
+	// The name of the Harness.
+	//
+	// This member is required.
+	HarnessName *string
+
+	// The configuration of the default model used by the Harness.
+	//
+	// This member is required.
+	Model HarnessModelConfiguration
+
+	// The skills of the Harness.
+	//
+	// This member is required.
+	Skills []HarnessSkill
+
+	// The status of the Harness.
+	//
+	// This member is required.
+	Status HarnessStatus
+
+	// The system prompt of the Harness.
+	//
+	// This member is required.
+	SystemPrompt []HarnessSystemContentBlock
+
+	// The tools of the Harness.
+	//
+	// This member is required.
+	Tools []HarnessTool
+
+	// Configuration for truncating model context.
+	//
+	// This member is required.
+	Truncation *HarnessTruncationConfiguration
+
+	// The updatedAt time of the Harness.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// Represents inbound authorization configuration options used to authenticate
+	// incoming requests.
+	AuthorizerConfiguration AuthorizerConfiguration
+
+	// The environment artifact (e.g., container) in which the Harness operates.
+	EnvironmentArtifact HarnessEnvironmentArtifact
+
+	// Environment variables exposed in the environment in which the Harness operates.
+	EnvironmentVariables map[string]string
+
+	// Reason why create or update operations fail.
+	FailureReason *string
+
+	// The maximum number of iterations in the agent loop allowed before exiting per
+	// invocation.
+	MaxIterations *int32
+
+	// The maximum number of tokens allowed before exiting per invocation.
+	MaxTokens *int32
+
+	// AgentCore Memory instance configuration for short and long term memory.
+	Memory HarnessMemoryConfiguration
+
+	// The maximum duration per invocation.
+	TimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for AgentCore Browser.
+type HarnessAgentCoreBrowserConfig struct {
+
+	// If not populated, the built-in Browser ARN is used.
+	BrowserArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for AgentCore Code Interpreter.
+type HarnessAgentCoreCodeInterpreterConfig struct {
+
+	// If not populated, the built-in Code Interpreter ARN is used.
+	CodeInterpreterArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for AgentCore Gateway.
+type HarnessAgentCoreGatewayConfig struct {
+
+	// The ARN of the desired AgentCore Gateway.
+	//
+	// This member is required.
+	GatewayArn *string
+
+	// How Loopy authenticates to this Gateway. Defaults to AWS_IAM (SigV4) if omitted.
+	OutboundAuth HarnessGatewayOutboundAuth
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for AgentCore Memory integration.
+type HarnessAgentCoreMemoryConfiguration struct {
+
+	// The ARN of the AgentCore Memory resource.
+	//
+	// This member is required.
+	Arn *string
+
+	// The actor ID for memory operations.
+	ActorId *string
+
+	// The number of messages to retrieve from memory.
+	MessagesCount *int32
+
+	// The retrieval configuration for long-term memory, mapping namespace path
+	// templates to retrieval settings.
+	RetrievalConfig map[string]HarnessAgentCoreMemoryRetrievalConfig
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for memory retrieval within a namespace.
+type HarnessAgentCoreMemoryRetrievalConfig struct {
+
+	// The minimum relevance score for retrieved memories.
+	RelevanceScore *float32
+
+	// The ID of the retrieval strategy to use.
+	StrategyId *string
+
+	// The maximum number of memory entries to retrieve.
+	TopK *int32
+
+	noSmithyDocumentSerde
+}
+
+// The AgentCore Runtime environment for a harness.
+type HarnessAgentCoreRuntimeEnvironment struct {
+
+	// The ARN of the underlying AgentCore Runtime.
+	//
+	// This member is required.
+	AgentRuntimeArn *string
+
+	// The ID of the underlying AgentCore Runtime.
+	//
+	// This member is required.
+	AgentRuntimeId *string
+
+	// The name of the underlying AgentCore Runtime.
+	//
+	// This member is required.
+	AgentRuntimeName *string
+
+	// LifecycleConfiguration lets you manage the lifecycle of runtime sessions and
+	// resources in AgentCore Runtime. This configuration helps optimize resource
+	// utilization by automatically cleaning up idle sessions and preventing
+	// long-running instances from consuming resources indefinitely.
+	//
+	// This member is required.
+	LifecycleConfiguration *LifecycleConfiguration
+
+	// SecurityConfig for the Agent.
+	//
+	// This member is required.
+	NetworkConfiguration *NetworkConfiguration
+
+	// The filesystem configurations for the runtime environment.
+	FilesystemConfigurations []FilesystemConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The AgentCore Runtime environment request configuration.
+type HarnessAgentCoreRuntimeEnvironmentRequest struct {
+
+	// The filesystem configurations for the runtime environment.
+	FilesystemConfigurations []FilesystemConfiguration
+
+	// LifecycleConfiguration lets you manage the lifecycle of runtime sessions and
+	// resources in AgentCore Runtime. This configuration helps optimize resource
+	// utilization by automatically cleaning up idle sessions and preventing
+	// long-running instances from consuming resources indefinitely.
+	LifecycleConfiguration *LifecycleConfiguration
+
+	// SecurityConfig for the Agent.
+	NetworkConfiguration *NetworkConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for an Amazon Bedrock model provider.
+type HarnessBedrockModelConfig struct {
+
+	// The Bedrock model ID.
+	//
+	// This member is required.
+	ModelId *string
+
+	// The maximum number of tokens to allow in the generated response per iteration.
+	MaxTokens *int32
+
+	// The temperature to set when calling the model.
+	Temperature *float32
+
+	// The topP set when calling the model.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// The environment artifact for a harness, such as a container image containing
+// custom dependencies.
+//
+// The following types satisfy this interface:
+//
+//	HarnessEnvironmentArtifactMemberContainerConfiguration
+type HarnessEnvironmentArtifact interface {
+	isHarnessEnvironmentArtifact()
+}
+
+// Representation of a container configuration.
+type HarnessEnvironmentArtifactMemberContainerConfiguration struct {
+	Value ContainerConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessEnvironmentArtifactMemberContainerConfiguration) isHarnessEnvironmentArtifact() {}
+
+// The environment provider for a harness.
+//
+// The following types satisfy this interface:
+//
+//	HarnessEnvironmentProviderMemberAgentCoreRuntimeEnvironment
+type HarnessEnvironmentProvider interface {
+	isHarnessEnvironmentProvider()
+}
+
+// The AgentCore Runtime environment configuration.
+type HarnessEnvironmentProviderMemberAgentCoreRuntimeEnvironment struct {
+	Value HarnessAgentCoreRuntimeEnvironment
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessEnvironmentProviderMemberAgentCoreRuntimeEnvironment) isHarnessEnvironmentProvider() {}
+
+// The environment provider request configuration.
+//
+// The following types satisfy this interface:
+//
+//	HarnessEnvironmentProviderRequestMemberAgentCoreRuntimeEnvironment
+type HarnessEnvironmentProviderRequest interface {
+	isHarnessEnvironmentProviderRequest()
+}
+
+// The AgentCore Runtime environment configuration.
+type HarnessEnvironmentProviderRequestMemberAgentCoreRuntimeEnvironment struct {
+	Value HarnessAgentCoreRuntimeEnvironmentRequest
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessEnvironmentProviderRequestMemberAgentCoreRuntimeEnvironment) isHarnessEnvironmentProviderRequest() {
+}
+
+// Authentication method for calling a Gateway.
+//
+// The following types satisfy this interface:
+//
+//	HarnessGatewayOutboundAuthMemberAwsIam
+//	HarnessGatewayOutboundAuthMemberNone
+//	HarnessGatewayOutboundAuthMemberOauth
+type HarnessGatewayOutboundAuth interface {
+	isHarnessGatewayOutboundAuth()
+}
+
+// SigV4-sign requests using the agent's execution role.
+type HarnessGatewayOutboundAuthMemberAwsIam struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessGatewayOutboundAuthMemberAwsIam) isHarnessGatewayOutboundAuth() {}
+
+// No authentication.
+type HarnessGatewayOutboundAuthMemberNone struct {
+	Value Unit
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessGatewayOutboundAuthMemberNone) isHarnessGatewayOutboundAuth() {}
+
+// An OAuth credential provider for gateway authentication. This structure
+// contains the configuration for authenticating with the target endpoint using
+// OAuth.
+type HarnessGatewayOutboundAuthMemberOauth struct {
+	Value OAuthCredentialProvider
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessGatewayOutboundAuthMemberOauth) isHarnessGatewayOutboundAuth() {}
+
+// Configuration for a Google Gemini model provider. Requires an API key stored in
+// AgentCore Identity.
+type HarnessGeminiModelConfig struct {
+
+	// The ARN of your Gemini API key on AgentCore Identity.
+	//
+	// This member is required.
+	ApiKeyArn *string
+
+	// The Gemini model ID.
+	//
+	// This member is required.
+	ModelId *string
+
+	// The maximum number of tokens to allow in the generated response per iteration.
+	MaxTokens *int32
+
+	// The temperature to set when calling the model.
+	Temperature *float32
+
+	// The topK set when calling the model.
+	TopK *int32
+
+	// The topP set when calling the model.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for an inline function tool. When the agent calls this tool, the
+// tool call is returned to the caller for external execution.
+type HarnessInlineFunctionConfig struct {
+
+	// Description of what the tool does, provided to the model.
+	//
+	// This member is required.
+	Description *string
+
+	// JSON Schema describing the tool's input parameters.
+	//
+	// This member is required.
+	InputSchema document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// The memory configuration for a harness.
+//
+// The following types satisfy this interface:
+//
+//	HarnessMemoryConfigurationMemberAgentCoreMemoryConfiguration
+type HarnessMemoryConfiguration interface {
+	isHarnessMemoryConfiguration()
+}
+
+// The AgentCore Memory configuration.
+type HarnessMemoryConfigurationMemberAgentCoreMemoryConfiguration struct {
+	Value HarnessAgentCoreMemoryConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessMemoryConfigurationMemberAgentCoreMemoryConfiguration) isHarnessMemoryConfiguration() {}
+
+// Specification of which model to use.
+//
+// The following types satisfy this interface:
+//
+//	HarnessModelConfigurationMemberBedrockModelConfig
+//	HarnessModelConfigurationMemberGeminiModelConfig
+//	HarnessModelConfigurationMemberOpenAiModelConfig
+type HarnessModelConfiguration interface {
+	isHarnessModelConfiguration()
+}
+
+// Configuration for an Amazon Bedrock model.
+type HarnessModelConfigurationMemberBedrockModelConfig struct {
+	Value HarnessBedrockModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessModelConfigurationMemberBedrockModelConfig) isHarnessModelConfiguration() {}
+
+// Configuration for a Google Gemini model.
+type HarnessModelConfigurationMemberGeminiModelConfig struct {
+	Value HarnessGeminiModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessModelConfigurationMemberGeminiModelConfig) isHarnessModelConfiguration() {}
+
+// Configuration for an OpenAI model.
+type HarnessModelConfigurationMemberOpenAiModelConfig struct {
+	Value HarnessOpenAiModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessModelConfigurationMemberOpenAiModelConfig) isHarnessModelConfiguration() {}
+
+// Configuration for an OpenAI model provider. Requires an API key stored in
+// AgentCore Identity.
+type HarnessOpenAiModelConfig struct {
+
+	// The ARN of your OpenAI API key on AgentCore Identity.
+	//
+	// This member is required.
+	ApiKeyArn *string
+
+	// The OpenAI model ID.
+	//
+	// This member is required.
+	ModelId *string
+
+	// The maximum number of tokens to allow in the generated response per iteration.
+	MaxTokens *int32
+
+	// The temperature to set when calling the model.
+	Temperature *float32
+
+	// The topP set when calling the model.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for connecting to a remote MCP server.
+type HarnessRemoteMcpConfig struct {
+
+	// URL of the MCP endpoint.
+	//
+	// This member is required.
+	Url *string
+
+	// Map of key/value pairs for HTTP headers.
+	Headers map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A skill available to the agent.
+//
+// The following types satisfy this interface:
+//
+//	HarnessSkillMemberPath
+type HarnessSkill interface {
+	isHarnessSkill()
+}
+
+// The filesystem path to the skill definition.
+type HarnessSkillMemberPath struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberPath) isHarnessSkill() {}
+
+// Configuration for sliding window truncation strategy.
+type HarnessSlidingWindowConfiguration struct {
+
+	// The number of recent messages to retain in the context window.
+	MessagesCount *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for summarization-based truncation strategy.
+type HarnessSummarizationConfiguration struct {
+
+	// The number of recent messages to preserve without summarization.
+	PreserveRecentMessages *int32
+
+	// The system prompt used for generating summaries.
+	SummarizationSystemPrompt *string
+
+	// The ratio of content to summarize.
+	SummaryRatio *float32
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a harness.
+type HarnessSummary struct {
+
+	// The ARN of the harness.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp when the harness was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The ID of the harness.
+	//
+	// This member is required.
+	HarnessId *string
+
+	// The name of the harness.
+	//
+	// This member is required.
+	HarnessName *string
+
+	// The current status of the harness.
+	//
+	// This member is required.
+	Status HarnessStatus
+
+	// The timestamp when the harness was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A content block in the system prompt.
+//
+// The following types satisfy this interface:
+//
+//	HarnessSystemContentBlockMemberText
+type HarnessSystemContentBlock interface {
+	isHarnessSystemContentBlock()
+}
+
+// The text content of the system prompt block.
+type HarnessSystemContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSystemContentBlockMemberText) isHarnessSystemContentBlock() {}
+
+// A tool available to the agent loop.
+type HarnessTool struct {
+
+	// The type of tool.
+	//
+	// This member is required.
+	Type HarnessToolType
+
+	// Tool-specific configuration.
+	Config HarnessToolConfiguration
+
+	// Unique name for the tool. If not provided, a name will be inferred or generated.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration union for different tool types.
+//
+// The following types satisfy this interface:
+//
+//	HarnessToolConfigurationMemberAgentCoreBrowser
+//	HarnessToolConfigurationMemberAgentCoreCodeInterpreter
+//	HarnessToolConfigurationMemberAgentCoreGateway
+//	HarnessToolConfigurationMemberInlineFunction
+//	HarnessToolConfigurationMemberRemoteMcp
+type HarnessToolConfiguration interface {
+	isHarnessToolConfiguration()
+}
+
+// Configuration for AgentCore Browser.
+type HarnessToolConfigurationMemberAgentCoreBrowser struct {
+	Value HarnessAgentCoreBrowserConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolConfigurationMemberAgentCoreBrowser) isHarnessToolConfiguration() {}
+
+// Configuration for AgentCore Code Interpreter.
+type HarnessToolConfigurationMemberAgentCoreCodeInterpreter struct {
+	Value HarnessAgentCoreCodeInterpreterConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolConfigurationMemberAgentCoreCodeInterpreter) isHarnessToolConfiguration() {}
+
+// Configuration for AgentCore Gateway.
+type HarnessToolConfigurationMemberAgentCoreGateway struct {
+	Value HarnessAgentCoreGatewayConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolConfigurationMemberAgentCoreGateway) isHarnessToolConfiguration() {}
+
+// Configuration for an inline function tool.
+type HarnessToolConfigurationMemberInlineFunction struct {
+	Value HarnessInlineFunctionConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolConfigurationMemberInlineFunction) isHarnessToolConfiguration() {}
+
+// Configuration for remote MCP server.
+type HarnessToolConfigurationMemberRemoteMcp struct {
+	Value HarnessRemoteMcpConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessToolConfigurationMemberRemoteMcp) isHarnessToolConfiguration() {}
+
+// Configuration for truncating conversation context when it exceeds model limits.
+type HarnessTruncationConfiguration struct {
+
+	// The truncation strategy to use.
+	//
+	// This member is required.
+	Strategy HarnessTruncationStrategy
+
+	// The strategy-specific configuration.
+	Config HarnessTruncationStrategyConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Strategy-specific truncation configuration.
+//
+// The following types satisfy this interface:
+//
+//	HarnessTruncationStrategyConfigurationMemberSlidingWindow
+//	HarnessTruncationStrategyConfigurationMemberSummarization
+type HarnessTruncationStrategyConfiguration interface {
+	isHarnessTruncationStrategyConfiguration()
+}
+
+// Configuration for sliding window truncation.
+type HarnessTruncationStrategyConfigurationMemberSlidingWindow struct {
+	Value HarnessSlidingWindowConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessTruncationStrategyConfigurationMemberSlidingWindow) isHarnessTruncationStrategyConfiguration() {
+}
+
+// Configuration for summarization-based truncation.
+type HarnessTruncationStrategyConfigurationMemberSummarization struct {
+	Value HarnessSummarizationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessTruncationStrategyConfigurationMemberSummarization) isHarnessTruncationStrategyConfiguration() {
+}
+
 // An IAM credential provider for gateway authentication. This structure contains
 // the configuration for authenticating with the target endpoint using IAM
 // credentials and SigV4 signing.
@@ -2593,6 +3291,10 @@ type McpServerTargetConfiguration struct {
 	// Dynamic tool discovery/synchronization will be disabled when target is
 	// configured with mcpToolSchema.
 	McpToolSchema McpToolSchemaConfiguration
+
+	// Priority for resolving MCP server targets with shared resource URIs. Lower
+	// values take precedence. Defaults to 1000 when not set.
+	ResourcePriority *int32
 
 	noSmithyDocumentSerde
 }
@@ -4841,6 +5543,10 @@ type TargetSummary struct {
 	// The description of the target.
 	Description *string
 
+	// Priority for resolving resource URI conflicts across targets. Lower values take
+	// precedence. Defaults to 1000 when not set.
+	ResourcePriority *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -5151,6 +5857,26 @@ type UpdatedDescriptorsUnion struct {
 	noSmithyDocumentSerde
 }
 
+// Wrapper for updating the environment artifact configuration.
+type UpdatedHarnessEnvironmentArtifact struct {
+
+	// The updated environment artifact value, or null to clear the existing
+	// configuration.
+	OptionalValue HarnessEnvironmentArtifact
+
+	noSmithyDocumentSerde
+}
+
+// Wrapper for updating the memory configuration.
+type UpdatedHarnessMemoryConfiguration struct {
+
+	// The updated memory configuration value, or null to clear the existing
+	// configuration.
+	OptionalValue HarnessMemoryConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Wrapper for updating an MCP descriptor with PATCH semantics. When present with
 // a value, individual MCP fields can be updated independently. When present with a
 // null value, the entire MCP descriptor is unset. When absent, the MCP descriptor
@@ -5397,6 +6123,10 @@ type WorkloadIdentityType struct {
 	noSmithyDocumentSerde
 }
 
+type Unit struct {
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -5408,53 +6138,63 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAgentRuntimeArtifact()                  {}
-func (*UnknownUnionMember) isApiSchemaConfiguration()                {}
-func (*UnknownUnionMember) isAuthorizationData()                     {}
-func (*UnknownUnionMember) isAuthorizerConfiguration()               {}
-func (*UnknownUnionMember) isCertificateLocation()                   {}
-func (*UnknownUnionMember) isClaimMatchValueType()                   {}
-func (*UnknownUnionMember) isCode()                                  {}
-func (*UnknownUnionMember) isCodeBasedEvaluatorConfig()              {}
-func (*UnknownUnionMember) isConsolidationConfiguration()            {}
-func (*UnknownUnionMember) isContent()                               {}
-func (*UnknownUnionMember) isCredentialProvider()                    {}
-func (*UnknownUnionMember) isCustomConfigurationInput()              {}
-func (*UnknownUnionMember) isCustomConsolidationConfiguration()      {}
-func (*UnknownUnionMember) isCustomConsolidationConfigurationInput() {}
-func (*UnknownUnionMember) isCustomExtractionConfiguration()         {}
-func (*UnknownUnionMember) isCustomExtractionConfigurationInput()    {}
-func (*UnknownUnionMember) isCustomReflectionConfiguration()         {}
-func (*UnknownUnionMember) isCustomReflectionConfigurationInput()    {}
-func (*UnknownUnionMember) isDataSourceConfig()                      {}
-func (*UnknownUnionMember) isEvaluatorConfig()                       {}
-func (*UnknownUnionMember) isEvaluatorModelConfig()                  {}
-func (*UnknownUnionMember) isEvaluatorReference()                    {}
-func (*UnknownUnionMember) isExtractionConfiguration()               {}
-func (*UnknownUnionMember) isFilesystemConfiguration()               {}
-func (*UnknownUnionMember) isFilterValue()                           {}
-func (*UnknownUnionMember) isGatewayProtocolConfiguration()          {}
-func (*UnknownUnionMember) isInterceptorConfiguration()              {}
-func (*UnknownUnionMember) isMcpTargetConfiguration()                {}
-func (*UnknownUnionMember) isMcpToolSchemaConfiguration()            {}
-func (*UnknownUnionMember) isMemoryStrategyInput()                   {}
-func (*UnknownUnionMember) isModifyConsolidationConfiguration()      {}
-func (*UnknownUnionMember) isModifyExtractionConfiguration()         {}
-func (*UnknownUnionMember) isModifyReflectionConfiguration()         {}
-func (*UnknownUnionMember) isOauth2Discovery()                       {}
-func (*UnknownUnionMember) isOauth2ProviderConfigInput()             {}
-func (*UnknownUnionMember) isOauth2ProviderConfigOutput()            {}
-func (*UnknownUnionMember) isPolicyDefinition()                      {}
-func (*UnknownUnionMember) isPrivateEndpoint()                       {}
-func (*UnknownUnionMember) isRatingScale()                           {}
-func (*UnknownUnionMember) isReflectionConfiguration()               {}
-func (*UnknownUnionMember) isRegistryRecordCredentialProviderUnion() {}
-func (*UnknownUnionMember) isRequestHeaderConfiguration()            {}
-func (*UnknownUnionMember) isResource()                              {}
-func (*UnknownUnionMember) isResourceLocation()                      {}
-func (*UnknownUnionMember) isSelfManagedLatticeResource()            {}
-func (*UnknownUnionMember) isStreamDeliveryResource()                {}
-func (*UnknownUnionMember) isTargetConfiguration()                   {}
-func (*UnknownUnionMember) isToolSchema()                            {}
-func (*UnknownUnionMember) isTriggerCondition()                      {}
-func (*UnknownUnionMember) isTriggerConditionInput()                 {}
+func (*UnknownUnionMember) isAgentRuntimeArtifact()                   {}
+func (*UnknownUnionMember) isApiSchemaConfiguration()                 {}
+func (*UnknownUnionMember) isAuthorizationData()                      {}
+func (*UnknownUnionMember) isAuthorizerConfiguration()                {}
+func (*UnknownUnionMember) isCertificateLocation()                    {}
+func (*UnknownUnionMember) isClaimMatchValueType()                    {}
+func (*UnknownUnionMember) isCode()                                   {}
+func (*UnknownUnionMember) isCodeBasedEvaluatorConfig()               {}
+func (*UnknownUnionMember) isConsolidationConfiguration()             {}
+func (*UnknownUnionMember) isContent()                                {}
+func (*UnknownUnionMember) isCredentialProvider()                     {}
+func (*UnknownUnionMember) isCustomConfigurationInput()               {}
+func (*UnknownUnionMember) isCustomConsolidationConfiguration()       {}
+func (*UnknownUnionMember) isCustomConsolidationConfigurationInput()  {}
+func (*UnknownUnionMember) isCustomExtractionConfiguration()          {}
+func (*UnknownUnionMember) isCustomExtractionConfigurationInput()     {}
+func (*UnknownUnionMember) isCustomReflectionConfiguration()          {}
+func (*UnknownUnionMember) isCustomReflectionConfigurationInput()     {}
+func (*UnknownUnionMember) isDataSourceConfig()                       {}
+func (*UnknownUnionMember) isEvaluatorConfig()                        {}
+func (*UnknownUnionMember) isEvaluatorModelConfig()                   {}
+func (*UnknownUnionMember) isEvaluatorReference()                     {}
+func (*UnknownUnionMember) isExtractionConfiguration()                {}
+func (*UnknownUnionMember) isFilesystemConfiguration()                {}
+func (*UnknownUnionMember) isFilterValue()                            {}
+func (*UnknownUnionMember) isGatewayProtocolConfiguration()           {}
+func (*UnknownUnionMember) isHarnessEnvironmentArtifact()             {}
+func (*UnknownUnionMember) isHarnessEnvironmentProvider()             {}
+func (*UnknownUnionMember) isHarnessEnvironmentProviderRequest()      {}
+func (*UnknownUnionMember) isHarnessGatewayOutboundAuth()             {}
+func (*UnknownUnionMember) isHarnessMemoryConfiguration()             {}
+func (*UnknownUnionMember) isHarnessModelConfiguration()              {}
+func (*UnknownUnionMember) isHarnessSkill()                           {}
+func (*UnknownUnionMember) isHarnessSystemContentBlock()              {}
+func (*UnknownUnionMember) isHarnessToolConfiguration()               {}
+func (*UnknownUnionMember) isHarnessTruncationStrategyConfiguration() {}
+func (*UnknownUnionMember) isInterceptorConfiguration()               {}
+func (*UnknownUnionMember) isMcpTargetConfiguration()                 {}
+func (*UnknownUnionMember) isMcpToolSchemaConfiguration()             {}
+func (*UnknownUnionMember) isMemoryStrategyInput()                    {}
+func (*UnknownUnionMember) isModifyConsolidationConfiguration()       {}
+func (*UnknownUnionMember) isModifyExtractionConfiguration()          {}
+func (*UnknownUnionMember) isModifyReflectionConfiguration()          {}
+func (*UnknownUnionMember) isOauth2Discovery()                        {}
+func (*UnknownUnionMember) isOauth2ProviderConfigInput()              {}
+func (*UnknownUnionMember) isOauth2ProviderConfigOutput()             {}
+func (*UnknownUnionMember) isPolicyDefinition()                       {}
+func (*UnknownUnionMember) isPrivateEndpoint()                        {}
+func (*UnknownUnionMember) isRatingScale()                            {}
+func (*UnknownUnionMember) isReflectionConfiguration()                {}
+func (*UnknownUnionMember) isRegistryRecordCredentialProviderUnion()  {}
+func (*UnknownUnionMember) isRequestHeaderConfiguration()             {}
+func (*UnknownUnionMember) isResource()                               {}
+func (*UnknownUnionMember) isResourceLocation()                       {}
+func (*UnknownUnionMember) isSelfManagedLatticeResource()             {}
+func (*UnknownUnionMember) isStreamDeliveryResource()                 {}
+func (*UnknownUnionMember) isTargetConfiguration()                    {}
+func (*UnknownUnionMember) isToolSchema()                             {}
+func (*UnknownUnionMember) isTriggerCondition()                       {}
+func (*UnknownUnionMember) isTriggerConditionInput()                  {}

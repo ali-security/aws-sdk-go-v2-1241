@@ -2631,6 +2631,24 @@ type ReservedInstanceOffering struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the rollback options for a service software update.
+type RollbackServiceSoftwareOptions struct {
+
+	// The current service software version on the domain.
+	CurrentVersion *string
+
+	// A description of the rollback status.
+	Description *string
+
+	// The service software version that the domain will roll back to.
+	NewVersion *string
+
+	// Whether a service software rollback is available for the domain.
+	RollbackAvailable *bool
+
+	noSmithyDocumentSerde
+}
+
 // Information about the Amazon S3 Glue Data Catalog.
 type S3GlueDataCatalog struct {
 
@@ -2878,6 +2896,11 @@ type SoftwareUpdateOptions struct {
 
 	// Whether automatic service software updates are enabled for the domain.
 	AutoSoftwareUpdateEnabled *bool
+
+	// Whether the domain should use the latest service software version during a
+	// blue/green deployment. If enabled, the domain will automatically use the latest
+	// available service software when a blue/green deployment is triggered.
+	UseLatestServiceSoftwareForBlueGreen *bool
 
 	noSmithyDocumentSerde
 }

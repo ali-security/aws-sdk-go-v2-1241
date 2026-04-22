@@ -1,0 +1,8 @@
+{
+    "id": "dde55b95-0762-4a2b-95f4-89ddd81fe3e8",
+    "type": "feature",
+    "description": "Adds support for Amazon IVS server-side ad insertion",
+    "modules": [
+        "service/ivs"
+    ]
+}

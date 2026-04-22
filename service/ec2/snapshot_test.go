@@ -6866,6 +6866,18 @@ func TestCheckSnapshot_GetManagedPrefixListEntries(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetManagedResourceVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedResourceVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetManagedResourceVisibility")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNetworkInsightsAccessScopeAnalysisFindings(context.Background(), nil, func(o *Options) {
@@ -7735,6 +7747,18 @@ func TestCheckSnapshot_ModifyManagedPrefixList(t *testing.T) {
 	_, err := svc.ModifyManagedPrefixList(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyManagedPrefixList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyManagedResourceVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyManagedResourceVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyManagedResourceVisibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -15997,6 +16021,18 @@ func TestUpdateSnapshot_GetManagedPrefixListEntries(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetManagedResourceVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedResourceVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetManagedResourceVisibility")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetNetworkInsightsAccessScopeAnalysisFindings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetNetworkInsightsAccessScopeAnalysisFindings(context.Background(), nil, func(o *Options) {
@@ -16866,6 +16902,18 @@ func TestUpdateSnapshot_ModifyManagedPrefixList(t *testing.T) {
 	_, err := svc.ModifyManagedPrefixList(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyManagedPrefixList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyManagedResourceVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyManagedResourceVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyManagedResourceVisibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

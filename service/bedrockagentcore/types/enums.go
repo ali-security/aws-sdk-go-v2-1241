@@ -197,6 +197,133 @@ func (ExtractionJobStatus) Values() []ExtractionJobStatus {
 	}
 }
 
+type HarnessConversationRole string
+
+// Enum values for HarnessConversationRole
+const (
+	HarnessConversationRoleUser      HarnessConversationRole = "user"
+	HarnessConversationRoleAssistant HarnessConversationRole = "assistant"
+)
+
+// Values returns all known values for HarnessConversationRole. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessConversationRole) Values() []HarnessConversationRole {
+	return []HarnessConversationRole{
+		"user",
+		"assistant",
+	}
+}
+
+type HarnessStopReason string
+
+// Enum values for HarnessStopReason
+const (
+	HarnessStopReasonEndTurn                    HarnessStopReason = "end_turn"
+	HarnessStopReasonToolUse                    HarnessStopReason = "tool_use"
+	HarnessStopReasonToolResult                 HarnessStopReason = "tool_result"
+	HarnessStopReasonMaxTokens                  HarnessStopReason = "max_tokens"
+	HarnessStopReasonStopSequence               HarnessStopReason = "stop_sequence"
+	HarnessStopReasonContentFiltered            HarnessStopReason = "content_filtered"
+	HarnessStopReasonMalformedModelOutput       HarnessStopReason = "malformed_model_output"
+	HarnessStopReasonMalformedToolUse           HarnessStopReason = "malformed_tool_use"
+	HarnessStopReasonInterrupted                HarnessStopReason = "interrupted"
+	HarnessStopReasonPartialTurn                HarnessStopReason = "partial_turn"
+	HarnessStopReasonModelContextWindowExceeded HarnessStopReason = "model_context_window_exceeded"
+	HarnessStopReasonMaxIterationsExceeded      HarnessStopReason = "max_iterations_exceeded"
+	HarnessStopReasonMaxOutputTokensExceeded    HarnessStopReason = "max_output_tokens_exceeded"
+	HarnessStopReasonTimeoutExceeded            HarnessStopReason = "timeout_exceeded"
+)
+
+// Values returns all known values for HarnessStopReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessStopReason) Values() []HarnessStopReason {
+	return []HarnessStopReason{
+		"end_turn",
+		"tool_use",
+		"tool_result",
+		"max_tokens",
+		"stop_sequence",
+		"content_filtered",
+		"malformed_model_output",
+		"malformed_tool_use",
+		"interrupted",
+		"partial_turn",
+		"model_context_window_exceeded",
+		"max_iterations_exceeded",
+		"max_output_tokens_exceeded",
+		"timeout_exceeded",
+	}
+}
+
+type HarnessToolType string
+
+// Enum values for HarnessToolType
+const (
+	HarnessToolTypeRemoteMcp                HarnessToolType = "remote_mcp"
+	HarnessToolTypeAgentcoreBrowser         HarnessToolType = "agentcore_browser"
+	HarnessToolTypeAgentcoreGateway         HarnessToolType = "agentcore_gateway"
+	HarnessToolTypeInlineFunction           HarnessToolType = "inline_function"
+	HarnessToolTypeAgentcoreCodeInterpreter HarnessToolType = "agentcore_code_interpreter"
+)
+
+// Values returns all known values for HarnessToolType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessToolType) Values() []HarnessToolType {
+	return []HarnessToolType{
+		"remote_mcp",
+		"agentcore_browser",
+		"agentcore_gateway",
+		"inline_function",
+		"agentcore_code_interpreter",
+	}
+}
+
+type HarnessToolUseStatus string
+
+// Enum values for HarnessToolUseStatus
+const (
+	HarnessToolUseStatusSuccess HarnessToolUseStatus = "success"
+	HarnessToolUseStatusError   HarnessToolUseStatus = "error"
+)
+
+// Values returns all known values for HarnessToolUseStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessToolUseStatus) Values() []HarnessToolUseStatus {
+	return []HarnessToolUseStatus{
+		"success",
+		"error",
+	}
+}
+
+type HarnessToolUseType string
+
+// Enum values for HarnessToolUseType
+const (
+	HarnessToolUseTypeToolUse       HarnessToolUseType = "tool_use"
+	HarnessToolUseTypeServerToolUse HarnessToolUseType = "server_tool_use"
+	HarnessToolUseTypeMcpToolUse    HarnessToolUseType = "mcp_tool_use"
+)
+
+// Values returns all known values for HarnessToolUseType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessToolUseType) Values() []HarnessToolUseType {
+	return []HarnessToolUseType{
+		"tool_use",
+		"server_tool_use",
+		"mcp_tool_use",
+	}
+}
+
 type LanguageRuntime string
 
 // Enum values for LanguageRuntime
@@ -274,6 +401,25 @@ func (Oauth2FlowType) Values() []Oauth2FlowType {
 	return []Oauth2FlowType{
 		"USER_FEDERATION",
 		"M2M",
+	}
+}
+
+type OAuthGrantType string
+
+// Enum values for OAuthGrantType
+const (
+	OAuthGrantTypeClientCredentials OAuthGrantType = "CLIENT_CREDENTIALS"
+	OAuthGrantTypeAuthorizationCode OAuthGrantType = "AUTHORIZATION_CODE"
+)
+
+// Values returns all known values for OAuthGrantType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OAuthGrantType) Values() []OAuthGrantType {
+	return []OAuthGrantType{
+		"CLIENT_CREDENTIALS",
+		"AUTHORIZATION_CODE",
 	}
 }
 

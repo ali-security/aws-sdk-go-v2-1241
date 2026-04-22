@@ -563,6 +563,221 @@ func ExampleGatewayProtocolConfiguration_outputUsage() {
 
 var _ *types.MCPGatewayConfiguration
 
+func ExampleHarnessEnvironmentArtifact_outputUsage() {
+	var union types.HarnessEnvironmentArtifact
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessEnvironmentArtifactMemberContainerConfiguration:
+		_ = v.Value // Value is types.ContainerConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ContainerConfiguration
+
+func ExampleHarnessEnvironmentProvider_outputUsage() {
+	var union types.HarnessEnvironmentProvider
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessEnvironmentProviderMemberAgentCoreRuntimeEnvironment:
+		_ = v.Value // Value is types.HarnessAgentCoreRuntimeEnvironment
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessAgentCoreRuntimeEnvironment
+
+func ExampleHarnessEnvironmentProviderRequest_outputUsage() {
+	var union types.HarnessEnvironmentProviderRequest
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessEnvironmentProviderRequestMemberAgentCoreRuntimeEnvironment:
+		_ = v.Value // Value is types.HarnessAgentCoreRuntimeEnvironmentRequest
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessAgentCoreRuntimeEnvironmentRequest
+
+func ExampleHarnessGatewayOutboundAuth_outputUsage() {
+	var union types.HarnessGatewayOutboundAuth
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessGatewayOutboundAuthMemberAwsIam:
+		_ = v.Value // Value is types.Unit
+
+	case *types.HarnessGatewayOutboundAuthMemberNone:
+		_ = v.Value // Value is types.Unit
+
+	case *types.HarnessGatewayOutboundAuthMemberOauth:
+		_ = v.Value // Value is types.OAuthCredentialProvider
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.Unit
+var _ *types.OAuthCredentialProvider
+
+func ExampleHarnessMemoryConfiguration_outputUsage() {
+	var union types.HarnessMemoryConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessMemoryConfigurationMemberAgentCoreMemoryConfiguration:
+		_ = v.Value // Value is types.HarnessAgentCoreMemoryConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessAgentCoreMemoryConfiguration
+
+func ExampleHarnessModelConfiguration_outputUsage() {
+	var union types.HarnessModelConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessModelConfigurationMemberBedrockModelConfig:
+		_ = v.Value // Value is types.HarnessBedrockModelConfig
+
+	case *types.HarnessModelConfigurationMemberGeminiModelConfig:
+		_ = v.Value // Value is types.HarnessGeminiModelConfig
+
+	case *types.HarnessModelConfigurationMemberOpenAiModelConfig:
+		_ = v.Value // Value is types.HarnessOpenAiModelConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessGeminiModelConfig
+var _ *types.HarnessOpenAiModelConfig
+var _ *types.HarnessBedrockModelConfig
+
+func ExampleHarnessSkill_outputUsage() {
+	var union types.HarnessSkill
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessSkillMemberPath:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleHarnessSystemContentBlock_outputUsage() {
+	var union types.HarnessSystemContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessSystemContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleHarnessToolConfiguration_outputUsage() {
+	var union types.HarnessToolConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessToolConfigurationMemberAgentCoreBrowser:
+		_ = v.Value // Value is types.HarnessAgentCoreBrowserConfig
+
+	case *types.HarnessToolConfigurationMemberAgentCoreCodeInterpreter:
+		_ = v.Value // Value is types.HarnessAgentCoreCodeInterpreterConfig
+
+	case *types.HarnessToolConfigurationMemberAgentCoreGateway:
+		_ = v.Value // Value is types.HarnessAgentCoreGatewayConfig
+
+	case *types.HarnessToolConfigurationMemberInlineFunction:
+		_ = v.Value // Value is types.HarnessInlineFunctionConfig
+
+	case *types.HarnessToolConfigurationMemberRemoteMcp:
+		_ = v.Value // Value is types.HarnessRemoteMcpConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessAgentCoreBrowserConfig
+var _ *types.HarnessRemoteMcpConfig
+var _ *types.HarnessAgentCoreGatewayConfig
+var _ *types.HarnessInlineFunctionConfig
+var _ *types.HarnessAgentCoreCodeInterpreterConfig
+
+func ExampleHarnessTruncationStrategyConfiguration_outputUsage() {
+	var union types.HarnessTruncationStrategyConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessTruncationStrategyConfigurationMemberSlidingWindow:
+		_ = v.Value // Value is types.HarnessSlidingWindowConfiguration
+
+	case *types.HarnessTruncationStrategyConfigurationMemberSummarization:
+		_ = v.Value // Value is types.HarnessSummarizationConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessSlidingWindowConfiguration
+var _ *types.HarnessSummarizationConfiguration
+
 func ExampleInterceptorConfiguration_outputUsage() {
 	var union types.InterceptorConfiguration
 	// type switches can be used to check the union value

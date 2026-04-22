@@ -671,6 +671,81 @@ func (GatewayStatus) Values() []GatewayStatus {
 	}
 }
 
+type HarnessStatus string
+
+// Enum values for HarnessStatus
+const (
+	HarnessStatusCreating     HarnessStatus = "CREATING"
+	HarnessStatusCreateFailed HarnessStatus = "CREATE_FAILED"
+	HarnessStatusUpdating     HarnessStatus = "UPDATING"
+	HarnessStatusUpdateFailed HarnessStatus = "UPDATE_FAILED"
+	HarnessStatusReady        HarnessStatus = "READY"
+	HarnessStatusDeleting     HarnessStatus = "DELETING"
+	HarnessStatusDeleteFailed HarnessStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for HarnessStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessStatus) Values() []HarnessStatus {
+	return []HarnessStatus{
+		"CREATING",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"READY",
+		"DELETING",
+		"DELETE_FAILED",
+	}
+}
+
+type HarnessToolType string
+
+// Enum values for HarnessToolType
+const (
+	HarnessToolTypeRemoteMcp                HarnessToolType = "remote_mcp"
+	HarnessToolTypeAgentcoreBrowser         HarnessToolType = "agentcore_browser"
+	HarnessToolTypeAgentcoreGateway         HarnessToolType = "agentcore_gateway"
+	HarnessToolTypeInlineFunction           HarnessToolType = "inline_function"
+	HarnessToolTypeAgentcoreCodeInterpreter HarnessToolType = "agentcore_code_interpreter"
+)
+
+// Values returns all known values for HarnessToolType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessToolType) Values() []HarnessToolType {
+	return []HarnessToolType{
+		"remote_mcp",
+		"agentcore_browser",
+		"agentcore_gateway",
+		"inline_function",
+		"agentcore_code_interpreter",
+	}
+}
+
+type HarnessTruncationStrategy string
+
+// Enum values for HarnessTruncationStrategy
+const (
+	HarnessTruncationStrategySlidingWindow HarnessTruncationStrategy = "sliding_window"
+	HarnessTruncationStrategySummarization HarnessTruncationStrategy = "summarization"
+	HarnessTruncationStrategyNone          HarnessTruncationStrategy = "none"
+)
+
+// Values returns all known values for HarnessTruncationStrategy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessTruncationStrategy) Values() []HarnessTruncationStrategy {
+	return []HarnessTruncationStrategy{
+		"sliding_window",
+		"summarization",
+		"none",
+	}
+}
+
 type InboundTokenClaimValueType string
 
 // Enum values for InboundTokenClaimValueType
@@ -866,6 +941,7 @@ const (
 	OnlineEvaluationConfigStatusUpdating     OnlineEvaluationConfigStatus = "UPDATING"
 	OnlineEvaluationConfigStatusUpdateFailed OnlineEvaluationConfigStatus = "UPDATE_FAILED"
 	OnlineEvaluationConfigStatusDeleting     OnlineEvaluationConfigStatus = "DELETING"
+	OnlineEvaluationConfigStatusError        OnlineEvaluationConfigStatus = "ERROR"
 )
 
 // Values returns all known values for OnlineEvaluationConfigStatus. Note that
@@ -881,6 +957,7 @@ func (OnlineEvaluationConfigStatus) Values() []OnlineEvaluationConfigStatus {
 		"UPDATING",
 		"UPDATE_FAILED",
 		"DELETING",
+		"ERROR",
 	}
 }
 

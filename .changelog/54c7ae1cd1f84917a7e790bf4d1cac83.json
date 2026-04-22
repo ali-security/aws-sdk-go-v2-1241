@@ -1,0 +1,8 @@
+{
+    "id": "54c7ae1c-d1f8-4917-a7e7-90bf4d1cac83",
+    "type": "feature",
+    "description": "Update the pipeline configuration body character limit for the CreatePipeline API call.",
+    "modules": [
+        "service/osis"
+    ]
+}

@@ -29,6 +29,9 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 
 type CreateChannelInput struct {
 
+	// ARN of the ad configuration associated with the channel.
+	AdConfigurationArn *string
+
 	// Whether the channel is private (enabled for playback authorization). Default:
 	// false .
 	Authorized bool
