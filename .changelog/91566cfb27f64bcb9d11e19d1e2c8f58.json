@@ -1,8 +1,0 @@
-{
-    "id": "91566cfb-27f6-4bcb-9d11-e19d1e2c8f58",
-    "type": "feature",
-    "description": "Amazon OpenSearch UI applications now support cross-Region domain association, enabling you to connect OpenSearch Dashboards in one AWS Region to OpenSearch domains in other Regions within the same partition for centralized data visualization.",
-    "modules": [
-        "service/opensearch"
-    ]
-}

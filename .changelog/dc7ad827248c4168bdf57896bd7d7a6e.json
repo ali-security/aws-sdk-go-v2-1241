@@ -1,8 +1,0 @@
-{
-    "id": "dc7ad827-248c-4168-bdf5-7896bd7d7a6e",
-    "type": "documentation",
-    "description": "This release adds support for Slurm 25.11 with expedited requeue enabled by default for jobs failing due to node issues, configurable requeue delay, health checks at node startup only, and unauthenticated HTTP endpoints disabled by default for improved security.",
-    "modules": [
-        "service/pcs"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.66.0 (2026-04-23)
+
+* **Feature**: Amazon OpenSearch UI applications now support cross-Region domain association, enabling you to connect OpenSearch Dashboards in one AWS Region to OpenSearch domains in other Regions within the same partition for centralized data visualization.
+
 # v1.65.0 (2026-04-22)
 
 * **Feature**: Adds support for RollbackServiceSoftwareUpdate API

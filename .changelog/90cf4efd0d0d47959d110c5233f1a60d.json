@@ -1,8 +1,0 @@
-{
-    "id": "90cf4efd-0d0d-4795-9d11-0c5233f1a60d",
-    "type": "feature",
-    "description": "Releasing For LakehouseProperties attributes in the Connections API's",
-    "modules": [
-        "service/datazone"
-    ]
-}

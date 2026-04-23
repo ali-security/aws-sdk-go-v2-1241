@@ -1,3 +1,7 @@
+# v1.9.0 (2026-04-23)
+
+* **Feature**: Adds "Status" field to provisioning profile operation response types, giving users visibility into the readiness of a provisioning profile to be used for device provisioning.
+
 # v1.8.5 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
