@@ -41,6 +41,10 @@ type RevokeVpcEndpointAccessInput struct {
 	// The service SP to revoke access from.
 	Service types.AWSServicePrincipal
 
+	// The options for the service, including the supported Regions for the endpoint
+	// access.
+	ServiceOptions *types.ServiceOptions
+
 	noSmithyDocumentSerde
 }
 

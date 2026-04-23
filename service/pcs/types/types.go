@@ -812,7 +812,7 @@ type Scheduler struct {
 	// cluster scaling and job scheduling. For more information, see [Slurm versions in PCS]in the PCS User
 	// Guide.
 	//
-	// Valid Values: 23.11 | 24.05 | 24.11 | 25.05
+	// Valid Values: 23.11 | 24.05 | 24.11 | 25.05 | 25.11
 	//
 	// [Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//
@@ -834,7 +834,7 @@ type SchedulerRequest struct {
 	// cluster scaling and job scheduling. For more information, see [Slurm versions in PCS]in the PCS User
 	// Guide.
 	//
-	// Valid Values: 24.11 | 25.05
+	// Valid Values: 24.11 | 25.05 | 25.11
 	//
 	// [Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//

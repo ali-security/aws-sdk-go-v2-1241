@@ -110,6 +110,9 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 	case *types.ConnectionPropertiesInputMemberIamProperties:
 		_ = v.Value // Value is types.IamPropertiesInput
 
+	case *types.ConnectionPropertiesInputMemberLakehouseProperties:
+		_ = v.Value // Value is types.LakehousePropertiesInput
+
 	case *types.ConnectionPropertiesInputMemberMlflowProperties:
 		_ = v.Value // Value is types.MlflowPropertiesInput
 
@@ -141,16 +144,17 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 }
 
 var _ *types.SparkEmrPropertiesInput
+var _ *types.LakehousePropertiesInput
+var _ *types.AthenaPropertiesInput
+var _ *types.SparkGluePropertiesInput
+var _ *types.HyperPodPropertiesInput
+var _ *types.WorkflowsServerlessPropertiesInput
 var _ *types.WorkflowsMwaaPropertiesInput
 var _ *types.AmazonQPropertiesInput
 var _ *types.GluePropertiesInput
 var _ *types.S3PropertiesInput
-var _ *types.AthenaPropertiesInput
 var _ *types.IamPropertiesInput
-var _ *types.SparkGluePropertiesInput
-var _ *types.HyperPodPropertiesInput
 var _ *types.RedshiftPropertiesInput
-var _ *types.WorkflowsServerlessPropertiesInput
 var _ *types.MlflowPropertiesInput
 
 func ExampleConnectionPropertiesOutput_outputUsage() {
@@ -171,6 +175,9 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 
 	case *types.ConnectionPropertiesOutputMemberIamProperties:
 		_ = v.Value // Value is types.IamPropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberLakehouseProperties:
+		_ = v.Value // Value is types.LakehousePropertiesOutput
 
 	case *types.ConnectionPropertiesOutputMemberMlflowProperties:
 		_ = v.Value // Value is types.MlflowPropertiesOutput
@@ -207,13 +214,14 @@ var _ *types.S3PropertiesOutput
 var _ *types.WorkflowsMwaaPropertiesOutput
 var _ *types.AthenaPropertiesOutput
 var _ *types.SparkGluePropertiesOutput
+var _ *types.AmazonQPropertiesOutput
+var _ *types.HyperPodPropertiesOutput
+var _ *types.SparkEmrPropertiesOutput
+var _ *types.LakehousePropertiesOutput
 var _ *types.IamPropertiesOutput
 var _ *types.WorkflowsServerlessPropertiesOutput
 var _ *types.RedshiftPropertiesOutput
-var _ *types.AmazonQPropertiesOutput
-var _ *types.HyperPodPropertiesOutput
 var _ *types.GluePropertiesOutput
-var _ *types.SparkEmrPropertiesOutput
 
 func ExampleConnectionPropertiesPatch_outputUsage() {
 	var union types.ConnectionPropertiesPatch
@@ -230,6 +238,9 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 
 	case *types.ConnectionPropertiesPatchMemberIamProperties:
 		_ = v.Value // Value is types.IamPropertiesPatch
+
+	case *types.ConnectionPropertiesPatchMemberLakehouseProperties:
+		_ = v.Value // Value is types.LakehousePropertiesPatch
 
 	case *types.ConnectionPropertiesPatchMemberMlflowProperties:
 		_ = v.Value // Value is types.MlflowPropertiesPatch
@@ -259,6 +270,7 @@ var _ *types.IamPropertiesPatch
 var _ *types.RedshiftPropertiesPatch
 var _ *types.AthenaPropertiesPatch
 var _ *types.GluePropertiesPatch
+var _ *types.LakehousePropertiesPatch
 var _ *types.S3PropertiesPatch
 
 func ExampleDataSourceConfigurationInput_outputUsage() {

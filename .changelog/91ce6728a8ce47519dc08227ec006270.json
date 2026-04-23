@@ -1,0 +1,8 @@
+{
+    "id": "91ce6728-a8ce-4751-9dc0-8227ec006270",
+    "type": "feature",
+    "description": "Adds \"Status\" field to provisioning profile operation response types, giving users visibility into the readiness of a provisioning profile to be used for device provisioning.",
+    "modules": [
+        "service/iotmanagedintegrations"
+    ]
+}

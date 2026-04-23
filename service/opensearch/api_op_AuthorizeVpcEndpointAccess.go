@@ -41,6 +41,10 @@ type AuthorizeVpcEndpointAccessInput struct {
 	// The Amazon Web Services service SP to grant access to.
 	Service types.AWSServicePrincipal
 
+	// The options for the service, including the supported Regions for the endpoint
+	// access.
+	ServiceOptions *types.ServiceOptions
+
 	noSmithyDocumentSerde
 }
 
