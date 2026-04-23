@@ -24,6 +24,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net"
 	"net/http"
+	"os"
 	"sync/atomic"
 	"time"
 )
@@ -723,6 +724,12 @@ func addRetry(stack *middleware.Stack, o Options, c *Client) error {
 		return err
 	}
 	return nil
+}
+
+func finalizeLongPollingRetryer(o *Options) {
+	if os.Getenv("AWS_NEW_RETRIES_2026") == "true" {
+		o.Retryer = retry.AddWithLongPolling(o.Retryer)
+	}
 }
 
 // resolves dual-stack endpoint configuration
