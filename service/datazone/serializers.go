@@ -18752,6 +18752,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesInput(v types.ConnectionP
 			return err
 		}
 
+	case *types.ConnectionPropertiesInputMemberLakehouseProperties:
+		av := object.Key("lakehouseProperties")
+		if err := awsRestjson1_serializeDocumentLakehousePropertiesInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConnectionPropertiesInputMemberMlflowProperties:
 		av := object.Key("mlflowProperties")
 		if err := awsRestjson1_serializeDocumentMlflowPropertiesInput(&uv.Value, av); err != nil {
@@ -18827,6 +18833,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesPatch(v types.ConnectionP
 	case *types.ConnectionPropertiesPatchMemberIamProperties:
 		av := object.Key("iamProperties")
 		if err := awsRestjson1_serializeDocumentIamPropertiesPatch(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConnectionPropertiesPatchMemberLakehouseProperties:
+		av := object.Key("lakehouseProperties")
+		if err := awsRestjson1_serializeDocumentLakehousePropertiesPatch(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -20208,6 +20220,30 @@ func awsRestjson1_serializeDocumentLakeFormationConfiguration(v *types.LakeForma
 	if v.LocationRegistrationRole != nil {
 		ok := object.Key("locationRegistrationRole")
 		ok.String(*v.LocationRegistrationRole)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLakehousePropertiesInput(v *types.LakehousePropertiesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GlueLineageSyncEnabled != nil {
+		ok := object.Key("glueLineageSyncEnabled")
+		ok.Boolean(*v.GlueLineageSyncEnabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLakehousePropertiesPatch(v *types.LakehousePropertiesPatch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GlueLineageSyncEnabled != nil {
+		ok := object.Key("glueLineageSyncEnabled")
+		ok.Boolean(*v.GlueLineageSyncEnabled)
 	}
 
 	return nil

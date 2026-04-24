@@ -28,7 +28,7 @@ func (c *Client) DeleteProvisioningProfile(ctx context.Context, params *DeletePr
 
 type DeleteProvisioningProfileInput struct {
 
-	// The name of the provisioning template.
+	// The id of the provisioning profile.
 	//
 	// This member is required.
 	Identifier *string

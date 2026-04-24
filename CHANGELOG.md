@@ -1,3 +1,15 @@
+# Release (2026-04-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.58.0](service/datazone/CHANGELOG.md#v1580-2026-04-23)
+  * **Feature**: Releasing For LakehouseProperties attributes in the Connections API's
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.9.0](service/iotmanagedintegrations/CHANGELOG.md#v190-2026-04-23)
+  * **Feature**: Adds "Status" field to provisioning profile operation response types, giving users visibility into the readiness of a provisioning profile to be used for device provisioning.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.66.0](service/opensearch/CHANGELOG.md#v1660-2026-04-23)
+  * **Feature**: Amazon OpenSearch UI applications now support cross-Region domain association, enabling you to connect OpenSearch Dashboards in one AWS Region to OpenSearch domains in other Regions within the same partition for centralized data visualization.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.17.3](service/pcs/CHANGELOG.md#v1173-2026-04-23)
+  * **Documentation**: This release adds support for Slurm 25.11 with expedited requeue enabled by default for jobs failing due to node issues, configurable requeue delay, health checks at node startup only, and unauthenticated HTTP endpoints disabled by default for improved security.
+
 # Release (2026-04-22)
 
 ## General Highlights

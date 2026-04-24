@@ -691,6 +691,13 @@ func awsRestjson1_serializeOpDocumentAuthorizeVpcEndpointAccessInput(v *Authoriz
 		ok.String(string(v.Service))
 	}
 
+	if v.ServiceOptions != nil {
+		ok := object.Key("ServiceOptions")
+		if err := awsRestjson1_serializeDocumentServiceOptions(v.ServiceOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6321,6 +6328,13 @@ func awsRestjson1_serializeOpDocumentRevokeVpcEndpointAccessInput(v *RevokeVpcEn
 		ok.String(string(v.Service))
 	}
 
+	if v.ServiceOptions != nil {
+		ok := object.Key("ServiceOptions")
+		if err := awsRestjson1_serializeDocumentServiceOptions(v.ServiceOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -8537,6 +8551,11 @@ func awsRestjson1_serializeDocumentIdentityCenterOptionsInput(v *types.IdentityC
 		ok.String(*v.IdentityCenterInstanceARN)
 	}
 
+	if v.IdentityCenterInstanceRegion != nil {
+		ok := object.Key("IdentityCenterInstanceRegion")
+		ok.String(*v.IdentityCenterInstanceRegion)
+	}
+
 	if len(v.RolesKey) > 0 {
 		ok := object.Key("RolesKey")
 		ok.String(string(v.RolesKey))
@@ -8972,6 +8991,17 @@ func awsRestjson1_serializeDocumentPrometheusDirectQueryDataSource(v *types.Prom
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRegionsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentS3GlueDataCatalog(v *types.S3GlueDataCatalog, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9076,6 +9106,20 @@ func awsRestjson1_serializeDocumentServerlessVectorAcceleration(v *types.Serverl
 	if v.Enabled != nil {
 		ok := object.Key("Enabled")
 		ok.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentServiceOptions(v *types.ServiceOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SupportedRegions != nil {
+		ok := object.Key("SupportedRegions")
+		if err := awsRestjson1_serializeDocumentRegionsList(v.SupportedRegions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

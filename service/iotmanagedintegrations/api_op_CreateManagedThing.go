@@ -53,6 +53,8 @@ type CreateManagedThingInput struct {
 	Brand *string
 
 	// The capabilities of the device such as light bulb.
+	//
+	// Deprecated: Capabilities has been deprecated, use CapabilityReport instead
 	Capabilities *string
 
 	// A report of the capabilities for the managed thing.

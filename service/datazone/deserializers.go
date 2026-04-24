@@ -40779,6 +40779,16 @@ loop:
 			uv = &types.ConnectionPropertiesOutputMemberIamProperties{Value: mv}
 			break loop
 
+		case "lakehouseProperties":
+			var mv types.LakehousePropertiesOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentLakehousePropertiesOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConnectionPropertiesOutputMemberLakehouseProperties{Value: mv}
+			break loop
+
 		case "mlflowProperties":
 			var mv types.MlflowPropertiesOutput
 			destAddr := &mv
@@ -48071,6 +48081,46 @@ func awsRestjson1_deserializeDocumentLakeFormationConfiguration(v **types.LakeFo
 					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.LocationRegistrationRole = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLakehousePropertiesOutput(v **types.LakehousePropertiesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LakehousePropertiesOutput
+	if *v == nil {
+		sv = &types.LakehousePropertiesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "glueLineageSyncEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.GlueLineageSyncEnabled = ptr.Bool(jtv)
 			}
 
 		default:

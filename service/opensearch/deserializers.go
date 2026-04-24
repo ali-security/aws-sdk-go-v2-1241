@@ -16399,6 +16399,11 @@ func awsRestjson1_deserializeDocumentAuthorizedPrincipal(v **types.AuthorizedPri
 				sv.PrincipalType = types.PrincipalType(jtv)
 			}
 
+		case "ServiceOptions":
+			if err := awsRestjson1_deserializeDocumentServiceOptions(&sv.ServiceOptions, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -20811,6 +20816,15 @@ func awsRestjson1_deserializeDocumentIdentityCenterOptions(v **types.IdentityCen
 				sv.IdentityCenterInstanceARN = ptr.String(jtv)
 			}
 
+		case "IdentityCenterInstanceRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+				}
+				sv.IdentityCenterInstanceRegion = ptr.String(jtv)
+			}
+
 		case "IdentityStoreId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23701,6 +23715,42 @@ func awsRestjson1_deserializeDocumentRecurringChargeList(v *[]types.RecurringCha
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRegionsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentReservedInstance(v **types.ReservedInstance, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -24789,6 +24839,42 @@ func awsRestjson1_deserializeDocumentServerlessVectorAcceleration(v **types.Serv
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceOptions(v **types.ServiceOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceOptions
+	if *v == nil {
+		sv = &types.ServiceOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SupportedRegions":
+			if err := awsRestjson1_deserializeDocumentRegionsList(&sv.SupportedRegions, value); err != nil {
+				return err
 			}
 
 		default:

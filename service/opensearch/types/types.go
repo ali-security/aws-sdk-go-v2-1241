@@ -289,6 +289,10 @@ type AuthorizedPrincipal struct {
 	// The type of principal.
 	PrincipalType PrincipalType
 
+	// The options for the service, including the supported Regions for the endpoint
+	// access.
+	ServiceOptions *ServiceOptions
+
 	noSmithyDocumentSerde
 }
 
@@ -1689,6 +1693,9 @@ type IdentityCenterOptions struct {
 	// The Amazon Resource Name (ARN) of the IAM Identity Center instance.
 	IdentityCenterInstanceARN *string
 
+	// The Region of the IAM Identity Center instance.
+	IdentityCenterInstanceRegion *string
+
 	// The identifier of the IAM Identity Store.
 	IdentityStoreId *string
 
@@ -1713,6 +1720,9 @@ type IdentityCenterOptionsInput struct {
 	// The ARN of the IAM Identity Center instance used to create an OpenSearch UI
 	// application that uses IAM Identity Center for authentication.
 	IdentityCenterInstanceARN *string
+
+	// The Region of the IAM Identity Center instance.
+	IdentityCenterInstanceRegion *string
 
 	// Specifies the attribute that contains the backend role identifier (such as
 	// group name or group ID) in IAM Identity Center.
@@ -2822,6 +2832,15 @@ type ServerlessVectorAcceleration struct {
 
 	// Specifies whether serverless vector acceleration is enabled for the domain.
 	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Options for the service, such as the supported Regions.
+type ServiceOptions struct {
+
+	// The list of supported Regions for the service.
+	SupportedRegions []string
 
 	noSmithyDocumentSerde
 }

@@ -1,3 +1,7 @@
+# v1.58.0 (2026-04-23)
+
+* **Feature**: Releasing For LakehouseProperties attributes in the Connections API's
+
 # v1.57.1 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

@@ -1030,6 +1030,7 @@ type ConnectionCredentials struct {
 //	ConnectionPropertiesInputMemberGlueProperties
 //	ConnectionPropertiesInputMemberHyperPodProperties
 //	ConnectionPropertiesInputMemberIamProperties
+//	ConnectionPropertiesInputMemberLakehouseProperties
 //	ConnectionPropertiesInputMemberMlflowProperties
 //	ConnectionPropertiesInputMemberRedshiftProperties
 //	ConnectionPropertiesInputMemberS3Properties
@@ -1085,6 +1086,15 @@ type ConnectionPropertiesInputMemberIamProperties struct {
 }
 
 func (*ConnectionPropertiesInputMemberIamProperties) isConnectionPropertiesInput() {}
+
+// The lakehouse properties of a connection.
+type ConnectionPropertiesInputMemberLakehouseProperties struct {
+	Value LakehousePropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberLakehouseProperties) isConnectionPropertiesInput() {}
 
 // The MLflow properties of a connection.
 type ConnectionPropertiesInputMemberMlflowProperties struct {
@@ -1158,6 +1168,7 @@ func (*ConnectionPropertiesInputMemberWorkflowsServerlessProperties) isConnectio
 //	ConnectionPropertiesOutputMemberGlueProperties
 //	ConnectionPropertiesOutputMemberHyperPodProperties
 //	ConnectionPropertiesOutputMemberIamProperties
+//	ConnectionPropertiesOutputMemberLakehouseProperties
 //	ConnectionPropertiesOutputMemberMlflowProperties
 //	ConnectionPropertiesOutputMemberRedshiftProperties
 //	ConnectionPropertiesOutputMemberS3Properties
@@ -1213,6 +1224,15 @@ type ConnectionPropertiesOutputMemberIamProperties struct {
 }
 
 func (*ConnectionPropertiesOutputMemberIamProperties) isConnectionPropertiesOutput() {}
+
+// The lakehouse properties of a connection.
+type ConnectionPropertiesOutputMemberLakehouseProperties struct {
+	Value LakehousePropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberLakehouseProperties) isConnectionPropertiesOutput() {}
 
 // The MLflow properties of a connection.
 type ConnectionPropertiesOutputMemberMlflowProperties struct {
@@ -1286,6 +1306,7 @@ func (*ConnectionPropertiesOutputMemberWorkflowsServerlessProperties) isConnecti
 //	ConnectionPropertiesPatchMemberAthenaProperties
 //	ConnectionPropertiesPatchMemberGlueProperties
 //	ConnectionPropertiesPatchMemberIamProperties
+//	ConnectionPropertiesPatchMemberLakehouseProperties
 //	ConnectionPropertiesPatchMemberMlflowProperties
 //	ConnectionPropertiesPatchMemberRedshiftProperties
 //	ConnectionPropertiesPatchMemberS3Properties
@@ -1329,6 +1350,15 @@ type ConnectionPropertiesPatchMemberIamProperties struct {
 }
 
 func (*ConnectionPropertiesPatchMemberIamProperties) isConnectionPropertiesPatch() {}
+
+// The lakehouse properties of a connection properties patch.
+type ConnectionPropertiesPatchMemberLakehouseProperties struct {
+	Value LakehousePropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberLakehouseProperties) isConnectionPropertiesPatch() {}
 
 // The MLflow properties of a connection.
 type ConnectionPropertiesPatchMemberMlflowProperties struct {
@@ -3586,6 +3616,36 @@ type LakeFormationConfiguration struct {
 	// bucket(s) for Data Lake using Amazon Web Services Lake Formation hybrid access
 	// mode.
 	LocationRegistrationRole *string
+
+	noSmithyDocumentSerde
+}
+
+// The lakehouse properties of a connection.
+type LakehousePropertiesInput struct {
+
+	// Specifies whether to enable Glue lineage sync for tables managed by Glue
+	// crawlers.
+	GlueLineageSyncEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// The lakehouse properties of a connection.
+type LakehousePropertiesOutput struct {
+
+	// Specifies whether Glue lineage sync is enabled for tables managed by Glue
+	// crawlers.
+	GlueLineageSyncEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// The lakehouse properties of a connection properties patch.
+type LakehousePropertiesPatch struct {
+
+	// Specifies whether to enable Glue lineage sync for tables managed by Glue
+	// crawlers.
+	GlueLineageSyncEnabled *bool
 
 	noSmithyDocumentSerde
 }
