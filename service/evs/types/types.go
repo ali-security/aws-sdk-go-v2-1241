@@ -181,8 +181,13 @@ type Environment struct {
 
 	//  The license information that Amazon EVS requires to create an environment.
 	// Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.
-	// The VCF solution key must cover a minimum of 256 cores. The vSAN license key
-	// must provide at least 110 TiB of vSAN capacity.
+	// The VCF solution key must meet minimum core requirements, and the vSAN license
+	// key must meet minimum capacity requirements for your selected instance type.
+	//
+	// For information about minimum license requirements, see [the VCF subscriptions section] in the Amazon EVS User
+	// Guide.
+	//
+	// [the VCF subscriptions section]: https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html
 	LicenseInfo []LicenseInfo
 
 	//  The date and time that the environment was modified.
@@ -303,8 +308,6 @@ type Host struct {
 
 	// The EC2 instance type of the host.
 	//
-	// Currently, Amazon EVS supports only the i4i.metal instance type.
-	//
 	// EC2 instances created through Amazon EVS do not support associating an IAM
 	// instance profile.
 	InstanceType InstanceType
@@ -343,8 +346,6 @@ type HostInfoForCreate struct {
 	HostName *string
 
 	// The EC2 instance type that represents the host.
-	//
-	// Currently, Amazon EVS supports only the i4i.metal instance type.
 	//
 	// This member is required.
 	InstanceType InstanceType
@@ -500,13 +501,13 @@ type LicenseInfo struct {
 
 	//  The VCF solution key. This license unlocks VMware VCF product features,
 	// including vSphere, NSX, SDDC Manager, and vCenter Server. The VCF solution key
-	// must cover a minimum of 256 cores.
+	// must meet the instance-type-specific minimum core requirements.
 	//
 	// This member is required.
 	SolutionKey *string
 
 	//  The VSAN license key. This license unlocks vSAN features. The vSAN license key
-	// must provide at least 110 TiB of vSAN capacity.
+	// must meet the instance-type-specific minimum capacity requirements.
 	//
 	// This member is required.
 	VsanKey *string

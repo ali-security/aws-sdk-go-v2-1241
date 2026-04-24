@@ -1091,8 +1091,8 @@ func ExamplePrivateEndpoint_outputUsage() {
 	var union types.PrivateEndpoint
 	// type switches can be used to check the union value
 	switch v := union.(type) {
-	case *types.PrivateEndpointMemberManagedLatticeResource:
-		_ = v.Value // Value is types.ManagedLatticeResource
+	case *types.PrivateEndpointMemberManagedVpcResource:
+		_ = v.Value // Value is types.ManagedVpcResource
 
 	case *types.PrivateEndpointMemberSelfManagedLatticeResource:
 		_ = v.Value // Value is types.SelfManagedLatticeResource
@@ -1106,8 +1106,8 @@ func ExamplePrivateEndpoint_outputUsage() {
 	}
 }
 
+var _ *types.ManagedVpcResource
 var _ types.SelfManagedLatticeResource
-var _ *types.ManagedLatticeResource
 
 func ExampleRatingScale_outputUsage() {
 	var union types.RatingScale

@@ -395,6 +395,18 @@ type AllowedCapabilities struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an allowed file extension.
+type AllowedExtension struct {
+
+	// The file extension. The extension must be between 1 and 10 characters and can
+	// contain only alphanumeric characters, hyphens, and underscores.
+	//
+	// This member is required.
+	Extension *string
+
+	noSmithyDocumentSerde
+}
+
 // This API is in preview release for Amazon Connect and is subject to change.
 //
 // Information about associations that are successfully created: DataSetId ,
@@ -593,6 +605,54 @@ type AttachedFileError struct {
 
 	// The unique identifier of the attached file resource.
 	FileId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for attached files for a specific attachment scope.
+type AttachedFilesConfiguration struct {
+
+	// The scope of the attachment. Valid values are EMAIL , CHAT , CASE , and TASK .
+	//
+	// This member is required.
+	AttachmentScope AttachmentScope
+
+	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The configuration for allowed file extensions.
+	ExtensionConfiguration *ExtensionConfiguration
+
+	// The timestamp when the configuration was last modified.
+	LastModifiedTime *time.Time
+
+	// The maximum size limit for attached files in bytes.
+	MaximumSizeLimitInBytes *int64
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the attached files configuration.
+type AttachedFilesConfigurationSummary struct {
+
+	// The scope of the attachment. Valid values are EMAIL , CHAT , CASE , and TASK .
+	//
+	// This member is required.
+	AttachmentScope AttachmentScope
+
+	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The configuration for allowed file extensions.
+	ExtensionConfiguration *ExtensionConfiguration
+
+	// The maximum size limit for attached files in bytes. The minimum value is 1 and
+	// the maximum value is 104857600 (100 MB).
+	MaximumSizeLimitInBytes *int64
 
 	noSmithyDocumentSerde
 }
@@ -4968,6 +5028,17 @@ type Expression struct {
 
 	// List of routing expressions which will be OR-ed together.
 	OrExpression []Expression
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for allowed file extensions.
+type ExtensionConfiguration struct {
+
+	// The list of allowed file extensions.
+	//
+	// This member is required.
+	AllowedExtensions []AllowedExtension
 
 	noSmithyDocumentSerde
 }

@@ -80,6 +80,9 @@ type CreateOauth2CredentialProviderOutput struct {
 	// Contains the output configuration for an OAuth2 provider.
 	Oauth2ProviderConfigOutput types.Oauth2ProviderConfigOutput
 
+	// The current status of the OAuth2 credential provider.
+	Status types.Status
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

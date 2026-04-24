@@ -26866,6 +26866,15 @@ func awsAwsjson11_deserializeOpDocumentGetQueryResultsOutput(v **GetQueryResults
 				sv.EncryptionKey = ptr.String(jtv)
 			}
 
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GetQueryResultsNextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
 		case "queryLanguage":
 			if value != nil {
 				jtv, ok := value.(string)

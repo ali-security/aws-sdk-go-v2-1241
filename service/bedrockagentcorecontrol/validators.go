@@ -2882,6 +2882,16 @@ func validateCustomJWTAuthorizerConfiguration(v *types.CustomJWTAuthorizerConfig
 			invalidParams.AddNested("CustomClaims", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.PrivateEndpoint != nil {
+		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
+			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PrivateEndpointOverrides != nil {
+		if err := validatePrivateEndpointOverrides(v.PrivateEndpointOverrides); err != nil {
+			invalidParams.AddNested("PrivateEndpointOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2926,6 +2936,16 @@ func validateCustomOauth2ProviderConfigInput(v *types.CustomOauth2ProviderConfig
 	}
 	if v.ClientSecret == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if v.PrivateEndpoint != nil {
+		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
+			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PrivateEndpointOverrides != nil {
+		if err := validatePrivateEndpointOverrides(v.PrivateEndpointOverrides); err != nil {
+			invalidParams.AddNested("PrivateEndpointOverrides", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3876,11 +3896,11 @@ func validateLlmAsAJudgeEvaluatorConfig(v *types.LlmAsAJudgeEvaluatorConfig) err
 	}
 }
 
-func validateManagedLatticeResource(v *types.ManagedLatticeResource) error {
+func validateManagedVpcResource(v *types.ManagedVpcResource) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "ManagedLatticeResource"}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedVpcResource"}
 	if v.VpcIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcIdentifier"))
 	}
@@ -4408,11 +4428,50 @@ func validatePrivateEndpoint(v types.PrivateEndpoint) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PrivateEndpoint"}
 	switch uv := v.(type) {
-	case *types.PrivateEndpointMemberManagedLatticeResource:
-		if err := validateManagedLatticeResource(&uv.Value); err != nil {
-			invalidParams.AddNested("[managedLatticeResource]", err.(smithy.InvalidParamsError))
+	case *types.PrivateEndpointMemberManagedVpcResource:
+		if err := validateManagedVpcResource(&uv.Value); err != nil {
+			invalidParams.AddNested("[managedVpcResource]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivateEndpointOverride(v *types.PrivateEndpointOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateEndpointOverride"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if v.PrivateEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrivateEndpoint"))
+	} else if v.PrivateEndpoint != nil {
+		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
+			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePrivateEndpointOverrides(v []types.PrivateEndpointOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PrivateEndpointOverrides"}
+	for i := range v {
+		if err := validatePrivateEndpointOverride(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

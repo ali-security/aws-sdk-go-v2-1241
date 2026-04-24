@@ -11,6 +11,7 @@ const (
 	AgentManagedRuntimeTypePython312 AgentManagedRuntimeType = "PYTHON_3_12"
 	AgentManagedRuntimeTypePython313 AgentManagedRuntimeType = "PYTHON_3_13"
 	AgentManagedRuntimeTypePython314 AgentManagedRuntimeType = "PYTHON_3_14"
+	AgentManagedRuntimeTypeNode22    AgentManagedRuntimeType = "NODE_22"
 )
 
 // Values returns all known values for AgentManagedRuntimeType. Note that this can
@@ -24,6 +25,7 @@ func (AgentManagedRuntimeType) Values() []AgentManagedRuntimeType {
 		"PYTHON_3_12",
 		"PYTHON_3_13",
 		"PYTHON_3_14",
+		"NODE_22",
 	}
 }
 
@@ -1337,6 +1339,35 @@ func (ServerProtocol) Values() []ServerProtocol {
 		"HTTP",
 		"A2A",
 		"AGUI",
+	}
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusCreating     Status = "CREATING"
+	StatusCreateFailed Status = "CREATE_FAILED"
+	StatusUpdating     Status = "UPDATING"
+	StatusUpdateFailed Status = "UPDATE_FAILED"
+	StatusReady        Status = "READY"
+	StatusDeleting     Status = "DELETING"
+	StatusDeleteFailed Status = "DELETE_FAILED"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"CREATING",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"READY",
+		"DELETING",
+		"DELETE_FAILED",
 	}
 }
 

@@ -275,6 +275,29 @@ func (AttachedFileServiceQuotaExceededExceptionReason) Values() []AttachedFileSe
 	}
 }
 
+type AttachmentScope string
+
+// Enum values for AttachmentScope
+const (
+	AttachmentScopeEmail AttachmentScope = "EMAIL"
+	AttachmentScopeChat  AttachmentScope = "CHAT"
+	AttachmentScopeCase  AttachmentScope = "CASE"
+	AttachmentScopeTask  AttachmentScope = "TASK"
+)
+
+// Values returns all known values for AttachmentScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttachmentScope) Values() []AttachmentScope {
+	return []AttachmentScope{
+		"EMAIL",
+		"CHAT",
+		"CASE",
+		"TASK",
+	}
+}
+
 type AutoEvaluationStatus string
 
 // Enum values for AutoEvaluationStatus

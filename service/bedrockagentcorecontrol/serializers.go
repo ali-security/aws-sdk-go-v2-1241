@@ -10582,6 +10582,20 @@ func awsRestjson1_serializeDocumentCustomJWTAuthorizerConfiguration(v *types.Cus
 		ok.String(*v.DiscoveryUrl)
 	}
 
+	if v.PrivateEndpoint != nil {
+		ok := object.Key("privateEndpoint")
+		if err := awsRestjson1_serializeDocumentPrivateEndpoint(v.PrivateEndpoint, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrivateEndpointOverrides != nil {
+		ok := object.Key("privateEndpointOverrides")
+		if err := awsRestjson1_serializeDocumentPrivateEndpointOverrides(v.PrivateEndpointOverrides, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -10640,6 +10654,20 @@ func awsRestjson1_serializeDocumentCustomOauth2ProviderConfigInput(v *types.Cust
 	if v.OauthDiscovery != nil {
 		ok := object.Key("oauthDiscovery")
 		if err := awsRestjson1_serializeDocumentOauth2Discovery(v.OauthDiscovery, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrivateEndpoint != nil {
+		ok := object.Key("privateEndpoint")
+		if err := awsRestjson1_serializeDocumentPrivateEndpoint(v.PrivateEndpoint, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrivateEndpointOverrides != nil {
+		ok := object.Key("privateEndpointOverrides")
+		if err := awsRestjson1_serializeDocumentPrivateEndpointOverrides(v.PrivateEndpointOverrides, ok); err != nil {
 			return err
 		}
 	}
@@ -12294,7 +12322,7 @@ func awsRestjson1_serializeDocumentLogGroupNamesList(v []string, value smithyjso
 	return nil
 }
 
-func awsRestjson1_serializeDocumentManagedLatticeResource(v *types.ManagedLatticeResource, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentManagedVpcResource(v *types.ManagedVpcResource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -13170,9 +13198,9 @@ func awsRestjson1_serializeDocumentPrivateEndpoint(v types.PrivateEndpoint, valu
 	defer object.Close()
 
 	switch uv := v.(type) {
-	case *types.PrivateEndpointMemberManagedLatticeResource:
-		av := object.Key("managedLatticeResource")
-		if err := awsRestjson1_serializeDocumentManagedLatticeResource(&uv.Value, av); err != nil {
+	case *types.PrivateEndpointMemberManagedVpcResource:
+		av := object.Key("managedVpcResource")
+		if err := awsRestjson1_serializeDocumentManagedVpcResource(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -13185,6 +13213,38 @@ func awsRestjson1_serializeDocumentPrivateEndpoint(v types.PrivateEndpoint, valu
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPrivateEndpointOverride(v *types.PrivateEndpointOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Domain != nil {
+		ok := object.Key("domain")
+		ok.String(*v.Domain)
+	}
+
+	if v.PrivateEndpoint != nil {
+		ok := object.Key("privateEndpoint")
+		if err := awsRestjson1_serializeDocumentPrivateEndpoint(v.PrivateEndpoint, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPrivateEndpointOverrides(v []types.PrivateEndpointOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentPrivateEndpointOverride(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

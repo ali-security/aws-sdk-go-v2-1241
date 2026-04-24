@@ -2625,6 +2625,15 @@ func awsRestjson1_deserializeOpDocumentCreateOauth2CredentialProviderOutput(v **
 				return err
 			}
 
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
+				}
+				sv.Status = types.Status(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5968,6 +5977,9 @@ func awsRestjson1_deserializeOpErrorDeleteOauth2CredentialProvider(response *smi
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
@@ -10127,6 +10139,15 @@ func awsRestjson1_deserializeOpDocumentGetOauth2CredentialProviderOutput(v **Get
 				sv.CredentialProviderVendor = types.CredentialProviderVendorType(jtv)
 			}
 
+		case "failureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = ptr.String(jtv)
+			}
+
 		case "lastUpdatedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10155,6 +10176,15 @@ func awsRestjson1_deserializeOpDocumentGetOauth2CredentialProviderOutput(v **Get
 		case "oauth2ProviderConfigOutput":
 			if err := awsRestjson1_deserializeDocumentOauth2ProviderConfigOutput(&sv.Oauth2ProviderConfigOutput, value); err != nil {
 				return err
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
+				}
+				sv.Status = types.Status(jtv)
 			}
 
 		default:
@@ -19378,6 +19408,15 @@ func awsRestjson1_deserializeOpDocumentUpdateOauth2CredentialProviderOutput(v **
 				return err
 			}
 
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
+				}
+				sv.Status = types.Status(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -24873,6 +24912,16 @@ func awsRestjson1_deserializeDocumentCustomJWTAuthorizerConfiguration(v **types.
 				sv.DiscoveryUrl = ptr.String(jtv)
 			}
 
+		case "privateEndpoint":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpoint(&sv.PrivateEndpoint, value); err != nil {
+				return err
+			}
+
+		case "privateEndpointOverrides":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpointOverrides(&sv.PrivateEndpointOverrides, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -24915,6 +24964,16 @@ func awsRestjson1_deserializeDocumentCustomOauth2ProviderConfigOutput(v **types.
 
 		case "oauthDiscovery":
 			if err := awsRestjson1_deserializeDocumentOauth2Discovery(&sv.OauthDiscovery, value); err != nil {
+				return err
+			}
+
+		case "privateEndpoint":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpoint(&sv.PrivateEndpoint, value); err != nil {
+				return err
+			}
+
+		case "privateEndpointOverrides":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpointOverrides(&sv.PrivateEndpointOverrides, value); err != nil {
 				return err
 			}
 
@@ -29695,79 +29754,6 @@ func awsRestjson1_deserializeDocumentLogGroupNamesList(v *[]string, value interf
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentManagedLatticeResource(v **types.ManagedLatticeResource, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.ManagedLatticeResource
-	if *v == nil {
-		sv = &types.ManagedLatticeResource{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "endpointIpAddressType":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected EndpointIpAddressType to be of type string, got %T instead", value)
-				}
-				sv.EndpointIpAddressType = types.EndpointIpAddressType(jtv)
-			}
-
-		case "routingDomain":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected RoutingDomain to be of type string, got %T instead", value)
-				}
-				sv.RoutingDomain = ptr.String(jtv)
-			}
-
-		case "securityGroupIds":
-			if err := awsRestjson1_deserializeDocumentSecurityGroupIds(&sv.SecurityGroupIds, value); err != nil {
-				return err
-			}
-
-		case "subnetIds":
-			if err := awsRestjson1_deserializeDocumentSubnetIds(&sv.SubnetIds, value); err != nil {
-				return err
-			}
-
-		case "tags":
-			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
-				return err
-			}
-
-		case "vpcIdentifier":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected VpcIdentifier to be of type string, got %T instead", value)
-				}
-				sv.VpcIdentifier = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
 func awsRestjson1_deserializeDocumentManagedResourceDetails(v **types.ManagedResourceDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29815,6 +29801,79 @@ func awsRestjson1_deserializeDocumentManagedResourceDetails(v **types.ManagedRes
 					return fmt.Errorf("expected ResourceGatewayArn to be of type string, got %T instead", value)
 				}
 				sv.ResourceGatewayArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentManagedVpcResource(v **types.ManagedVpcResource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedVpcResource
+	if *v == nil {
+		sv = &types.ManagedVpcResource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endpointIpAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndpointIpAddressType to be of type string, got %T instead", value)
+				}
+				sv.EndpointIpAddressType = types.EndpointIpAddressType(jtv)
+			}
+
+		case "routingDomain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoutingDomain to be of type string, got %T instead", value)
+				}
+				sv.RoutingDomain = ptr.String(jtv)
+			}
+
+		case "securityGroupIds":
+			if err := awsRestjson1_deserializeDocumentSecurityGroupIds(&sv.SecurityGroupIds, value); err != nil {
+				return err
+			}
+
+		case "subnetIds":
+			if err := awsRestjson1_deserializeDocumentSubnetIds(&sv.SubnetIds, value); err != nil {
+				return err
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTagsMap(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "vpcIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcIdentifier to be of type string, got %T instead", value)
+				}
+				sv.VpcIdentifier = ptr.String(jtv)
 			}
 
 		default:
@@ -32498,14 +32557,14 @@ loop:
 			continue
 		}
 		switch key {
-		case "managedLatticeResource":
-			var mv types.ManagedLatticeResource
+		case "managedVpcResource":
+			var mv types.ManagedVpcResource
 			destAddr := &mv
-			if err := awsRestjson1_deserializeDocumentManagedLatticeResource(&destAddr, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentManagedVpcResource(&destAddr, value); err != nil {
 				return err
 			}
 			mv = *destAddr
-			uv = &types.PrivateEndpointMemberManagedLatticeResource{Value: mv}
+			uv = &types.PrivateEndpointMemberManagedVpcResource{Value: mv}
 			break loop
 
 		case "selfManagedLatticeResource":
@@ -32550,6 +32609,85 @@ func awsRestjson1_deserializeDocumentPrivateEndpointManagedResources(v *[]types.
 		var col types.ManagedResourceDetails
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentManagedResourceDetails(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPrivateEndpointOverride(v **types.PrivateEndpointOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PrivateEndpointOverride
+	if *v == nil {
+		sv = &types.PrivateEndpointOverride{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "domain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrivateEndpointOverrideDomain to be of type string, got %T instead", value)
+				}
+				sv.Domain = ptr.String(jtv)
+			}
+
+		case "privateEndpoint":
+			if err := awsRestjson1_deserializeDocumentPrivateEndpoint(&sv.PrivateEndpoint, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPrivateEndpointOverrides(v *[]types.PrivateEndpointOverride, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PrivateEndpointOverride
+	if *v == nil {
+		cv = []types.PrivateEndpointOverride{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PrivateEndpointOverride
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPrivateEndpointOverride(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

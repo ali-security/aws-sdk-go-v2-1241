@@ -1,0 +1,8 @@
+{
+    "id": "8873e774-3c9d-4c10-9827-238277a205ec",
+    "type": "feature",
+    "description": "AWS Transfer Family now support configurable IP address types for Web Apps of type VPC, enabling customers to select IPv4-only or dual-stack (IPv4 and IPv6) configurations based on their network requirements.",
+    "modules": [
+        "service/transfer"
+    ]
+}

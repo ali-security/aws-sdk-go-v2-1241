@@ -9980,6 +9980,16 @@ func awsAwsjson11_serializeOpDocumentGetQueryResultsInput(v *GetQueryResultsInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.MaxItems != nil {
+		ok := object.Key("maxItems")
+		ok.Integer(*v.MaxItems)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
 	if v.QueryId != nil {
 		ok := object.Key("queryId")
 		ok.String(*v.QueryId)

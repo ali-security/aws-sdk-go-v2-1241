@@ -1,0 +1,8 @@
+{
+    "id": "928538aa-44d7-43bf-b136-6726aadc1ade",
+    "type": "feature",
+    "description": "EVS now supports i7i.metal-24xl EC2 bare metal instance type, delivering high random IOPS performance with real-time latency, ideal for IO intensive and latency-sensitive workloads such as transactional databases, real-time analytics, and AI ML pre-processing.",
+    "modules": [
+        "service/evs"
+    ]
+}

@@ -775,8 +775,9 @@ type CodeConfiguration struct {
 	// This member is required.
 	EntryPoint []string
 
-	// The runtime environment for executing the code (for example, Python 3.9 or
-	// Node.js 18).
+	// The runtime environment for executing the agent code. Specify the programming
+	// language and version to use for the agent runtime. For valid values, see the
+	// list of supported runtimes.
 	//
 	// This member is required.
 	Runtime AgentManagedRuntimeType
@@ -1272,6 +1273,15 @@ type CustomJWTAuthorizerConfiguration struct {
 	// operation
 	CustomClaims []CustomClaimValidationType
 
+	// The private endpoint configuration for a gateway target. Defines how the
+	// gateway connects to private resources in your VPC.
+	PrivateEndpoint PrivateEndpoint
+
+	// A list of private endpoint overrides for the JWT authorizer. Each override maps
+	// a specific domain to a private endpoint, enabling secure connectivity through
+	// VPC Lattice resource configurations.
+	PrivateEndpointOverrides []PrivateEndpointOverride
+
 	noSmithyDocumentSerde
 }
 
@@ -1318,6 +1328,15 @@ type CustomOauth2ProviderConfigInput struct {
 	// This member is required.
 	OauthDiscovery Oauth2Discovery
 
+	// The default private endpoint for the custom OAuth2 provider, enabling secure
+	// connectivity through a VPC Lattice resource configuration.
+	PrivateEndpoint PrivateEndpoint
+
+	// The list of private endpoint overrides for the custom OAuth2 provider. Each
+	// override maps a specific domain to a private endpoint, enabling secure
+	// connectivity through VPC Lattice resource configurations.
+	PrivateEndpointOverrides []PrivateEndpointOverride
+
 	noSmithyDocumentSerde
 }
 
@@ -1331,6 +1350,15 @@ type CustomOauth2ProviderConfigOutput struct {
 
 	// The client ID for the custom OAuth2 provider.
 	ClientId *string
+
+	// The default private endpoint for the custom OAuth2 provider, enabling secure
+	// connectivity through a VPC Lattice resource configuration.
+	PrivateEndpoint PrivateEndpoint
+
+	// The list of private endpoint overrides for the custom OAuth2 provider. Each
+	// override maps a specific domain to a private endpoint, enabling secure
+	// connectivity through VPC Lattice resource configurations.
+	PrivateEndpointOverrides []PrivateEndpointOverride
 
 	noSmithyDocumentSerde
 }
@@ -3168,10 +3196,26 @@ type LlmAsAJudgeEvaluatorConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Details of a resource created and managed by the gateway for private endpoint
+// connectivity.
+type ManagedResourceDetails struct {
+
+	// The domain associated with this managed resource.
+	Domain *string
+
+	// The ARN of the service network resource association.
+	ResourceAssociationArn *string
+
+	// The ARN of the VPC Lattice resource gateway created in your account.
+	ResourceGatewayArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for a managed VPC Lattice resource. The gateway creates and
 // manages the VPC Lattice resource gateway and resource configuration on your
 // behalf using a service-linked role.
-type ManagedLatticeResource struct {
+type ManagedVpcResource struct {
 
 	// The IP address type for the resource configuration endpoint.
 	//
@@ -3199,22 +3243,6 @@ type ManagedLatticeResource struct {
 
 	// Tags to apply to the managed VPC Lattice resource gateway.
 	Tags map[string]string
-
-	noSmithyDocumentSerde
-}
-
-// Details of a resource created and managed by the gateway for private endpoint
-// connectivity.
-type ManagedResourceDetails struct {
-
-	// The domain associated with this managed resource.
-	Domain *string
-
-	// The ARN of the service network resource association.
-	ResourceAssociationArn *string
-
-	// The ARN of the VPC Lattice resource gateway created in your account.
-	ResourceGatewayArn *string
 
 	noSmithyDocumentSerde
 }
@@ -4568,7 +4596,7 @@ type PolicyGenerationDetails struct {
 //
 // The following types satisfy this interface:
 //
-//	PrivateEndpointMemberManagedLatticeResource
+//	PrivateEndpointMemberManagedVpcResource
 //	PrivateEndpointMemberSelfManagedLatticeResource
 type PrivateEndpoint interface {
 	isPrivateEndpoint()
@@ -4577,13 +4605,13 @@ type PrivateEndpoint interface {
 // Configuration for connecting to a private resource using a managed VPC Lattice
 // resource. The gateway creates and manages the VPC Lattice resources on your
 // behalf.
-type PrivateEndpointMemberManagedLatticeResource struct {
-	Value ManagedLatticeResource
+type PrivateEndpointMemberManagedVpcResource struct {
+	Value ManagedVpcResource
 
 	noSmithyDocumentSerde
 }
 
-func (*PrivateEndpointMemberManagedLatticeResource) isPrivateEndpoint() {}
+func (*PrivateEndpointMemberManagedVpcResource) isPrivateEndpoint() {}
 
 // Configuration for connecting to a private resource using a self-managed VPC
 // Lattice resource configuration.
@@ -4594,6 +4622,23 @@ type PrivateEndpointMemberSelfManagedLatticeResource struct {
 }
 
 func (*PrivateEndpointMemberSelfManagedLatticeResource) isPrivateEndpoint() {}
+
+// A mapping of a specific domain to a private endpoint for secure connectivity
+// through a VPC Lattice resource configuration.
+type PrivateEndpointOverride struct {
+
+	// The domain to override with a private endpoint.
+	//
+	// This member is required.
+	Domain *string
+
+	// The private endpoint configuration for the specified domain.
+	//
+	// This member is required.
+	PrivateEndpoint PrivateEndpoint
+
+	noSmithyDocumentSerde
+}
 
 // The protocol configuration for an agent runtime. This structure defines how the
 // agent runtime communicates with clients.
