@@ -1,3 +1,7 @@
+# v1.172.0 (2026-04-24)
+
+* **Feature**: Amazon Connect is expanding attachment capabilities to give customers greater flexibility and control. Currently limited to predefined file types, the new feature will allow contact center administrators to customize which file extensions and sizes are supported across chat, email, tasks, and cases.
+
 # v1.171.0 (2026-04-17)
 
 * **Feature**: Fixes in SDK for customers using TestCase APIs

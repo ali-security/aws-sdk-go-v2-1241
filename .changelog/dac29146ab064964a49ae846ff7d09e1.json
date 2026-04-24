@@ -1,8 +1,0 @@
-{
-    "id": "dac29146-ab06-4964-a49a-e846ff7d09e1",
-    "type": "feature",
-    "description": "Corrected CreateWebAppConfiguration documentation. Adding slash as an allowed character for the Ambient documentation agent to allow pronoun specifications.",
-    "modules": [
-        "service/connecthealth"
-    ]
-}

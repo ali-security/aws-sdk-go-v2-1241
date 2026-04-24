@@ -1,8 +1,0 @@
-{
-    "id": "95d21581-a366-4ee0-875e-47316cfa71a7",
-    "type": "feature",
-    "description": "Added support for configuring identity providers and inbound authorizers within a private VPC for AWS Bedrock AgentCore, enabling secure network connection without public internet access",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

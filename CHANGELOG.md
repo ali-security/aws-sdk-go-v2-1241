@@ -1,3 +1,19 @@
+# Release (2026-04-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.32.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1320-2026-04-24)
+  * **Feature**: Added support for configuring identity providers and inbound authorizers within a private VPC for AWS Bedrock AgentCore, enabling secure network connection without public internet access
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.70.0](service/cloudwatchlogs/CHANGELOG.md#v1700-2026-04-24)
+  * **Feature**: Adding nextToken and maxItems to the GetQueryResults API.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.172.0](service/connect/CHANGELOG.md#v11720-2026-04-24)
+  * **Feature**: Amazon Connect is expanding attachment capabilities to give customers greater flexibility and control. Currently limited to predefined file types, the new feature will allow contact center administrators to customize which file extensions and sizes are supported across chat, email, tasks, and cases.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.1.0](service/connecthealth/CHANGELOG.md#v110-2026-04-24)
+  * **Feature**: Corrected CreateWebAppConfiguration documentation. Adding slash as an allowed character for the Ambient documentation agent to allow pronoun specifications.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.8.0](service/evs/CHANGELOG.md#v180-2026-04-24)
+  * **Feature**: EVS now supports i7i.metal-24xl EC2 bare metal instance type, delivering high random IOPS performance with real-time latency, ideal for IO intensive and latency-sensitive workloads such as transactional databases, real-time analytics, and AI ML pre-processing.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.71.0](service/transfer/CHANGELOG.md#v1710-2026-04-24)
+  * **Feature**: AWS Transfer Family now support configurable IP address types for Web Apps of type VPC, enabling customers to select IPv4-only or dual-stack (IPv4 and IPv6) configurations based on their network requirements.
+
 # Release (2026-04-23)
 
 ## Module Highlights

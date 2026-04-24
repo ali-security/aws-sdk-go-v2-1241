@@ -1,3 +1,7 @@
+# v1.1.0 (2026-04-24)
+
+* **Feature**: Corrected CreateWebAppConfiguration documentation. Adding slash as an allowed character for the Ambient documentation agent to allow pronoun specifications.
+
 # v1.0.4 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
