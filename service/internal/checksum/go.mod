@@ -5,7 +5,7 @@ go 1.24
 require (
 	github.com/aws/aws-sdk-go-v2 v1.41.6
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.13.22
-	github.com/aws/smithy-go v1.25.0
+	github.com/aws/smithy-go v1.25.1
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
