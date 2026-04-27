@@ -13079,12 +13079,17 @@ type MetricDefinition struct {
 type MetricsConfig struct {
 
 	// Specifies whether to enable enhanced metrics for the endpoint. Enhanced metrics
-	// provide utilization data at instance and container granularity. Container
-	// granularity is supported for Inference Components. The default is False .
+	// provide utilization and invocation data at instance and container granularity.
+	// Container granularity is supported for Inference Components. The default is
+	// False .
 	EnableEnhancedMetrics *bool
 
-	// The frequency, in seconds, at which utilization metrics are published to Amazon
-	// CloudWatch. The default is 60 seconds.
+	// The interval, in seconds, at which metrics are published to Amazon CloudWatch.
+	// Defaults to 60 . Valid values: 10 , 30 , 60 , 120 , 180 , 240 , 300 . When
+	// EnableEnhancedMetrics is set to False , this interval applies to utilization
+	// metrics only; invocation metrics continue to be published at the default
+	// 60-second interval. When EnableEnhancedMetrics is set to True , this interval
+	// applies to both utilization and invocation metrics.
 	MetricPublishFrequencyInSeconds MetricPublishFrequencyInSeconds
 
 	noSmithyDocumentSerde

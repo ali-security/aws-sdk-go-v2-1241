@@ -1,0 +1,8 @@
+{
+    "id": "e6561661-c6bd-48c2-ae37-c542e8aa74d8",
+    "type": "feature",
+    "description": "Addition of AdditionalAuditContext to GetPartition, GetPartitions, GetTableVersion, and GetTableVersions",
+    "modules": [
+        "service/glue"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "325d6f7f-4627-418f-8eb8-a6ec892a654a",
+    "type": "feature",
+    "description": "Adds tags parameter to the CreateAdConfiguration operation",
+    "modules": [
+        "service/ivs"
+    ]
+}

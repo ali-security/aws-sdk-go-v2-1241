@@ -21790,6 +21790,15 @@ func awsRestjson1_deserializeDocumentJWTOptionsOutput(v **types.JWTOptionsOutput
 				sv.Enabled = ptr.Bool(jtv)
 			}
 
+		case "JwksUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JwksUrl to be of type string, got %T instead", value)
+				}
+				sv.JwksUrl = ptr.String(jtv)
+			}
+
 		case "PublicKey":
 			if value != nil {
 				jtv, ok := value.(string)

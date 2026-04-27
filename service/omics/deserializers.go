@@ -22369,6 +22369,15 @@ func awsRestjson1_deserializeDocumentDefaultRunSetting(v **types.DefaultRunSetti
 				sv.CacheId = ptr.String(jtv)
 			}
 
+		case "configurationName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigurationName to be of type string, got %T instead", value)
+				}
+				sv.ConfigurationName = ptr.String(jtv)
+			}
+
 		case "logLevel":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22385,6 +22394,15 @@ func awsRestjson1_deserializeDocumentDefaultRunSetting(v **types.DefaultRunSetti
 					return fmt.Errorf("expected RunName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "networkingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkingMode to be of type string, got %T instead", value)
+				}
+				sv.NetworkingMode = types.NetworkingMode(jtv)
 			}
 
 		case "outputBucketOwnerId":

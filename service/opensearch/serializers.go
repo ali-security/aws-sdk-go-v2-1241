@@ -8627,6 +8627,11 @@ func awsRestjson1_serializeDocumentJWTOptionsInput(v *types.JWTOptionsInput, val
 		ok.Boolean(*v.Enabled)
 	}
 
+	if v.JwksUrl != nil {
+		ok := object.Key("JwksUrl")
+		ok.String(*v.JwksUrl)
+	}
+
 	if v.PublicKey != nil {
 		ok := object.Key("PublicKey")
 		ok.String(*v.PublicKey)

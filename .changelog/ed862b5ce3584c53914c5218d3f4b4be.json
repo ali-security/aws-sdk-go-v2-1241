@@ -1,0 +1,8 @@
+{
+    "id": "ed862b5c-e358-4c53-914c-5218d3f4b4be",
+    "type": "feature",
+    "description": "Add support for Passthrough pricing plan",
+    "modules": [
+        "service/billingconductor"
+    ]
+}

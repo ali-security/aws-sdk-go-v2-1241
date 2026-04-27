@@ -10056,6 +10056,11 @@ func awsRestjson1_serializeDocumentDefaultRunSetting(v *types.DefaultRunSetting,
 		ok.String(*v.CacheId)
 	}
 
+	if v.ConfigurationName != nil {
+		ok := object.Key("configurationName")
+		ok.String(*v.ConfigurationName)
+	}
+
 	if len(v.LogLevel) > 0 {
 		ok := object.Key("logLevel")
 		ok.String(string(v.LogLevel))
@@ -10064,6 +10069,11 @@ func awsRestjson1_serializeDocumentDefaultRunSetting(v *types.DefaultRunSetting,
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.NetworkingMode) > 0 {
+		ok := object.Key("networkingMode")
+		ok.String(string(v.NetworkingMode))
 	}
 
 	if v.OutputBucketOwnerId != nil {

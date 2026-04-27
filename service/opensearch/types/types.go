@@ -1971,6 +1971,10 @@ type JWTOptionsInput struct {
 	// True to enable JWT authentication and authorization for a domain.
 	Enabled *bool
 
+	// The URL endpoint that hosts the JSON Web Key Set (JWKS) containing public keys
+	// used to verify JWT signatures.
+	JwksUrl *string
+
 	// Element of the JWT assertion used by the cluster to verify JWT signatures.
 	PublicKey *string
 
@@ -1988,6 +1992,10 @@ type JWTOptionsOutput struct {
 
 	// True if JWT use is enabled.
 	Enabled *bool
+
+	// The configured JWKS URL endpoint from which the cluster retrieves public keys
+	// to verify JWT requests.
+	JwksUrl *string
 
 	// The key used to verify the signature of incoming JWT requests.
 	PublicKey *string

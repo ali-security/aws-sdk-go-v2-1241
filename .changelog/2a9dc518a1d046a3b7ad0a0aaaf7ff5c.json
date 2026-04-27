@@ -1,0 +1,8 @@
+{
+    "id": "2a9dc518-a1d0-46a3-b7ad-0a0aaaf7ff5c",
+    "type": "feature",
+    "description": "Adds support for selecting all logs sources and types in a single association.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

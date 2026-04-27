@@ -349,6 +349,13 @@ func awsRestjson1_serializeOpDocumentCreateAdConfigurationInput(v *CreateAdConfi
 		ok.String(*v.Name)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
