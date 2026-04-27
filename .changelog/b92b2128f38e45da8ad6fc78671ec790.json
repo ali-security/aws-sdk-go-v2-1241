@@ -1,8 +1,0 @@
-{
-    "id": "b92b2128-f38e-45da-8ad6-fc78671ec790",
-    "type": "feature",
-    "description": "Enable Public Internet or VPC configuration to BatchRun",
-    "modules": [
-        "service/omics"
-    ]
-}

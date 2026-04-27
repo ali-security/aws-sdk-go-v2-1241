@@ -1,3 +1,7 @@
+# v1.21.0 (2026-04-27)
+
+* **Feature**: Application Signals now supports creating composite Service Level Objectives on Service Operations. Users can now create service SLO on multiple operations.
+
 # v1.20.0 (2026-04-20)
 
 * **Feature**: Releasing Second phase of SLO Recommendations where you can create recommended SLOs out-of-the box using CreateSLO API

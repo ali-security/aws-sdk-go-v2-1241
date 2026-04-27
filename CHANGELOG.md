@@ -1,3 +1,29 @@
+# Release (2026-04-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.21.0](service/applicationsignals/CHANGELOG.md#v1210-2026-04-27)
+  * **Feature**: Application Signals now supports creating composite Service Level Objectives on Service Operations. Users can now create service SLO on multiple operations.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.71.0](service/cloudwatchlogs/CHANGELOG.md#v1710-2026-04-27)
+  * **Feature**: Adds support for selecting all logs sources and types in a single association.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.11.3](service/gameliftstreams/CHANGELOG.md#v1113-2026-04-27)
+  * **Documentation**: Adds Proton 10.0-4 to the list of runtime environment options available when creating an Amazon GameLift Streams application
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.140.0](service/glue/CHANGELOG.md#v11400-2026-04-27)
+  * **Feature**: Addition of AdditionalAuditContext to GetPartition, GetPartitions, GetTableVersion, and GetTableVersions
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.50.0](service/ivs/CHANGELOG.md#v1500-2026-04-27)
+  * **Feature**: Adds tags parameter to the CreateAdConfiguration operation
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.51.0](service/kms/CHANGELOG.md#v1510-2026-04-27)
+  * **Feature**: KMS GetKeyLastUsage API provides information on the last successful cryptographic operation performed on KMS keys. This new API provides KMS customers with the last timestamp, CloudTrail eventId, and the cryptographic operation that was performed on the key.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.42.0](service/mgn/CHANGELOG.md#v1420-2026-04-27)
+  * **Feature**: Added network modernization support, enabling customers to edit, resize, merge, and split VPCs and subnets during migration while retaining functional, non-conflicting IP addresses.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.41.0](service/omics/CHANGELOG.md#v1410-2026-04-27)
+  * **Feature**: Enable Public Internet or VPC configuration to BatchRun
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.67.0](service/opensearch/CHANGELOG.md#v1670-2026-04-27)
+  * **Feature**: Amazon OpenSearch Service now supports JWKS URL configuration for JWT authentication
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.243.0](service/sagemaker/CHANGELOG.md#v12430-2026-04-27)
+  * **Feature**: Updated API documentation for endpoint MetricsConfig. Added details on supported metric publish frequencies and clarified how EnableEnhancedMetrics controls utilization and invocation metric behavior.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.68.0](service/workspaces/CHANGELOG.md#v1680-2026-04-27)
+  * **Feature**: Added support for Protocol as modified resource and added update failure as modification state
+
 # Release (2026-04-24)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "5d6bb376-f948-41d8-85a0-3b898b162a0a",
-    "type": "feature",
-    "description": "Amazon OpenSearch Service now supports JWKS URL configuration for JWT authentication",
-    "modules": [
-        "service/opensearch"
-    ]
-}

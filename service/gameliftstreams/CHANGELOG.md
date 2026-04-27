@@ -1,3 +1,7 @@
+# v1.11.3 (2026-04-27)
+
+* **Documentation**: Adds Proton 10.0-4 to the list of runtime environment options available when creating an Amazon GameLift Streams application
+
 # v1.11.2 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

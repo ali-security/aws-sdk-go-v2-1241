@@ -1,8 +1,0 @@
-{
-    "id": "fabb69e5-1ae2-441d-9a67-be5aa8bed616",
-    "type": "feature",
-    "description": "Added network modernization support, enabling customers to edit, resize, merge, and split VPCs and subnets during migration while retaining functional, non-conflicting IP addresses.",
-    "modules": [
-        "service/mgn"
-    ]
-}

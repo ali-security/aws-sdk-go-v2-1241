@@ -1,3 +1,7 @@
+# v1.41.0 (2026-04-27)
+
+* **Feature**: Enable Public Internet or VPC configuration to BatchRun
+
 # v1.40.1 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

@@ -1,3 +1,7 @@
+# v1.140.0 (2026-04-27)
+
+* **Feature**: Addition of AdditionalAuditContext to GetPartition, GetPartitions, GetTableVersion, and GetTableVersions
+
 # v1.139.3 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

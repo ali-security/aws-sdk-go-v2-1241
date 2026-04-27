@@ -1,3 +1,7 @@
+# v1.50.0 (2026-04-27)
+
+* **Feature**: Adds tags parameter to the CreateAdConfiguration operation
+
 # v1.49.0 (2026-04-22)
 
 * **Feature**: Adds support for Amazon IVS server-side ad insertion

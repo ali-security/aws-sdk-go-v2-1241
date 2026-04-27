@@ -1,8 +1,0 @@
-{
-    "id": "dbdb6d50-29f8-4f45-b38e-503d8a458f08",
-    "type": "feature",
-    "description": "Application Signals now supports creating composite Service Level Objectives on Service Operations. Users can now create service SLO on multiple operations.",
-    "modules": [
-        "service/applicationsignals"
-    ]
-}

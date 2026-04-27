@@ -1,3 +1,7 @@
+# v1.68.0 (2026-04-27)
+
+* **Feature**: Added support for Protocol as modified resource and added update failure as modification state
+
 # v1.67.3 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

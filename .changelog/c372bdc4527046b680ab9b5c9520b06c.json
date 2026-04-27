@@ -1,8 +1,0 @@
-{
-    "id": "c372bdc4-5270-46b6-80ab-9b5c9520b06c",
-    "type": "feature",
-    "description": "Added support for Protocol as modified resource and added update failure as modification state",
-    "modules": [
-        "service/workspaces"
-    ]
-}

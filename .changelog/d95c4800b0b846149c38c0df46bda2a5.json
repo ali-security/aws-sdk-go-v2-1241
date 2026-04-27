@@ -1,8 +1,0 @@
-{
-    "id": "d95c4800-b0b8-4614-9c38-c0df46bda2a5",
-    "type": "feature",
-    "description": "Updated API documentation for endpoint MetricsConfig. Added details on supported metric publish frequencies and clarified how EnableEnhancedMetrics controls utilization and invocation metric behavior.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}
