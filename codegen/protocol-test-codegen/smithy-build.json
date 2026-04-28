@@ -111,7 +111,8 @@
       "plugins": {
         "go-codegen": {
           "service": "aws.protocoltests.restxml#RestXml",
-          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml"
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml",
+          "useExperimentalSerde": true
         }
       }
     },
