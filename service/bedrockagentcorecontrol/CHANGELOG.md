@@ -1,3 +1,9 @@
+# v1.33.0 (2026-04-29)
+
+* **Feature**: Adds configuration bundles for versioned, immutable agent configuration snapshots with branch-based lineage
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2026-04-24)
 
 * **Feature**: Added support for configuring identity providers and inbound authorizers within a private VPC for AWS Bedrock AgentCore, enabling secure network connection without public internet access

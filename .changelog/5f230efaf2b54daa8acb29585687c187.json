@@ -1,8 +1,0 @@
-{
-    "id": "5f230efa-f2b5-4daa-8acb-29585687c187",
-    "type": "feature",
-    "description": "Adds AccountState in the response for the GetAccountInformation API. Each state represents a specific phase in the account lifecycle. Use this information to manage account access, automate workflows, or trigger actions based on account state changes.",
-    "modules": [
-        "service/account"
-    ]
-}

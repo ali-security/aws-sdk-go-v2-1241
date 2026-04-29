@@ -1,8 +1,0 @@
-{
-    "id": "356e514c-1655-4f9d-a570-c4b38be1b3e3",
-    "type": "feature",
-    "description": "Adds support for rtx-pro-server-6000 GPU accelerator for service-managed fleets.",
-    "modules": [
-        "service/deadline"
-    ]
-}

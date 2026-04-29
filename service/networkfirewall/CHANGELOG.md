@@ -1,3 +1,8 @@
+# v1.60.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.0 (2026-04-21)
 
 * **Feature**: Support for new types of partner managed rulegroups for Network Firewall Service

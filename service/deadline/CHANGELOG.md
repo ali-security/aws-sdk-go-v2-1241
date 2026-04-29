@@ -1,3 +1,9 @@
+# v1.31.0 (2026-04-29)
+
+* **Feature**: Adds support for rtx-pro-server-6000 GPU accelerator for service-managed fleets.
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.1 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

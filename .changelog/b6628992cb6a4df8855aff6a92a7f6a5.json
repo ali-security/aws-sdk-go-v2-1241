@@ -1,8 +1,0 @@
-{
-    "id": "b6628992-cb6a-4df8-855a-ff6a92a7f6a5",
-    "type": "documentation",
-    "description": "Removes support for registry policy V1",
-    "modules": [
-        "service/ecr"
-    ]
-}

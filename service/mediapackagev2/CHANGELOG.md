@@ -1,3 +1,9 @@
+# v1.37.0 (2026-04-29)
+
+* **Feature**: This feature adds configuration for specifying SCTE marker handling and allow greater control over generated manifest and segment URIs
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.2 (2026-04-17)
 
 * **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait

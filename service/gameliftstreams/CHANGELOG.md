@@ -1,3 +1,8 @@
+# v1.11.4 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.3 (2026-04-27)
 
 * **Documentation**: Adds Proton 10.0-4 to the list of runtime environment options available when creating an Amazon GameLift Streams application

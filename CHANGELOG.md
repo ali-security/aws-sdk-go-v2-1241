@@ -1,3 +1,33 @@
+# Release (2026-04-29)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.31.0](service/account/CHANGELOG.md#v1310-2026-04-29)
+  * **Feature**: Adds AccountState in the response for the GetAccountInformation API. Each state represents a specific phase in the account lifecycle. Use this information to manage account access, automate workflows, or trigger actions based on account state changes.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.23.0](service/bedrockagentcore/CHANGELOG.md#v1230-2026-04-29)
+  * **Feature**: Adds batch evaluation for running evaluators against multiple agent sessions with server-side orchestration, AI-powered recommendations for optimizing system prompts and tool descriptions, and AB testing with controlled traffic splitting and statistical significance reporting
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.33.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1330-2026-04-29)
+  * **Feature**: Adds configuration bundles for versioned, immutable agent configuration snapshots with branch-based lineage
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.62.0](service/cloudfront/CHANGELOG.md#v1620-2026-04-29)
+  * **Feature**: Amazon CloudFront now supports cache tag. Tag objects via response headers and invalidate all matching objects in a single request, replacing manual URL tracking and broad wildcards.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.31.0](service/deadline/CHANGELOG.md#v1310-2026-04-29)
+  * **Feature**: Adds support for rtx-pro-server-6000 GPU accelerator for service-managed fleets.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.57.2](service/ecr/CHANGELOG.md#v1572-2026-04-29)
+  * **Documentation**: Removes support for registry policy V1
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.54.0](service/gamelift/CHANGELOG.md#v1540-2026-04-29)
+  * **Feature**: Amazon GameLift Servers adds a new DescribeContainerGroupPortMappings API for container fleets, making it easy to discover which connection ports map to your container ports without needing to remotely access the compute.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.37.0](service/mediapackagev2/CHANGELOG.md#v1370-2026-04-29)
+  * **Feature**: This feature adds configuration for specifying SCTE marker handling and allow greater control over generated manifest and segment URIs
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.100.1](service/s3/CHANGELOG.md#v11001-2026-04-29)
+  * **Bug Fix**: Fix a memory leak in the credential cache used for S3 Express session credentials.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.72.0](service/transfer/CHANGELOG.md#v1720-2026-04-29)
+  * **Feature**: This launch will increase the limits for customers to list the contents from the remote directories from 10k to 200k.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.39.0](service/workspacesweb/CHANGELOG.md#v1390-2026-04-29)
+  * **Feature**: Allow admins to configure IPv6 ranges on IP Access Settings.
+
 # Release (2026-04-27)
 
 ## Module Highlights

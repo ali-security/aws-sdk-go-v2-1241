@@ -1,3 +1,8 @@
+# v1.14.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2026-04-20)
 
 * **Feature**: Enablement for Security Hub v2 via Observability Admin Telemetry Rule for account and organization level.

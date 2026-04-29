@@ -1,3 +1,8 @@
+# v1.43.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.0 (2026-04-17)
 
 * **Feature**: This release adds support for configurable spark properties for Cleanrooms PySpark workloads.

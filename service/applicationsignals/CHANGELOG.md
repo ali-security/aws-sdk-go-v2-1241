@@ -1,3 +1,8 @@
+# v1.21.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2026-04-27)
 
 * **Feature**: Application Signals now supports creating composite Service Level Objectives on Service Operations. Users can now create service SLO on multiple operations.

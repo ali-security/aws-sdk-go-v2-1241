@@ -1,3 +1,8 @@
+# v1.75.3 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.75.2 (2026-04-20)
 
 * **Documentation**: Expanded support for new suppression rule fields.

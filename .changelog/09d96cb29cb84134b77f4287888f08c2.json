@@ -1,8 +1,0 @@
-{
-    "id": "09d96cb2-9cb8-4134-b77f-4287888f08c2",
-    "type": "feature",
-    "description": "This launch will increase the limits for customers to list the contents from the remote directories from 10k to 200k.",
-    "modules": [
-        "service/transfer"
-    ]
-}

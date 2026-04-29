@@ -1,3 +1,8 @@
+# v1.58.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.0 (2026-04-23)
 
 * **Feature**: Releasing For LakehouseProperties attributes in the Connections API's

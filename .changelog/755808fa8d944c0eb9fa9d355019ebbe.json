@@ -1,8 +1,0 @@
-{
-    "id": "755808fa-8d94-4c0e-b9fa-9d355019ebbe",
-    "type": "feature",
-    "description": "Allow admins to configure IPv6 ranges on IP Access Settings.",
-    "modules": [
-        "service/workspacesweb"
-    ]
-}

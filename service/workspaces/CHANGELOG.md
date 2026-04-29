@@ -1,3 +1,8 @@
+# v1.68.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.68.0 (2026-04-27)
 
 * **Feature**: Added support for Protocol as modified resource and added update failure as modification state

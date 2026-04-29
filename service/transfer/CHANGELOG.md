@@ -1,3 +1,9 @@
+# v1.72.0 (2026-04-29)
+
+* **Feature**: This launch will increase the limits for customers to list the contents from the remote directories from 10k to 200k.
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.71.0 (2026-04-24)
 
 * **Feature**: AWS Transfer Family now support configurable IP address types for Web Apps of type VPC, enabling customers to select IPv4-only or dual-stack (IPv4 and IPv6) configurations based on their network requirements.
