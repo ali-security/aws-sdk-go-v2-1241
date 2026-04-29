@@ -8,6 +8,50 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
 )
 
+func ExampleABTestEvaluationConfig_outputUsage() {
+	var union types.ABTestEvaluationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ABTestEvaluationConfigMemberOnlineEvaluationConfigArn:
+		_ = v.Value // Value is string
+
+	case *types.ABTestEvaluationConfigMemberPerVariantOnlineEvaluationConfig:
+		_ = v.Value // Value is []types.PerVariantOnlineEvaluationConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.PerVariantOnlineEvaluationConfig
+var _ *string
+
+func ExampleAgentTracesConfig_outputUsage() {
+	var union types.AgentTracesConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgentTracesConfigMemberCloudwatchLogs:
+		_ = v.Value // Value is types.CloudWatchLogsTraceConfig
+
+	case *types.AgentTracesConfigMemberSessionSpans:
+		_ = v.Value // Value is []document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CloudWatchLogsTraceConfig
+var _ []document.Interface
+
 func ExampleBrowserAction_outputUsage() {
 	var union types.BrowserAction
 	// type switches can be used to check the union value
@@ -172,6 +216,24 @@ func ExampleContext_outputUsage() {
 
 var _ *types.SpanContext
 
+func ExampleDataSourceConfig_outputUsage() {
+	var union types.DataSourceConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DataSourceConfigMemberCloudWatchLogs:
+		_ = v.Value // Value is types.CloudWatchLogsSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CloudWatchLogsSource
+
 func ExampleEvaluationContent_outputUsage() {
 	var union types.EvaluationContent
 	// type switches can be used to check the union value
@@ -207,6 +269,24 @@ func ExampleEvaluationInput_outputUsage() {
 }
 
 var _ []document.Interface
+
+func ExampleEvaluationMetadata_outputUsage() {
+	var union types.EvaluationMetadata
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluationMetadataMemberSessionMetadata:
+		_ = v.Value // Value is []types.SessionMetadataShape
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.SessionMetadataShape
 
 func ExampleEvaluationTarget_outputUsage() {
 	var union types.EvaluationTarget
@@ -247,6 +327,68 @@ func ExampleExtractionJobMessages_outputUsage() {
 }
 
 var _ []types.MessageMetadata
+
+func ExampleFilterValue_outputUsage() {
+	var union types.FilterValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FilterValueMemberBooleanValue:
+		_ = v.Value // Value is bool
+
+	case *types.FilterValueMemberDoubleValue:
+		_ = v.Value // Value is float64
+
+	case *types.FilterValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *bool
+var _ *float64
+
+func ExampleGroundTruthSource_outputUsage() {
+	var union types.GroundTruthSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GroundTruthSourceMemberInline:
+		_ = v.Value // Value is types.InlineGroundTruth
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.InlineGroundTruth
+
+func ExampleGroundTruthTurnInput_outputUsage() {
+	var union types.GroundTruthTurnInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GroundTruthTurnInputMemberPrompt:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleHarnessContentBlock_outputUsage() {
 	var union types.HarnessContentBlock
@@ -652,6 +794,24 @@ func ExampleMetadataValue_outputUsage() {
 
 var _ *string
 
+func ExampleOutputConfig_outputUsage() {
+	var union types.OutputConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OutputConfigMemberCloudWatchConfig:
+		_ = v.Value // Value is types.CloudWatchOutputConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CloudWatchOutputConfig
+
 func ExamplePayloadType_outputUsage() {
 	var union types.PayloadType
 	// type switches can be used to check the union value
@@ -710,6 +870,50 @@ func ExampleProxyCredentials_outputUsage() {
 
 var _ *types.BasicAuth
 
+func ExampleRecommendationConfig_outputUsage() {
+	var union types.RecommendationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecommendationConfigMemberSystemPromptRecommendationConfig:
+		_ = v.Value // Value is types.SystemPromptRecommendationConfig
+
+	case *types.RecommendationConfigMemberToolDescriptionRecommendationConfig:
+		_ = v.Value // Value is types.ToolDescriptionRecommendationConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ToolDescriptionRecommendationConfig
+var _ *types.SystemPromptRecommendationConfig
+
+func ExampleRecommendationResult_outputUsage() {
+	var union types.RecommendationResult
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecommendationResultMemberSystemPromptRecommendationResult:
+		_ = v.Value // Value is types.SystemPromptRecommendationResult
+
+	case *types.RecommendationResultMemberToolDescriptionRecommendationResult:
+		_ = v.Value // Value is types.ToolDescriptionRecommendationResult
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SystemPromptRecommendationResult
+var _ *types.ToolDescriptionRecommendationResult
+
 func ExampleResourceLocation_outputUsage() {
 	var union types.ResourceLocation
 	// type switches can be used to check the union value
@@ -763,6 +967,68 @@ func ExampleStreamUpdate_outputUsage() {
 }
 
 var _ *types.AutomationStreamUpdate
+
+func ExampleSystemPromptConfig_outputUsage() {
+	var union types.SystemPromptConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SystemPromptConfigMemberConfigurationBundle:
+		_ = v.Value // Value is types.SystemPromptConfigurationBundle
+
+	case *types.SystemPromptConfigMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *types.SystemPromptConfigurationBundle
+
+func ExampleToolDescriptionConfig_outputUsage() {
+	var union types.ToolDescriptionConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolDescriptionConfigMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleToolDescriptionSource_outputUsage() {
+	var union types.ToolDescriptionSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolDescriptionSourceMemberConfigurationBundle:
+		_ = v.Value // Value is types.ToolDescriptionConfigurationBundle
+
+	case *types.ToolDescriptionSourceMemberToolDescriptionText:
+		_ = v.Value // Value is types.ToolDescriptionTextInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ToolDescriptionConfigurationBundle
+var _ *types.ToolDescriptionTextInput
 
 func ExampleUserIdentifier_outputUsage() {
 	var union types.UserIdentifier

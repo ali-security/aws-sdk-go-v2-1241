@@ -130,6 +130,26 @@ func (m *validateOpCreateCodeInterpreter) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConfigurationBundle struct {
+}
+
+func (*validateOpCreateConfigurationBundle) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConfigurationBundle) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConfigurationBundleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConfigurationBundleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEvaluator struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpCreateGateway) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateGatewayRule struct {
+}
+
+func (*validateOpCreateGatewayRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGatewayRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGatewayRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGatewayRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,6 +530,26 @@ func (m *validateOpDeleteCodeInterpreter) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteConfigurationBundle struct {
+}
+
+func (*validateOpDeleteConfigurationBundle) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConfigurationBundle) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConfigurationBundleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConfigurationBundleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEvaluator struct {
 }
 
@@ -525,6 +585,26 @@ func (m *validateOpDeleteGateway) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteGatewayRule struct {
+}
+
+func (*validateOpDeleteGatewayRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteGatewayRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteGatewayRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteGatewayRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -870,6 +950,46 @@ func (m *validateOpGetCodeInterpreter) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetConfigurationBundle struct {
+}
+
+func (*validateOpGetConfigurationBundle) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfigurationBundle) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfigurationBundleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfigurationBundleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConfigurationBundleVersion struct {
+}
+
+func (*validateOpGetConfigurationBundleVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfigurationBundleVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfigurationBundleVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfigurationBundleVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEvaluator struct {
 }
 
@@ -905,6 +1025,26 @@ func (m *validateOpGetGateway) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetGatewayRule struct {
+}
+
+func (*validateOpGetGatewayRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetGatewayRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetGatewayRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetGatewayRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1185,6 +1325,46 @@ func (m *validateOpListAgentRuntimeVersions) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAgentRuntimeVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListConfigurationBundleVersions struct {
+}
+
+func (*validateOpListConfigurationBundleVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListConfigurationBundleVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListConfigurationBundleVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListConfigurationBundleVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListGatewayRules struct {
+}
+
+func (*validateOpListGatewayRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListGatewayRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListGatewayRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListGatewayRulesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1510,6 +1690,26 @@ func (m *validateOpUpdateApiKeyCredentialProvider) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConfigurationBundle struct {
+}
+
+func (*validateOpUpdateConfigurationBundle) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConfigurationBundle) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConfigurationBundleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConfigurationBundleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEvaluator struct {
 }
 
@@ -1545,6 +1745,26 @@ func (m *validateOpUpdateGateway) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateGatewayRule struct {
+}
+
+func (*validateOpUpdateGatewayRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateGatewayRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateGatewayRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateGatewayRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1794,12 +2014,20 @@ func addOpCreateCodeInterpreterValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateCodeInterpreter{}, middleware.After)
 }
 
+func addOpCreateConfigurationBundleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConfigurationBundle{}, middleware.After)
+}
+
 func addOpCreateEvaluatorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEvaluator{}, middleware.After)
 }
 
 func addOpCreateGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGateway{}, middleware.After)
+}
+
+func addOpCreateGatewayRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGatewayRule{}, middleware.After)
 }
 
 func addOpCreateGatewayTargetValidationMiddleware(stack *middleware.Stack) error {
@@ -1866,12 +2094,20 @@ func addOpDeleteCodeInterpreterValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteCodeInterpreter{}, middleware.After)
 }
 
+func addOpDeleteConfigurationBundleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConfigurationBundle{}, middleware.After)
+}
+
 func addOpDeleteEvaluatorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEvaluator{}, middleware.After)
 }
 
 func addOpDeleteGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteGateway{}, middleware.After)
+}
+
+func addOpDeleteGatewayRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteGatewayRule{}, middleware.After)
 }
 
 func addOpDeleteGatewayTargetValidationMiddleware(stack *middleware.Stack) error {
@@ -1942,12 +2178,24 @@ func addOpGetCodeInterpreterValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpGetCodeInterpreter{}, middleware.After)
 }
 
+func addOpGetConfigurationBundleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfigurationBundle{}, middleware.After)
+}
+
+func addOpGetConfigurationBundleVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfigurationBundleVersion{}, middleware.After)
+}
+
 func addOpGetEvaluatorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEvaluator{}, middleware.After)
 }
 
 func addOpGetGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGateway{}, middleware.After)
+}
+
+func addOpGetGatewayRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetGatewayRule{}, middleware.After)
 }
 
 func addOpGetGatewayTargetValidationMiddleware(stack *middleware.Stack) error {
@@ -2004,6 +2252,14 @@ func addOpListAgentRuntimeEndpointsValidationMiddleware(stack *middleware.Stack)
 
 func addOpListAgentRuntimeVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAgentRuntimeVersions{}, middleware.After)
+}
+
+func addOpListConfigurationBundleVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListConfigurationBundleVersions{}, middleware.After)
+}
+
+func addOpListGatewayRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListGatewayRules{}, middleware.After)
 }
 
 func addOpListGatewayTargetsValidationMiddleware(stack *middleware.Stack) error {
@@ -2070,12 +2326,20 @@ func addOpUpdateApiKeyCredentialProviderValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpUpdateApiKeyCredentialProvider{}, middleware.After)
 }
 
+func addOpUpdateConfigurationBundleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConfigurationBundle{}, middleware.After)
+}
+
 func addOpUpdateEvaluatorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEvaluator{}, middleware.After)
 }
 
 func addOpUpdateGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateGateway{}, middleware.After)
+}
+
+func addOpUpdateGatewayRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateGatewayRule{}, middleware.After)
 }
 
 func addOpUpdateGatewayTargetValidationMiddleware(stack *middleware.Stack) error {
@@ -2120,6 +2384,47 @@ func addOpUpdateRegistryRecordStatusValidationMiddleware(stack *middleware.Stack
 
 func addOpUpdateWorkloadIdentityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkloadIdentity{}, middleware.After)
+}
+
+func validateAction(v types.Action) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Action"}
+	switch uv := v.(type) {
+	case *types.ActionMemberConfigurationBundle:
+		if err := validateConfigurationBundleAction(uv.Value); err != nil {
+			invalidParams.AddNested("[configurationBundle]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ActionMemberRouteToTarget:
+		if err := validateRouteToTargetAction(uv.Value); err != nil {
+			invalidParams.AddNested("[routeToTarget]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateActions(v []types.Action) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Actions"}
+	for i := range v {
+		if err := validateAction(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAgentRuntimeArtifact(v types.AgentRuntimeArtifact) error {
@@ -2604,6 +2909,122 @@ func validateCodeInterpreterNetworkConfiguration(v *types.CodeInterpreterNetwork
 		if err := validateVpcConfig(v.VpcConfig); err != nil {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComponentConfiguration(v *types.ComponentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentConfiguration"}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateComponentConfigurationMap(v map[string]types.ComponentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ComponentConfigurationMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateComponentConfiguration(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCondition(v types.Condition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Condition"}
+	switch uv := v.(type) {
+	case *types.ConditionMemberMatchPaths:
+		if err := validateMatchPaths(&uv.Value); err != nil {
+			invalidParams.AddNested("[matchPaths]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConditionMemberMatchPrincipals:
+		if err := validateMatchPrincipals(&uv.Value); err != nil {
+			invalidParams.AddNested("[matchPrincipals]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConditions(v []types.Condition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Conditions"}
+	for i := range v {
+		if err := validateCondition(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfigurationBundleAction(v types.ConfigurationBundleAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationBundleAction"}
+	switch uv := v.(type) {
+	case *types.ConfigurationBundleActionMemberStaticOverride:
+		if err := validateStaticOverride(&uv.Value); err != nil {
+			invalidParams.AddNested("[staticOverride]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConfigurationBundleActionMemberWeightedOverride:
+		if err := validateWeightedOverride(&uv.Value); err != nil {
+			invalidParams.AddNested("[weightedOverride]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfigurationBundleReference(v *types.ConfigurationBundleReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationBundleReference"}
+	if v.BundleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleArn"))
+	}
+	if v.BundleVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3697,6 +4118,25 @@ func validateHarnessTruncationConfiguration(v *types.HarnessTruncationConfigurat
 	}
 }
 
+func validateHttpTargetConfiguration(v types.HttpTargetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpTargetConfiguration"}
+	switch uv := v.(type) {
+	case *types.HttpTargetConfigurationMemberAgentcoreRuntime:
+		if err := validateRuntimeTargetConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[agentcoreRuntime]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIamCredentialProvider(v *types.IamCredentialProvider) error {
 	if v == nil {
 		return nil
@@ -3704,6 +4144,21 @@ func validateIamCredentialProvider(v *types.IamCredentialProvider) error {
 	invalidParams := smithy.InvalidParamsError{Context: "IamCredentialProvider"}
 	if v.Service == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIamPrincipal(v *types.IamPrincipal) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IamPrincipal"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3909,6 +4364,76 @@ func validateManagedVpcResource(v *types.ManagedVpcResource) error {
 	}
 	if len(v.EndpointIpAddressType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointIpAddressType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMatchPaths(v *types.MatchPaths) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchPaths"}
+	if v.AnyOf == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnyOf"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMatchPrincipalEntries(v []types.MatchPrincipalEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchPrincipalEntries"}
+	for i := range v {
+		if err := validateMatchPrincipalEntry(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMatchPrincipalEntry(v types.MatchPrincipalEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchPrincipalEntry"}
+	switch uv := v.(type) {
+	case *types.MatchPrincipalEntryMemberIamPrincipal:
+		if err := validateIamPrincipal(&uv.Value); err != nil {
+			invalidParams.AddNested("[iamPrincipal]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMatchPrincipals(v *types.MatchPrincipals) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchPrincipals"}
+	if v.AnyOf == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnyOf"))
+	} else if v.AnyOf != nil {
+		if err := validateMatchPrincipalEntries(v.AnyOf); err != nil {
+			invalidParams.AddNested("AnyOf", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4628,6 +5153,30 @@ func validateResourceLocation(v types.ResourceLocation) error {
 	}
 }
 
+func validateRouteToTargetAction(v types.RouteToTargetAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouteToTargetAction"}
+	switch uv := v.(type) {
+	case *types.RouteToTargetActionMemberStaticRoute:
+		if err := validateStaticRoute(&uv.Value); err != nil {
+			invalidParams.AddNested("[staticRoute]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouteToTargetActionMemberWeightedRoute:
+		if err := validateWeightedRoute(&uv.Value); err != nil {
+			invalidParams.AddNested("[weightedRoute]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRule(v *types.Rule) error {
 	if v == nil {
 		return nil
@@ -4664,6 +5213,21 @@ func validateRuntimeMetadataConfiguration(v *types.RuntimeMetadataConfiguration)
 	invalidParams := smithy.InvalidParamsError{Context: "RuntimeMetadataConfiguration"}
 	if v.RequireMMDSV2 == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RequireMMDSV2"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuntimeTargetConfiguration(v *types.RuntimeTargetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuntimeTargetConfiguration"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4921,6 +5485,39 @@ func validateSlackOauth2ProviderConfigInput(v *types.SlackOauth2ProviderConfigIn
 	}
 }
 
+func validateStaticOverride(v *types.StaticOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StaticOverride"}
+	if v.BundleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleArn"))
+	}
+	if v.BundleVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleVersion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStaticRoute(v *types.StaticRoute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StaticRoute"}
+	if v.TargetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStreamDeliveryResource(v types.StreamDeliveryResource) error {
 	if v == nil {
 		return nil
@@ -5049,11 +5646,54 @@ func validateTargetConfiguration(v types.TargetConfiguration) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TargetConfiguration"}
 	switch uv := v.(type) {
+	case *types.TargetConfigurationMemberHttp:
+		if err := validateHttpTargetConfiguration(uv.Value); err != nil {
+			invalidParams.AddNested("[http]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.TargetConfigurationMemberMcp:
 		if err := validateMcpTargetConfiguration(uv.Value); err != nil {
 			invalidParams.AddNested("[mcp]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrafficSplitEntries(v []types.TargetTrafficSplitEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrafficSplitEntries"}
+	for i := range v {
+		if err := validateTargetTrafficSplitEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrafficSplitEntry(v *types.TargetTrafficSplitEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrafficSplitEntry"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Weight == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Weight"))
+	}
+	if v.TargetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5120,6 +5760,48 @@ func validateToolSchema(v types.ToolSchema) error {
 			invalidParams.AddNested("[inlinePayload]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrafficSplitEntries(v []types.TrafficSplitEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrafficSplitEntries"}
+	for i := range v {
+		if err := validateTrafficSplitEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrafficSplitEntry(v *types.TrafficSplitEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrafficSplitEntry"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Weight == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Weight"))
+	}
+	if v.ConfigurationBundle == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationBundle"))
+	} else if v.ConfigurationBundle != nil {
+		if err := validateConfigurationBundleReference(v.ConfigurationBundle); err != nil {
+			invalidParams.AddNested("ConfigurationBundle", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5269,6 +5951,21 @@ func validateUserPreferenceOverrideExtractionConfigurationInput(v *types.UserPre
 	}
 }
 
+func validateVersionCreatedBySource(v *types.VersionCreatedBySource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VersionCreatedBySource"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVpcConfig(v *types.VpcConfig) error {
 	if v == nil {
 		return nil
@@ -5279,6 +5976,44 @@ func validateVpcConfig(v *types.VpcConfig) error {
 	}
 	if v.Subnets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWeightedOverride(v *types.WeightedOverride) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WeightedOverride"}
+	if v.TrafficSplit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficSplit"))
+	} else if v.TrafficSplit != nil {
+		if err := validateTrafficSplitEntries(v.TrafficSplit); err != nil {
+			invalidParams.AddNested("TrafficSplit", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWeightedRoute(v *types.WeightedRoute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WeightedRoute"}
+	if v.TrafficSplit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficSplit"))
+	} else if v.TrafficSplit != nil {
+		if err := validateTargetTrafficSplitEntries(v.TrafficSplit); err != nil {
+			invalidParams.AddNested("TrafficSplit", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5454,6 +6189,33 @@ func validateOpCreateCodeInterpreterInput(v *CreateCodeInterpreterInput) error {
 	}
 }
 
+func validateOpCreateConfigurationBundleInput(v *CreateConfigurationBundleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConfigurationBundleInput"}
+	if v.BundleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleName"))
+	}
+	if v.Components == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Components"))
+	} else if v.Components != nil {
+		if err := validateComponentConfigurationMap(v.Components); err != nil {
+			invalidParams.AddNested("Components", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CreatedBy != nil {
+		if err := validateVersionCreatedBySource(v.CreatedBy); err != nil {
+			invalidParams.AddNested("CreatedBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEvaluatorInput(v *CreateEvaluatorInput) error {
 	if v == nil {
 		return nil
@@ -5490,9 +6252,6 @@ func validateOpCreateGatewayInput(v *CreateGatewayInput) error {
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
-	if len(v.ProtocolType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ProtocolType"))
-	}
 	if len(v.AuthorizerType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerType"))
 	}
@@ -5509,6 +6268,36 @@ func validateOpCreateGatewayInput(v *CreateGatewayInput) error {
 	if v.PolicyEngineConfiguration != nil {
 		if err := validateGatewayPolicyEngineConfiguration(v.PolicyEngineConfiguration); err != nil {
 			invalidParams.AddNested("PolicyEngineConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateGatewayRuleInput(v *CreateGatewayRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGatewayRuleInput"}
+	if v.GatewayIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayIdentifier"))
+	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
+	if v.Conditions != nil {
+		if err := validateConditions(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	} else if v.Actions != nil {
+		if err := validateActions(v.Actions); err != nil {
+			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -5891,6 +6680,21 @@ func validateOpDeleteCodeInterpreterInput(v *DeleteCodeInterpreterInput) error {
 	}
 }
 
+func validateOpDeleteConfigurationBundleInput(v *DeleteConfigurationBundleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfigurationBundleInput"}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEvaluatorInput(v *DeleteEvaluatorInput) error {
 	if v == nil {
 		return nil
@@ -5913,6 +6717,24 @@ func validateOpDeleteGatewayInput(v *DeleteGatewayInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteGatewayInput"}
 	if v.GatewayIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteGatewayRuleInput(v *DeleteGatewayRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteGatewayRuleInput"}
+	if v.GatewayIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayIdentifier"))
+	}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6188,6 +7010,39 @@ func validateOpGetCodeInterpreterInput(v *GetCodeInterpreterInput) error {
 	}
 }
 
+func validateOpGetConfigurationBundleInput(v *GetConfigurationBundleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfigurationBundleInput"}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConfigurationBundleVersionInput(v *GetConfigurationBundleVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfigurationBundleVersionInput"}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if v.VersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEvaluatorInput(v *GetEvaluatorInput) error {
 	if v == nil {
 		return nil
@@ -6210,6 +7065,24 @@ func validateOpGetGatewayInput(v *GetGatewayInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetGatewayInput"}
 	if v.GatewayIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetGatewayRuleInput(v *GetGatewayRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetGatewayRuleInput"}
+	if v.GatewayIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayIdentifier"))
+	}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6432,6 +7305,36 @@ func validateOpListAgentRuntimeVersionsInput(v *ListAgentRuntimeVersionsInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "ListAgentRuntimeVersionsInput"}
 	if v.AgentRuntimeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentRuntimeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListConfigurationBundleVersionsInput(v *ListConfigurationBundleVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListConfigurationBundleVersionsInput"}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListGatewayRulesInput(v *ListGatewayRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListGatewayRulesInput"}
+	if v.GatewayIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6754,6 +7657,31 @@ func validateOpUpdateApiKeyCredentialProviderInput(v *UpdateApiKeyCredentialProv
 	}
 }
 
+func validateOpUpdateConfigurationBundleInput(v *UpdateConfigurationBundleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigurationBundleInput"}
+	if v.BundleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if v.Components != nil {
+		if err := validateComponentConfigurationMap(v.Components); err != nil {
+			invalidParams.AddNested("Components", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CreatedBy != nil {
+		if err := validateVersionCreatedBySource(v.CreatedBy); err != nil {
+			invalidParams.AddNested("CreatedBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateEvaluatorInput(v *UpdateEvaluatorInput) error {
 	if v == nil {
 		return nil
@@ -6788,9 +7716,6 @@ func validateOpUpdateGatewayInput(v *UpdateGatewayInput) error {
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
-	if len(v.ProtocolType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ProtocolType"))
-	}
 	if len(v.AuthorizerType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerType"))
 	}
@@ -6807,6 +7732,34 @@ func validateOpUpdateGatewayInput(v *UpdateGatewayInput) error {
 	if v.PolicyEngineConfiguration != nil {
 		if err := validateGatewayPolicyEngineConfiguration(v.PolicyEngineConfiguration); err != nil {
 			invalidParams.AddNested("PolicyEngineConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateGatewayRuleInput(v *UpdateGatewayRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateGatewayRuleInput"}
+	if v.GatewayIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayIdentifier"))
+	}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if v.Conditions != nil {
+		if err := validateConditions(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Actions != nil {
+		if err := validateActions(v.Actions); err != nil {
+			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

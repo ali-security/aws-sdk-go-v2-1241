@@ -24,6 +24,8 @@ import (
 //   - l4 : Uses G6 and Gr6 instance families
 //
 //   - l40s : Uses G6e instance family
+//
+//   - rtx-pro-server-6000 : Uses G7e instance family
 type AcceleratorCapabilities struct {
 
 	// A list of accelerator capabilities requested for this fleet. Only Amazon
@@ -84,6 +86,8 @@ type AcceleratorSelection struct {
 	//
 	//   - l40s - NVIDIA L40S Tensor Core GPU (48 GiB memory)
 	//
+	//   - rtx-pro-server-6000 - NVIDIA RTX PRO Server 6000 GPU (96 GiB memory)
+	//
 	// This member is required.
 	Name AcceleratorName
 
@@ -96,6 +100,8 @@ type AcceleratorSelection struct {
 	//   latest and a new version of the runtime is released, the new version of the
 	//   runtime is used.
 	//
+	//   - grid:r580 - [NVIDIA vGPU software 19]
+	//
 	//   - grid:r570 - [NVIDIA vGPU software 18]
 	//
 	//   - grid:r535 - [NVIDIA vGPU software 16]
@@ -107,16 +113,19 @@ type AcceleratorSelection struct {
 	//
 	// Not all runtimes are compatible with all accelerator types:
 	//
-	//   - t4 and a10g : Support all runtimes ( grid:r570 , grid:r535 )
+	//   - t4 and a10g : Support all runtimes ( grid:r580 , grid:r570 , grid:r535 )
 	//
 	//   - l4 and l40s : Only support grid:r570 and newer
+	//
+	//   - rtx-pro-server-6000 : Only supports grid:r580
 	//
 	// All accelerators in a fleet must use the same runtime version. You cannot mix
 	// different runtime versions within a single fleet.
 	//
-	// When you specify latest , it resolves to grid:r570 for all currently supported
+	// When you specify latest , it resolves to grid:r580 for all currently supported
 	// accelerators.
 	//
+	// [NVIDIA vGPU software 19]: https://docs.nvidia.com/vgpu/19.0/index.html
 	// [NVIDIA vGPU software 16]: https://docs.nvidia.com/vgpu/16.0/index.html
 	// [NVIDIA vGPU software 18]: https://docs.nvidia.com/vgpu/18.0/index.html
 	Runtime *string
@@ -1448,7 +1457,7 @@ type ConsumedUsages struct {
 type CustomerManagedAutoScalingConfiguration struct {
 
 	// The number of workers that can be added per minute to the fleet. The default is
-	// a service-defined value that balances efficiency with cost.
+	// 10 workers per minute.
 	ScaleOutWorkersPerMinute *int32
 
 	// The number of idle workers maintained and ready to process incoming tasks. The
@@ -2902,7 +2911,7 @@ type MonitorSummary struct {
 	// This member is required.
 	Url *string
 
-	// The AWS region where IAM Identity Center is enabled.
+	// The AWS Region where IAM Identity Center is enabled.
 	IdentityCenterRegion *string
 
 	// The UNIX timestamp of the date and time that the monitor was last updated.
@@ -3511,7 +3520,7 @@ type SearchTermFilterExpression struct {
 type ServiceManagedEc2AutoScalingConfiguration struct {
 
 	// The number of workers that can be added per minute to the fleet. The default is
-	// a service-defined value that balances efficiency with cost.
+	// 10 workers per minute.
 	ScaleOutWorkersPerMinute *int32
 
 	// The number of idle workers maintained and ready to process incoming tasks. The

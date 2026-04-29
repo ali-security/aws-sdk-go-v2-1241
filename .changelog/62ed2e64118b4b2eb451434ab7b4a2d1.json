@@ -1,0 +1,8 @@
+{
+    "id": "62ed2e64-118b-4b2e-b451-434ab7b4a2d1",
+    "type": "feature",
+    "description": "This feature adds configuration for specifying SCTE marker handling and allow greater control over generated manifest and segment URIs",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

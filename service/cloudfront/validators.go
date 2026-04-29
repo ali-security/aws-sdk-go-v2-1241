@@ -3690,6 +3690,21 @@ func validateCachePolicyQueryStringsConfig(v *types.CachePolicyQueryStringsConfi
 	}
 }
 
+func validateCacheTagConfig(v *types.CacheTagConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CacheTagConfig"}
+	if v.HeaderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HeaderName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCertificate(v *types.Certificate) error {
 	if v == nil {
 		return nil
@@ -4162,6 +4177,11 @@ func validateDistributionConfig(v *types.DistributionConfig) error {
 	if v.ConnectionFunctionAssociation != nil {
 		if err := validateConnectionFunctionAssociation(v.ConnectionFunctionAssociation); err != nil {
 			invalidParams.AddNested("ConnectionFunctionAssociation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CacheTagConfig != nil {
+		if err := validateCacheTagConfig(v.CacheTagConfig); err != nil {
+			invalidParams.AddNested("CacheTagConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

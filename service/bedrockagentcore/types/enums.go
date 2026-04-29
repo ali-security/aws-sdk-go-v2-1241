@@ -2,6 +2,60 @@
 
 package types
 
+type ABTestExecutionStatus string
+
+// Enum values for ABTestExecutionStatus
+const (
+	ABTestExecutionStatusPaused     ABTestExecutionStatus = "PAUSED"
+	ABTestExecutionStatusRunning    ABTestExecutionStatus = "RUNNING"
+	ABTestExecutionStatusStopped    ABTestExecutionStatus = "STOPPED"
+	ABTestExecutionStatusNotStarted ABTestExecutionStatus = "NOT_STARTED"
+)
+
+// Values returns all known values for ABTestExecutionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ABTestExecutionStatus) Values() []ABTestExecutionStatus {
+	return []ABTestExecutionStatus{
+		"PAUSED",
+		"RUNNING",
+		"STOPPED",
+		"NOT_STARTED",
+	}
+}
+
+type ABTestStatus string
+
+// Enum values for ABTestStatus
+const (
+	ABTestStatusCreating     ABTestStatus = "CREATING"
+	ABTestStatusActive       ABTestStatus = "ACTIVE"
+	ABTestStatusCreateFailed ABTestStatus = "CREATE_FAILED"
+	ABTestStatusUpdating     ABTestStatus = "UPDATING"
+	ABTestStatusUpdateFailed ABTestStatus = "UPDATE_FAILED"
+	ABTestStatusDeleting     ABTestStatus = "DELETING"
+	ABTestStatusDeleteFailed ABTestStatus = "DELETE_FAILED"
+	ABTestStatusFailed       ABTestStatus = "FAILED"
+)
+
+// Values returns all known values for ABTestStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ABTestStatus) Values() []ABTestStatus {
+	return []ABTestStatus{
+		"CREATING",
+		"ACTIVE",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"DELETING",
+		"DELETE_FAILED",
+		"FAILED",
+	}
+}
+
 type AutomationStreamStatus string
 
 // Enum values for AutomationStreamStatus
@@ -18,6 +72,37 @@ func (AutomationStreamStatus) Values() []AutomationStreamStatus {
 	return []AutomationStreamStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type BatchEvaluationStatus string
+
+// Enum values for BatchEvaluationStatus
+const (
+	BatchEvaluationStatusPending             BatchEvaluationStatus = "PENDING"
+	BatchEvaluationStatusInProgress          BatchEvaluationStatus = "IN_PROGRESS"
+	BatchEvaluationStatusCompleted           BatchEvaluationStatus = "COMPLETED"
+	BatchEvaluationStatusCompletedWithErrors BatchEvaluationStatus = "COMPLETED_WITH_ERRORS"
+	BatchEvaluationStatusFailed              BatchEvaluationStatus = "FAILED"
+	BatchEvaluationStatusStopping            BatchEvaluationStatus = "STOPPING"
+	BatchEvaluationStatusStopped             BatchEvaluationStatus = "STOPPED"
+	BatchEvaluationStatusDeleting            BatchEvaluationStatus = "DELETING"
+)
+
+// Values returns all known values for BatchEvaluationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchEvaluationStatus) Values() []BatchEvaluationStatus {
+	return []BatchEvaluationStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"COMPLETED_WITH_ERRORS",
+		"FAILED",
+		"STOPPING",
+		"STOPPED",
+		"DELETING",
 	}
 }
 
@@ -75,6 +160,38 @@ func (BrowserSessionStatus) Values() []BrowserSessionStatus {
 	return []BrowserSessionStatus{
 		"READY",
 		"TERMINATED",
+	}
+}
+
+type CloudWatchLogsFilterOperator string
+
+// Enum values for CloudWatchLogsFilterOperator
+const (
+	CloudWatchLogsFilterOperatorEquals             CloudWatchLogsFilterOperator = "Equals"
+	CloudWatchLogsFilterOperatorNotEquals          CloudWatchLogsFilterOperator = "NotEquals"
+	CloudWatchLogsFilterOperatorGreaterThan        CloudWatchLogsFilterOperator = "GreaterThan"
+	CloudWatchLogsFilterOperatorLessThan           CloudWatchLogsFilterOperator = "LessThan"
+	CloudWatchLogsFilterOperatorGreaterThanOrEqual CloudWatchLogsFilterOperator = "GreaterThanOrEqual"
+	CloudWatchLogsFilterOperatorLessThanOrEqual    CloudWatchLogsFilterOperator = "LessThanOrEqual"
+	CloudWatchLogsFilterOperatorContains           CloudWatchLogsFilterOperator = "Contains"
+	CloudWatchLogsFilterOperatorNotContains        CloudWatchLogsFilterOperator = "NotContains"
+)
+
+// Values returns all known values for CloudWatchLogsFilterOperator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CloudWatchLogsFilterOperator) Values() []CloudWatchLogsFilterOperator {
+	return []CloudWatchLogsFilterOperator{
+		"Equals",
+		"NotEquals",
+		"GreaterThan",
+		"LessThan",
+		"GreaterThanOrEqual",
+		"LessThanOrEqual",
+		"Contains",
+		"NotContains",
 	}
 }
 
@@ -462,6 +579,50 @@ func (ProgrammingLanguage) Values() []ProgrammingLanguage {
 		"python",
 		"javascript",
 		"typescript",
+	}
+}
+
+type RecommendationStatus string
+
+// Enum values for RecommendationStatus
+const (
+	RecommendationStatusPending    RecommendationStatus = "PENDING"
+	RecommendationStatusInProgress RecommendationStatus = "IN_PROGRESS"
+	RecommendationStatusCompleted  RecommendationStatus = "COMPLETED"
+	RecommendationStatusFailed     RecommendationStatus = "FAILED"
+	RecommendationStatusDeleting   RecommendationStatus = "DELETING"
+)
+
+// Values returns all known values for RecommendationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationStatus) Values() []RecommendationStatus {
+	return []RecommendationStatus{
+		"PENDING",
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"DELETING",
+	}
+}
+
+type RecommendationType string
+
+// Enum values for RecommendationType
+const (
+	RecommendationTypeSystemPromptRecommendation    RecommendationType = "SYSTEM_PROMPT_RECOMMENDATION"
+	RecommendationTypeToolDescriptionRecommendation RecommendationType = "TOOL_DESCRIPTION_RECOMMENDATION"
+)
+
+// Values returns all known values for RecommendationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationType) Values() []RecommendationType {
+	return []RecommendationType{
+		"SYSTEM_PROMPT_RECOMMENDATION",
+		"TOOL_DESCRIPTION_RECOMMENDATION",
 	}
 }
 

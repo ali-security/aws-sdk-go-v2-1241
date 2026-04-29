@@ -20,6 +20,98 @@ type A2aDescriptor struct {
 	noSmithyDocumentSerde
 }
 
+// The evaluation configuration for an A/B test, specifying which online
+// evaluation configurations to use for measuring variant performance.
+//
+// The following types satisfy this interface:
+//
+//	ABTestEvaluationConfigMemberOnlineEvaluationConfigArn
+//	ABTestEvaluationConfigMemberPerVariantOnlineEvaluationConfig
+type ABTestEvaluationConfig interface {
+	isABTestEvaluationConfig()
+}
+
+// The Amazon Resource Name (ARN) of a single online evaluation configuration to
+// use for both variants.
+type ABTestEvaluationConfigMemberOnlineEvaluationConfigArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ABTestEvaluationConfigMemberOnlineEvaluationConfigArn) isABTestEvaluationConfig() {}
+
+// Per-variant online evaluation configurations, allowing different evaluation
+// settings for each variant.
+type ABTestEvaluationConfigMemberPerVariantOnlineEvaluationConfig struct {
+	Value []PerVariantOnlineEvaluationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*ABTestEvaluationConfigMemberPerVariantOnlineEvaluationConfig) isABTestEvaluationConfig() {}
+
+// The statistical results of an A/B test.
+type ABTestResults struct {
+
+	// The per-evaluator metrics comparing control and treatment variants.
+	//
+	// This member is required.
+	EvaluatorMetrics []EvaluatorMetric
+
+	// The timestamp when the analysis was performed.
+	AnalysisTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an A/B test.
+type ABTestSummary struct {
+
+	// The Amazon Resource Name (ARN) of the A/B test.
+	//
+	// This member is required.
+	AbTestArn *string
+
+	// The unique identifier of the A/B test.
+	//
+	// This member is required.
+	AbTestId *string
+
+	// The timestamp when the A/B test was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The execution status of the A/B test.
+	//
+	// This member is required.
+	ExecutionStatus ABTestExecutionStatus
+
+	// The name of the A/B test.
+	//
+	// This member is required.
+	Name *string
+
+	// The current status of the A/B test.
+	//
+	// This member is required.
+	Status ABTestStatus
+
+	// The timestamp when the A/B test was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The description of the A/B test.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the gateway used for traffic splitting.
+	GatewayArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about an actor in an AgentCore Memory resource.
 type ActorSummary struct {
 
@@ -58,6 +150,35 @@ type AgentSkillsDescriptor struct {
 
 	noSmithyDocumentSerde
 }
+
+// The configuration specifying where to read agent traces from for recommendation
+// analysis.
+//
+// The following types satisfy this interface:
+//
+//	AgentTracesConfigMemberCloudwatchLogs
+//	AgentTracesConfigMemberSessionSpans
+type AgentTracesConfig interface {
+	isAgentTracesConfig()
+}
+
+// Agent traces read from CloudWatch Logs.
+type AgentTracesConfigMemberCloudwatchLogs struct {
+	Value CloudWatchLogsTraceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentTracesConfigMemberCloudwatchLogs) isAgentTracesConfig() {}
+
+// Agent traces provided as inline session spans in OpenTelemetry format.
+type AgentTracesConfigMemberSessionSpans struct {
+	Value []document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentTracesConfigMemberSessionSpans) isAgentTracesConfig() {}
 
 // The configuration for a stream that enables programmatic control of a browser
 // session in Amazon Bedrock AgentCore. This stream provides a bidirectional
@@ -108,6 +229,52 @@ type BasicAuth struct {
 	//
 	// This member is required.
 	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary representation for list responses
+type BatchEvaluationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the batch evaluation.
+	//
+	// This member is required.
+	BatchEvaluationArn *string
+
+	// The unique identifier of the batch evaluation.
+	//
+	// This member is required.
+	BatchEvaluationId *string
+
+	// The name of the batch evaluation.
+	//
+	// This member is required.
+	BatchEvaluationName *string
+
+	// The timestamp when the batch evaluation was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The current status of the batch evaluation.
+	//
+	// This member is required.
+	Status BatchEvaluationStatus
+
+	// The description of the batch evaluation.
+	Description *string
+
+	// The error details if the batch evaluation encountered failures.
+	ErrorDetails []string
+
+	// The aggregated evaluation results.
+	EvaluationResults *EvaluationJobResults
+
+	// The list of evaluators applied during the batch evaluation.
+	Evaluators []Evaluator
+
+	// The timestamp when the batch evaluation was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -453,6 +620,117 @@ type CertificateLocationMemberSecretsManager struct {
 
 func (*CertificateLocationMemberSecretsManager) isCertificateLocation() {}
 
+// Filter configuration for narrowing down CloudWatch Logs sessions for evaluation.
+type CloudWatchFilterConfig struct {
+
+	// A list of specific session IDs to evaluate. If specified, only these sessions
+	// are included in the evaluation.
+	SessionIds []string
+
+	// The time range filter for selecting sessions to evaluate.
+	TimeRange *SessionFilterConfig
+
+	noSmithyDocumentSerde
+}
+
+// A filter for narrowing down agent traces from CloudWatch Logs based on
+// key-value comparisons.
+type CloudWatchLogsFilter struct {
+
+	// The key or field name to filter on within the agent trace data.
+	//
+	// This member is required.
+	Key *string
+
+	// The comparison operator to use for filtering.
+	//
+	// This member is required.
+	Operator CloudWatchLogsFilterOperator
+
+	// The value to compare against using the specified operator.
+	//
+	// This member is required.
+	Value FilterValue
+
+	noSmithyDocumentSerde
+}
+
+// A rule configuration for filtering agent traces from CloudWatch Logs.
+type CloudWatchLogsRule struct {
+
+	// The list of filters to apply when reading agent traces.
+	Filters []CloudWatchLogsFilter
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for reading agent traces from CloudWatch Logs.
+type CloudWatchLogsSource struct {
+
+	// The list of CloudWatch log group names to read agent traces from. Maximum of 5
+	// log groups.
+	//
+	// This member is required.
+	LogGroupNames []string
+
+	// The list of agent service names to filter traces within the specified log
+	// groups.
+	//
+	// This member is required.
+	ServiceNames []string
+
+	// Optional filter configuration to narrow down which sessions to evaluate.
+	FilterConfig *CloudWatchFilterConfig
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for reading agent traces from CloudWatch Logs for recommendation
+// analysis.
+type CloudWatchLogsTraceConfig struct {
+
+	// The end time of the time range to read traces from.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The list of CloudWatch log group ARNs to read agent traces from.
+	//
+	// This member is required.
+	LogGroupArns []string
+
+	// The list of service names to filter traces within the specified log groups.
+	//
+	// This member is required.
+	ServiceNames []string
+
+	// The start time of the time range to read traces from.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// Optional rule configuration for filtering traces.
+	Rule *CloudWatchLogsRule
+
+	noSmithyDocumentSerde
+}
+
+// CloudWatch Logs destination for batch evaluation results
+type CloudWatchOutputConfig struct {
+
+	// The name of the CloudWatch log group where evaluation results will be written.
+	//
+	// This member is required.
+	LogGroupName *string
+
+	// The name of the CloudWatch log stream where evaluation results will be written.
+	//
+	// This member is required.
+	LogStreamName *string
+
+	noSmithyDocumentSerde
+}
+
 // The output produced by executing code in a code interpreter session in Amazon
 // Bedrock AgentCore. This structure contains the results of code execution,
 // including textual output, structured data, and error information. Agents use
@@ -543,6 +821,51 @@ type CodeInterpreterStreamOutputMemberResult struct {
 }
 
 func (*CodeInterpreterStreamOutputMemberResult) isCodeInterpreterStreamOutput() {}
+
+// A confidence interval for a statistical measurement.
+type ConfidenceInterval struct {
+
+	// The lower bound of the confidence interval.
+	Lower *float64
+
+	// The upper bound of the confidence interval.
+	Upper *float64
+
+	noSmithyDocumentSerde
+}
+
+// A reference to a specific version of a configuration bundle.
+type ConfigurationBundleRef struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The version of the configuration bundle.
+	//
+	// This member is required.
+	BundleVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Maps a tool name to its JSON path within a configuration bundle.
+type ConfigurationBundleToolEntry struct {
+
+	// The JSON path within the configuration bundle's components that contains the
+	// tool description.
+	//
+	// This member is required.
+	ToolDescriptionJsonPath *string
+
+	// The name of the tool.
+	//
+	// This member is required.
+	ToolName *string
+
+	noSmithyDocumentSerde
+}
 
 // Contains the content of a memory item.
 //
@@ -664,6 +987,27 @@ type ContextMemberSpanContext struct {
 
 func (*ContextMemberSpanContext) isContext() {}
 
+// Statistics for the control variant in an A/B test.
+type ControlStats struct {
+
+	// The mean evaluation score for the control variant.
+	//
+	// This member is required.
+	Mean *float64
+
+	// The number of sessions evaluated for the control variant.
+	//
+	// This member is required.
+	SampleSize *int32
+
+	// The name of the control variant.
+	//
+	// This member is required.
+	VariantName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains conversational content for an event payload.
 type Conversational struct {
 
@@ -689,6 +1033,24 @@ type CustomDescriptor struct {
 
 	noSmithyDocumentSerde
 }
+
+// Where to pull session spans from
+//
+// The following types satisfy this interface:
+//
+//	DataSourceConfigMemberCloudWatchLogs
+type DataSourceConfig interface {
+	isDataSourceConfig()
+}
+
+// Pull session spans from CloudWatch
+type DataSourceConfigMemberCloudWatchLogs struct {
+	Value CloudWatchLogsSource
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceConfigMemberCloudWatchLogs) isDataSourceConfig() {}
 
 //	Contains the descriptor configuration for a registry record. Only the field
 //
@@ -768,6 +1130,50 @@ type EvaluationInputMemberSessionSpans struct {
 }
 
 func (*EvaluationInputMemberSessionSpans) isEvaluationInput() {}
+
+// Aggregated results from a batch evaluation, including session completion counts
+// and evaluator score summaries.
+type EvaluationJobResults struct {
+
+	// A list of per-evaluator summary statistics.
+	EvaluatorSummaries []EvaluatorSummary
+
+	// The number of sessions that have been successfully evaluated.
+	NumberOfSessionsCompleted *int32
+
+	// The number of sessions that failed evaluation.
+	NumberOfSessionsFailed *int32
+
+	// The number of sessions that were ignored during evaluation.
+	NumberOfSessionsIgnored *int32
+
+	// The number of sessions currently being evaluated.
+	NumberOfSessionsInProgress *int32
+
+	// The total number of sessions included in the batch evaluation.
+	TotalNumberOfSessions *int32
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for the evaluation, including session-specific ground truth data.
+//
+// The following types satisfy this interface:
+//
+//	EvaluationMetadataMemberSessionMetadata
+type EvaluationMetadata interface {
+	isEvaluationMetadata()
+}
+
+// A list of session metadata entries containing ground truth data and test
+// scenario identifiers for specific sessions.
+type EvaluationMetadataMemberSessionMetadata struct {
+	Value []SessionMetadataShape
+
+	noSmithyDocumentSerde
+}
+
+func (*EvaluationMetadataMemberSessionMetadata) isEvaluationMetadata() {}
 
 //	A reference input containing ground truth data for evaluation, scoped to a
 //
@@ -910,6 +1316,67 @@ type EvaluationTargetMemberTraceIds struct {
 }
 
 func (*EvaluationTargetMemberTraceIds) isEvaluationTarget() {}
+
+// An evaluator to run against sessions
+type Evaluator struct {
+
+	// The unique identifier of the evaluator. Can reference built-in evaluators
+	// (e.g., Builtin.Helpfulness ) or custom evaluators.
+	//
+	// This member is required.
+	EvaluatorId *string
+
+	noSmithyDocumentSerde
+}
+
+// Statistical metrics for a single evaluator comparing control and treatment
+// variants.
+type EvaluatorMetric struct {
+
+	// The statistics for the control variant.
+	//
+	// This member is required.
+	ControlStats *ControlStats
+
+	// The Amazon Resource Name (ARN) of the evaluator.
+	//
+	// This member is required.
+	EvaluatorArn *string
+
+	// The results for each treatment variant compared against the control.
+	//
+	// This member is required.
+	VariantResults []VariantResult
+
+	noSmithyDocumentSerde
+}
+
+// Aggregated statistics for an evaluator.
+type EvaluatorStatistics struct {
+
+	// The average score across all evaluated sessions for this evaluator.
+	AverageScore *float64
+
+	noSmithyDocumentSerde
+}
+
+// Summary statistics for a single evaluator within a batch evaluation.
+type EvaluatorSummary struct {
+
+	// The unique identifier of the evaluator.
+	EvaluatorId *string
+
+	// The aggregated statistics for this evaluator.
+	Statistics *EvaluatorStatistics
+
+	// The total number of sessions evaluated by this evaluator.
+	TotalEvaluated *int32
+
+	// The total number of sessions that failed evaluation by this evaluator.
+	TotalFailed *int32
+
+	noSmithyDocumentSerde
+}
 
 // Contains information about an event in an AgentCore Memory resource.
 type Event struct {
@@ -1098,6 +1565,101 @@ type FilterInput struct {
 	noSmithyDocumentSerde
 }
 
+// A value used in filter comparisons, supporting different data types.
+//
+// The following types satisfy this interface:
+//
+//	FilterValueMemberBooleanValue
+//	FilterValueMemberDoubleValue
+//	FilterValueMemberStringValue
+type FilterValue interface {
+	isFilterValue()
+}
+
+// A boolean value for true/false filtering conditions.
+type FilterValueMemberBooleanValue struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*FilterValueMemberBooleanValue) isFilterValue() {}
+
+// A numeric value for numerical filtering and comparisons.
+type FilterValueMemberDoubleValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*FilterValueMemberDoubleValue) isFilterValue() {}
+
+// A string value for text-based filtering.
+type FilterValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*FilterValueMemberStringValue) isFilterValue() {}
+
+// A filter to restrict which gateway target paths are included in the A/B test.
+type GatewayFilter struct {
+
+	// A list of target path patterns to include in the A/B test.
+	TargetPaths []string
+
+	noSmithyDocumentSerde
+}
+
+// Where to pull ground truth from
+//
+// The following types satisfy this interface:
+//
+//	GroundTruthSourceMemberInline
+type GroundTruthSource interface {
+	isGroundTruthSource()
+}
+
+// Provide ground truth inline
+type GroundTruthSourceMemberInline struct {
+	Value InlineGroundTruth
+
+	noSmithyDocumentSerde
+}
+
+func (*GroundTruthSourceMemberInline) isGroundTruthSource() {}
+
+// Ground truth data for a single conversation turn.
+type GroundTruthTurn struct {
+
+	// The expected response for this conversation turn.
+	ExpectedResponse EvaluationContent
+
+	// The input for this conversation turn.
+	Input GroundTruthTurnInput
+
+	noSmithyDocumentSerde
+}
+
+// The input for a ground truth conversation turn.
+//
+// The following types satisfy this interface:
+//
+//	GroundTruthTurnInputMemberPrompt
+type GroundTruthTurnInput interface {
+	isGroundTruthTurnInput()
+}
+
+// The text prompt for this conversation turn.
+type GroundTruthTurnInputMemberPrompt struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*GroundTruthTurnInputMemberPrompt) isGroundTruthTurnInput() {}
+
 // Configuration for AgentCore Browser.
 type HarnessAgentCoreBrowserConfig struct {
 
@@ -1124,7 +1686,8 @@ type HarnessAgentCoreGatewayConfig struct {
 	// This member is required.
 	GatewayArn *string
 
-	// How Loopy authenticates to this Gateway. Defaults to AWS_IAM (SigV4) if omitted.
+	// How harness authenticates to this Gateway. Defaults to AWS_IAM (SigV4) if
+	// omitted.
 	OutboundAuth HarnessGatewayOutboundAuth
 
 	noSmithyDocumentSerde
@@ -1608,7 +2171,7 @@ type HarnessRemoteMcpConfig struct {
 	// This member is required.
 	Url *string
 
-	// Map of key/value pairs for HTTP headers.
+	// Custom headers to include when connecting to the remote MCP server.
 	Headers map[string]string
 
 	noSmithyDocumentSerde
@@ -1911,6 +2474,24 @@ type HarnessToolUseBlockStart struct {
 
 	// The type of tool use.
 	Type HarnessToolUseType
+
+	noSmithyDocumentSerde
+}
+
+// Inline ground truth data containing assertions, expected trajectories, and
+// per-turn expected responses.
+type InlineGroundTruth struct {
+
+	// assertions for evaluation, reuses common model EvaluationContentList
+	Assertions []EvaluationContent
+
+	// expectedTrajectory for evaluation, reuses common model
+	// EvaluationExpectedTrajectory
+	ExpectedTrajectory *EvaluationExpectedTrajectory
+
+	// A list of per-turn ground truth data, each containing an input prompt and
+	// expected response.
+	Turns []GroundTruthTurn
 
 	noSmithyDocumentSerde
 }
@@ -2577,6 +3158,24 @@ type OAuthCredentialProvider struct {
 	noSmithyDocumentSerde
 }
 
+// Output destination configuration
+//
+// The following types satisfy this interface:
+//
+//	OutputConfigMemberCloudWatchConfig
+type OutputConfig interface {
+	isOutputConfig()
+}
+
+// The CloudWatch Logs configuration for writing evaluation results.
+type OutputConfigMemberCloudWatchConfig struct {
+	Value CloudWatchOutputConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*OutputConfigMemberCloudWatchConfig) isOutputConfig() {}
+
 // Contains the payload content for an event.
 //
 // The following types satisfy this interface:
@@ -2604,6 +3203,23 @@ type PayloadTypeMemberConversational struct {
 }
 
 func (*PayloadTypeMemberConversational) isPayloadType() {}
+
+// An online evaluation configuration associated with a specific A/B test variant.
+type PerVariantOnlineEvaluationConfig struct {
+
+	// The name of the variant this evaluation configuration applies to.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the online evaluation configuration for this
+	// variant.
+	//
+	// This member is required.
+	OnlineEvaluationConfigArn *string
+
+	noSmithyDocumentSerde
+}
 
 // Union type representing different proxy configurations. Currently supports
 // external customer-managed proxies.
@@ -2678,6 +3294,145 @@ type ProxyCredentialsMemberBasicAuth struct {
 }
 
 func (*ProxyCredentialsMemberBasicAuth) isProxyCredentials() {}
+
+// The configuration for a recommendation, varying by recommendation type.
+//
+// The following types satisfy this interface:
+//
+//	RecommendationConfigMemberSystemPromptRecommendationConfig
+//	RecommendationConfigMemberToolDescriptionRecommendationConfig
+type RecommendationConfig interface {
+	isRecommendationConfig()
+}
+
+// The configuration for a system prompt recommendation.
+type RecommendationConfigMemberSystemPromptRecommendationConfig struct {
+	Value SystemPromptRecommendationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*RecommendationConfigMemberSystemPromptRecommendationConfig) isRecommendationConfig() {}
+
+// The configuration for a tool description recommendation.
+type RecommendationConfigMemberToolDescriptionRecommendationConfig struct {
+	Value ToolDescriptionRecommendationConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*RecommendationConfigMemberToolDescriptionRecommendationConfig) isRecommendationConfig() {}
+
+// The evaluation configuration for assessing recommendation quality.
+type RecommendationEvaluationConfig struct {
+
+	// The list of evaluators to use for assessing recommendation quality.
+	//
+	// This member is required.
+	Evaluators []RecommendationEvaluatorReference
+
+	noSmithyDocumentSerde
+}
+
+// A reference to an evaluator used for recommendation assessment.
+type RecommendationEvaluatorReference struct {
+
+	// The Amazon Resource Name (ARN) of the evaluator.
+	//
+	// This member is required.
+	EvaluatorArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The result of a recommendation, containing the optimized output.
+//
+// The following types satisfy this interface:
+//
+//	RecommendationResultMemberSystemPromptRecommendationResult
+//	RecommendationResultMemberToolDescriptionRecommendationResult
+type RecommendationResult interface {
+	isRecommendationResult()
+}
+
+// The result of a system prompt recommendation.
+type RecommendationResultMemberSystemPromptRecommendationResult struct {
+	Value SystemPromptRecommendationResult
+
+	noSmithyDocumentSerde
+}
+
+func (*RecommendationResultMemberSystemPromptRecommendationResult) isRecommendationResult() {}
+
+// The result of a tool description recommendation.
+type RecommendationResultMemberToolDescriptionRecommendationResult struct {
+	Value ToolDescriptionRecommendationResult
+
+	noSmithyDocumentSerde
+}
+
+func (*RecommendationResultMemberToolDescriptionRecommendationResult) isRecommendationResult() {}
+
+// A configuration bundle reference in a recommendation result.
+type RecommendationResultConfigurationBundle struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The version identifier of the configuration bundle containing the
+	// recommendation.
+	//
+	// This member is required.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a recommendation.
+type RecommendationSummary struct {
+
+	// The timestamp when the recommendation was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the recommendation.
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the recommendation.
+	//
+	// This member is required.
+	RecommendationArn *string
+
+	// The unique identifier of the recommendation.
+	//
+	// This member is required.
+	RecommendationId *string
+
+	// The current status of the recommendation.
+	//
+	// This member is required.
+	Status RecommendationStatus
+
+	// The type of recommendation.
+	//
+	// This member is required.
+	Type RecommendationType
+
+	// The timestamp when the recommendation was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The description of the recommendation.
+	Description *string
+
+	noSmithyDocumentSerde
+}
 
 // Summary information about a registry record.
 type RegistryRecordSummary struct {
@@ -2920,6 +3675,44 @@ type SessionFilter struct {
 	noSmithyDocumentSerde
 }
 
+// A time range filter for selecting sessions. Specifies the start and end times
+// to narrow down which sessions are included.
+type SessionFilterConfig struct {
+
+	// The end time of the time range. Only sessions with activity before this
+	// timestamp are included.
+	EndTime *time.Time
+
+	// The start time of the time range. Only sessions with activity at or after this
+	// timestamp are included.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for a specific session in a batch evaluation, including ground truth
+// data and test scenario identifiers.
+type SessionMetadataShape struct {
+
+	// The unique identifier of the session this metadata applies to.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The ground truth data for this session, including expected responses and
+	// assertions.
+	GroundTruth GroundTruthSource
+
+	// Additional key-value metadata associated with this session.
+	Metadata map[string]string
+
+	// An optional test scenario identifier for categorizing and tracking evaluation
+	// results.
+	TestScenarioId *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a session in an AgentCore Memory resource.
 type SessionSummary struct {
 
@@ -3007,6 +3800,107 @@ type StreamUpdateMemberAutomationStreamUpdate struct {
 
 func (*StreamUpdateMemberAutomationStreamUpdate) isStreamUpdate() {}
 
+// The system prompt input, either as inline text or from a configuration bundle.
+//
+// The following types satisfy this interface:
+//
+//	SystemPromptConfigMemberConfigurationBundle
+//	SystemPromptConfigMemberText
+type SystemPromptConfig interface {
+	isSystemPromptConfig()
+}
+
+// The system prompt sourced from a configuration bundle version.
+type SystemPromptConfigMemberConfigurationBundle struct {
+	Value SystemPromptConfigurationBundle
+
+	noSmithyDocumentSerde
+}
+
+func (*SystemPromptConfigMemberConfigurationBundle) isSystemPromptConfig() {}
+
+// The system prompt text provided inline.
+type SystemPromptConfigMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SystemPromptConfigMemberText) isSystemPromptConfig() {}
+
+// A system prompt sourced from a configuration bundle version.
+type SystemPromptConfigurationBundle struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The JSON path within the configuration bundle that contains the system prompt.
+	//
+	// This member is required.
+	SystemPromptJsonPath *string
+
+	// The version identifier of the configuration bundle.
+	//
+	// This member is required.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for generating system prompt optimization recommendations.
+type SystemPromptRecommendationConfig struct {
+
+	// The agent traces to analyze for generating recommendations.
+	//
+	// This member is required.
+	AgentTraces AgentTracesConfig
+
+	// The evaluation configuration specifying which evaluator to use for assessing
+	// recommendation quality.
+	//
+	// This member is required.
+	EvaluationConfig *RecommendationEvaluationConfig
+
+	// The current system prompt to optimize.
+	//
+	// This member is required.
+	SystemPrompt SystemPromptConfig
+
+	noSmithyDocumentSerde
+}
+
+// The result of a system prompt recommendation, containing the optimized prompt.
+type SystemPromptRecommendationResult struct {
+
+	// The configuration bundle containing the recommended system prompt, if the input
+	// was sourced from a configuration bundle.
+	ConfigurationBundle *RecommendationResultConfigurationBundle
+
+	// The error code if the recommendation failed.
+	ErrorCode *string
+
+	// The error message if the recommendation failed.
+	ErrorMessage *string
+
+	// The optimized system prompt text generated by the recommendation.
+	RecommendedSystemPrompt *string
+
+	noSmithyDocumentSerde
+}
+
+// A reference to a gateway target.
+type TargetRef struct {
+
+	// The name of the gateway target.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 //	The token consumption statistics for language model operations during
 //
 // evaluation. Provides detailed breakdown of input, output, and total tokens used
@@ -3070,6 +3964,152 @@ type ToolArguments struct {
 
 	// The identifier of the task for the tool operation.
 	TaskId *string
+
+	noSmithyDocumentSerde
+}
+
+// The tool description content.
+//
+// The following types satisfy this interface:
+//
+//	ToolDescriptionConfigMemberText
+type ToolDescriptionConfig interface {
+	isToolDescriptionConfig()
+}
+
+// The tool description as inline text.
+type ToolDescriptionConfigMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolDescriptionConfigMemberText) isToolDescriptionConfig() {}
+
+// Tool descriptions sourced from a configuration bundle version.
+type ToolDescriptionConfigurationBundle struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The list of tool entries mapping tool names to their JSON paths within the
+	// bundle.
+	//
+	// This member is required.
+	Tools []ConfigurationBundleToolEntry
+
+	// The version identifier of the configuration bundle.
+	//
+	// This member is required.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// A tool description input containing the tool name and its current description.
+type ToolDescriptionInput struct {
+
+	// The current description of the tool to optimize.
+	//
+	// This member is required.
+	ToolDescription ToolDescriptionConfig
+
+	// The name of the tool.
+	//
+	// This member is required.
+	ToolName *string
+
+	noSmithyDocumentSerde
+}
+
+// The output for a single tool description recommendation.
+type ToolDescriptionOutput struct {
+
+	// The name of the tool.
+	//
+	// This member is required.
+	ToolName *string
+
+	// The optimized tool description text generated by the recommendation.
+	RecommendedToolDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for generating tool description optimization recommendations.
+type ToolDescriptionRecommendationConfig struct {
+
+	// The agent traces to analyze for generating tool description recommendations.
+	//
+	// This member is required.
+	AgentTraces AgentTracesConfig
+
+	// The current tool descriptions to optimize.
+	//
+	// This member is required.
+	ToolDescription ToolDescriptionSource
+
+	noSmithyDocumentSerde
+}
+
+// The result of a tool description recommendation, containing optimized
+// descriptions.
+type ToolDescriptionRecommendationResult struct {
+
+	// The configuration bundle containing the recommended tool descriptions, if the
+	// input was sourced from a configuration bundle.
+	ConfigurationBundle *RecommendationResultConfigurationBundle
+
+	// The error code if the recommendation failed.
+	ErrorCode *string
+
+	// The error message if the recommendation failed.
+	ErrorMessage *string
+
+	// The list of tools with their recommended descriptions.
+	Tools []ToolDescriptionOutput
+
+	noSmithyDocumentSerde
+}
+
+// The source of tool descriptions, either inline text or from a configuration
+// bundle.
+//
+// The following types satisfy this interface:
+//
+//	ToolDescriptionSourceMemberConfigurationBundle
+//	ToolDescriptionSourceMemberToolDescriptionText
+type ToolDescriptionSource interface {
+	isToolDescriptionSource()
+}
+
+// Tool descriptions sourced from a configuration bundle version.
+type ToolDescriptionSourceMemberConfigurationBundle struct {
+	Value ToolDescriptionConfigurationBundle
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolDescriptionSourceMemberConfigurationBundle) isToolDescriptionSource() {}
+
+// Tool descriptions provided as inline text.
+type ToolDescriptionSourceMemberToolDescriptionText struct {
+	Value ToolDescriptionTextInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolDescriptionSourceMemberToolDescriptionText) isToolDescriptionSource() {}
+
+// Inline tool description input containing a list of tools.
+type ToolDescriptionTextInput struct {
+
+	// The list of tool descriptions to optimize.
+	//
+	// This member is required.
+	Tools []ToolDescriptionInput
 
 	noSmithyDocumentSerde
 }
@@ -3164,6 +4204,80 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+// A variant in an A/B test, representing either the control (C) or treatment (T1)
+// configuration.
+type Variant struct {
+
+	// The name of the variant. Must be C for control or T1 for treatment.
+	//
+	// This member is required.
+	Name *string
+
+	// The configuration for this variant, including the configuration bundle or
+	// target reference.
+	//
+	// This member is required.
+	VariantConfiguration *VariantConfiguration
+
+	// The percentage of traffic to route to this variant. Weights across all variants
+	// must sum to 100.
+	//
+	// This member is required.
+	Weight *int32
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an A/B test variant.
+type VariantConfiguration struct {
+
+	// A reference to a configuration bundle version to use for this variant.
+	ConfigurationBundle *ConfigurationBundleRef
+
+	// A reference to a gateway target to route traffic to for this variant.
+	Target *TargetRef
+
+	noSmithyDocumentSerde
+}
+
+// Statistical results for a treatment variant compared against the control.
+type VariantResult struct {
+
+	// Whether the observed difference is statistically significant.
+	//
+	// This member is required.
+	IsSignificant *bool
+
+	// The mean evaluation score for this variant.
+	//
+	// This member is required.
+	Mean *float64
+
+	// The number of sessions evaluated for this variant.
+	//
+	// This member is required.
+	SampleSize *int32
+
+	// The name of the treatment variant.
+	//
+	// This member is required.
+	VariantName *string
+
+	// The absolute change in mean score compared to the control variant.
+	AbsoluteChange *float64
+
+	// The confidence interval for the observed difference.
+	ConfidenceInterval *ConfidenceInterval
+
+	// The p-value indicating the statistical significance of the observed difference.
+	PValue *float64
+
+	// The percentage change in mean score compared to the control variant.
+	PercentChange *float64
+
+	noSmithyDocumentSerde
+}
+
 // The configuration that defines the dimensions of a browser viewport in a
 // browser session. The viewport determines the visible area of web content and
 // affects how web pages are rendered and displayed. Proper viewport configuration
@@ -3200,16 +4314,23 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isABTestEvaluationConfig()                {}
+func (*UnknownUnionMember) isAgentTracesConfig()                     {}
 func (*UnknownUnionMember) isBrowserAction()                         {}
 func (*UnknownUnionMember) isBrowserActionResult()                   {}
 func (*UnknownUnionMember) isCertificateLocation()                   {}
 func (*UnknownUnionMember) isCodeInterpreterStreamOutput()           {}
 func (*UnknownUnionMember) isContent()                               {}
 func (*UnknownUnionMember) isContext()                               {}
+func (*UnknownUnionMember) isDataSourceConfig()                      {}
 func (*UnknownUnionMember) isEvaluationContent()                     {}
 func (*UnknownUnionMember) isEvaluationInput()                       {}
+func (*UnknownUnionMember) isEvaluationMetadata()                    {}
 func (*UnknownUnionMember) isEvaluationTarget()                      {}
 func (*UnknownUnionMember) isExtractionJobMessages()                 {}
+func (*UnknownUnionMember) isFilterValue()                           {}
+func (*UnknownUnionMember) isGroundTruthSource()                     {}
+func (*UnknownUnionMember) isGroundTruthTurnInput()                  {}
 func (*UnknownUnionMember) isHarnessContentBlock()                   {}
 func (*UnknownUnionMember) isHarnessContentBlockDelta()              {}
 func (*UnknownUnionMember) isHarnessContentBlockStart()              {}
@@ -3227,10 +4348,16 @@ func (*UnknownUnionMember) isInvokeHarnessStreamOutput()             {}
 func (*UnknownUnionMember) isLeftExpression()                        {}
 func (*UnknownUnionMember) isMemoryContent()                         {}
 func (*UnknownUnionMember) isMetadataValue()                         {}
+func (*UnknownUnionMember) isOutputConfig()                          {}
 func (*UnknownUnionMember) isPayloadType()                           {}
 func (*UnknownUnionMember) isProxy()                                 {}
 func (*UnknownUnionMember) isProxyCredentials()                      {}
+func (*UnknownUnionMember) isRecommendationConfig()                  {}
+func (*UnknownUnionMember) isRecommendationResult()                  {}
 func (*UnknownUnionMember) isResourceLocation()                      {}
 func (*UnknownUnionMember) isRightExpression()                       {}
 func (*UnknownUnionMember) isStreamUpdate()                          {}
+func (*UnknownUnionMember) isSystemPromptConfig()                    {}
+func (*UnknownUnionMember) isToolDescriptionConfig()                 {}
+func (*UnknownUnionMember) isToolDescriptionSource()                 {}
 func (*UnknownUnionMember) isUserIdentifier()                        {}

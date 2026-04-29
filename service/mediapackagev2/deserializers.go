@@ -1240,6 +1240,15 @@ func awsRestjson1_deserializeOpDocumentCreateOriginEndpointOutput(v **CreateOrig
 				return err
 			}
 
+		case "UriSeparator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UriSeparator to be of type string, got %T instead", value)
+				}
+				sv.UriSeparator = types.UriSeparator(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3053,6 +3062,15 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointOutput(v **GetOriginEndp
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		case "UriSeparator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UriSeparator to be of type string, got %T instead", value)
+				}
+				sv.UriSeparator = types.UriSeparator(jtv)
 			}
 
 		default:
@@ -5729,6 +5747,15 @@ func awsRestjson1_deserializeOpDocumentUpdateOriginEndpointOutput(v **UpdateOrig
 				return err
 			}
 
+		case "UriSeparator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UriSeparator to be of type string, got %T instead", value)
+				}
+				sv.UriSeparator = types.UriSeparator(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6423,6 +6450,42 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomAdTypeList(v *[]types.CustomAdType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CustomAdType
+	if *v == nil {
+		cv = []types.CustomAdType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CustomAdType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CustomAdType to be of type string, got %T instead", value)
+			}
+			col = types.CustomAdType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -7577,6 +7640,15 @@ func awsRestjson1_deserializeDocumentGetDashManifestConfiguration(v **types.GetD
 				sv.SuggestedPresentationDelaySeconds = ptr.Int32(int32(i64))
 			}
 
+		case "UriPathType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UriPathType to be of type string, got %T instead", value)
+				}
+				sv.UriPathType = types.UriPathType(jtv)
+			}
+
 		case "Url":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7713,6 +7785,15 @@ func awsRestjson1_deserializeDocumentGetHlsManifestConfiguration(v **types.GetHl
 		case "StartTag":
 			if err := awsRestjson1_deserializeDocumentStartTag(&sv.StartTag, value); err != nil {
 				return err
+			}
+
+		case "UriPathType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UriPathType to be of type string, got %T instead", value)
+				}
+				sv.UriPathType = types.UriPathType(jtv)
 			}
 
 		case "Url":
@@ -7855,6 +7936,15 @@ func awsRestjson1_deserializeDocumentGetLowLatencyHlsManifestConfiguration(v **t
 		case "StartTag":
 			if err := awsRestjson1_deserializeDocumentStartTag(&sv.StartTag, value); err != nil {
 				return err
+			}
+
+		case "UriPathType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UriPathType to be of type string, got %T instead", value)
+				}
+				sv.UriPathType = types.UriPathType(jtv)
 			}
 
 		case "Url":
@@ -9211,6 +9301,15 @@ func awsRestjson1_deserializeDocumentOriginEndpointListConfiguration(v **types.O
 				sv.OriginEndpointName = ptr.String(jtv)
 			}
 
+		case "UriSeparator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UriSeparator to be of type string, got %T instead", value)
+				}
+				sv.UriSeparator = types.UriSeparator(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9414,6 +9513,11 @@ func awsRestjson1_deserializeDocumentScte(v **types.Scte, value interface{}) err
 
 	for key, value := range shape {
 		switch key {
+		case "CustomAdTypes":
+			if err := awsRestjson1_deserializeDocumentCustomAdTypeList(&sv.CustomAdTypes, value); err != nil {
+				return err
+			}
+
 		case "ScteFilter":
 			if err := awsRestjson1_deserializeDocumentScteFilterList(&sv.ScteFilter, value); err != nil {
 				return err
@@ -9466,6 +9570,15 @@ func awsRestjson1_deserializeDocumentScteDash(v **types.ScteDash, value interfac
 					return fmt.Errorf("expected AdMarkerDash to be of type string, got %T instead", value)
 				}
 				sv.AdMarkerDash = types.AdMarkerDash(jtv)
+			}
+
+		case "ScteInManifests":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScteInManifests to be of type string, got %T instead", value)
+				}
+				sv.ScteInManifests = types.ScteInManifests(jtv)
 			}
 
 		default:
@@ -9542,6 +9655,15 @@ func awsRestjson1_deserializeDocumentScteHls(v **types.ScteHls, value interface{
 					return fmt.Errorf("expected AdMarkerHls to be of type string, got %T instead", value)
 				}
 				sv.AdMarkerHls = types.AdMarkerHls(jtv)
+			}
+
+		case "ScteInManifests":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScteInManifests to be of type string, got %T instead", value)
+				}
+				sv.ScteInManifests = types.ScteInManifests(jtv)
 			}
 
 		default:

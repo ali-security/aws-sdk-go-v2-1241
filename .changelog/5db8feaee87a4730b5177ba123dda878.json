@@ -1,0 +1,8 @@
+{
+    "id": "5db8feae-e87a-4730-b517-7ba123dda878",
+    "type": "feature",
+    "description": "Amazon CloudFront now supports cache tag. Tag objects via response headers and invalidate all matching objects in a single request, replacing manual URL tracking and broad wildcards.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

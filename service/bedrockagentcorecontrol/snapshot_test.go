@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvaluator(context.Background(), nil, func(o *Options) {
@@ -151,6 +163,18 @@ func TestCheckSnapshot_CreateGateway(t *testing.T) {
 	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -350,6 +374,18 @@ func TestCheckSnapshot_DeleteCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEvaluator(context.Background(), nil, func(o *Options) {
@@ -367,6 +403,18 @@ func TestCheckSnapshot_DeleteGateway(t *testing.T) {
 	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +626,30 @@ func TestCheckSnapshot_GetCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetConfigurationBundleVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfigurationBundleVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConfigurationBundleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEvaluator(context.Background(), nil, func(o *Options) {
@@ -595,6 +667,18 @@ func TestCheckSnapshot_GetGateway(t *testing.T) {
 	_, err := svc.GetGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -842,11 +926,47 @@ func TestCheckSnapshot_ListCodeInterpreters(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListConfigurationBundles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurationBundles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConfigurationBundles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListConfigurationBundleVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurationBundleVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConfigurationBundleVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEvaluators(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEvaluators(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEvaluators")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGatewayRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGatewayRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGatewayRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1142,6 +1262,18 @@ func TestCheckSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateEvaluator(context.Background(), nil, func(o *Options) {
@@ -1159,6 +1291,18 @@ func TestCheckSnapshot_UpdateGateway(t *testing.T) {
 	_, err := svc.UpdateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1369,6 +1513,18 @@ func TestUpdateSnapshot_CreateCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvaluator(context.Background(), nil, func(o *Options) {
@@ -1386,6 +1542,18 @@ func TestUpdateSnapshot_CreateGateway(t *testing.T) {
 	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1585,6 +1753,18 @@ func TestUpdateSnapshot_DeleteCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEvaluator(context.Background(), nil, func(o *Options) {
@@ -1602,6 +1782,18 @@ func TestUpdateSnapshot_DeleteGateway(t *testing.T) {
 	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1813,6 +2005,30 @@ func TestUpdateSnapshot_GetCodeInterpreter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConfigurationBundleVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConfigurationBundleVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConfigurationBundleVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEvaluator(context.Background(), nil, func(o *Options) {
@@ -1830,6 +2046,18 @@ func TestUpdateSnapshot_GetGateway(t *testing.T) {
 	_, err := svc.GetGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2077,11 +2305,47 @@ func TestUpdateSnapshot_ListCodeInterpreters(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListConfigurationBundles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurationBundles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConfigurationBundles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListConfigurationBundleVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConfigurationBundleVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConfigurationBundleVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListEvaluators(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEvaluators(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEvaluators")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGatewayRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGatewayRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGatewayRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2377,6 +2641,18 @@ func TestUpdateSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateConfigurationBundle(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConfigurationBundle(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateEvaluator(context.Background(), nil, func(o *Options) {
@@ -2394,6 +2670,18 @@ func TestUpdateSnapshot_UpdateGateway(t *testing.T) {
 	_, err := svc.UpdateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateGatewayRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGatewayRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateGatewayRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

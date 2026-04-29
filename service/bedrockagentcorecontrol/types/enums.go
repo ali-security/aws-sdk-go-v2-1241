@@ -106,9 +106,10 @@ type AuthorizerType string
 
 // Enum values for AuthorizerType
 const (
-	AuthorizerTypeCustomJwt AuthorizerType = "CUSTOM_JWT"
-	AuthorizerTypeAwsIam    AuthorizerType = "AWS_IAM"
-	AuthorizerTypeNone      AuthorizerType = "NONE"
+	AuthorizerTypeCustomJwt        AuthorizerType = "CUSTOM_JWT"
+	AuthorizerTypeAwsIam           AuthorizerType = "AWS_IAM"
+	AuthorizerTypeNone             AuthorizerType = "NONE"
+	AuthorizerTypeAuthenticateOnly AuthorizerType = "AUTHENTICATE_ONLY"
 )
 
 // Values returns all known values for AuthorizerType. Note that this can be
@@ -120,6 +121,7 @@ func (AuthorizerType) Values() []AuthorizerType {
 		"CUSTOM_JWT",
 		"AWS_IAM",
 		"NONE",
+		"AUTHENTICATE_ONLY",
 	}
 }
 
@@ -280,6 +282,35 @@ func (CodeInterpreterStatus) Values() []CodeInterpreterStatus {
 	}
 }
 
+type ConfigurationBundleStatus string
+
+// Enum values for ConfigurationBundleStatus
+const (
+	ConfigurationBundleStatusActive       ConfigurationBundleStatus = "ACTIVE"
+	ConfigurationBundleStatusCreating     ConfigurationBundleStatus = "CREATING"
+	ConfigurationBundleStatusCreateFailed ConfigurationBundleStatus = "CREATE_FAILED"
+	ConfigurationBundleStatusUpdating     ConfigurationBundleStatus = "UPDATING"
+	ConfigurationBundleStatusUpdateFailed ConfigurationBundleStatus = "UPDATE_FAILED"
+	ConfigurationBundleStatusDeleting     ConfigurationBundleStatus = "DELETING"
+	ConfigurationBundleStatusDeleteFailed ConfigurationBundleStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for ConfigurationBundleStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationBundleStatus) Values() []ConfigurationBundleStatus {
+	return []ConfigurationBundleStatus{
+		"ACTIVE",
+		"CREATING",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"DELETING",
+		"DELETE_FAILED",
+	}
+}
+
 type ContentLevel string
 
 // Enum values for ContentLevel
@@ -320,9 +351,11 @@ type CredentialProviderType string
 
 // Enum values for CredentialProviderType
 const (
-	CredentialProviderTypeGatewayIamRole CredentialProviderType = "GATEWAY_IAM_ROLE"
-	CredentialProviderTypeOauth          CredentialProviderType = "OAUTH"
-	CredentialProviderTypeApiKey         CredentialProviderType = "API_KEY"
+	CredentialProviderTypeGatewayIamRole       CredentialProviderType = "GATEWAY_IAM_ROLE"
+	CredentialProviderTypeOauth                CredentialProviderType = "OAUTH"
+	CredentialProviderTypeApiKey               CredentialProviderType = "API_KEY"
+	CredentialProviderTypeCallerIamCredentials CredentialProviderType = "CALLER_IAM_CREDENTIALS"
+	CredentialProviderTypeJwtPassthrough       CredentialProviderType = "JWT_PASSTHROUGH"
 )
 
 // Values returns all known values for CredentialProviderType. Note that this can
@@ -334,6 +367,8 @@ func (CredentialProviderType) Values() []CredentialProviderType {
 		"GATEWAY_IAM_ROLE",
 		"OAUTH",
 		"API_KEY",
+		"CALLER_IAM_CREDENTIALS",
+		"JWT_PASSTHROUGH",
 	}
 }
 
@@ -646,6 +681,29 @@ func (GatewayProtocolType) Values() []GatewayProtocolType {
 	}
 }
 
+type GatewayRuleStatus string
+
+// Enum values for GatewayRuleStatus
+const (
+	GatewayRuleStatusCreating GatewayRuleStatus = "CREATING"
+	GatewayRuleStatusActive   GatewayRuleStatus = "ACTIVE"
+	GatewayRuleStatusUpdating GatewayRuleStatus = "UPDATING"
+	GatewayRuleStatusDeleting GatewayRuleStatus = "DELETING"
+)
+
+// Values returns all known values for GatewayRuleStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GatewayRuleStatus) Values() []GatewayRuleStatus {
+	return []GatewayRuleStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+	}
+}
+
 type GatewayStatus string
 
 // Enum values for GatewayStatus
@@ -764,6 +822,25 @@ func (InboundTokenClaimValueType) Values() []InboundTokenClaimValueType {
 	return []InboundTokenClaimValueType{
 		"STRING",
 		"STRING_ARRAY",
+	}
+}
+
+type IncludedData string
+
+// Enum values for IncludedData
+const (
+	IncludedDataAllData      IncludedData = "ALL_DATA"
+	IncludedDataMetadataOnly IncludedData = "METADATA_ONLY"
+)
+
+// Values returns all known values for IncludedData. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludedData) Values() []IncludedData {
+	return []IncludedData{
+		"ALL_DATA",
+		"METADATA_ONLY",
 	}
 }
 
@@ -1108,6 +1185,25 @@ func (PolicyValidationMode) Values() []PolicyValidationMode {
 	}
 }
 
+type PrincipalMatchOperator string
+
+// Enum values for PrincipalMatchOperator
+const (
+	PrincipalMatchOperatorStringEquals PrincipalMatchOperator = "StringEquals"
+	PrincipalMatchOperatorStringLike   PrincipalMatchOperator = "StringLike"
+)
+
+// Values returns all known values for PrincipalMatchOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrincipalMatchOperator) Values() []PrincipalMatchOperator {
+	return []PrincipalMatchOperator{
+		"StringEquals",
+		"StringLike",
+	}
+}
+
 type RegistryAuthorizerType string
 
 // Enum values for RegistryAuthorizerType
@@ -1385,6 +1481,25 @@ const (
 func (SynchronizationType) Values() []SynchronizationType {
 	return []SynchronizationType{
 		"URL",
+	}
+}
+
+type TargetProtocolType string
+
+// Enum values for TargetProtocolType
+const (
+	TargetProtocolTypeMcp  TargetProtocolType = "MCP"
+	TargetProtocolTypeHttp TargetProtocolType = "HTTP"
+)
+
+// Values returns all known values for TargetProtocolType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetProtocolType) Values() []TargetProtocolType {
+	return []TargetProtocolType{
+		"MCP",
+		"HTTP",
 	}
 }
 

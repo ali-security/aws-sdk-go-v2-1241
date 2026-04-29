@@ -1,0 +1,8 @@
+{
+    "id": "48915432-e92b-4224-90fd-da055eb09f9c",
+    "type": "feature",
+    "description": "Amazon GameLift Servers adds a new DescribeContainerGroupPortMappings API for container fleets, making it easy to discover which connection ports map to your container ports without needing to remotely access the compute.",
+    "modules": [
+        "service/gamelift"
+    ]
+}

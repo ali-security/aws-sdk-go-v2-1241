@@ -739,6 +739,128 @@ func awsRestjson1_serializeOpDocumentCreateCodeInterpreterInput(v *CreateCodeInt
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateConfigurationBundle struct {
+}
+
+func (*awsRestjson1_serializeOpCreateConfigurationBundle) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateConfigurationBundle) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateConfigurationBundleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configuration-bundles/create")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateConfigurationBundleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateConfigurationBundleInput(v *CreateConfigurationBundleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateConfigurationBundleInput(v *CreateConfigurationBundleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BranchName != nil {
+		ok := object.Key("branchName")
+		ok.String(*v.BranchName)
+	}
+
+	if v.BundleName != nil {
+		ok := object.Key("bundleName")
+		ok.String(*v.BundleName)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.CommitMessage != nil {
+		ok := object.Key("commitMessage")
+		ok.String(*v.CommitMessage)
+	}
+
+	if v.Components != nil {
+		ok := object.Key("components")
+		if err := awsRestjson1_serializeDocumentComponentConfigurationMap(v.Components, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CreatedBy != nil {
+		ok := object.Key("createdBy")
+		if err := awsRestjson1_serializeDocumentVersionCreatedBySource(v.CreatedBy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateEvaluator struct {
 }
 
@@ -832,6 +954,11 @@ func awsRestjson1_serializeOpDocumentCreateEvaluatorInput(v *CreateEvaluatorInpu
 	if v.EvaluatorName != nil {
 		ok := object.Key("evaluatorName")
 		ok.String(*v.EvaluatorName)
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
 	}
 
 	if len(v.Level) > 0 {
@@ -995,6 +1122,124 @@ func awsRestjson1_serializeOpDocumentCreateGatewayInput(v *CreateGatewayInput, v
 		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateGatewayRule struct {
+}
+
+func (*awsRestjson1_serializeOpCreateGatewayRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateGatewayRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateGatewayRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/gateways/{gatewayIdentifier}/rules")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateGatewayRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateGatewayRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateGatewayRuleInput(v *CreateGatewayRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayIdentifier == nil || len(*v.GatewayIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayIdentifier must not be empty")}
+	}
+	if v.GatewayIdentifier != nil {
+		if err := encoder.SetURI("gatewayIdentifier").String(*v.GatewayIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateGatewayRuleInput(v *CreateGatewayRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Actions != nil {
+		ok := object.Key("actions")
+		if err := awsRestjson1_serializeDocumentActions(v.Actions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Conditions != nil {
+		ok := object.Key("conditions")
+		if err := awsRestjson1_serializeDocumentConditions(v.Conditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Priority != nil {
+		ok := object.Key("priority")
+		ok.Integer(*v.Priority)
 	}
 
 	return nil
@@ -2700,6 +2945,77 @@ func awsRestjson1_serializeOpHttpBindingsDeleteCodeInterpreterInput(v *DeleteCod
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteConfigurationBundle struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteConfigurationBundle) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteConfigurationBundle) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteConfigurationBundleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configuration-bundles/{bundleId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteConfigurationBundleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteConfigurationBundleInput(v *DeleteConfigurationBundleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BundleId == nil || len(*v.BundleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member bundleId must not be empty")}
+	}
+	if v.BundleId != nil {
+		if err := encoder.SetURI("bundleId").String(*v.BundleId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteEvaluator struct {
 }
 
@@ -2835,6 +3151,86 @@ func awsRestjson1_serializeOpHttpBindingsDeleteGatewayInput(v *DeleteGatewayInpu
 	}
 	if v.GatewayIdentifier != nil {
 		if err := encoder.SetURI("gatewayIdentifier").String(*v.GatewayIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteGatewayRule struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteGatewayRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteGatewayRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteGatewayRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/gateways/{gatewayIdentifier}/rules/{ruleId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteGatewayRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteGatewayRuleInput(v *DeleteGatewayRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayIdentifier == nil || len(*v.GatewayIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayIdentifier must not be empty")}
+	}
+	if v.GatewayIdentifier != nil {
+		if err := encoder.SetURI("gatewayIdentifier").String(*v.GatewayIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleId == nil || len(*v.RuleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ruleId must not be empty")}
+	}
+	if v.RuleId != nil {
+		if err := encoder.SetURI("ruleId").String(*v.RuleId); err != nil {
 			return err
 		}
 	}
@@ -4127,6 +4523,161 @@ func awsRestjson1_serializeOpHttpBindingsGetCodeInterpreterInput(v *GetCodeInter
 	return nil
 }
 
+type awsRestjson1_serializeOpGetConfigurationBundle struct {
+}
+
+func (*awsRestjson1_serializeOpGetConfigurationBundle) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetConfigurationBundle) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetConfigurationBundleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configuration-bundles/{bundleId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetConfigurationBundleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetConfigurationBundleInput(v *GetConfigurationBundleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BranchName != nil {
+		encoder.SetQuery("branchName").String(*v.BranchName)
+	}
+
+	if v.BundleId == nil || len(*v.BundleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member bundleId must not be empty")}
+	}
+	if v.BundleId != nil {
+		if err := encoder.SetURI("bundleId").String(*v.BundleId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetConfigurationBundleVersion struct {
+}
+
+func (*awsRestjson1_serializeOpGetConfigurationBundleVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetConfigurationBundleVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetConfigurationBundleVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configuration-bundles/{bundleId}/versions/{versionId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetConfigurationBundleVersionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetConfigurationBundleVersionInput(v *GetConfigurationBundleVersionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BundleId == nil || len(*v.BundleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member bundleId must not be empty")}
+	}
+	if v.BundleId != nil {
+		if err := encoder.SetURI("bundleId").String(*v.BundleId); err != nil {
+			return err
+		}
+	}
+
+	if v.VersionId == nil || len(*v.VersionId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member versionId must not be empty")}
+	}
+	if v.VersionId != nil {
+		if err := encoder.SetURI("versionId").String(*v.VersionId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetEvaluator struct {
 }
 
@@ -4193,6 +4744,10 @@ func awsRestjson1_serializeOpHttpBindingsGetEvaluatorInput(v *GetEvaluatorInput,
 		if err := encoder.SetURI("evaluatorId").String(*v.EvaluatorId); err != nil {
 			return err
 		}
+	}
+
+	if len(v.IncludedData) > 0 {
+		encoder.SetQuery("includedData").String(string(v.IncludedData))
 	}
 
 	return nil
@@ -4262,6 +4817,86 @@ func awsRestjson1_serializeOpHttpBindingsGetGatewayInput(v *GetGatewayInput, enc
 	}
 	if v.GatewayIdentifier != nil {
 		if err := encoder.SetURI("gatewayIdentifier").String(*v.GatewayIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetGatewayRule struct {
+}
+
+func (*awsRestjson1_serializeOpGetGatewayRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetGatewayRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetGatewayRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/gateways/{gatewayIdentifier}/rules/{ruleId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetGatewayRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetGatewayRuleInput(v *GetGatewayRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayIdentifier == nil || len(*v.GatewayIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayIdentifier must not be empty")}
+	}
+	if v.GatewayIdentifier != nil {
+		if err := encoder.SetURI("gatewayIdentifier").String(*v.GatewayIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleId == nil || len(*v.RuleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ruleId must not be empty")}
+	}
+	if v.RuleId != nil {
+		if err := encoder.SetURI("ruleId").String(*v.RuleId); err != nil {
 			return err
 		}
 	}
@@ -5817,6 +6452,180 @@ func awsRestjson1_serializeOpHttpBindingsListCodeInterpretersInput(v *ListCodeIn
 	return nil
 }
 
+type awsRestjson1_serializeOpListConfigurationBundles struct {
+}
+
+func (*awsRestjson1_serializeOpListConfigurationBundles) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListConfigurationBundles) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListConfigurationBundlesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configuration-bundles")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListConfigurationBundlesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListConfigurationBundlesInput(v *ListConfigurationBundlesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListConfigurationBundleVersions struct {
+}
+
+func (*awsRestjson1_serializeOpListConfigurationBundleVersions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListConfigurationBundleVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListConfigurationBundleVersionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configuration-bundles/{bundleId}/versions")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListConfigurationBundleVersionsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListConfigurationBundleVersionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListConfigurationBundleVersionsInput(v *ListConfigurationBundleVersionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BundleId == nil || len(*v.BundleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member bundleId must not be empty")}
+	}
+	if v.BundleId != nil {
+		if err := encoder.SetURI("bundleId").String(*v.BundleId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListConfigurationBundleVersionsInput(v *ListConfigurationBundleVersionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsRestjson1_serializeDocumentVersionFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListEvaluators struct {
 }
 
@@ -5874,6 +6683,85 @@ func (m *awsRestjson1_serializeOpListEvaluators) HandleSerialize(ctx context.Con
 func awsRestjson1_serializeOpHttpBindingsListEvaluatorsInput(v *ListEvaluatorsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListGatewayRules struct {
+}
+
+func (*awsRestjson1_serializeOpListGatewayRules) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListGatewayRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListGatewayRulesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/gateways/{gatewayIdentifier}/rules")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListGatewayRulesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListGatewayRulesInput(v *ListGatewayRulesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayIdentifier == nil || len(*v.GatewayIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayIdentifier must not be empty")}
+	}
+	if v.GatewayIdentifier != nil {
+		if err := encoder.SetURI("gatewayIdentifier").String(*v.GatewayIdentifier); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxResults != nil {
@@ -8000,6 +8888,141 @@ func awsRestjson1_serializeOpDocumentUpdateApiKeyCredentialProviderInput(v *Upda
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateConfigurationBundle struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateConfigurationBundle) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateConfigurationBundle) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateConfigurationBundleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/configuration-bundles/{bundleId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateConfigurationBundleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateConfigurationBundleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateConfigurationBundleInput(v *UpdateConfigurationBundleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BundleId == nil || len(*v.BundleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member bundleId must not be empty")}
+	}
+	if v.BundleId != nil {
+		if err := encoder.SetURI("bundleId").String(*v.BundleId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateConfigurationBundleInput(v *UpdateConfigurationBundleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BranchName != nil {
+		ok := object.Key("branchName")
+		ok.String(*v.BranchName)
+	}
+
+	if v.BundleName != nil {
+		ok := object.Key("bundleName")
+		ok.String(*v.BundleName)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.CommitMessage != nil {
+		ok := object.Key("commitMessage")
+		ok.String(*v.CommitMessage)
+	}
+
+	if v.Components != nil {
+		ok := object.Key("components")
+		if err := awsRestjson1_serializeDocumentComponentConfigurationMap(v.Components, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CreatedBy != nil {
+		ok := object.Key("createdBy")
+		if err := awsRestjson1_serializeDocumentVersionCreatedBySource(v.CreatedBy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.ParentVersionIds != nil {
+		ok := object.Key("parentVersionIds")
+		if err := awsRestjson1_serializeDocumentConfigurationBundleVersionList(v.ParentVersionIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateEvaluator struct {
 }
 
@@ -8101,6 +9124,11 @@ func awsRestjson1_serializeOpDocumentUpdateEvaluatorInput(v *UpdateEvaluatorInpu
 		if err := awsRestjson1_serializeDocumentEvaluatorConfig(v.EvaluatorConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("kmsKeyArn")
+		ok.String(*v.KmsKeyArn)
 	}
 
 	if len(v.Level) > 0 {
@@ -8258,6 +9286,128 @@ func awsRestjson1_serializeOpDocumentUpdateGatewayInput(v *UpdateGatewayInput, v
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateGatewayRule struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateGatewayRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateGatewayRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateGatewayRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/gateways/{gatewayIdentifier}/rules/{ruleId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateGatewayRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateGatewayRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateGatewayRuleInput(v *UpdateGatewayRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayIdentifier == nil || len(*v.GatewayIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayIdentifier must not be empty")}
+	}
+	if v.GatewayIdentifier != nil {
+		if err := encoder.SetURI("gatewayIdentifier").String(*v.GatewayIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleId == nil || len(*v.RuleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ruleId must not be empty")}
+	}
+	if v.RuleId != nil {
+		if err := encoder.SetURI("ruleId").String(*v.RuleId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateGatewayRuleInput(v *UpdateGatewayRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Actions != nil {
+		ok := object.Key("actions")
+		if err := awsRestjson1_serializeDocumentActions(v.Actions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Conditions != nil {
+		ok := object.Key("conditions")
+		if err := awsRestjson1_serializeDocumentConditions(v.Conditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Priority != nil {
+		ok := object.Key("priority")
+		ok.Integer(*v.Priority)
 	}
 
 	return nil
@@ -9620,6 +10770,46 @@ func awsRestjson1_serializeDocumentA2aDescriptor(v *types.A2aDescriptor, value s
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAction(v types.Action, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ActionMemberConfigurationBundle:
+		av := object.Key("configurationBundle")
+		if err := awsRestjson1_serializeDocumentConfigurationBundleAction(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ActionMemberRouteToTarget:
+		av := object.Key("routeToTarget")
+		if err := awsRestjson1_serializeDocumentRouteToTargetAction(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentActions(v []types.Action, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentAction(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAdditionalModelRequestFields(v document.Interface, value smithyjson.Value) error {
 	if v == nil {
 		return nil
@@ -10265,6 +11455,126 @@ func awsRestjson1_serializeDocumentCodeInterpreterNetworkConfiguration(v *types.
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComponentConfiguration(v *types.ComponentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Configuration != nil {
+		ok := object.Key("configuration")
+		if err := awsRestjson1_serializeDocumentDocument(v.Configuration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentComponentConfigurationMap(v map[string]types.ComponentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentComponentConfiguration(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCondition(v types.Condition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ConditionMemberMatchPaths:
+		av := object.Key("matchPaths")
+		if err := awsRestjson1_serializeDocumentMatchPaths(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConditionMemberMatchPrincipals:
+		av := object.Key("matchPrincipals")
+		if err := awsRestjson1_serializeDocumentMatchPrincipals(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConditions(v []types.Condition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentCondition(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfigurationBundleAction(v types.ConfigurationBundleAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ConfigurationBundleActionMemberStaticOverride:
+		av := object.Key("staticOverride")
+		if err := awsRestjson1_serializeDocumentStaticOverride(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConfigurationBundleActionMemberWeightedOverride:
+		av := object.Key("weightedOverride")
+		if err := awsRestjson1_serializeDocumentWeightedOverride(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfigurationBundleReference(v *types.ConfigurationBundleReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BundleArn != nil {
+		ok := object.Key("bundleArn")
+		ok.String(*v.BundleArn)
+	}
+
+	if v.BundleVersion != nil {
+		ok := object.Key("bundleVersion")
+		ok.String(*v.BundleVersion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfigurationBundleVersionList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -12035,6 +13345,24 @@ func awsRestjson1_serializeDocumentHttpHeadersMap(v map[string]string, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHttpTargetConfiguration(v types.HttpTargetConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.HttpTargetConfigurationMemberAgentcoreRuntime:
+		av := object.Key("agentcoreRuntime")
+		if err := awsRestjson1_serializeDocumentRuntimeTargetConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIamCredentialProvider(v *types.IamCredentialProvider, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12047,6 +13375,23 @@ func awsRestjson1_serializeDocumentIamCredentialProvider(v *types.IamCredentialP
 	if v.Service != nil {
 		ok := object.Key("service")
 		ok.String(*v.Service)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIamPrincipal(v *types.IamPrincipal, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	if len(v.Operator) > 0 {
+		ok := object.Key("operator")
+		ok.String(string(v.Operator))
 	}
 
 	return nil
@@ -12360,6 +13705,79 @@ func awsRestjson1_serializeDocumentManagedVpcResource(v *types.ManagedVpcResourc
 	if v.VpcIdentifier != nil {
 		ok := object.Key("vpcIdentifier")
 		ok.String(*v.VpcIdentifier)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMatchPathPatterns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMatchPaths(v *types.MatchPaths, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnyOf != nil {
+		ok := object.Key("anyOf")
+		if err := awsRestjson1_serializeDocumentMatchPathPatterns(v.AnyOf, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMatchPrincipalEntries(v []types.MatchPrincipalEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentMatchPrincipalEntry(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMatchPrincipalEntry(v types.MatchPrincipalEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.MatchPrincipalEntryMemberIamPrincipal:
+		av := object.Key("iamPrincipal")
+		if err := awsRestjson1_serializeDocumentIamPrincipal(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMatchPrincipals(v *types.MatchPrincipals, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnyOf != nil {
+		ok := object.Key("anyOf")
+		if err := awsRestjson1_serializeDocumentMatchPrincipalEntries(v.AnyOf, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -13520,6 +14938,30 @@ func awsRestjson1_serializeDocumentRestApiMethods(v []types.RestApiMethod, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRouteToTargetAction(v types.RouteToTargetAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.RouteToTargetActionMemberStaticRoute:
+		av := object.Key("staticRoute")
+		if err := awsRestjson1_serializeDocumentStaticRoute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RouteToTargetActionMemberWeightedRoute:
+		av := object.Key("weightedRoute")
+		if err := awsRestjson1_serializeDocumentWeightedRoute(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRule(v *types.Rule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -13555,6 +14997,23 @@ func awsRestjson1_serializeDocumentRuntimeMetadataConfiguration(v *types.Runtime
 	if v.RequireMMDSV2 != nil {
 		ok := object.Key("requireMMDSV2")
 		ok.Boolean(*v.RequireMMDSV2)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuntimeTargetConfiguration(v *types.RuntimeTargetConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Qualifier != nil {
+		ok := object.Key("qualifier")
+		ok.String(*v.Qualifier)
 	}
 
 	return nil
@@ -13979,6 +15438,35 @@ func awsRestjson1_serializeDocumentSlackOauth2ProviderConfigInput(v *types.Slack
 	return nil
 }
 
+func awsRestjson1_serializeDocumentStaticOverride(v *types.StaticOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BundleArn != nil {
+		ok := object.Key("bundleArn")
+		ok.String(*v.BundleArn)
+	}
+
+	if v.BundleVersion != nil {
+		ok := object.Key("bundleVersion")
+		ok.String(*v.BundleVersion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStaticRoute(v *types.StaticRoute, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TargetName != nil {
+		ok := object.Key("targetName")
+		ok.String(*v.TargetName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentStreamDeliveryResource(v types.StreamDeliveryResource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14141,6 +15629,12 @@ func awsRestjson1_serializeDocumentTargetConfiguration(v types.TargetConfigurati
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.TargetConfigurationMemberHttp:
+		av := object.Key("http")
+		if err := awsRestjson1_serializeDocumentHttpTargetConfiguration(uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.TargetConfigurationMemberMcp:
 		av := object.Key("mcp")
 		if err := awsRestjson1_serializeDocumentMcpTargetConfiguration(uv.Value, av); err != nil {
@@ -14162,6 +15656,53 @@ func awsRestjson1_serializeDocumentTargetIdList(v []string, value smithyjson.Val
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTargetTrafficSplitEntries(v []types.TargetTrafficSplitEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTargetTrafficSplitEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTargetTrafficSplitEntry(v *types.TargetTrafficSplitEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Metadata != nil {
+		ok := object.Key("metadata")
+		if err := awsRestjson1_serializeDocumentTrafficSplitMetadataMap(v.Metadata, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.TargetName != nil {
+		ok := object.Key("targetName")
+		ok.String(*v.TargetName)
+	}
+
+	if v.Weight != nil {
+		ok := object.Key("weight")
+		ok.Integer(*v.Weight)
+	}
+
 	return nil
 }
 
@@ -14282,6 +15823,66 @@ func awsRestjson1_serializeDocumentToolsDefinition(v *types.ToolsDefinition, val
 		ok.String(*v.ProtocolVersion)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTrafficSplitEntries(v []types.TrafficSplitEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTrafficSplitEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTrafficSplitEntry(v *types.TrafficSplitEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfigurationBundle != nil {
+		ok := object.Key("configurationBundle")
+		if err := awsRestjson1_serializeDocumentConfigurationBundleReference(v.ConfigurationBundle, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Metadata != nil {
+		ok := object.Key("metadata")
+		if err := awsRestjson1_serializeDocumentTrafficSplitMetadataMap(v.Metadata, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Weight != nil {
+		ok := object.Key("weight")
+		ok.Integer(*v.Weight)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTrafficSplitMetadataMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 
@@ -14714,6 +16315,45 @@ func awsRestjson1_serializeDocumentUserPreferenceOverrideExtractionConfiguration
 	return nil
 }
 
+func awsRestjson1_serializeDocumentVersionCreatedBySource(v *types.VersionCreatedBySource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVersionFilter(v *types.VersionFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BranchName != nil {
+		ok := object.Key("branchName")
+		ok.String(*v.BranchName)
+	}
+
+	if v.CreatedByName != nil {
+		ok := object.Key("createdByName")
+		ok.String(*v.CreatedByName)
+	}
+
+	if v.LatestPerBranch != nil {
+		ok := object.Key("latestPerBranch")
+		ok.Boolean(*v.LatestPerBranch)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVpcConfig(v *types.VpcConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14732,6 +16372,49 @@ func awsRestjson1_serializeDocumentVpcConfig(v *types.VpcConfig, value smithyjso
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWeightedOverride(v *types.WeightedOverride, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TrafficSplit != nil {
+		ok := object.Key("trafficSplit")
+		if err := awsRestjson1_serializeDocumentTrafficSplitEntries(v.TrafficSplit, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWeightedRoute(v *types.WeightedRoute, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TrafficSplit != nil {
+		ok := object.Key("trafficSplit")
+		if err := awsRestjson1_serializeDocumentTargetTrafficSplitEntries(v.TrafficSplit, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocument(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
 	return nil
 }
 

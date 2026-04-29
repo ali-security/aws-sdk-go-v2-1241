@@ -7,6 +7,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 )
 
+func ExampleAction_outputUsage() {
+	var union types.Action
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ActionMemberConfigurationBundle:
+		_ = v.Value // Value is types.ConfigurationBundleAction
+
+	case *types.ActionMemberRouteToTarget:
+		_ = v.Value // Value is types.RouteToTargetAction
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.RouteToTargetAction
+var _ types.ConfigurationBundleAction
+
 func ExampleAgentRuntimeArtifact_outputUsage() {
 	var union types.AgentRuntimeArtifact
 	// type switches can be used to check the union value
@@ -162,6 +184,50 @@ func ExampleCodeBasedEvaluatorConfig_outputUsage() {
 }
 
 var _ *types.LambdaEvaluatorConfig
+
+func ExampleCondition_outputUsage() {
+	var union types.Condition
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConditionMemberMatchPaths:
+		_ = v.Value // Value is types.MatchPaths
+
+	case *types.ConditionMemberMatchPrincipals:
+		_ = v.Value // Value is types.MatchPrincipals
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MatchPaths
+var _ *types.MatchPrincipals
+
+func ExampleConfigurationBundleAction_outputUsage() {
+	var union types.ConfigurationBundleAction
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ConfigurationBundleActionMemberStaticOverride:
+		_ = v.Value // Value is types.StaticOverride
+
+	case *types.ConfigurationBundleActionMemberWeightedOverride:
+		_ = v.Value // Value is types.WeightedOverride
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StaticOverride
+var _ *types.WeightedOverride
 
 func ExampleConsolidationConfiguration_outputUsage() {
 	var union types.ConsolidationConfiguration
@@ -778,6 +844,24 @@ func ExampleHarnessTruncationStrategyConfiguration_outputUsage() {
 var _ *types.HarnessSlidingWindowConfiguration
 var _ *types.HarnessSummarizationConfiguration
 
+func ExampleHttpTargetConfiguration_outputUsage() {
+	var union types.HttpTargetConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HttpTargetConfigurationMemberAgentcoreRuntime:
+		_ = v.Value // Value is types.RuntimeTargetConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RuntimeTargetConfiguration
+
 func ExampleInterceptorConfiguration_outputUsage() {
 	var union types.InterceptorConfiguration
 	// type switches can be used to check the union value
@@ -795,6 +879,24 @@ func ExampleInterceptorConfiguration_outputUsage() {
 }
 
 var _ *types.LambdaInterceptorConfiguration
+
+func ExampleMatchPrincipalEntry_outputUsage() {
+	var union types.MatchPrincipalEntry
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MatchPrincipalEntryMemberIamPrincipal:
+		_ = v.Value // Value is types.IamPrincipal
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.IamPrincipal
 
 func ExampleMcpTargetConfiguration_outputUsage() {
 	var union types.McpTargetConfiguration
@@ -1229,6 +1331,28 @@ func ExampleResourceLocation_outputUsage() {
 
 var _ *types.S3Location
 
+func ExampleRouteToTargetAction_outputUsage() {
+	var union types.RouteToTargetAction
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RouteToTargetActionMemberStaticRoute:
+		_ = v.Value // Value is types.StaticRoute
+
+	case *types.RouteToTargetActionMemberWeightedRoute:
+		_ = v.Value // Value is types.WeightedRoute
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StaticRoute
+var _ *types.WeightedRoute
+
 func ExampleSelfManagedLatticeResource_outputUsage() {
 	var union types.SelfManagedLatticeResource
 	// type switches can be used to check the union value
@@ -1269,6 +1393,9 @@ func ExampleTargetConfiguration_outputUsage() {
 	var union types.TargetConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.TargetConfigurationMemberHttp:
+		_ = v.Value // Value is types.HttpTargetConfiguration
+
 	case *types.TargetConfigurationMemberMcp:
 		_ = v.Value // Value is types.McpTargetConfiguration
 
@@ -1281,6 +1408,7 @@ func ExampleTargetConfiguration_outputUsage() {
 	}
 }
 
+var _ types.HttpTargetConfiguration
 var _ types.McpTargetConfiguration
 
 func ExampleToolSchema_outputUsage() {

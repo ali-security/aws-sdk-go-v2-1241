@@ -15298,6 +15298,22 @@ func awsRestxml_serializeDocumentCachePolicyQueryStringsConfig(v *types.CachePol
 	return nil
 }
 
+func awsRestxml_serializeDocumentCacheTagConfig(v *types.CacheTagConfig, value smithyxml.Value) error {
+	defer value.Close()
+	if v.HeaderName != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "HeaderName",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.HeaderName)
+	}
+	return nil
+}
+
 func awsRestxml_serializeDocumentCertificate(v *types.Certificate, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Arn != nil {
@@ -16214,6 +16230,19 @@ func awsRestxml_serializeDocumentDistributionConfig(v *types.DistributionConfig,
 		}
 		el := value.MemberElement(root)
 		if err := awsRestxml_serializeDocumentCacheBehaviors(v.CacheBehaviors, el); err != nil {
+			return err
+		}
+	}
+	if v.CacheTagConfig != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "CacheTagConfig",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentCacheTagConfig(v.CacheTagConfig, el); err != nil {
 			return err
 		}
 	}

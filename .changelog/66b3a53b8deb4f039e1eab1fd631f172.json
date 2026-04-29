@@ -1,0 +1,8 @@
+{
+    "id": "66b3a53b-8deb-4f03-9e1e-ab1fd631f172",
+    "type": "feature",
+    "description": "Adds batch evaluation for running evaluators against multiple agent sessions with server-side orchestration, AI-powered recommendations for optimizing system prompts and tool descriptions, and AB testing with controlled traffic splitting and statistical significance reporting",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

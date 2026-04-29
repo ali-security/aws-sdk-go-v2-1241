@@ -6,10 +6,11 @@ type AcceleratorName string
 
 // Enum values for AcceleratorName
 const (
-	AcceleratorNameT4   AcceleratorName = "t4"
-	AcceleratorNameA10g AcceleratorName = "a10g"
-	AcceleratorNameL4   AcceleratorName = "l4"
-	AcceleratorNameL40s AcceleratorName = "l40s"
+	AcceleratorNameT4               AcceleratorName = "t4"
+	AcceleratorNameA10g             AcceleratorName = "a10g"
+	AcceleratorNameL4               AcceleratorName = "l4"
+	AcceleratorNameL40s             AcceleratorName = "l40s"
+	AcceleratorNameRtxProServer6000 AcceleratorName = "rtx-pro-server-6000"
 )
 
 // Values returns all known values for AcceleratorName. Note that this can be
@@ -22,6 +23,7 @@ func (AcceleratorName) Values() []AcceleratorName {
 		"a10g",
 		"l4",
 		"l40s",
+		"rtx-pro-server-6000",
 	}
 }
 

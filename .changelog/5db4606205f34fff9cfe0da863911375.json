@@ -1,0 +1,8 @@
+{
+    "id": "5db46062-05f3-4fff-9cfe-0da863911375",
+    "type": "feature",
+    "description": "Adds configuration bundles for versioned, immutable agent configuration snapshots with branch-based lineage",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

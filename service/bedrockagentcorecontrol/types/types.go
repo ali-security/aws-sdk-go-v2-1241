@@ -19,6 +19,34 @@ type A2aDescriptor struct {
 	noSmithyDocumentSerde
 }
 
+// An action to take when a gateway rule's conditions are met.
+//
+// The following types satisfy this interface:
+//
+//	ActionMemberConfigurationBundle
+//	ActionMemberRouteToTarget
+type Action interface {
+	isAction()
+}
+
+// An action that applies a configuration bundle override to the request.
+type ActionMemberConfigurationBundle struct {
+	Value ConfigurationBundleAction
+
+	noSmithyDocumentSerde
+}
+
+func (*ActionMemberConfigurationBundle) isAction() {}
+
+// An action that routes the request to a specific target.
+type ActionMemberRouteToTarget struct {
+	Value RouteToTargetAction
+
+	noSmithyDocumentSerde
+}
+
+func (*ActionMemberRouteToTarget) isAction() {}
+
 // The agent card definition for an A2A descriptor. Contains the schema version
 // and inline content for the agent card.
 type AgentCardDefinition struct {
@@ -833,6 +861,148 @@ type CodeInterpreterSummary struct {
 
 	// The name of the code interpreter.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for a component within a configuration bundle. The component
+// type is inferred from the component identifier ARN.
+type ComponentConfiguration struct {
+
+	// The configuration values as a flexible JSON document.
+	//
+	// This member is required.
+	Configuration document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// A condition that determines when a gateway rule applies. Conditions can match
+// on principals or request paths.
+//
+// The following types satisfy this interface:
+//
+//	ConditionMemberMatchPaths
+//	ConditionMemberMatchPrincipals
+type Condition interface {
+	isCondition()
+}
+
+// A condition that matches on the request path.
+type ConditionMemberMatchPaths struct {
+	Value MatchPaths
+
+	noSmithyDocumentSerde
+}
+
+func (*ConditionMemberMatchPaths) isCondition() {}
+
+// A condition that matches on the identity of the caller making the request.
+type ConditionMemberMatchPrincipals struct {
+	Value MatchPrincipals
+
+	noSmithyDocumentSerde
+}
+
+func (*ConditionMemberMatchPrincipals) isCondition() {}
+
+// An action that applies a configuration bundle override, either as a static
+// override or a weighted split for A/B testing.
+//
+// The following types satisfy this interface:
+//
+//	ConfigurationBundleActionMemberStaticOverride
+//	ConfigurationBundleActionMemberWeightedOverride
+type ConfigurationBundleAction interface {
+	isConfigurationBundleAction()
+}
+
+// A static configuration bundle override that applies a single bundle version to
+// all matching requests.
+type ConfigurationBundleActionMemberStaticOverride struct {
+	Value StaticOverride
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationBundleActionMemberStaticOverride) isConfigurationBundleAction() {}
+
+// A weighted configuration bundle override that splits traffic between multiple
+// bundle versions based on configured weights.
+type ConfigurationBundleActionMemberWeightedOverride struct {
+	Value WeightedOverride
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationBundleActionMemberWeightedOverride) isConfigurationBundleAction() {}
+
+// A reference to a specific version of a configuration bundle.
+type ConfigurationBundleReference struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The version of the configuration bundle.
+	//
+	// This member is required.
+	BundleVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a configuration bundle.
+type ConfigurationBundleSummary struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The unique identifier of the configuration bundle.
+	//
+	// This member is required.
+	BundleId *string
+
+	// The name of the configuration bundle.
+	//
+	// This member is required.
+	BundleName *string
+
+	// The description of the configuration bundle.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a configuration bundle version.
+type ConfigurationBundleVersionSummary struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The unique identifier of the configuration bundle.
+	//
+	// This member is required.
+	BundleId *string
+
+	// The timestamp when this version was created.
+	//
+	// This member is required.
+	VersionCreatedAt *time.Time
+
+	// The version identifier of this configuration bundle version.
+	//
+	// This member is required.
+	VersionId *string
+
+	// The version lineage metadata, including parent versions, branch name, and
+	// creation source.
+	LineageMetadata *VersionLineageMetadata
 
 	noSmithyDocumentSerde
 }
@@ -1777,6 +1947,11 @@ type EvaluatorSummary struct {
 	//  The description of the evaluator.
 	Description *string
 
+	//  The Amazon Resource Name (ARN) of the customer managed KMS key used to encrypt
+	// the evaluator's sensitive data. This field is only present for evaluators
+	// encrypted with a customer managed key.
+	KmsKeyArn *string
+
 	//  The evaluation level ( TOOL_CALL , TRACE , or SESSION ) that determines the
 	// scope of evaluation.
 	Level EvaluatorLevel
@@ -2030,6 +2205,55 @@ type GatewayProtocolConfigurationMemberMcp struct {
 
 func (*GatewayProtocolConfigurationMemberMcp) isGatewayProtocolConfiguration() {}
 
+// Detailed information about a gateway rule.
+type GatewayRuleDetail struct {
+
+	// The actions to take when the rule conditions are met.
+	//
+	// This member is required.
+	Actions []Action
+
+	// The timestamp when the rule was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the gateway that the rule belongs to.
+	//
+	// This member is required.
+	GatewayArn *string
+
+	// The priority of the rule. Rules are evaluated in order of priority, with lower
+	// numbers evaluated first.
+	//
+	// This member is required.
+	Priority *int32
+
+	// The unique identifier of the gateway rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The current status of the rule.
+	//
+	// This member is required.
+	Status GatewayRuleStatus
+
+	// The conditions that must be met for the rule to apply.
+	Conditions []Condition
+
+	// The description of the gateway rule.
+	Description *string
+
+	// System-managed metadata for rules created by automated processes.
+	System *SystemManagedBlock
+
+	// The timestamp when the rule was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about a gateway.
 type GatewaySummary struct {
 
@@ -2053,11 +2277,6 @@ type GatewaySummary struct {
 	// This member is required.
 	Name *string
 
-	// The protocol type used by the gateway.
-	//
-	// This member is required.
-	ProtocolType GatewayProtocolType
-
 	// The current status of the gateway.
 	//
 	// This member is required.
@@ -2070,6 +2289,9 @@ type GatewaySummary struct {
 
 	// The description of the gateway.
 	Description *string
+
+	// The protocol type used by the gateway.
+	ProtocolType GatewayProtocolType
 
 	noSmithyDocumentSerde
 }
@@ -2141,6 +2363,9 @@ type GatewayTarget struct {
 	// connectivity. These resources are created in your account when you use a managed
 	// VPC Lattice resource configuration.
 	PrivateEndpointManagedResources []ManagedResourceDetails
+
+	// The protocol type of the gateway target.
+	ProtocolType TargetProtocolType
 
 	// The status reasons for the target status.
 	StatusReasons []string
@@ -2298,7 +2523,8 @@ type Harness struct {
 	// invocation.
 	MaxIterations *int32
 
-	// The maximum number of tokens allowed before exiting per invocation.
+	// The maximum total number of output tokens the agent can generate across all
+	// model calls within a single invocation.
 	MaxTokens *int32
 
 	// AgentCore Memory instance configuration for short and long term memory.
@@ -2336,7 +2562,8 @@ type HarnessAgentCoreGatewayConfig struct {
 	// This member is required.
 	GatewayArn *string
 
-	// How Loopy authenticates to this Gateway. Defaults to AWS_IAM (SigV4) if omitted.
+	// How harness authenticates to this Gateway. Defaults to AWS_IAM (SigV4) if
+	// omitted.
 	OutboundAuth HarnessGatewayOutboundAuth
 
 	noSmithyDocumentSerde
@@ -2441,7 +2668,7 @@ type HarnessBedrockModelConfig struct {
 	// This member is required.
 	ModelId *string
 
-	// The maximum number of tokens to allow in the generated response per iteration.
+	// The maximum number of tokens to allow in the generated response per model call.
 	MaxTokens *int32
 
 	// The temperature to set when calling the model.
@@ -2563,7 +2790,7 @@ type HarnessGeminiModelConfig struct {
 	// This member is required.
 	ModelId *string
 
-	// The maximum number of tokens to allow in the generated response per iteration.
+	// The maximum number of tokens to allow in the generated response per model call.
 	MaxTokens *int32
 
 	// The temperature to set when calling the model.
@@ -2665,7 +2892,7 @@ type HarnessOpenAiModelConfig struct {
 	// This member is required.
 	ModelId *string
 
-	// The maximum number of tokens to allow in the generated response per iteration.
+	// The maximum number of tokens to allow in the generated response per model call.
 	MaxTokens *int32
 
 	// The temperature to set when calling the model.
@@ -2685,7 +2912,7 @@ type HarnessRemoteMcpConfig struct {
 	// This member is required.
 	Url *string
 
-	// Map of key/value pairs for HTTP headers.
+	// Custom headers to include when connecting to the remote MCP server.
 	Headers map[string]string
 
 	noSmithyDocumentSerde
@@ -2906,6 +3133,26 @@ type HarnessTruncationStrategyConfigurationMemberSummarization struct {
 func (*HarnessTruncationStrategyConfigurationMemberSummarization) isHarnessTruncationStrategyConfiguration() {
 }
 
+// The HTTP target configuration for a gateway target. Contains the configuration
+// for HTTP-based target endpoints.
+//
+// The following types satisfy this interface:
+//
+//	HttpTargetConfigurationMemberAgentcoreRuntime
+type HttpTargetConfiguration interface {
+	isHttpTargetConfiguration()
+}
+
+// The AgentCore Runtime target configuration for HTTP-based communication with an
+// agent runtime.
+type HttpTargetConfigurationMemberAgentcoreRuntime struct {
+	Value RuntimeTargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*HttpTargetConfigurationMemberAgentcoreRuntime) isHttpTargetConfiguration() {}
+
 // An IAM credential provider for gateway authentication. This structure contains
 // the configuration for authenticating with the target endpoint using IAM
 // credentials and SigV4 signing.
@@ -2921,6 +3168,22 @@ type IamCredentialProvider struct {
 	// The Amazon Web Services Region used for SigV4 signing. If not specified,
 	// defaults to the gateway's Region.
 	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// An IAM principal specification for rule matching.
+type IamPrincipal struct {
+
+	// The Amazon Resource Name (ARN) of the IAM principal. Supports user, role, and
+	// assumed-role ARNs. Wildcards can be used with the StringLike operator.
+	//
+	// This member is required.
+	Arn *string
+
+	// The match operator. StringEquals requires an exact match. StringLike supports
+	// wildcard patterns using * and ? .
+	Operator PrincipalMatchOperator
 
 	noSmithyDocumentSerde
 }
@@ -3243,6 +3506,49 @@ type ManagedVpcResource struct {
 
 	// Tags to apply to the managed VPC Lattice resource gateway.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A condition that matches requests based on the request path.
+type MatchPaths struct {
+
+	// A list of path patterns. The condition is met if the request path matches any
+	// of the patterns.
+	//
+	// This member is required.
+	AnyOf []string
+
+	noSmithyDocumentSerde
+}
+
+// Union for principal matching. Currently supports IAM principal ARN glob
+// matching. Extensible for future principal types (e.g., OAuth client ID).
+//
+// The following types satisfy this interface:
+//
+//	MatchPrincipalEntryMemberIamPrincipal
+type MatchPrincipalEntry interface {
+	isMatchPrincipalEntry()
+}
+
+// An IAM principal to match against, specified by ARN.
+type MatchPrincipalEntryMemberIamPrincipal struct {
+	Value IamPrincipal
+
+	noSmithyDocumentSerde
+}
+
+func (*MatchPrincipalEntryMemberIamPrincipal) isMatchPrincipalEntry() {}
+
+// A condition that matches requests based on the caller's identity.
+type MatchPrincipals struct {
+
+	// A list of principal entries. The condition is met if any of the entries match
+	// the caller's identity.
+	//
+	// This member is required.
+	AnyOf []MatchPrincipalEntry
 
 	noSmithyDocumentSerde
 }
@@ -4994,6 +5300,35 @@ type ResourceLocationMemberS3 struct {
 
 func (*ResourceLocationMemberS3) isResourceLocation() {}
 
+// An action that routes requests to a gateway target, either statically or with
+// weighted traffic splitting.
+//
+// The following types satisfy this interface:
+//
+//	RouteToTargetActionMemberStaticRoute
+//	RouteToTargetActionMemberWeightedRoute
+type RouteToTargetAction interface {
+	isRouteToTargetAction()
+}
+
+// A static route that sends all matching requests to a single target.
+type RouteToTargetActionMemberStaticRoute struct {
+	Value StaticRoute
+
+	noSmithyDocumentSerde
+}
+
+func (*RouteToTargetActionMemberStaticRoute) isRouteToTargetAction() {}
+
+// A weighted route that splits traffic between multiple targets.
+type RouteToTargetActionMemberWeightedRoute struct {
+	Value WeightedRoute
+
+	noSmithyDocumentSerde
+}
+
+func (*RouteToTargetActionMemberWeightedRoute) isRouteToTargetAction() {}
+
 //	The evaluation rule that defines sampling configuration, filtering criteria,
 //
 // and session detection settings for online evaluation.
@@ -5024,6 +5359,22 @@ type RuntimeMetadataConfiguration struct {
 	//
 	// This member is required.
 	RequireMMDSV2 *bool
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for an AgentCore Runtime target. Specifies the agent runtime to
+// route requests to via HTTP.
+type RuntimeTargetConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the AgentCore Runtime to route requests to.
+	//
+	// This member is required.
+	Arn *string
+
+	// The qualifier for the agent runtime, used to target a specific endpoint
+	// version. If not specified, the default endpoint is used.
+	Qualifier *string
 
 	noSmithyDocumentSerde
 }
@@ -5413,6 +5764,33 @@ type SlackOauth2ProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+// A static configuration bundle override.
+type StaticOverride struct {
+
+	// The Amazon Resource Name (ARN) of the configuration bundle to apply.
+	//
+	// This member is required.
+	BundleArn *string
+
+	// The version of the configuration bundle to apply.
+	//
+	// This member is required.
+	BundleVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// A static route to a single gateway target.
+type StaticRoute struct {
+
+	// The name of the target to route requests to.
+	//
+	// This member is required.
+	TargetName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains configuration information for a memory strategy.
 type StrategyConfiguration struct {
 
@@ -5536,15 +5914,38 @@ type SynchronizationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// System-managed metadata for rules created by automated processes such as A/B
+// tests.
+type SystemManagedBlock struct {
+
+	// The identifier of the system or process that manages this rule.
+	//
+	// This member is required.
+	ManagedBy *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for a gateway target. This structure defines how the gateway
 // connects to and interacts with the target endpoint.
 //
 // The following types satisfy this interface:
 //
+//	TargetConfigurationMemberHttp
 //	TargetConfigurationMemberMcp
 type TargetConfiguration interface {
 	isTargetConfiguration()
 }
+
+// The HTTP target configuration. Use this to route gateway requests to an
+// HTTP-based endpoint such as an AgentCore Runtime.
+type TargetConfigurationMemberHttp struct {
+	Value HttpTargetConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*TargetConfigurationMemberHttp) isTargetConfiguration() {}
 
 // The Model Context Protocol (MCP) configuration for the target. This
 // configuration defines how the gateway uses MCP to communicate with the target.
@@ -5591,6 +5992,33 @@ type TargetSummary struct {
 	// Priority for resolving resource URI conflicts across targets. Lower values take
 	// precedence. Defaults to 1000 when not set.
 	ResourcePriority *int32
+
+	noSmithyDocumentSerde
+}
+
+// An entry in a target traffic split configuration.
+type TargetTrafficSplitEntry struct {
+
+	// The name of this traffic split variant.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the target to route traffic to.
+	//
+	// This member is required.
+	TargetName *string
+
+	// The percentage of traffic to route to this variant.
+	//
+	// This member is required.
+	Weight *int32
+
+	// The description of this traffic split variant.
+	Description *string
+
+	// Key-value metadata associated with this traffic split variant.
+	Metadata map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -5702,6 +6130,35 @@ type ToolsDefinition struct {
 	// The protocol version of the tools definition based on the MCP protocol
 	// specification. If not specified, the version is auto-detected from the content.
 	ProtocolVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// An entry in a traffic split configuration, defining a named variant with a
+// weight and configuration bundle reference.
+type TrafficSplitEntry struct {
+
+	// The configuration bundle reference for this variant.
+	//
+	// This member is required.
+	ConfigurationBundle *ConfigurationBundleReference
+
+	// The name of this traffic split variant.
+	//
+	// This member is required.
+	Name *string
+
+	// The percentage of traffic to route to this variant. Weights across all entries
+	// must sum to 100.
+	//
+	// This member is required.
+	Weight *int32
+
+	// The description of this traffic split variant.
+	Description *string
+
+	// Key-value metadata associated with this traffic split variant.
+	Metadata map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -6125,6 +6582,60 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+// The source that created a configuration bundle version.
+type VersionCreatedBySource struct {
+
+	// The name of the source (for example, user , optimization-job , or system ).
+	//
+	// This member is required.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the source, if applicable (for example, a
+	// user ARN or optimization job ARN).
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter for listing configuration bundle versions.
+type VersionFilter struct {
+
+	// Filter by branch name.
+	BranchName *string
+
+	// Filter by creation source name.
+	CreatedByName *string
+
+	// When true, returns only the latest version for each branch. When false or not
+	// specified, returns all versions. Can be combined with branchName to get the
+	// latest version for a specific branch.
+	LatestPerBranch *bool
+
+	noSmithyDocumentSerde
+}
+
+// The version lineage metadata that tracks parent versions and creation source.
+// Supports git-like two-parent merges for branch management.
+type VersionLineageMetadata struct {
+
+	// The branch name for this version. If not specified, inherits the parent's
+	// branch or defaults to mainline .
+	BranchName *string
+
+	// A commit message describing the changes in this version.
+	CommitMessage *string
+
+	// The source that created this version.
+	CreatedBy *VersionCreatedBySource
+
+	// A list of parent version identifiers. Regular commits have 0-1 parents. Merge
+	// commits have 2 parents: the target branch parent and the source branch parent.
+	// The first parent represents the primary lineage.
+	ParentVersionIds []string
+
+	noSmithyDocumentSerde
+}
+
 // VpcConfig for the Agent.
 type VpcConfig struct {
 
@@ -6137,6 +6648,30 @@ type VpcConfig struct {
 	//
 	// This member is required.
 	Subnets []string
+
+	noSmithyDocumentSerde
+}
+
+// A weighted configuration bundle override that splits traffic between multiple
+// bundle versions.
+type WeightedOverride struct {
+
+	// The traffic split entries defining how traffic is distributed between
+	// configuration bundle versions.
+	//
+	// This member is required.
+	TrafficSplit []TrafficSplitEntry
+
+	noSmithyDocumentSerde
+}
+
+// A weighted route that splits traffic between multiple gateway targets.
+type WeightedRoute struct {
+
+	// The traffic split entries defining how traffic is distributed between targets.
+	//
+	// This member is required.
+	TrafficSplit []TargetTrafficSplitEntry
 
 	noSmithyDocumentSerde
 }
@@ -6183,6 +6718,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isAction()                                 {}
 func (*UnknownUnionMember) isAgentRuntimeArtifact()                   {}
 func (*UnknownUnionMember) isApiSchemaConfiguration()                 {}
 func (*UnknownUnionMember) isAuthorizationData()                      {}
@@ -6191,6 +6727,8 @@ func (*UnknownUnionMember) isCertificateLocation()                    {}
 func (*UnknownUnionMember) isClaimMatchValueType()                    {}
 func (*UnknownUnionMember) isCode()                                   {}
 func (*UnknownUnionMember) isCodeBasedEvaluatorConfig()               {}
+func (*UnknownUnionMember) isCondition()                              {}
+func (*UnknownUnionMember) isConfigurationBundleAction()              {}
 func (*UnknownUnionMember) isConsolidationConfiguration()             {}
 func (*UnknownUnionMember) isContent()                                {}
 func (*UnknownUnionMember) isCredentialProvider()                     {}
@@ -6219,7 +6757,9 @@ func (*UnknownUnionMember) isHarnessSkill()                           {}
 func (*UnknownUnionMember) isHarnessSystemContentBlock()              {}
 func (*UnknownUnionMember) isHarnessToolConfiguration()               {}
 func (*UnknownUnionMember) isHarnessTruncationStrategyConfiguration() {}
+func (*UnknownUnionMember) isHttpTargetConfiguration()                {}
 func (*UnknownUnionMember) isInterceptorConfiguration()               {}
+func (*UnknownUnionMember) isMatchPrincipalEntry()                    {}
 func (*UnknownUnionMember) isMcpTargetConfiguration()                 {}
 func (*UnknownUnionMember) isMcpToolSchemaConfiguration()             {}
 func (*UnknownUnionMember) isMemoryStrategyInput()                    {}
@@ -6237,6 +6777,7 @@ func (*UnknownUnionMember) isRegistryRecordCredentialProviderUnion()  {}
 func (*UnknownUnionMember) isRequestHeaderConfiguration()             {}
 func (*UnknownUnionMember) isResource()                               {}
 func (*UnknownUnionMember) isResourceLocation()                       {}
+func (*UnknownUnionMember) isRouteToTargetAction()                    {}
 func (*UnknownUnionMember) isSelfManagedLatticeResource()             {}
 func (*UnknownUnionMember) isStreamDeliveryResource()                 {}
 func (*UnknownUnionMember) isTargetConfiguration()                    {}
