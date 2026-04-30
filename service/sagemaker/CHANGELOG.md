@@ -1,3 +1,7 @@
+# v1.244.0 (2026-04-30)
+
+* **Feature**: Add InstancePools support to Endpoint for flexible provisioning across a prioritized list of instance types. Add Specifications support to InferenceComponent for per-instance-type model configurations.
+
 # v1.243.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

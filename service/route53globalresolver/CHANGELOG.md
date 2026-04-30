@@ -1,3 +1,7 @@
+# v1.2.0 (2026-04-30)
+
+* **Feature**: Adds support for regions in the UpdateGlobalResolver input.
+
 # v1.1.4 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

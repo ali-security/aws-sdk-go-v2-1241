@@ -1,3 +1,7 @@
+# v1.10.0 (2026-04-30)
+
+* **Feature**: Support ECDSA for CloudFront sign cookies
+
 # v1.9.23 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

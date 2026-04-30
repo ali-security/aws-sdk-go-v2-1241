@@ -1,8 +1,0 @@
-{
-    "id": "c50830ec-9b5a-41fe-a328-868f8b815acc",
-    "type": "feature",
-    "description": "Adds support for ZookeeperAccess field to control the Client-Zookeeper connectivity.",
-    "modules": [
-        "service/kafka"
-    ]
-}

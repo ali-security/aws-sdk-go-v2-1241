@@ -1,3 +1,7 @@
+# v1.34.0 (2026-04-30)
+
+* **Feature**: AgentCore Identity now supports on-behalf-of token exchange OAuth2. AgentCore Memory now supports metadata for LongTerm Memory Records.
+
 # v1.33.0 (2026-04-29)
 
 * **Feature**: Adds configuration bundles for versioned, immutable agent configuration snapshots with branch-based lineage

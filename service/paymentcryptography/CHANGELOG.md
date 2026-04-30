@@ -1,3 +1,7 @@
+# v1.29.0 (2026-04-30)
+
+* **Feature**: Adds support for resource-based policies on AWS Payment Cryptography keys, enabling cross-account key sharing. Also adds Multi-Party Approval (MPA) team association APIs for protecting sensitive import root public key operations.
+
 # v1.28.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

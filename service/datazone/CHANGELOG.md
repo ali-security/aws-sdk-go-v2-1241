@@ -1,3 +1,7 @@
+# v1.59.0 (2026-04-30)
+
+* **Feature**: Adds support for asynchronous notebook runs
+
 # v1.58.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

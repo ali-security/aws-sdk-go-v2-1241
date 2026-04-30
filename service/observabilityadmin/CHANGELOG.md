@@ -1,3 +1,7 @@
+# v1.15.0 (2026-04-30)
+
+* **Feature**: Observability Admin enablement launch for AWS Kafka, Bedrock Agent Core Workload Identity and OTel metric enablement.
+
 # v1.14.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

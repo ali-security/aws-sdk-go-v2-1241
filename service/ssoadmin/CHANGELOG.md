@@ -1,3 +1,7 @@
+# v1.38.0 (2026-04-30)
+
+* **Feature**: Add InstanceArn and IdentityStoreArn in the response of CreateApplication API and IdentityStoreArn in the response of DescribeApplication API
+
 # v1.37.8 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

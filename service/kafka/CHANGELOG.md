@@ -1,3 +1,7 @@
+# v1.51.0 (2026-04-30)
+
+* **Feature**: Adds support for ZookeeperAccess field to control the Client-Zookeeper connectivity.
+
 # v1.50.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

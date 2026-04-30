@@ -1,3 +1,31 @@
+# Release (2026-04-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`: [v1.10.0](feature/cloudfront/sign/CHANGELOG.md#v1100-2026-04-30)
+  * **Feature**: Support ECDSA for CloudFront sign cookies
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.1.20](feature/s3/transfermanager/CHANGELOG.md#v0120-2026-04-30)
+  * **Bug Fix**: Reinstate Location output field on Upload operations.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.24.0](service/bedrockagentcore/CHANGELOG.md#v1240-2026-04-30)
+  * **Feature**: AgentCore Identity now supports on-behalf-of token exchange OAuth2. AgentCore Memory now supports metadata for LongTerm Memory Records.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.34.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1340-2026-04-30)
+  * **Feature**: AgentCore Identity now supports on-behalf-of token exchange OAuth2. AgentCore Memory now supports metadata for LongTerm Memory Records.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.59.0](service/datazone/CHANGELOG.md#v1590-2026-04-30)
+  * **Feature**: Adds support for asynchronous notebook runs
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.83.0](service/eks/CHANGELOG.md#v1830-2026-04-30)
+  * **Feature**: Vended logs update param for capability vended logs feature
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.51.0](service/kafka/CHANGELOG.md#v1510-2026-04-30)
+  * **Feature**: Adds support for ZookeeperAccess field to control the Client-Zookeeper connectivity.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.15.0](service/observabilityadmin/CHANGELOG.md#v1150-2026-04-30)
+  * **Feature**: Observability Admin enablement launch for AWS Kafka, Bedrock Agent Core Workload Identity and OTel metric enablement.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.29.0](service/paymentcryptography/CHANGELOG.md#v1290-2026-04-30)
+  * **Feature**: Adds support for resource-based policies on AWS Payment Cryptography keys, enabling cross-account key sharing. Also adds Multi-Party Approval (MPA) team association APIs for protecting sensitive import root public key operations.
+* `github.com/aws/aws-sdk-go-v2/service/route53globalresolver`: [v1.2.0](service/route53globalresolver/CHANGELOG.md#v120-2026-04-30)
+  * **Feature**: Adds support for regions in the UpdateGlobalResolver input.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.244.0](service/sagemaker/CHANGELOG.md#v12440-2026-04-30)
+  * **Feature**: Add InstancePools support to Endpoint for flexible provisioning across a prioritized list of instance types. Add Specifications support to InferenceComponent for per-instance-type model configurations.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.38.0](service/ssoadmin/CHANGELOG.md#v1380-2026-04-30)
+  * **Feature**: Add InstanceArn and IdentityStoreArn in the response of CreateApplication API and IdentityStoreArn in the response of DescribeApplication API
+
 # Release (2026-04-29)
 
 ## General Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "a4542546-a833-4e95-a63a-1e718f247d07",
-    "type": "feature",
-    "description": "Observability Admin enablement launch for AWS Kafka, Bedrock Agent Core Workload Identity and OTel metric enablement.",
-    "modules": [
-        "service/observabilityadmin"
-    ]
-}
