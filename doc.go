@@ -28,7 +28,7 @@
 //
 //	    "github.com/aws/aws-sdk-go-v2/service/dynamodb"
 //	)
-//
+//      aaaaa
 //	func main() {
 //	    // Using the SDK's default configuration, loading additional config
 //	    // and credentials values from the environment variables, shared
