@@ -1,0 +1,8 @@
+{
+    "id": "e85fd57e-422f-4774-a9f8-3a7a40a9a965",
+    "type": "feature",
+    "description": "Adds support for regions in the UpdateGlobalResolver input.",
+    "modules": [
+        "service/route53globalresolver"
+    ]
+}

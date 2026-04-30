@@ -30904,6 +30904,11 @@ func awsAwsjson11_serializeDocumentInferenceComponentSpecification(v *types.Infe
 		}
 	}
 
+	if len(v.InstanceType) > 0 {
+		ok := object.Key("InstanceType")
+		ok.String(string(v.InstanceType))
+	}
+
 	if v.ModelName != nil {
 		ok := object.Key("ModelName")
 		ok.String(*v.ModelName)
@@ -30923,6 +30928,19 @@ func awsAwsjson11_serializeDocumentInferenceComponentSpecification(v *types.Infe
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInferenceComponentSpecificationList(v []types.InferenceComponentSpecification, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentInferenceComponentSpecification(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -31224,6 +31242,41 @@ func awsAwsjson11_serializeDocumentInstancePlacementConfig(v *types.InstancePlac
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInstancePool(v *types.InstancePool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.InstanceType) > 0 {
+		ok := object.Key("InstanceType")
+		ok.String(string(v.InstanceType))
+	}
+
+	if v.ModelNameOverride != nil {
+		ok := object.Key("ModelNameOverride")
+		ok.String(*v.ModelNameOverride)
+	}
+
+	if v.Priority != nil {
+		ok := object.Key("Priority")
+		ok.Integer(*v.Priority)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentInstancePoolList(v []types.InstancePool, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentInstancePool(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -34470,6 +34523,13 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 		}
 	}
 
+	if v.InstancePools != nil {
+		ok := object.Key("InstancePools")
+		if err := awsAwsjson11_serializeDocumentInstancePoolList(v.InstancePools, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.InstanceType) > 0 {
 		ok := object.Key("InstanceType")
 		ok.String(string(v.InstanceType))
@@ -34504,6 +34564,11 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 		if err := awsAwsjson11_serializeDocumentProductionVariantServerlessConfig(v.ServerlessConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VariantInstanceProvisionTimeoutInSeconds != nil {
+		ok := object.Key("VariantInstanceProvisionTimeoutInSeconds")
+		ok.Integer(*v.VariantInstanceProvisionTimeoutInSeconds)
 	}
 
 	if v.VariantName != nil {
@@ -40058,6 +40123,13 @@ func awsAwsjson11_serializeOpDocumentCreateInferenceComponentInput(v *CreateInfe
 	if v.Specification != nil {
 		ok := object.Key("Specification")
 		if err := awsAwsjson11_serializeDocumentInferenceComponentSpecification(v.Specification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Specifications != nil {
+		ok := object.Key("Specifications")
+		if err := awsAwsjson11_serializeDocumentInferenceComponentSpecificationList(v.Specifications, ok); err != nil {
 			return err
 		}
 	}
@@ -49885,6 +49957,13 @@ func awsAwsjson11_serializeOpDocumentUpdateInferenceComponentInput(v *UpdateInfe
 	if v.Specification != nil {
 		ok := object.Key("Specification")
 		if err := awsAwsjson11_serializeDocumentInferenceComponentSpecification(v.Specification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Specifications != nil {
+		ok := object.Key("Specifications")
+		if err := awsAwsjson11_serializeDocumentInferenceComponentSpecificationList(v.Specifications, ok); err != nil {
 			return err
 		}
 	}

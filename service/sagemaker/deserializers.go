@@ -70118,6 +70118,93 @@ func awsAwsjson11_deserializeDocumentInferenceComponentMetadata(v **types.Infere
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentInferenceComponentPlacementStatus(v **types.InferenceComponentPlacementStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InferenceComponentPlacementStatus
+	if *v == nil {
+		sv = &types.InferenceComponentPlacementStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentCopyCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InferenceComponentCopyCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CurrentCopyCount = ptr.Int32(int32(i64))
+			}
+
+		case "InstanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.ProductionVariantInstanceType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInferenceComponentPlacementStatusList(v *[]types.InferenceComponentPlacementStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InferenceComponentPlacementStatus
+	if *v == nil {
+		cv = []types.InferenceComponentPlacementStatus{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InferenceComponentPlacementStatus
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentInferenceComponentPlacementStatus(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentInferenceComponentRollingUpdatePolicy(v **types.InferenceComponentRollingUpdatePolicy, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -70233,6 +70320,11 @@ func awsAwsjson11_deserializeDocumentInferenceComponentRuntimeConfigSummary(v **
 				sv.DesiredCopyCount = ptr.Int32(int32(i64))
 			}
 
+		case "PlacementStatus":
+			if err := awsAwsjson11_deserializeDocumentInferenceComponentPlacementStatusList(&sv.PlacementStatus, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -70333,6 +70425,15 @@ func awsAwsjson11_deserializeDocumentInferenceComponentSpecificationSummary(v **
 				return err
 			}
 
+		case "InstanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.ProductionVariantInstanceType(jtv)
+			}
+
 		case "ModelName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -70358,6 +70459,40 @@ func awsAwsjson11_deserializeDocumentInferenceComponentSpecificationSummary(v **
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInferenceComponentSpecificationSummaryList(v *[]types.InferenceComponentSpecificationSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InferenceComponentSpecificationSummary
+	if *v == nil {
+		cv = []types.InferenceComponentSpecificationSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InferenceComponentSpecificationSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentInferenceComponentSpecificationSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -72096,6 +72231,189 @@ func awsAwsjson11_deserializeDocumentInstancePlacementConfig(v **types.InstanceP
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstancePool(v **types.InstancePool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstancePool
+	if *v == nil {
+		sv = &types.InstancePool{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InstanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.ProductionVariantInstanceType(jtv)
+			}
+
+		case "ModelNameOverride":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelName to be of type string, got %T instead", value)
+				}
+				sv.ModelNameOverride = ptr.String(jtv)
+			}
+
+		case "Priority":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InstancePoolPriority to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Priority = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstancePoolList(v *[]types.InstancePool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InstancePool
+	if *v == nil {
+		cv = []types.InstancePool{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InstancePool
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentInstancePool(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstancePoolSummary(v **types.InstancePoolSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstancePoolSummary
+	if *v == nil {
+		sv = &types.InstancePoolSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentInstanceCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TaskCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CurrentInstanceCount = ptr.Int32(int32(i64))
+			}
+
+		case "InstanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.ProductionVariantInstanceType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentInstancePoolSummaryList(v *[]types.InstancePoolSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InstancePoolSummary
+	if *v == nil {
+		cv = []types.InstancePoolSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InstancePoolSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentInstancePoolSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -84320,6 +84638,11 @@ func awsAwsjson11_deserializeDocumentPendingProductionVariantSummary(v **types.P
 				}
 			}
 
+		case "InstancePools":
+			if err := awsAwsjson11_deserializeDocumentInstancePoolSummaryList(&sv.InstancePools, value); err != nil {
+				return err
+			}
+
 		case "InstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -87093,6 +87416,11 @@ func awsAwsjson11_deserializeDocumentProductionVariant(v **types.ProductionVaria
 				}
 			}
 
+		case "InstancePools":
+			if err := awsAwsjson11_deserializeDocumentInstancePoolList(&sv.InstancePools, value); err != nil {
+				return err
+			}
+
 		case "InstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -87137,6 +87465,19 @@ func awsAwsjson11_deserializeDocumentProductionVariant(v **types.ProductionVaria
 		case "ServerlessConfig":
 			if err := awsAwsjson11_deserializeDocumentProductionVariantServerlessConfig(&sv.ServerlessConfig, value); err != nil {
 				return err
+			}
+
+		case "VariantInstanceProvisionTimeoutInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected VariantInstanceProvisionTimeoutInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.VariantInstanceProvisionTimeoutInSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "VariantName":
@@ -87875,6 +88216,11 @@ func awsAwsjson11_deserializeDocumentProductionVariantSummary(v **types.Producti
 					return fmt.Errorf("expected VariantWeight to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "InstancePools":
+			if err := awsAwsjson11_deserializeDocumentInstancePoolSummaryList(&sv.InstancePools, value); err != nil {
+				return err
 			}
 
 		case "ManagedInstanceScaling":
@@ -111590,6 +111936,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeInferenceComponentOutput(v **Desc
 
 		case "Specification":
 			if err := awsAwsjson11_deserializeDocumentInferenceComponentSpecificationSummary(&sv.Specification, value); err != nil {
+				return err
+			}
+
+		case "Specifications":
+			if err := awsAwsjson11_deserializeDocumentInferenceComponentSpecificationSummaryList(&sv.Specifications, value); err != nil {
 				return err
 			}
 

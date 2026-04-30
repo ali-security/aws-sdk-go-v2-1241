@@ -24,6 +24,7 @@ import (
 	"io"
 	"math"
 	"strings"
+	"time"
 )
 
 type awsRestjson1_deserializeOpBatchCreateMemoryRecords struct {
@@ -17450,7 +17451,7 @@ func awsRestjson1_deserializeDocumentMemoryRecord(v **types.MemoryRecord, value 
 			}
 
 		case "metadata":
-			if err := awsRestjson1_deserializeDocumentMetadataMap(&sv.Metadata, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentMemoryRecordMetadataMap(&sv.Metadata, value); err != nil {
 				return err
 			}
 
@@ -17465,6 +17466,146 @@ func awsRestjson1_deserializeDocumentMemoryRecord(v **types.MemoryRecord, value 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMemoryRecordMetadataMap(v *map[string]types.MemoryRecordMetadataValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.MemoryRecordMetadataValue
+	if *v == nil {
+		mv = map[string]types.MemoryRecordMetadataValue{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.MemoryRecordMetadataValue
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentMemoryRecordMetadataValue(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMemoryRecordMetadataValue(v *types.MemoryRecordMetadataValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.MemoryRecordMetadataValue
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "dateTimeValue":
+			var mv time.Time
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					mv = smithytime.ParseEpochSeconds(f64)
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+			uv = &types.MemoryRecordMetadataValueMemberDateTimeValue{Value: mv}
+			break loop
+
+		case "numberValue":
+			var mv float64
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					mv = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					mv = f64
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+			uv = &types.MemoryRecordMetadataValueMemberNumberValue{Value: mv}
+			break loop
+
+		case "stringListValue":
+			var mv []string
+			if err := awsRestjson1_deserializeDocumentStringValueList(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.MemoryRecordMetadataValueMemberStringListValue{Value: mv}
+			break loop
+
+		case "stringValue":
+			var mv string
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+				}
+				mv = jtv
+			}
+			uv = &types.MemoryRecordMetadataValueMemberStringValue{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -17644,7 +17785,7 @@ func awsRestjson1_deserializeDocumentMemoryRecordSummary(v **types.MemoryRecordS
 			}
 
 		case "metadata":
-			if err := awsRestjson1_deserializeDocumentMetadataMap(&sv.Metadata, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentMemoryRecordMetadataMap(&sv.Metadata, value); err != nil {
 				return err
 			}
 
@@ -19789,6 +19930,42 @@ func awsRestjson1_deserializeDocumentSpans(v *[]document.Interface, value interf
 		var col document.Interface
 		if err := awsRestjson1_deserializeDocumentSpan(&col, value); err != nil {
 			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStringValueList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected StringListMemberValue to be of type string, got %T instead", value)
+			}
+			col = jtv
 		}
 		cv = append(cv, col)
 

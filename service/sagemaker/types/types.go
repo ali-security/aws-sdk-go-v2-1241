@@ -5330,11 +5330,6 @@ type ClusterRestrictedInstanceGroupDetails struct {
 // The specifications of a restricted instance group that you need to define.
 type ClusterRestrictedInstanceGroupSpecification struct {
 
-	// The configuration for the restricted instance groups (RIG) environment.
-	//
-	// This member is required.
-	EnvironmentConfig *EnvironmentConfig
-
 	// Specifies an IAM execution role to be assumed by the restricted instance group.
 	//
 	// This member is required.
@@ -5355,6 +5350,9 @@ type ClusterRestrictedInstanceGroupSpecification struct {
 	//
 	// This member is required.
 	InstanceType ClusterInstanceType
+
+	// The configuration for the restricted instance groups (RIG) environment.
+	EnvironmentConfig *EnvironmentConfig
 
 	// Specifies the additional storage configurations for the instances in the
 	// SageMaker HyperPod cluster restricted instance group.
@@ -11470,6 +11468,25 @@ type InferenceComponentMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// The placement status of an inference component on a specific instance type.
+// Shows the number of inference component copies currently placed on instances of
+// a given type.
+type InferenceComponentPlacementStatus struct {
+
+	// The number of inference component copies currently placed on instances of this
+	// type.
+	//
+	// This member is required.
+	CurrentCopyCount *int32
+
+	// The ML compute instance type where the inference component copies are placed.
+	//
+	// This member is required.
+	InstanceType ProductionVariantInstanceType
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a rolling deployment strategy for updating a SageMaker AI inference
 // component.
 type InferenceComponentRollingUpdatePolicy struct {
@@ -11522,6 +11539,10 @@ type InferenceComponentRuntimeConfigSummary struct {
 	// The number of runtime copies of the model container that you requested to
 	// deploy with the inference component.
 	DesiredCopyCount *int32
+
+	// The placement status of the inference component across instance types. Shows
+	// how the inference component copies are distributed across instance types.
+	PlacementStatus []InferenceComponentPlacementStatus
 
 	noSmithyDocumentSerde
 }
@@ -11586,6 +11607,11 @@ type InferenceComponentSpecification struct {
 	// Settings that affect how the inference component caches data.
 	DataCacheConfig *InferenceComponentDataCacheConfig
 
+	// The ML compute instance type for the inference component specification.
+	// Specifies which instance type this specification applies to. Required when using
+	// the Specifications parameter with multiple entries.
+	InstanceType ProductionVariantInstanceType
+
 	// The name of an existing SageMaker AI model object in your account that you want
 	// to deploy with the inference component.
 	ModelName *string
@@ -11616,6 +11642,10 @@ type InferenceComponentSpecificationSummary struct {
 
 	// Settings that affect how the inference component caches data.
 	DataCacheConfig *InferenceComponentDataCacheConfigSummary
+
+	// The ML compute instance type associated with this inference component
+	// specification.
+	InstanceType ProductionVariantInstanceType
 
 	// The name of the SageMaker AI model object that is deployed with the inference
 	// component.
@@ -12323,6 +12353,52 @@ type InstancePlacementConfig struct {
 	// A list of specifications for how instances should be placed on specific
 	// UltraServers. Maximum of 10 items is supported.
 	PlacementSpecifications []PlacementSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an instance type and its priority for a heterogeneous endpoint. Use
+// instance pools to configure a production variant with multiple instance types,
+// enabling the endpoint to provision instances across different types based on
+// priority.
+type InstancePool struct {
+
+	// The ML compute instance type for the instance pool.
+	//
+	// This member is required.
+	InstanceType ProductionVariantInstanceType
+
+	// The priority for the instance pool. SageMaker attempts to provision instances
+	// in order of priority, starting with the lowest value. If instances for a
+	// higher-priority pool are unavailable, SageMaker attempts to provision from the
+	// next pool.
+	//
+	// Valid values: 1 to 5, where 1 is the highest priority.
+	//
+	// This member is required.
+	Priority *int32
+
+	// The name of a SageMaker model to use for this instance pool instead of the
+	// model specified for the production variant. Use this to deploy a different model
+	// optimized for the instance type in this pool.
+	ModelNameOverride *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an instance pool for a production variant, including the instance
+// type and the current number of instances.
+type InstancePoolSummary struct {
+
+	// The current number of instances of this type in the instance pool.
+	//
+	// This member is required.
+	CurrentInstanceCount *int32
+
+	// The ML compute instance type for the instance pool.
+	//
+	// This member is required.
+	InstanceType ProductionVariantInstanceType
 
 	noSmithyDocumentSerde
 }
@@ -16546,6 +16622,10 @@ type PendingProductionVariantSummary struct {
 	// [CreateEndpointConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html
 	DesiredWeight *float32
 
+	// A list of instance pools for the production variant. Each pool indicates the
+	// instance type and the current number of instances of that type.
+	InstancePools []InstancePoolSummary
+
 	// The type of instances associated with the variant.
 	InstanceType ProductionVariantInstanceType
 
@@ -17543,6 +17623,12 @@ type ProductionVariant struct {
 	// values across all ProductionVariants. If unspecified, it defaults to 1.0.
 	InitialVariantWeight *float32
 
+	// A list of instance pools for the production variant. Each instance pool
+	// specifies an instance type and its priority for provisioning. Use instance pools
+	// to configure heterogeneous endpoints that deploy models across multiple instance
+	// types.
+	InstancePools []InstancePool
+
 	// The ML compute instance type.
 	InstanceType ProductionVariantInstanceType
 
@@ -17566,6 +17652,16 @@ type ProductionVariant struct {
 	// The serverless configuration for an endpoint. Specifies a serverless endpoint
 	// configuration instead of an instance-based endpoint configuration.
 	ServerlessConfig *ProductionVariantServerlessConfig
+
+	// The timeout value, in seconds, for provisioning instances for the production
+	// variant. When SageMaker encounters an insufficient capacity error while
+	// provisioning instances, it retries with the next instance pool (if configured)
+	// or waits until the timeout expires. This timeout applies only to capacity
+	// provisioning and does not include the time for model download or container
+	// startup.
+	//
+	// Valid values: 300 to 3600.
+	VariantInstanceProvisionTimeoutInSeconds *int32
 
 	// The size, in GB, of the ML storage volume attached to individual inference
 	// instance associated with the production variant. Currently only Amazon EBS gp2
@@ -17854,6 +17950,10 @@ type ProductionVariantSummary struct {
 	// The requested weight, as specified in the UpdateEndpointWeightsAndCapacities
 	// request.
 	DesiredWeight *float32
+
+	// A list of instance pools for the production variant. Each pool indicates the
+	// instance type and the current number of instances of that type.
+	InstancePools []InstancePoolSummary
 
 	// Settings that control the range in the number of instances that the endpoint
 	// provisions as it scales up or down to accommodate traffic.

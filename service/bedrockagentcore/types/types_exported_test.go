@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	"time"
 )
 
 func ExampleABTestEvaluationConfig_outputUsage() {
@@ -775,6 +776,72 @@ func ExampleMemoryContent_outputUsage() {
 }
 
 var _ *string
+
+func ExampleMemoryRecordLeftExpression_outputUsage() {
+	var union types.MemoryRecordLeftExpression
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MemoryRecordLeftExpressionMemberMetadataKey:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleMemoryRecordMetadataValue_outputUsage() {
+	var union types.MemoryRecordMetadataValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MemoryRecordMetadataValueMemberDateTimeValue:
+		_ = v.Value // Value is time.Time
+
+	case *types.MemoryRecordMetadataValueMemberNumberValue:
+		_ = v.Value // Value is float64
+
+	case *types.MemoryRecordMetadataValueMemberStringListValue:
+		_ = v.Value // Value is []string
+
+	case *types.MemoryRecordMetadataValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *float64
+var _ []string
+var _ *time.Time
+
+func ExampleMemoryRecordRightExpression_outputUsage() {
+	var union types.MemoryRecordRightExpression
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MemoryRecordRightExpressionMemberMetadataValue:
+		_ = v.Value // Value is types.MemoryRecordMetadataValue
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.MemoryRecordMetadataValue
 
 func ExampleMetadataValue_outputUsage() {
 	var union types.MetadataValue

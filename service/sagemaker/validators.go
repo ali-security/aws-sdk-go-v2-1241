@@ -9590,9 +9590,7 @@ func validateClusterRestrictedInstanceGroupSpecification(v *types.ClusterRestric
 			invalidParams.AddNested("ScheduledUpdateConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.EnvironmentConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentConfig"))
-	} else if v.EnvironmentConfig != nil {
+	if v.EnvironmentConfig != nil {
 		if err := validateEnvironmentConfig(v.EnvironmentConfig); err != nil {
 			invalidParams.AddNested("EnvironmentConfig", err.(smithy.InvalidParamsError))
 		}
@@ -11815,6 +11813,23 @@ func validateInferenceComponentSpecification(v *types.InferenceComponentSpecific
 	}
 }
 
+func validateInferenceComponentSpecificationList(v []types.InferenceComponentSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceComponentSpecificationList"}
+	for i := range v {
+		if err := validateInferenceComponentSpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInferenceExecutionConfig(v *types.InferenceExecutionConfig) error {
 	if v == nil {
 		return nil
@@ -11993,6 +12008,41 @@ func validateInstancePlacementConfig(v *types.InstancePlacementConfig) error {
 	if v.PlacementSpecifications != nil {
 		if err := validatePlacementSpecifications(v.PlacementSpecifications); err != nil {
 			invalidParams.AddNested("PlacementSpecifications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstancePool(v *types.InstancePool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstancePool"}
+	if len(v.InstanceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstancePoolList(v []types.InstancePool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstancePoolList"}
+	for i := range v {
+		if err := validateInstancePool(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -14001,6 +14051,11 @@ func validateProductionVariant(v *types.ProductionVariant) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ProductionVariant"}
 	if v.VariantName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VariantName"))
+	}
+	if v.InstancePools != nil {
+		if err := validateInstancePoolList(v.InstancePools); err != nil {
+			invalidParams.AddNested("InstancePools", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.CoreDumpConfig != nil {
 		if err := validateProductionVariantCoreDumpConfig(v.CoreDumpConfig); err != nil {
@@ -17140,6 +17195,11 @@ func validateOpCreateInferenceComponentInput(v *CreateInferenceComponentInput) e
 	if v.Specification != nil {
 		if err := validateInferenceComponentSpecification(v.Specification); err != nil {
 			invalidParams.AddNested("Specification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Specifications != nil {
+		if err := validateInferenceComponentSpecificationList(v.Specifications); err != nil {
+			invalidParams.AddNested("Specifications", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RuntimeConfig != nil {
@@ -22107,6 +22167,11 @@ func validateOpUpdateInferenceComponentInput(v *UpdateInferenceComponentInput) e
 	if v.Specification != nil {
 		if err := validateInferenceComponentSpecification(v.Specification); err != nil {
 			invalidParams.AddNested("Specification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Specifications != nil {
+		if err := validateInferenceComponentSpecificationList(v.Specifications); err != nil {
+			invalidParams.AddNested("Specifications", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RuntimeConfig != nil {

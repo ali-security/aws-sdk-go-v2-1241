@@ -2770,19 +2770,20 @@ func (*MemoryContentMemberText) isMemoryContent() {}
 // relationship to match.
 type MemoryMetadataFilterExpression struct {
 
-	// Left expression of the event metadata filter.
+	// The metadata key to evaluate.
 	//
 	// This member is required.
-	Left LeftExpression
+	Left MemoryRecordLeftExpression
 
 	// The relationship between the metadata key and value to match when applying the
 	// metadata filter.
 	//
 	// This member is required.
-	Operator OperatorType
+	Operator MemoryRecordOperatorType
 
-	// Right expression of the eventMetadata filter.
-	Right RightExpression
+	// The value to compare against. Required for all operators except EXISTS and
+	// NOT_EXISTS.
+	Right MemoryRecordRightExpression
 
 	noSmithyDocumentSerde
 }
@@ -2817,7 +2818,7 @@ type MemoryRecord struct {
 	Namespaces []string
 
 	// A map of metadata key-value pairs associated with a memory record.
-	Metadata map[string]MetadataValue
+	Metadata map[string]MemoryRecordMetadataValue
 
 	noSmithyDocumentSerde
 }
@@ -2848,6 +2849,9 @@ type MemoryRecordCreateInput struct {
 	// The ID of the memory strategy that defines how this memory record is grouped.
 	MemoryStrategyId *string
 
+	// Metadata key-value pairs to be stored with the memory record.
+	Metadata map[string]MemoryRecordMetadataValue
+
 	noSmithyDocumentSerde
 }
 
@@ -2861,6 +2865,72 @@ type MemoryRecordDeleteInput struct {
 
 	noSmithyDocumentSerde
 }
+
+// The left-hand side of a memory record metadata filter expression.
+//
+// The following types satisfy this interface:
+//
+//	MemoryRecordLeftExpressionMemberMetadataKey
+type MemoryRecordLeftExpression interface {
+	isMemoryRecordLeftExpression()
+}
+
+// The metadata key to filter on.
+type MemoryRecordLeftExpressionMemberMetadataKey struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordLeftExpressionMemberMetadataKey) isMemoryRecordLeftExpression() {}
+
+// The value of a memory record metadata entry.
+//
+// The following types satisfy this interface:
+//
+//	MemoryRecordMetadataValueMemberDateTimeValue
+//	MemoryRecordMetadataValueMemberNumberValue
+//	MemoryRecordMetadataValueMemberStringListValue
+//	MemoryRecordMetadataValueMemberStringValue
+type MemoryRecordMetadataValue interface {
+	isMemoryRecordMetadataValue()
+}
+
+// A timestamp value in ISO 8601 UTC format.
+type MemoryRecordMetadataValueMemberDateTimeValue struct {
+	Value time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordMetadataValueMemberDateTimeValue) isMemoryRecordMetadataValue() {}
+
+// A numeric value.
+type MemoryRecordMetadataValueMemberNumberValue struct {
+	Value float64
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordMetadataValueMemberNumberValue) isMemoryRecordMetadataValue() {}
+
+// A list of string values.
+type MemoryRecordMetadataValueMemberStringListValue struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordMetadataValueMemberStringListValue) isMemoryRecordMetadataValue() {}
+
+// A string value.
+type MemoryRecordMetadataValueMemberStringValue struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordMetadataValueMemberStringValue) isMemoryRecordMetadataValue() {}
 
 // Output information returned after processing a memory record operation.
 type MemoryRecordOutput struct {
@@ -2887,6 +2957,24 @@ type MemoryRecordOutput struct {
 
 	noSmithyDocumentSerde
 }
+
+// The right-hand side of a memory record metadata filter expression.
+//
+// The following types satisfy this interface:
+//
+//	MemoryRecordRightExpressionMemberMetadataValue
+type MemoryRecordRightExpression interface {
+	isMemoryRecordRightExpression()
+}
+
+// The metadata value to compare against.
+type MemoryRecordRightExpressionMemberMetadataValue struct {
+	Value MemoryRecordMetadataValue
+
+	noSmithyDocumentSerde
+}
+
+func (*MemoryRecordRightExpressionMemberMetadataValue) isMemoryRecordRightExpression() {}
 
 // Contains summary information about a memory record.
 type MemoryRecordSummary struct {
@@ -2917,7 +3005,7 @@ type MemoryRecordSummary struct {
 	Namespaces []string
 
 	// A map of metadata key-value pairs associated with a memory record.
-	Metadata map[string]MetadataValue
+	Metadata map[string]MemoryRecordMetadataValue
 
 	// The relevance score of the memory record when returned as part of a search
 	// result. Higher values indicate greater relevance to the search query.
@@ -2945,6 +3033,9 @@ type MemoryRecordUpdateInput struct {
 	// The updated ID of the memory strategy that defines how this memory record is
 	// grouped.
 	MemoryStrategyId *string
+
+	// Metadata key-value pairs to be stored with the memory record.
+	Metadata map[string]MemoryRecordMetadataValue
 
 	// The updated list of namespace identifiers for categorizing the memory record.
 	Namespaces []string
@@ -4347,6 +4438,9 @@ func (*UnknownUnionMember) isInvokeAgentRuntimeCommandStreamOutput() {}
 func (*UnknownUnionMember) isInvokeHarnessStreamOutput()             {}
 func (*UnknownUnionMember) isLeftExpression()                        {}
 func (*UnknownUnionMember) isMemoryContent()                         {}
+func (*UnknownUnionMember) isMemoryRecordLeftExpression()            {}
+func (*UnknownUnionMember) isMemoryRecordMetadataValue()             {}
+func (*UnknownUnionMember) isMemoryRecordRightExpression()           {}
 func (*UnknownUnionMember) isMetadataValue()                         {}
 func (*UnknownUnionMember) isOutputConfig()                          {}
 func (*UnknownUnionMember) isPayloadType()                           {}

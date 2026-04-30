@@ -8355,6 +8355,46 @@ func awsRestjson1_deserializeDocumentLogTypes(v *[]types.LogType, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMskMonitoringParameters(v **types.MskMonitoringParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MskMonitoringParameters
+	if *v == nil {
+		sv = &types.MskMonitoringParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnhancedMonitoring":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MskEnhancedMonitoringLevel to be of type string, got %T instead", value)
+				}
+				sv.EnhancedMonitoring = types.MskEnhancedMonitoringLevel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPipelineOutput(v **types.PipelineOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9361,6 +9401,11 @@ func awsRestjson1_deserializeDocumentTelemetryDestinationConfiguration(v **types
 
 		case "LogDeliveryParameters":
 			if err := awsRestjson1_deserializeDocumentLogDeliveryParameters(&sv.LogDeliveryParameters, value); err != nil {
+				return err
+			}
+
+		case "MskMonitoringParameters":
+			if err := awsRestjson1_deserializeDocumentMskMonitoringParameters(&sv.MskMonitoringParameters, value); err != nil {
 				return err
 			}
 

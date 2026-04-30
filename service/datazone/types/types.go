@@ -938,6 +938,11 @@ type BusinessNameGenerationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The information about a cell in a notebook run in Amazon DataZone.
+type CellInformation struct {
+	noSmithyDocumentSerde
+}
+
 // Part of the provisioning properties of the environment blueprint.
 type CloudFormationProperties struct {
 
@@ -955,6 +960,18 @@ type ColumnFilterConfiguration struct {
 
 	// Specifies whether to include column names.
 	IncludedColumnNames []string
+
+	noSmithyDocumentSerde
+}
+
+// The compute configuration for a notebook run in Amazon DataZone.
+type ComputeConfig struct {
+
+	// The environment version for the notebook run compute.
+	EnvironmentVersion *string
+
+	// The instance type for the notebook run compute.
+	InstanceType *string
 
 	noSmithyDocumentSerde
 }
@@ -2397,6 +2414,18 @@ type EnvironmentBlueprintSummary struct {
 
 	// The timestamp of when the blueprint was enabled.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The environment configuration for a notebook run in Amazon DataZone.
+type EnvironmentConfig struct {
+
+	// The image version for the notebook run environment.
+	ImageVersion *string
+
+	// The package configuration for the notebook run environment.
+	PackageConfig *PackageConfig
 
 	noSmithyDocumentSerde
 }
@@ -4338,6 +4367,96 @@ type NameIdentifier struct {
 	noSmithyDocumentSerde
 }
 
+// The network configuration for a notebook run in Amazon DataZone.
+type NetworkConfig struct {
+
+	// The network access type for the notebook run. Valid values are
+	// PUBLIC_INTERNET_ONLY and VPC_ONLY .
+	//
+	// This member is required.
+	NetworkAccessType NetworkAccessType
+
+	// The identifiers of the security groups for the notebook run. You can specify up
+	// to 5 security groups.
+	SecurityGroupIds []string
+
+	// The identifiers of the subnets for the notebook run. You can specify up to 10
+	// subnets.
+	SubnetIds []string
+
+	// The identifier of the VPC for the notebook run. This is required when the
+	// network access type is VPC_ONLY .
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details of a failed notebook run in Amazon DataZone.
+type NotebookRunError struct {
+
+	// The error message. The maximum length is 1024 characters.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of a notebook run in Amazon DataZone.
+type NotebookRunSummary struct {
+
+	// The identifier of the Amazon DataZone domain.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The identifier of the notebook run.
+	//
+	// This member is required.
+	Id *string
+
+	// The identifier of the notebook.
+	//
+	// This member is required.
+	NotebookId *string
+
+	// The identifier of the project that owns the notebook run.
+	//
+	// This member is required.
+	OwningProjectId *string
+
+	// The status of the notebook run.
+	//
+	// This member is required.
+	Status NotebookRunStatus
+
+	// The timestamp of when the notebook run completed.
+	CompletedAt *time.Time
+
+	// The timestamp of when the notebook run was created.
+	CreatedAt *time.Time
+
+	// The identifier of the user who created the notebook run.
+	CreatedBy *string
+
+	// The identifier of the schedule associated with the notebook run.
+	ScheduleId *string
+
+	// The timestamp of when the notebook run started executing.
+	StartedAt *time.Time
+
+	// The source that triggered the notebook run.
+	TriggerSource *TriggerSource
+
+	// The timestamp of when the notebook run was last updated.
+	UpdatedAt *time.Time
+
+	// The identifier of the user who last updated the notebook run.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies that a value is not equal to the expression.
 type NotEqualToExpression struct {
 
@@ -4630,6 +4749,21 @@ type OwnerUserPropertiesOutput struct {
 
 	// The ID of the owner user.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// The package configuration for a notebook run environment in Amazon DataZone.
+type PackageConfig struct {
+
+	// The package manager for the notebook run environment. The default value is UV .
+	//
+	// This member is required.
+	PackageManager PackageManager
+
+	// The package specification content for the notebook run environment. The maximum
+	// length is 10240 characters.
+	PackageSpecification *string
 
 	noSmithyDocumentSerde
 }
@@ -6442,6 +6576,18 @@ type SsoUserProfileDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The storage configuration for a notebook run in Amazon DataZone.
+type StorageConfig struct {
+
+	// The ARN of the KMS key used for encryption.
+	KmsKeyArn *string
+
+	// The Amazon Simple Storage Service path for the project storage.
+	ProjectS3Path *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of the asset for which the subscription grant is created.
 type SubscribedAsset struct {
 
@@ -7101,6 +7247,17 @@ type TextMatchItem struct {
 	noSmithyDocumentSerde
 }
 
+// The timeout configuration for a notebook run in Amazon DataZone.
+type TimeoutConfig struct {
+
+	// The timeout for the notebook run, in minutes. The minimum value is 60 minutes
+	// (1 hour), the maximum value is 1440 minutes (24 hours), and the default value is
+	// 720 minutes (12 hours).
+	RunTimeoutInMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 // The time series data points form.
 type TimeSeriesDataPointFormInput struct {
 
@@ -7205,6 +7362,19 @@ type Topic struct {
 	//
 	// This member is required.
 	Subject *string
+
+	noSmithyDocumentSerde
+}
+
+// The source that triggered a notebook run in Amazon DataZone.
+type TriggerSource struct {
+
+	// The name of the trigger source.
+	Name *string
+
+	// The type of the trigger source. Valid values are MANUAL , SCHEDULED , and
+	// WORKFLOW .
+	Type TriggerSourceType
 
 	noSmithyDocumentSerde
 }

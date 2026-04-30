@@ -1,0 +1,8 @@
+{
+    "id": "f3160086-5a9e-4c60-8a58-07574b678ea0",
+    "type": "feature",
+    "description": "Add InstanceArn and IdentityStoreArn in the response of CreateApplication API and IdentityStoreArn in the response of DescribeApplication API",
+    "modules": [
+        "service/ssoadmin"
+    ]
+}

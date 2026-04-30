@@ -3333,6 +3333,11 @@ func validateCustomMemoryStrategyInput(v *types.CustomMemoryStrategyInput) error
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MemoryRecordSchema != nil {
+		if err := validateMemoryRecordSchema(v.MemoryRecordSchema); err != nil {
+			invalidParams.AddNested("MemoryRecordSchema", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3352,12 +3357,6 @@ func validateCustomOauth2ProviderConfigInput(v *types.CustomOauth2ProviderConfig
 			invalidParams.AddNested("OauthDiscovery", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ClientId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
-	}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
-	}
 	if v.PrivateEndpoint != nil {
 		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
 			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
@@ -3366,6 +3365,11 @@ func validateCustomOauth2ProviderConfigInput(v *types.CustomOauth2ProviderConfig
 	if v.PrivateEndpointOverrides != nil {
 		if err := validatePrivateEndpointOverrides(v.PrivateEndpointOverrides); err != nil {
 			invalidParams.AddNested("PrivateEndpointOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OnBehalfOfTokenExchangeConfig != nil {
+		if err := validateOnBehalfOfTokenExchangeConfigType(v.OnBehalfOfTokenExchangeConfig); err != nil {
+			invalidParams.AddNested("OnBehalfOfTokenExchangeConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3453,6 +3457,16 @@ func validateEpisodicMemoryStrategyInput(v *types.EpisodicMemoryStrategyInput) e
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.ReflectionConfiguration != nil {
+		if err := validateEpisodicReflectionConfigurationInput(v.ReflectionConfiguration); err != nil {
+			invalidParams.AddNested("ReflectionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MemoryRecordSchema != nil {
+		if err := validateMemoryRecordSchema(v.MemoryRecordSchema); err != nil {
+			invalidParams.AddNested("MemoryRecordSchema", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3534,6 +3548,28 @@ func validateEpisodicOverrideReflectionConfigurationInput(v *types.EpisodicOverr
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
 	}
+	if v.MemoryRecordSchema != nil {
+		if err := validateMemoryRecordSchema(v.MemoryRecordSchema); err != nil {
+			invalidParams.AddNested("MemoryRecordSchema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEpisodicReflectionConfigurationInput(v *types.EpisodicReflectionConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EpisodicReflectionConfigurationInput"}
+	if v.MemoryRecordSchema != nil {
+		if err := validateMemoryRecordSchema(v.MemoryRecordSchema); err != nil {
+			invalidParams.AddNested("MemoryRecordSchema", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3574,6 +3610,25 @@ func validateEvaluatorModelConfig(v types.EvaluatorModelConfig) error {
 	case *types.EvaluatorModelConfigMemberBedrockEvaluatorModelConfig:
 		if err := validateBedrockEvaluatorModelConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[bedrockEvaluatorModelConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExtractionConfig(v types.ExtractionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExtractionConfig"}
+	switch uv := v.(type) {
+	case *types.ExtractionConfigMemberLlmExtractionConfig:
+		if err := validateLlmExtractionConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[llmExtractionConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -4185,6 +4240,41 @@ func validateIncludedOauth2ProviderConfigInput(v *types.IncludedOauth2ProviderCo
 	}
 }
 
+func validateIndexedKey(v *types.IndexedKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IndexedKey"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIndexedKeysList(v []types.IndexedKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IndexedKeysList"}
+	for i := range v {
+		if err := validateIndexedKey(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInterceptorConfiguration(v types.InterceptorConfiguration) error {
 	if v == nil {
 		return nil
@@ -4351,6 +4441,26 @@ func validateLlmAsAJudgeEvaluatorConfig(v *types.LlmAsAJudgeEvaluatorConfig) err
 	}
 }
 
+func validateLlmExtractionConfig(v *types.LlmExtractionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LlmExtractionConfig"}
+	if v.Definition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
+	}
+	if v.Validation != nil {
+		if err := validateValidation(v.Validation); err != nil {
+			invalidParams.AddNested("Validation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateManagedVpcResource(v *types.ManagedVpcResource) error {
 	if v == nil {
 		return nil
@@ -4508,6 +4618,23 @@ func validateMcpTargetConfiguration(v types.McpTargetConfiguration) error {
 	}
 }
 
+func validateMemoryRecordSchema(v *types.MemoryRecordSchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MemoryRecordSchema"}
+	if v.MetadataSchema != nil {
+		if err := validateMetadataSchemaList(v.MetadataSchema); err != nil {
+			invalidParams.AddNested("MetadataSchema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMemoryStrategyInput(v types.MemoryStrategyInput) error {
 	if v == nil {
 		return nil
@@ -4554,6 +4681,43 @@ func validateMemoryStrategyInputList(v []types.MemoryStrategyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MemoryStrategyInputList"}
 	for i := range v {
 		if err := validateMemoryStrategyInput(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataSchemaEntry(v *types.MetadataSchemaEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataSchemaEntry"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.ExtractionConfig != nil {
+		if err := validateExtractionConfig(v.ExtractionConfig); err != nil {
+			invalidParams.AddNested("ExtractionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetadataSchemaList(v []types.MetadataSchemaEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataSchemaList"}
+	for i := range v {
+		if err := validateMetadataSchemaEntry(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -4677,6 +4841,11 @@ func validateModifyMemoryStrategyInput(v *types.ModifyMemoryStrategyInput) error
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MemoryRecordSchema != nil {
+		if err := validateMemoryRecordSchema(v.MemoryRecordSchema); err != nil {
+			invalidParams.AddNested("MemoryRecordSchema", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4693,6 +4862,11 @@ func validateModifyReflectionConfiguration(v types.ModifyReflectionConfiguration
 	case *types.ModifyReflectionConfigurationMemberCustomReflectionConfiguration:
 		if err := validateCustomReflectionConfigurationInput(uv.Value); err != nil {
 			invalidParams.AddNested("[customReflectionConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ModifyReflectionConfigurationMemberEpisodicReflectionConfiguration:
+		if err := validateEpisodicReflectionConfigurationInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[episodicReflectionConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -4897,6 +5071,26 @@ func validateOAuthCredentialProvider(v *types.OAuthCredentialProvider) error {
 	}
 	if v.Scopes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Scopes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOnBehalfOfTokenExchangeConfigType(v *types.OnBehalfOfTokenExchangeConfigType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OnBehalfOfTokenExchangeConfigType"}
+	if len(v.GrantType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("GrantType"))
+	}
+	if v.TokenExchangeGrantTypeConfig != nil {
+		if err := validateTokenExchangeGrantTypeConfigType(v.TokenExchangeGrantTypeConfig); err != nil {
+			invalidParams.AddNested("TokenExchangeGrantTypeConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5372,6 +5566,11 @@ func validateSemanticMemoryStrategyInput(v *types.SemanticMemoryStrategyInput) e
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.MemoryRecordSchema != nil {
+		if err := validateMemoryRecordSchema(v.MemoryRecordSchema); err != nil {
+			invalidParams.AddNested("MemoryRecordSchema", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5573,6 +5772,21 @@ func validateStreamDeliveryResourcesList(v []types.StreamDeliveryResource) error
 	}
 }
 
+func validateStringValidation(v *types.StringValidation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StringValidation"}
+	if v.AllowedValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSummaryMemoryStrategyInput(v *types.SummaryMemoryStrategyInput) error {
 	if v == nil {
 		return nil
@@ -5580,6 +5794,11 @@ func validateSummaryMemoryStrategyInput(v *types.SummaryMemoryStrategyInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "SummaryMemoryStrategyInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.MemoryRecordSchema != nil {
+		if err := validateMemoryRecordSchema(v.MemoryRecordSchema); err != nil {
+			invalidParams.AddNested("MemoryRecordSchema", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5694,6 +5913,21 @@ func validateTargetTrafficSplitEntry(v *types.TargetTrafficSplitEntry) error {
 	}
 	if v.TargetName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTokenExchangeGrantTypeConfigType(v *types.TokenExchangeGrantTypeConfigType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TokenExchangeGrantTypeConfigType"}
+	if len(v.ActorTokenContent) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ActorTokenContent"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5886,6 +6120,11 @@ func validateUserPreferenceMemoryStrategyInput(v *types.UserPreferenceMemoryStra
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
+	if v.MemoryRecordSchema != nil {
+		if err := validateMemoryRecordSchema(v.MemoryRecordSchema); err != nil {
+			invalidParams.AddNested("MemoryRecordSchema", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5943,6 +6182,25 @@ func validateUserPreferenceOverrideExtractionConfigurationInput(v *types.UserPre
 	}
 	if v.ModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateValidation(v types.Validation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Validation"}
+	switch uv := v.(type) {
+	case *types.ValidationMemberStringValidation:
+		if err := validateStringValidation(&uv.Value); err != nil {
+			invalidParams.AddNested("[stringValidation]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6409,6 +6667,11 @@ func validateOpCreateMemoryInput(v *CreateMemoryInput) error {
 	if v.MemoryStrategies != nil {
 		if err := validateMemoryStrategyInputList(v.MemoryStrategies); err != nil {
 			invalidParams.AddNested("MemoryStrategies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IndexedKeys != nil {
+		if err := validateIndexedKeysList(v.IndexedKeys); err != nil {
+			invalidParams.AddNested("IndexedKeys", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.StreamDeliveryResources != nil {
@@ -7868,6 +8131,11 @@ func validateOpUpdateMemoryInput(v *UpdateMemoryInput) error {
 	if v.MemoryStrategies != nil {
 		if err := validateModifyMemoryStrategies(v.MemoryStrategies); err != nil {
 			invalidParams.AddNested("MemoryStrategies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AddIndexedKeys != nil {
+		if err := validateIndexedKeysList(v.AddIndexedKeys); err != nil {
+			invalidParams.AddNested("AddIndexedKeys", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.StreamDeliveryResources != nil {

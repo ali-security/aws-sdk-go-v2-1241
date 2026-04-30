@@ -1190,6 +1190,18 @@ func TestCheckSnapshot_GetMetadataGenerationRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetNotebookRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNotebookRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetNotebookRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetProject(context.Background(), nil, func(o *Options) {
@@ -1550,6 +1562,18 @@ func TestCheckSnapshot_ListMetadataGenerationRuns(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListNotebookRuns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNotebookRuns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListNotebookRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListNotifications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNotifications(context.Background(), nil, func(o *Options) {
@@ -1891,6 +1915,30 @@ func TestCheckSnapshot_StartMetadataGenerationRun(t *testing.T) {
 	_, err := svc.StartMetadataGenerationRun(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartMetadataGenerationRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartNotebookRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNotebookRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartNotebookRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopNotebookRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopNotebookRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopNotebookRun")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3301,6 +3349,18 @@ func TestUpdateSnapshot_GetMetadataGenerationRun(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetNotebookRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetNotebookRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetNotebookRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetProject(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetProject(context.Background(), nil, func(o *Options) {
@@ -3661,6 +3721,18 @@ func TestUpdateSnapshot_ListMetadataGenerationRuns(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListNotebookRuns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListNotebookRuns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListNotebookRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListNotifications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListNotifications(context.Background(), nil, func(o *Options) {
@@ -4002,6 +4074,30 @@ func TestUpdateSnapshot_StartMetadataGenerationRun(t *testing.T) {
 	_, err := svc.StartMetadataGenerationRun(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartMetadataGenerationRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartNotebookRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartNotebookRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartNotebookRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopNotebookRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopNotebookRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopNotebookRun")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

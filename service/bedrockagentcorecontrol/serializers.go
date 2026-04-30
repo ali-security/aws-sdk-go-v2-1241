@@ -1660,6 +1660,13 @@ func awsRestjson1_serializeOpDocumentCreateMemoryInput(v *CreateMemoryInput, val
 		ok.Integer(*v.EventExpiryDuration)
 	}
 
+	if v.IndexedKeys != nil {
+		ok := object.Key("indexedKeys")
+		if err := awsRestjson1_serializeDocumentIndexedKeysList(v.IndexedKeys, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MemoryExecutionRoleArn != nil {
 		ok := object.Key("memoryExecutionRoleArn")
 		ok.String(*v.MemoryExecutionRoleArn)
@@ -9826,6 +9833,13 @@ func awsRestjson1_serializeOpDocumentUpdateMemoryInput(v *UpdateMemoryInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.AddIndexedKeys != nil {
+		ok := object.Key("addIndexedKeys")
+		if err := awsRestjson1_serializeDocumentIndexedKeysList(v.AddIndexedKeys, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -10953,6 +10967,28 @@ func awsRestjson1_serializeDocumentAllowedScopesType(v []string, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAllowedStringListValuesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAllowedStringValuesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentApiGatewayTargetConfiguration(v *types.ApiGatewayTargetConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11925,6 +11961,13 @@ func awsRestjson1_serializeDocumentCustomMemoryStrategyInput(v *types.CustomMemo
 		ok.String(*v.Description)
 	}
 
+	if v.MemoryRecordSchema != nil {
+		ok := object.Key("memoryRecordSchema")
+		if err := awsRestjson1_serializeDocumentMemoryRecordSchema(v.MemoryRecordSchema, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -11951,6 +11994,11 @@ func awsRestjson1_serializeDocumentCustomOauth2ProviderConfigInput(v *types.Cust
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ClientAuthenticationMethod) > 0 {
+		ok := object.Key("clientAuthenticationMethod")
+		ok.String(string(v.ClientAuthenticationMethod))
+	}
+
 	if v.ClientId != nil {
 		ok := object.Key("clientId")
 		ok.String(*v.ClientId)
@@ -11964,6 +12012,13 @@ func awsRestjson1_serializeDocumentCustomOauth2ProviderConfigInput(v *types.Cust
 	if v.OauthDiscovery != nil {
 		ok := object.Key("oauthDiscovery")
 		if err := awsRestjson1_serializeDocumentOauth2Discovery(v.OauthDiscovery, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OnBehalfOfTokenExchangeConfig != nil {
+		ok := object.Key("onBehalfOfTokenExchangeConfig")
+		if err := awsRestjson1_serializeDocumentOnBehalfOfTokenExchangeConfigType(v.OnBehalfOfTokenExchangeConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -12123,6 +12178,13 @@ func awsRestjson1_serializeDocumentEpisodicMemoryStrategyInput(v *types.Episodic
 		ok.String(*v.Description)
 	}
 
+	if v.MemoryRecordSchema != nil {
+		ok := object.Key("memoryRecordSchema")
+		if err := awsRestjson1_serializeDocumentMemoryRecordSchema(v.MemoryRecordSchema, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -12223,6 +12285,13 @@ func awsRestjson1_serializeDocumentEpisodicOverrideReflectionConfigurationInput(
 		ok.String(*v.AppendToPrompt)
 	}
 
+	if v.MemoryRecordSchema != nil {
+		ok := object.Key("memoryRecordSchema")
+		if err := awsRestjson1_serializeDocumentMemoryRecordSchema(v.MemoryRecordSchema, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelId != nil {
 		ok := object.Key("modelId")
 		ok.String(*v.ModelId)
@@ -12248,6 +12317,13 @@ func awsRestjson1_serializeDocumentEpisodicOverrideReflectionConfigurationInput(
 func awsRestjson1_serializeDocumentEpisodicReflectionConfigurationInput(v *types.EpisodicReflectionConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.MemoryRecordSchema != nil {
+		ok := object.Key("memoryRecordSchema")
+		if err := awsRestjson1_serializeDocumentMemoryRecordSchema(v.MemoryRecordSchema, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Namespaces != nil {
 		ok := object.Key("namespaces")
@@ -12332,6 +12408,24 @@ func awsRestjson1_serializeDocumentEvaluatorReference(v types.EvaluatorReference
 	case *types.EvaluatorReferenceMemberEvaluatorId:
 		av := object.Key("evaluatorId")
 		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentExtractionConfig(v types.ExtractionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ExtractionConfigMemberLlmExtractionConfig:
+		av := object.Key("llmExtractionConfig")
+		if err := awsRestjson1_serializeDocumentLlmExtractionConfig(&uv.Value, av); err != nil {
+			return err
+		}
 
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
@@ -13429,6 +13523,36 @@ func awsRestjson1_serializeDocumentIncludedOauth2ProviderConfigInput(v *types.In
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIndexedKey(v *types.IndexedKey, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIndexedKeysList(v []types.IndexedKey, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentIndexedKey(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInferenceConfiguration(v *types.InferenceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -13649,6 +13773,30 @@ func awsRestjson1_serializeDocumentLlmAsAJudgeEvaluatorConfig(v *types.LlmAsAJud
 	if v.RatingScale != nil {
 		ok := object.Key("ratingScale")
 		if err := awsRestjson1_serializeDocumentRatingScale(v.RatingScale, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLlmExtractionConfig(v *types.LlmExtractionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Definition != nil {
+		ok := object.Key("definition")
+		ok.String(*v.Definition)
+	}
+
+	if v.LlmExtractionInstruction != nil {
+		ok := object.Key("llmExtractionInstruction")
+		ok.String(*v.LlmExtractionInstruction)
+	}
+
+	if v.Validation != nil {
+		ok := object.Key("validation")
+		if err := awsRestjson1_serializeDocumentValidation(v.Validation, ok); err != nil {
 			return err
 		}
 	}
@@ -13962,6 +14110,20 @@ func awsRestjson1_serializeDocumentMcpToolSchemaConfiguration(v types.McpToolSch
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMemoryRecordSchema(v *types.MemoryRecordSchema, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataSchema != nil {
+		ok := object.Key("metadataSchema")
+		if err := awsRestjson1_serializeDocumentMetadataSchemaList(v.MetadataSchema, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMemoryStrategyInput(v types.MemoryStrategyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14057,6 +14219,43 @@ func awsRestjson1_serializeDocumentMetadataConfiguration(v *types.MetadataConfig
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetadataSchemaEntry(v *types.MetadataSchemaEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExtractionConfig != nil {
+		ok := object.Key("extractionConfig")
+		if err := awsRestjson1_serializeDocumentExtractionConfig(v.ExtractionConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetadataSchemaList(v []types.MetadataSchemaEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMetadataSchemaEntry(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -14190,6 +14389,13 @@ func awsRestjson1_serializeDocumentModifyMemoryStrategyInput(v *types.ModifyMemo
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.MemoryRecordSchema != nil {
+		ok := object.Key("memoryRecordSchema")
+		if err := awsRestjson1_serializeDocumentMemoryRecordSchema(v.MemoryRecordSchema, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MemoryStrategyId != nil {
@@ -14337,6 +14543,49 @@ func awsRestjson1_serializeDocumentNonEmptyStringList(v []string, value smithyjs
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNumberValidation(v *types.NumberValidation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxValue != nil {
+		ok := object.Key("maxValue")
+		switch {
+		case math.IsNaN(*v.MaxValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MaxValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MaxValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MaxValue)
+
+		}
+	}
+
+	if v.MinValue != nil {
+		ok := object.Key("minValue")
+		switch {
+		case math.IsNaN(*v.MinValue):
+			ok.String("NaN")
+
+		case math.IsInf(*v.MinValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.MinValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.MinValue)
+
+		}
+	}
+
 	return nil
 }
 
@@ -14567,6 +14816,25 @@ func awsRestjson1_serializeDocumentOAuthScopes(v []string, value smithyjson.Valu
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOnBehalfOfTokenExchangeConfigType(v *types.OnBehalfOfTokenExchangeConfigType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.GrantType) > 0 {
+		ok := object.Key("grantType")
+		ok.String(string(v.GrantType))
+	}
+
+	if v.TokenExchangeGrantTypeConfig != nil {
+		ok := object.Key("tokenExchangeGrantTypeConfig")
+		if err := awsRestjson1_serializeDocumentTokenExchangeGrantTypeConfigType(v.TokenExchangeGrantTypeConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -15163,6 +15431,17 @@ func awsRestjson1_serializeDocumentScopeList(v []string, value smithyjson.Value)
 	return nil
 }
 
+func awsRestjson1_serializeDocumentScopesListType(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSecretsManagerLocation(v *types.SecretsManagerLocation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -15246,6 +15525,13 @@ func awsRestjson1_serializeDocumentSemanticMemoryStrategyInput(v *types.Semantic
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.MemoryRecordSchema != nil {
+		ok := object.Key("memoryRecordSchema")
+		if err := awsRestjson1_serializeDocumentMemoryRecordSchema(v.MemoryRecordSchema, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {
@@ -15515,6 +15801,39 @@ func awsRestjson1_serializeDocumentStreamDeliveryResourcesList(v []types.StreamD
 	return nil
 }
 
+func awsRestjson1_serializeDocumentStringListValidation(v *types.StringListValidation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedValues != nil {
+		ok := object.Key("allowedValues")
+		if err := awsRestjson1_serializeDocumentAllowedStringListValuesList(v.AllowedValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxItems != nil {
+		ok := object.Key("maxItems")
+		ok.Integer(*v.MaxItems)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStringValidation(v *types.StringValidation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedValues != nil {
+		ok := object.Key("allowedValues")
+		if err := awsRestjson1_serializeDocumentAllowedStringValuesList(v.AllowedValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSubnetIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -15544,6 +15863,13 @@ func awsRestjson1_serializeDocumentSummaryMemoryStrategyInput(v *types.SummaryMe
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.MemoryRecordSchema != nil {
+		ok := object.Key("memoryRecordSchema")
+		if err := awsRestjson1_serializeDocumentMemoryRecordSchema(v.MemoryRecordSchema, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Name != nil {
@@ -15738,6 +16064,25 @@ func awsRestjson1_serializeDocumentTokenEndpointAuthMethodsType(v []string, valu
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTokenExchangeGrantTypeConfigType(v *types.TokenExchangeGrantTypeConfigType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ActorTokenContent) > 0 {
+		ok := object.Key("actorTokenContent")
+		ok.String(string(v.ActorTokenContent))
+	}
+
+	if v.ActorTokenScopes != nil {
+		ok := object.Key("actorTokenScopes")
+		if err := awsRestjson1_serializeDocumentScopesListType(v.ActorTokenScopes, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -16238,6 +16583,13 @@ func awsRestjson1_serializeDocumentUserPreferenceMemoryStrategyInput(v *types.Us
 		ok.String(*v.Description)
 	}
 
+	if v.MemoryRecordSchema != nil {
+		ok := object.Key("memoryRecordSchema")
+		if err := awsRestjson1_serializeDocumentMemoryRecordSchema(v.MemoryRecordSchema, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -16312,6 +16664,36 @@ func awsRestjson1_serializeDocumentUserPreferenceOverrideExtractionConfiguration
 		ok.String(*v.ModelId)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentValidation(v types.Validation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ValidationMemberNumberValidation:
+		av := object.Key("numberValidation")
+		if err := awsRestjson1_serializeDocumentNumberValidation(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ValidationMemberStringListValidation:
+		av := object.Key("stringListValidation")
+		if err := awsRestjson1_serializeDocumentStringListValidation(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ValidationMemberStringValidation:
+		av := object.Key("stringValidation")
+		if err := awsRestjson1_serializeDocumentStringValidation(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

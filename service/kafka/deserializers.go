@@ -15567,6 +15567,11 @@ func awsRestjson1_deserializeDocumentMutableClusterInfo(v **types.MutableCluster
 				sv.StorageMode = types.StorageMode(jtv)
 			}
 
+		case "zookeeperAccess":
+			if err := awsRestjson1_deserializeDocumentZookeeperAccess(&sv.ZookeeperAccess, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -18382,6 +18387,46 @@ func awsRestjson1_deserializeDocumentVpcConnectivityTls(v **types.VpcConnectivit
 	var sv *types.VpcConnectivityTls
 	if *v == nil {
 		sv = &types.VpcConnectivityTls{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentZookeeperAccess(v **types.ZookeeperAccess, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ZookeeperAccess
+	if *v == nil {
+		sv = &types.ZookeeperAccess{}
 	} else {
 		sv = *v
 	}

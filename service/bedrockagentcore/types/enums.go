@@ -462,6 +462,41 @@ func (LanguageRuntime) Values() []LanguageRuntime {
 	}
 }
 
+type MemoryRecordOperatorType string
+
+// Enum values for MemoryRecordOperatorType
+const (
+	MemoryRecordOperatorTypeEqualsTo            MemoryRecordOperatorType = "EQUALS_TO"
+	MemoryRecordOperatorTypeExists              MemoryRecordOperatorType = "EXISTS"
+	MemoryRecordOperatorTypeNotExists           MemoryRecordOperatorType = "NOT_EXISTS"
+	MemoryRecordOperatorTypeBefore              MemoryRecordOperatorType = "BEFORE"
+	MemoryRecordOperatorTypeAfter               MemoryRecordOperatorType = "AFTER"
+	MemoryRecordOperatorTypeContains            MemoryRecordOperatorType = "CONTAINS"
+	MemoryRecordOperatorTypeGreaterThan         MemoryRecordOperatorType = "GREATER_THAN"
+	MemoryRecordOperatorTypeGreaterThanOrEquals MemoryRecordOperatorType = "GREATER_THAN_OR_EQUALS"
+	MemoryRecordOperatorTypeLessThan            MemoryRecordOperatorType = "LESS_THAN"
+	MemoryRecordOperatorTypeLessThanOrEquals    MemoryRecordOperatorType = "LESS_THAN_OR_EQUALS"
+)
+
+// Values returns all known values for MemoryRecordOperatorType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MemoryRecordOperatorType) Values() []MemoryRecordOperatorType {
+	return []MemoryRecordOperatorType{
+		"EQUALS_TO",
+		"EXISTS",
+		"NOT_EXISTS",
+		"BEFORE",
+		"AFTER",
+		"CONTAINS",
+		"GREATER_THAN",
+		"GREATER_THAN_OR_EQUALS",
+		"LESS_THAN",
+		"LESS_THAN_OR_EQUALS",
+	}
+}
+
 type MemoryRecordStatus string
 
 // Enum values for MemoryRecordStatus
@@ -506,8 +541,9 @@ type Oauth2FlowType string
 
 // Enum values for Oauth2FlowType
 const (
-	Oauth2FlowTypeUserFederation Oauth2FlowType = "USER_FEDERATION"
-	Oauth2FlowTypeM2m            Oauth2FlowType = "M2M"
+	Oauth2FlowTypeUserFederation          Oauth2FlowType = "USER_FEDERATION"
+	Oauth2FlowTypeM2m                     Oauth2FlowType = "M2M"
+	Oauth2FlowTypeOnBehalfOfTokenExchange Oauth2FlowType = "ON_BEHALF_OF_TOKEN_EXCHANGE"
 )
 
 // Values returns all known values for Oauth2FlowType. Note that this can be
@@ -518,6 +554,7 @@ func (Oauth2FlowType) Values() []Oauth2FlowType {
 	return []Oauth2FlowType{
 		"USER_FEDERATION",
 		"M2M",
+		"ON_BEHALF_OF_TOKEN_EXCHANGE",
 	}
 }
 

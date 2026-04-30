@@ -1,0 +1,8 @@
+{
+    "id": "f719f002-3fc5-4af7-b533-a7413110be46",
+    "type": "feature",
+    "description": "AgentCore Identity now supports on-behalf-of token exchange OAuth2. AgentCore Memory now supports metadata for LongTerm Memory Records.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

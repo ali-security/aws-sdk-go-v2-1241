@@ -1,0 +1,8 @@
+{
+    "id": "288f08f3-3e57-4eb2-8cc0-9f4ffc3ef770",
+    "type": "feature",
+    "description": "Vended logs update param for capability vended logs feature",
+    "modules": [
+        "service/eks"
+    ]
+}

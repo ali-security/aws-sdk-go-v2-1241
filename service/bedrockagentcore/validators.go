@@ -3973,6 +3973,11 @@ func validateOpListMemoryRecordsInput(v *ListMemoryRecordsInput) error {
 	if v.MemoryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MemoryId"))
 	}
+	if v.MetadataFilters != nil {
+		if err := validateMemoryMetadataFilterList(v.MetadataFilters); err != nil {
+			invalidParams.AddNested("MetadataFilters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

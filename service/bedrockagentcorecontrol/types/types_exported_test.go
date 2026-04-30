@@ -549,6 +549,24 @@ func ExampleEvaluatorReference_outputUsage() {
 
 var _ *string
 
+func ExampleExtractionConfig_outputUsage() {
+	var union types.ExtractionConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ExtractionConfigMemberLlmExtractionConfig:
+		_ = v.Value // Value is types.LlmExtractionConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LlmExtractionConfig
+
 func ExampleExtractionConfiguration_outputUsage() {
 	var union types.ExtractionConfiguration
 	// type switches can be used to check the union value
@@ -1484,3 +1502,29 @@ func ExampleTriggerConditionInput_outputUsage() {
 var _ *types.TimeBasedTriggerInput
 var _ *types.MessageBasedTriggerInput
 var _ *types.TokenBasedTriggerInput
+
+func ExampleValidation_outputUsage() {
+	var union types.Validation
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ValidationMemberNumberValidation:
+		_ = v.Value // Value is types.NumberValidation
+
+	case *types.ValidationMemberStringListValidation:
+		_ = v.Value // Value is types.StringListValidation
+
+	case *types.ValidationMemberStringValidation:
+		_ = v.Value // Value is types.StringValidation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StringValidation
+var _ *types.NumberValidation
+var _ *types.StringListValidation

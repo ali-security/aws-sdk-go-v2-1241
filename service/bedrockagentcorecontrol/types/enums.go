@@ -2,6 +2,27 @@
 
 package types
 
+type ActorTokenContentType string
+
+// Enum values for ActorTokenContentType
+const (
+	ActorTokenContentTypeNone             ActorTokenContentType = "NONE"
+	ActorTokenContentTypeM2m              ActorTokenContentType = "M2M"
+	ActorTokenContentTypeAwsIamIdTokenJwt ActorTokenContentType = "AWS_IAM_ID_TOKEN_JWT"
+)
+
+// Values returns all known values for ActorTokenContentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ActorTokenContentType) Values() []ActorTokenContentType {
+	return []ActorTokenContentType{
+		"NONE",
+		"M2M",
+		"AWS_IAM_ID_TOKEN_JWT",
+	}
+}
+
 type AgentManagedRuntimeType string
 
 // Enum values for AgentManagedRuntimeType
@@ -231,6 +252,28 @@ func (ClaimMatchOperatorType) Values() []ClaimMatchOperatorType {
 		"EQUALS",
 		"CONTAINS",
 		"CONTAINS_ANY",
+	}
+}
+
+type ClientAuthenticationMethodType string
+
+// Enum values for ClientAuthenticationMethodType
+const (
+	ClientAuthenticationMethodTypeClientSecretBasic ClientAuthenticationMethodType = "CLIENT_SECRET_BASIC"
+	ClientAuthenticationMethodTypeClientSecretPost  ClientAuthenticationMethodType = "CLIENT_SECRET_POST"
+	ClientAuthenticationMethodTypeAwsIamIdTokenJwt  ClientAuthenticationMethodType = "AWS_IAM_ID_TOKEN_JWT"
+)
+
+// Values returns all known values for ClientAuthenticationMethodType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientAuthenticationMethodType) Values() []ClientAuthenticationMethodType {
+	return []ClientAuthenticationMethodType{
+		"CLIENT_SECRET_BASIC",
+		"CLIENT_SECRET_POST",
+		"AWS_IAM_ID_TOKEN_JWT",
 	}
 }
 
@@ -972,6 +1015,27 @@ func (MemoryView) Values() []MemoryView {
 	}
 }
 
+type MetadataValueType string
+
+// Enum values for MetadataValueType
+const (
+	MetadataValueTypeString     MetadataValueType = "STRING"
+	MetadataValueTypeStringlist MetadataValueType = "STRINGLIST"
+	MetadataValueTypeNumber     MetadataValueType = "NUMBER"
+)
+
+// Values returns all known values for MetadataValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataValueType) Values() []MetadataValueType {
+	return []MetadataValueType{
+		"STRING",
+		"STRINGLIST",
+		"NUMBER",
+	}
+}
+
 type NetworkMode string
 
 // Enum values for NetworkMode
@@ -997,6 +1061,7 @@ type OAuthGrantType string
 const (
 	OAuthGrantTypeClientCredentials OAuthGrantType = "CLIENT_CREDENTIALS"
 	OAuthGrantTypeAuthorizationCode OAuthGrantType = "AUTHORIZATION_CODE"
+	OAuthGrantTypeTokenExchange     OAuthGrantType = "TOKEN_EXCHANGE"
 )
 
 // Values returns all known values for OAuthGrantType. Note that this can be
@@ -1007,6 +1072,31 @@ func (OAuthGrantType) Values() []OAuthGrantType {
 	return []OAuthGrantType{
 		"CLIENT_CREDENTIALS",
 		"AUTHORIZATION_CODE",
+		"TOKEN_EXCHANGE",
+	}
+}
+
+type OnBehalfOfTokenExchangeGrantTypeType string
+
+// Enum values for OnBehalfOfTokenExchangeGrantTypeType
+const (
+	// RFC 8693 - Adopted by majority of IDPs supporting OBO grant type =
+	// urn:ietf:params:oauth:grant-type:token-exchange
+	OnBehalfOfTokenExchangeGrantTypeTypeTokenExchange OnBehalfOfTokenExchangeGrantTypeType = "TOKEN_EXCHANGE"
+	// RFC 7523 - Adopted by Microsoft Entra ID grant type =
+	// urn:ietf:params:oauth:grant-type:jwt-bearer
+	OnBehalfOfTokenExchangeGrantTypeTypeJwtAuthorizationGrant OnBehalfOfTokenExchangeGrantTypeType = "JWT_AUTHORIZATION_GRANT"
+)
+
+// Values returns all known values for OnBehalfOfTokenExchangeGrantTypeType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OnBehalfOfTokenExchangeGrantTypeType) Values() []OnBehalfOfTokenExchangeGrantTypeType {
+	return []OnBehalfOfTokenExchangeGrantTypeType{
+		"TOKEN_EXCHANGE",
+		"JWT_AUTHORIZATION_GRANT",
 	}
 }
 

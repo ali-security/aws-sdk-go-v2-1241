@@ -1890,6 +1890,26 @@ func (m *validateOpGetMetadataGenerationRun) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetNotebookRun struct {
+}
+
+func (*validateOpGetNotebookRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNotebookRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNotebookRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNotebookRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetProject struct {
 }
 
@@ -2470,6 +2490,26 @@ func (m *validateOpListMetadataGenerationRuns) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListNotebookRuns struct {
+}
+
+func (*validateOpListNotebookRuns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNotebookRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNotebookRunsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNotebookRunsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListNotifications struct {
 }
 
@@ -3045,6 +3085,46 @@ func (m *validateOpStartMetadataGenerationRun) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartMetadataGenerationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartNotebookRun struct {
+}
+
+func (*validateOpStartNotebookRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartNotebookRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartNotebookRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartNotebookRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopNotebookRun struct {
+}
+
+func (*validateOpStopNotebookRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopNotebookRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopNotebookRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopNotebookRunInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3886,6 +3966,10 @@ func addOpGetMetadataGenerationRunValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetMetadataGenerationRun{}, middleware.After)
 }
 
+func addOpGetNotebookRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNotebookRun{}, middleware.After)
+}
+
 func addOpGetProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProject{}, middleware.After)
 }
@@ -4002,6 +4086,10 @@ func addOpListMetadataGenerationRunsValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpListMetadataGenerationRuns{}, middleware.After)
 }
 
+func addOpListNotebookRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNotebookRuns{}, middleware.After)
+}
+
 func addOpListNotificationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNotifications{}, middleware.After)
 }
@@ -4116,6 +4204,14 @@ func addOpStartDataSourceRunValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpStartMetadataGenerationRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartMetadataGenerationRun{}, middleware.After)
+}
+
+func addOpStartNotebookRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartNotebookRun{}, middleware.After)
+}
+
+func addOpStopNotebookRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopNotebookRun{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -5448,6 +5544,21 @@ func validateMetadataGenerationRunTarget(v *types.MetadataGenerationRunTarget) e
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkConfig(v *types.NetworkConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkConfig"}
+	if len(v.NetworkAccessType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkAccessType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8426,6 +8537,24 @@ func validateOpGetMetadataGenerationRunInput(v *GetMetadataGenerationRunInput) e
 	}
 }
 
+func validateOpGetNotebookRunInput(v *GetNotebookRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNotebookRunInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetProjectInput(v *GetProjectInput) error {
 	if v == nil {
 		return nil
@@ -8934,6 +9063,24 @@ func validateOpListMetadataGenerationRunsInput(v *ListMetadataGenerationRunsInpu
 	invalidParams := smithy.InvalidParamsError{Context: "ListMetadataGenerationRunsInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNotebookRunsInput(v *ListNotebookRunsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNotebookRunsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.OwningProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwningProjectIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9555,6 +9702,50 @@ func validateOpStartMetadataGenerationRunInput(v *StartMetadataGenerationRunInpu
 	}
 	if v.OwningProjectIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OwningProjectIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartNotebookRunInput(v *StartNotebookRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartNotebookRunInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.OwningProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwningProjectIdentifier"))
+	}
+	if v.NotebookIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotebookIdentifier"))
+	}
+	if v.NetworkConfiguration != nil {
+		if err := validateNetworkConfig(v.NetworkConfiguration); err != nil {
+			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopNotebookRunInput(v *StopNotebookRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopNotebookRunInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -48,6 +48,9 @@ type ListMemoryRecordsInput struct {
 	// memory records with this strategy ID are returned.
 	MemoryStrategyId *string
 
+	// A list of metadata filter expressions to scope the returned memory records.
+	MetadataFilters []types.MemoryMetadataFilterExpression
+
 	// The namespace prefix to filter memory records by. Returns all memory records in
 	// namespaces that start with the provided prefix.
 	Namespace *string
