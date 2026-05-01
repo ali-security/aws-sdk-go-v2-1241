@@ -1,8 +1,0 @@
-{
-    "id": "e506cd3d-078a-4503-ac85-cbdfc8da450a",
-    "type": "feature",
-    "description": "Added reasoning details, statusDescription, and timeToFirstTokenMs fields to the ListSpans response in Amazon Q in Connect to provide visibility into model thinking, error diagnostics, and inference latency metrics.",
-    "modules": [
-        "service/qconnect"
-    ]
-}

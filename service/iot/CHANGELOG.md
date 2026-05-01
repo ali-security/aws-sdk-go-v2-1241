@@ -1,3 +1,7 @@
+# v1.73.0 (2026-05-01)
+
+* **Feature**: AWS IoT HTTP rule actions now support cross-topic batching, combining messages from different MQTT topics into single HTTP requests.
+
 # v1.72.8 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

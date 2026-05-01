@@ -1,3 +1,7 @@
+# v1.30.0 (2026-05-01)
+
+* **Feature**: Added reasoning details, statusDescription, and timeToFirstTokenMs fields to the ListSpans response in Amazon Q in Connect to provide visibility into model thinking, error diagnostics, and inference latency metrics.
+
 # v1.29.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

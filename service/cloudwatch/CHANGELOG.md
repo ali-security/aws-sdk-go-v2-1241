@@ -1,3 +1,7 @@
+# v1.57.0 (2026-05-01)
+
+* **Feature**: This release adds tag support for CloudWatch Dashboards. The PutDashboard API now accepts a Tags parameter, allowing you to tag dashboards at creation time. Additionally, the TagResource, UntagResource, and ListTagsForResource APIs now support dashboard ARNs as resources.
+
 # v1.56.3 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

@@ -1,3 +1,7 @@
+# v1.72.0 (2026-05-01)
+
+* **Feature**: Adds support for filtering log groups by tags in the ListLogGroups API via the new logGroupTags parameter.
+
 # v1.71.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

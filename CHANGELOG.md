@@ -1,3 +1,23 @@
+# Release (2026-05-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.58.0](service/appstream/CHANGELOG.md#v1580-2026-05-01)
+  * **Feature**: Amazon WorkSpaces Applications now enables AI agents to securely operate desktop applications. Administrators configure stacks to provide agents access to WorkSpaces. Agents can click, type, and take screenshots. Agents authenticate with AWS IAM credentials with activity logged in AWS CloudTrail.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.57.0](service/cloudwatch/CHANGELOG.md#v1570-2026-05-01)
+  * **Feature**: This release adds tag support for CloudWatch Dashboards. The PutDashboard API now accepts a Tags parameter, allowing you to tag dashboards at creation time. Additionally, the TagResource, UntagResource, and ListTagsForResource APIs now support dashboard ARNs as resources.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.72.0](service/cloudwatchlogs/CHANGELOG.md#v1720-2026-05-01)
+  * **Feature**: Adds support for filtering log groups by tags in the ListLogGroups API via the new logGroupTags parameter.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.27.0](service/entityresolution/CHANGELOG.md#v1270-2026-05-01)
+  * **Feature**: Add support for transitive matching in AWS Entity Resolution rule-based matching workflows. When enabled, records that match through different rules are grouped together into the same match group, allowing related records to be connected across rule levels.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.53.10](service/iam/CHANGELOG.md#v15310-2026-05-01)
+  * **Documentation**: Added guidance for CreateOpenIDConnectProvider to include multiple thumbprints when OIDC discovery and JWKS endpoints use different hosts or certificates
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.73.0](service/iot/CHANGELOG.md#v1730-2026-05-01)
+  * **Feature**: AWS IoT HTTP rule actions now support cross-topic batching, combining messages from different MQTT topics into single HTTP requests.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.30.0](service/qconnect/CHANGELOG.md#v1300-2026-05-01)
+  * **Feature**: Added reasoning details, statusDescription, and timeToFirstTokenMs fields to the ListSpans response in Amazon Q in Connect to provide visibility into model thinking, error diagnostics, and inference latency metrics.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.108.0](service/quicksight/CHANGELOG.md#v11080-2026-05-01)
+  * **Feature**: Add IdentityProviderCACertificatesBundleS3Uri for private CA certs with OAuth datasources. 256-char limit for FontFamily in themes. ControlTitleFormatText on all 13 filters. ControlTitleFontConfiguration. ContextRegion for cross-region identity context. Story,scenario in CreateCustomCapability API.
+
 # Release (2026-04-30)
 
 ## Module Highlights
