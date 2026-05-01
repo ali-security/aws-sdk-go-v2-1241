@@ -8325,6 +8325,49 @@ func awsAwsjson11_serializeDocumentSuppressionPeriod(v *types.SuppressionPeriod,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTagFilter(v *types.TagFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsAwsjson11_serializeDocumentTagFilterValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTagFilters(v []types.TagFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentTagFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTagFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTagKeyList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -10248,6 +10291,13 @@ func awsAwsjson11_serializeOpDocumentListLogGroupsInput(v *ListLogGroupsInput, v
 	if v.LogGroupNamePattern != nil {
 		ok := object.Key("logGroupNamePattern")
 		ok.String(*v.LogGroupNamePattern)
+	}
+
+	if v.LogGroupTags != nil {
+		ok := object.Key("logGroupTags")
+		if err := awsAwsjson11_serializeDocumentTagFilters(v.LogGroupTags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.NextToken != nil {

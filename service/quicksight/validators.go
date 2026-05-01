@@ -11380,9 +11380,6 @@ func validateDefaultFilterControlConfiguration(v *types.DefaultFilterControlConf
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DefaultFilterControlConfiguration"}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
 	if v.ControlOptions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ControlOptions"))
 	} else if v.ControlOptions != nil {
@@ -12453,9 +12450,6 @@ func validateFilterDateTimePickerControl(v *types.FilterDateTimePickerControl) e
 	if v.FilterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilterControlId"))
 	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
 	if v.SourceFilterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceFilterId"))
 	}
@@ -12473,9 +12467,6 @@ func validateFilterDropDownControl(v *types.FilterDropDownControl) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FilterDropDownControl"}
 	if v.FilterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilterControlId"))
-	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
 	}
 	if v.SourceFilterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceFilterId"))
@@ -12586,9 +12577,6 @@ func validateFilterListControl(v *types.FilterListControl) error {
 	if v.FilterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilterControlId"))
 	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
 	if v.SourceFilterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceFilterId"))
 	}
@@ -12678,9 +12666,6 @@ func validateFilterRelativeDateTimeControl(v *types.FilterRelativeDateTimeContro
 	if v.FilterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilterControlId"))
 	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
 	if v.SourceFilterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceFilterId"))
 	}
@@ -12715,9 +12700,6 @@ func validateFilterSliderControl(v *types.FilterSliderControl) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FilterSliderControl"}
 	if v.FilterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilterControlId"))
-	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
 	}
 	if v.SourceFilterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceFilterId"))
@@ -12766,9 +12748,6 @@ func validateFilterTextAreaControl(v *types.FilterTextAreaControl) error {
 	if v.FilterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilterControlId"))
 	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
 	if v.SourceFilterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceFilterId"))
 	}
@@ -12786,9 +12765,6 @@ func validateFilterTextFieldControl(v *types.FilterTextFieldControl) error {
 	invalidParams := smithy.InvalidParamsError{Context: "FilterTextFieldControl"}
 	if v.FilterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FilterControlId"))
-	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
 	}
 	if v.SourceFilterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceFilterId"))
@@ -16901,9 +16877,6 @@ func validateParameterDateTimePickerControl(v *types.ParameterDateTimePickerCont
 	if v.ParameterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParameterControlId"))
 	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
 	if v.SourceParameterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceParameterName"))
 	}
@@ -16971,9 +16944,6 @@ func validateParameterDropDownControl(v *types.ParameterDropDownControl) error {
 	if v.ParameterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParameterControlId"))
 	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
 	if v.SourceParameterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceParameterName"))
 	}
@@ -17006,9 +16976,6 @@ func validateParameterListControl(v *types.ParameterListControl) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ParameterListControl"}
 	if v.ParameterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParameterControlId"))
-	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
 	}
 	if v.SourceParameterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceParameterName"))
@@ -17092,9 +17059,6 @@ func validateParameterSliderControl(v *types.ParameterSliderControl) error {
 	if v.ParameterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParameterControlId"))
 	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
 	if v.SourceParameterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceParameterName"))
 	}
@@ -17113,9 +17077,6 @@ func validateParameterTextAreaControl(v *types.ParameterTextAreaControl) error {
 	if v.ParameterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParameterControlId"))
 	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
-	}
 	if v.SourceParameterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceParameterName"))
 	}
@@ -17133,9 +17094,6 @@ func validateParameterTextFieldControl(v *types.ParameterTextFieldControl) error
 	invalidParams := smithy.InvalidParamsError{Context: "ParameterTextFieldControl"}
 	if v.ParameterControlId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParameterControlId"))
-	}
-	if v.Title == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Title"))
 	}
 	if v.SourceParameterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceParameterName"))

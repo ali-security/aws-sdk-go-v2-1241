@@ -11616,6 +11616,11 @@ func awsRestjson1_serializeOpDocumentGetIdentityContextInput(v *GetIdentityConte
 	object := value.Object()
 	defer object.Close()
 
+	if v.ContextRegion != nil {
+		ok := object.Key("ContextRegion")
+		ok.String(*v.ContextRegion)
+	}
+
 	if v.Namespace != nil {
 		ok := object.Key("Namespace")
 		ok.String(*v.Namespace)
@@ -27435,6 +27440,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 		ok.String(string(v.SAPProductMasterDataAction))
 	}
 
+	if len(v.Scenario) > 0 {
+		ok := object.Key("Scenario")
+		ok.String(string(v.Scenario))
+	}
+
 	if len(v.SelfUpgradeUserRole) > 0 {
 		ok := object.Key("SelfUpgradeUserRole")
 		ok.String(string(v.SelfUpgradeUserRole))
@@ -27708,6 +27718,11 @@ func awsRestjson1_serializeDocumentCapabilities(v *types.Capabilities, value smi
 	if len(v.Space) > 0 {
 		ok := object.Key("Space")
 		ok.String(string(v.Space))
+	}
+
+	if len(v.Story) > 0 {
+		ok := object.Key("Story")
+		ok.String(string(v.Story))
 	}
 
 	if len(v.SubscribeDashboardEmailReports) > 0 {
@@ -29822,6 +29837,42 @@ func awsRestjson1_serializeDocumentControlSortConfigurationList(v []types.Contro
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentControlTitleFontConfiguration(v *types.ControlTitleFontConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FontConfiguration != nil {
+		ok := object.Key("FontConfiguration")
+		if err := awsRestjson1_serializeDocumentFontConfiguration(v.FontConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TextAlignment) > 0 {
+		ok := object.Key("TextAlignment")
+		ok.String(string(v.TextAlignment))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentControlTitleFormatText(v *types.ControlTitleFormatText, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PlainText != nil {
+		ok := object.Key("PlainText")
+		ok.String(*v.PlainText)
+	}
+
+	if v.RichText != nil {
+		ok := object.Key("RichText")
+		ok.String(*v.RichText)
+	}
+
 	return nil
 }
 
@@ -32945,6 +32996,13 @@ func awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v *types.De
 		}
 	}
 
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Title != nil {
 		ok := object.Key("Title")
 		ok.String(*v.Title)
@@ -34512,6 +34570,13 @@ func awsRestjson1_serializeDocumentFilterDateTimePickerControl(v *types.FilterDa
 		ok.String(string(v.CommitMode))
 	}
 
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
 		if err := awsRestjson1_serializeDocumentDateTimePickerControlDisplayOptions(v.DisplayOptions, ok); err != nil {
@@ -34561,6 +34626,13 @@ func awsRestjson1_serializeDocumentFilterDropDownControl(v *types.FilterDropDown
 	if v.ControlSortConfigurations != nil {
 		ok := object.Key("ControlSortConfigurations")
 		if err := awsRestjson1_serializeDocumentControlSortConfigurationList(v.ControlSortConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
 			return err
 		}
 	}
@@ -34722,6 +34794,13 @@ func awsRestjson1_serializeDocumentFilterListControl(v *types.FilterListControl,
 		}
 	}
 
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
 		if err := awsRestjson1_serializeDocumentListControlDisplayOptions(v.DisplayOptions, ok); err != nil {
@@ -34854,6 +34933,13 @@ func awsRestjson1_serializeDocumentFilterRelativeDateTimeControl(v *types.Filter
 		ok.String(string(v.CommitMode))
 	}
 
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
 		if err := awsRestjson1_serializeDocumentRelativeDateTimeControlDisplayOptions(v.DisplayOptions, ok); err != nil {
@@ -34917,6 +35003,13 @@ func awsRestjson1_serializeDocumentFilterSelectableValues(v *types.FilterSelecta
 func awsRestjson1_serializeDocumentFilterSliderControl(v *types.FilterSliderControl, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
@@ -35032,6 +35125,13 @@ func awsRestjson1_serializeDocumentFilterTextAreaControl(v *types.FilterTextArea
 	object := value.Object()
 	defer object.Close()
 
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Delimiter != nil {
 		ok := object.Key("Delimiter")
 		ok.String(*v.Delimiter)
@@ -35065,6 +35165,13 @@ func awsRestjson1_serializeDocumentFilterTextAreaControl(v *types.FilterTextArea
 func awsRestjson1_serializeDocumentFilterTextFieldControl(v *types.FilterTextFieldControl, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
@@ -41330,6 +41437,11 @@ func awsRestjson1_serializeDocumentOAuthParameters(v *types.OAuthParameters, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.IdentityProviderCACertificatesBundleS3Uri != nil {
+		ok := object.Key("IdentityProviderCACertificatesBundleS3Uri")
+		ok.String(*v.IdentityProviderCACertificatesBundleS3Uri)
+	}
+
 	if v.IdentityProviderResourceUri != nil {
 		ok := object.Key("IdentityProviderResourceUri")
 		ok.String(*v.IdentityProviderResourceUri)
@@ -41627,6 +41739,13 @@ func awsRestjson1_serializeDocumentParameterDateTimePickerControl(v *types.Param
 	object := value.Object()
 	defer object.Close()
 
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
 		if err := awsRestjson1_serializeDocumentDateTimePickerControlDisplayOptions(v.DisplayOptions, ok); err != nil {
@@ -41723,6 +41842,13 @@ func awsRestjson1_serializeDocumentParameterDropDownControl(v *types.ParameterDr
 		}
 	}
 
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
 		if err := awsRestjson1_serializeDocumentDropDownControlDisplayOptions(v.DisplayOptions, ok); err != nil {
@@ -41774,6 +41900,13 @@ func awsRestjson1_serializeDocumentParameterListControl(v *types.ParameterListCo
 	if v.ControlSortConfigurations != nil {
 		ok := object.Key("ControlSortConfigurations")
 		if err := awsRestjson1_serializeDocumentControlSortConfigurationList(v.ControlSortConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
 			return err
 		}
 	}
@@ -41886,6 +42019,13 @@ func awsRestjson1_serializeDocumentParameterSliderControl(v *types.ParameterSlid
 	object := value.Object()
 	defer object.Close()
 
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
 		if err := awsRestjson1_serializeDocumentSliderControlDisplayOptions(v.DisplayOptions, ok); err != nil {
@@ -41969,6 +42109,13 @@ func awsRestjson1_serializeDocumentParameterTextAreaControl(v *types.ParameterTe
 	object := value.Object()
 	defer object.Close()
 
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Delimiter != nil {
 		ok := object.Key("Delimiter")
 		ok.String(*v.Delimiter)
@@ -42002,6 +42149,13 @@ func awsRestjson1_serializeDocumentParameterTextAreaControl(v *types.ParameterTe
 func awsRestjson1_serializeDocumentParameterTextFieldControl(v *types.ParameterTextFieldControl, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ControlTitleFormatText != nil {
+		ok := object.Key("ControlTitleFormatText")
+		if err := awsRestjson1_serializeDocumentControlTitleFormatText(v.ControlTitleFormatText, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DisplayOptions != nil {
 		ok := object.Key("DisplayOptions")
@@ -51587,6 +51741,13 @@ func awsRestjson1_serializeDocumentTypography(v *types.Typography, value smithyj
 	if v.AxisTitleFontConfiguration != nil {
 		ok := object.Key("AxisTitleFontConfiguration")
 		if err := awsRestjson1_serializeDocumentFontConfiguration(v.AxisTitleFontConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ControlTitleFontConfiguration != nil {
+		ok := object.Key("ControlTitleFontConfiguration")
+		if err := awsRestjson1_serializeDocumentControlTitleFontConfiguration(v.ControlTitleFontConfiguration, ok); err != nil {
 			return err
 		}
 	}

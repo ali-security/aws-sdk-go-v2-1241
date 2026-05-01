@@ -1,0 +1,8 @@
+{
+    "id": "8de0640b-9488-4154-aaf1-57f0962c599e",
+    "type": "feature",
+    "description": "This release adds tag support for CloudWatch Dashboards. The PutDashboard API now accepts a Tags parameter, allowing you to tag dashboards at creation time. Additionally, the TagResource, UntagResource, and ListTagsForResource APIs now support dashboard ARNs as resources.",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

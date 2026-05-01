@@ -3451,6 +3451,9 @@ type Capabilities struct {
 	// The ability to perform actions using S&P Global Energy connectors.
 	SandPGlobalEnergyAction CapabilityState
 
+	// The ability to perform Scenario-related actions.
+	Scenario CapabilityState
+
 	// The ability to enable users to upgrade their user role.
 	SelfUpgradeUserRole CapabilityState
 
@@ -3615,6 +3618,9 @@ type Capabilities struct {
 
 	// The ability to perform space-related actions.
 	Space CapabilityState
+
+	// The ability to perform Story-related actions.
+	Story CapabilityState
 
 	// The ability to subscribe to email reports.
 	SubscribeDashboardEmailReports CapabilityState
@@ -4849,6 +4855,31 @@ type ControlSortConfiguration struct {
 	// option to sort values that are manually entered by users in a dropdown or list
 	// control.
 	SelectableValuesSort *SelectableValuesSort
+
+	noSmithyDocumentSerde
+}
+
+// Configures the display properties of the control title.
+type ControlTitleFontConfiguration struct {
+
+	// Configures the font settings for the control title.
+	FontConfiguration *FontConfiguration
+
+	// Determines the alignment of the control title.
+	TextAlignment HorizontalTextAlignment
+
+	noSmithyDocumentSerde
+}
+
+// The title format text configuration for a sheet control. This is a tagged union
+// type. Specify either PlainText or RichText , but not both.
+type ControlTitleFormatText struct {
+
+	// The plain text format of the title text.
+	PlainText *string
+
+	// The rich text format of the title text.
+	RichText *string
 
 	noSmithyDocumentSerde
 }
@@ -7663,10 +7694,11 @@ type DefaultFilterControlConfiguration struct {
 	// This member is required.
 	ControlOptions *DefaultFilterControlOptions
 
+	// The title text format configuration for the default filter control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The title of the DefaultFilterControlConfiguration . This title is shared by all
 	// controls that are tied to this filter.
-	//
-	// This member is required.
 	Title *string
 
 	noSmithyDocumentSerde
@@ -8698,16 +8730,17 @@ type FilterDateTimePickerControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterDateTimePickerControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The visibility configurationof the Apply button on a DateTimePickerControl .
 	CommitMode CommitMode
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *DateTimePickerControlDisplayOptions
+
+	// The title of the FilterDateTimePickerControl .
+	Title *string
 
 	// The type of the FilterDropDownControl . Choose one of the following options:
 	//
@@ -8733,11 +8766,6 @@ type FilterDropDownControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterDropDownControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
@@ -8749,11 +8777,17 @@ type FilterDropDownControl struct {
 	// configuration can be applied per control.
 	ControlSortConfigurations []ControlSortConfiguration
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of the FilterDropDownControl .
 	DisplayOptions *DropDownControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *FilterSelectableValues
+
+	// The title of the FilterDropDownControl .
+	Title *string
 
 	// The type of the FilterDropDownControl . Choose one of the following options:
 	//
@@ -8850,11 +8884,6 @@ type FilterListControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterListControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
@@ -8863,11 +8892,17 @@ type FilterListControl struct {
 	// configuration can be applied per control.
 	ControlSortConfigurations []ControlSortConfiguration
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *ListControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *FilterSelectableValues
+
+	// The title of the FilterListControl .
+	Title *string
 
 	// The type of the FilterListControl . Choose one of the following options:
 	//
@@ -8946,17 +8981,18 @@ type FilterRelativeDateTimeControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterTextAreaControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The visibility configuration of the Apply button on a
 	// FilterRelativeDateTimeControl .
 	CommitMode CommitMode
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *RelativeDateTimeControlDisplayOptions
+
+	// The title of the FilterTextAreaControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -9017,13 +9053,14 @@ type FilterSliderControl struct {
 	// This member is required.
 	StepSize float64
 
-	// The title of the FilterSliderControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *SliderControlDisplayOptions
+
+	// The title of the FilterSliderControl .
+	Title *string
 
 	// The type of the FilterSliderControl . Choose one of the following options:
 	//
@@ -9069,16 +9106,17 @@ type FilterTextAreaControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterTextAreaControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The delimiter that is used to separate the lines in text.
 	Delimiter *string
 
 	// The display options of a control.
 	DisplayOptions *TextAreaControlDisplayOptions
+
+	// The title of the FilterTextAreaControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -9096,13 +9134,14 @@ type FilterTextFieldControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterTextFieldControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *TextFieldControlDisplayOptions
+
+	// The title of the FilterTextFieldControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -13366,6 +13405,12 @@ type OAuthParameters struct {
 	// This member is required.
 	TokenProviderUrl *string
 
+	// The S3 URI of the identity provider's CA certificates bundle in PEM format. Use
+	// this parameter to provide a custom CA certificate bundle for the identity
+	// provider when the default trust store does not include the required
+	// certificates.
+	IdentityProviderCACertificatesBundleS3Uri *string
+
 	// The resource uri of the identity provider.
 	IdentityProviderResourceUri *string
 
@@ -13580,13 +13625,14 @@ type ParameterDateTimePickerControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterDateTimePickerControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *DateTimePickerControlDisplayOptions
+
+	// The title of the ParameterDateTimePickerControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -13630,11 +13676,6 @@ type ParameterDropDownControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterDropDownControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
@@ -13646,11 +13687,17 @@ type ParameterDropDownControl struct {
 	// configuration can be applied per control.
 	ControlSortConfigurations []ControlSortConfiguration
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *DropDownControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *ParameterSelectableValues
+
+	// The title of the ParameterDropDownControl .
+	Title *string
 
 	// The type parameter name of the ParameterDropDownControl .
 	Type SheetControlListType
@@ -13672,11 +13719,6 @@ type ParameterListControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterListControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
@@ -13685,11 +13727,17 @@ type ParameterListControl struct {
 	// configuration can be applied per control.
 	ControlSortConfigurations []ControlSortConfiguration
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *ListControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *ParameterSelectableValues
+
+	// The title of the ParameterListControl .
+	Title *string
 
 	// The type of ParameterListControl .
 	Type SheetControlListType
@@ -13756,13 +13804,14 @@ type ParameterSliderControl struct {
 	// This member is required.
 	StepSize float64
 
-	// The title of the ParameterSliderControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *SliderControlDisplayOptions
+
+	// The title of the ParameterSliderControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -13780,16 +13829,17 @@ type ParameterTextAreaControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterTextAreaControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The delimiter that is used to separate the lines in text.
 	Delimiter *string
 
 	// The display options of a control.
 	DisplayOptions *TextAreaControlDisplayOptions
+
+	// The title of the ParameterTextAreaControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -13807,13 +13857,14 @@ type ParameterTextFieldControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterTextFieldControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *TextFieldControlDisplayOptions
+
+	// The title of the ParameterTextFieldControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -20903,6 +20954,9 @@ type Typography struct {
 
 	// Configures the display properties of the given text.
 	AxisTitleFontConfiguration *FontConfiguration
+
+	// Configures the display properties of the control title.
+	ControlTitleFontConfiguration *ControlTitleFontConfiguration
 
 	// Configures the display properties of the given text.
 	DataLabelFontConfiguration *FontConfiguration

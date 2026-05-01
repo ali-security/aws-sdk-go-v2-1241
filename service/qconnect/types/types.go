@@ -5526,6 +5526,9 @@ type Span struct {
 	// Parent span identifier for hierarchy. Null for root spans.
 	ParentSpanId *string
 
+	// Human-readable error description when status is ERROR or TIMEOUT
+	StatusDescription *string
+
 	noSmithyDocumentSerde
 }
 
@@ -5623,6 +5626,10 @@ type SpanAttributes struct {
 	// Sampling temperature for generation
 	Temperature *float32
 
+	// Time to first token in milliseconds, measured from when Amazon Bedrock was
+	// invoked to when the first token was returned
+	TimeToFirstTokenMs *int32
+
 	// Top-p sampling parameter for generation
 	TopP *float32
 
@@ -5675,7 +5682,7 @@ type SpanMessage struct {
 	// This member is required.
 	Timestamp *time.Time
 
-	// Message content values (text, tool use, tool result)
+	// Message content values (text, tool use, tool result, reasoning)
 	//
 	// This member is required.
 	Values []SpanMessageValue
@@ -5683,16 +5690,26 @@ type SpanMessage struct {
 	noSmithyDocumentSerde
 }
 
-// Message content value - can be text, tool invocation, or tool result
+// Message content value - can be text, tool invocation, tool result, or reasoning
 //
 // The following types satisfy this interface:
 //
+//	SpanMessageValueMemberReasoning
 //	SpanMessageValueMemberText
 //	SpanMessageValueMemberToolResult
 //	SpanMessageValueMemberToolUse
 type SpanMessageValue interface {
 	isSpanMessageValue()
 }
+
+// Model reasoning and it's internal decision making process
+type SpanMessageValueMemberReasoning struct {
+	Value SpanReasoningValue
+
+	noSmithyDocumentSerde
+}
+
+func (*SpanMessageValueMemberReasoning) isSpanMessageValue() {}
 
 // Text message content
 type SpanMessageValueMemberText struct {
@@ -5720,6 +5737,17 @@ type SpanMessageValueMemberToolUse struct {
 }
 
 func (*SpanMessageValueMemberToolUse) isSpanMessageValue() {}
+
+// Model reasoning and it's internal decision making process
+type SpanReasoningValue struct {
+
+	// The reasoning text content
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
 
 // Text message content
 type SpanTextValue struct {

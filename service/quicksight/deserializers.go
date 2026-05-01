@@ -59054,6 +59054,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 				sv.SAPProductMasterDataAction = types.CapabilityState(jtv)
 			}
 
+		case "Scenario":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.Scenario = types.CapabilityState(jtv)
+			}
+
 		case "SelfUpgradeUserRole":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -59547,6 +59556,15 @@ func awsRestjson1_deserializeDocumentCapabilities(v **types.Capabilities, value 
 					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
 				}
 				sv.Space = types.CapabilityState(jtv)
+			}
+
+		case "Story":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CapabilityState to be of type string, got %T instead", value)
+				}
+				sv.Story = types.CapabilityState(jtv)
 			}
 
 		case "SubscribeDashboardEmailReports":
@@ -63818,6 +63836,100 @@ func awsRestjson1_deserializeDocumentControlSortConfigurationList(v *[]types.Con
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentControlTitleFontConfiguration(v **types.ControlTitleFontConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ControlTitleFontConfiguration
+	if *v == nil {
+		sv = &types.ControlTitleFontConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FontConfiguration":
+			if err := awsRestjson1_deserializeDocumentFontConfiguration(&sv.FontConfiguration, value); err != nil {
+				return err
+			}
+
+		case "TextAlignment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HorizontalTextAlignment to be of type string, got %T instead", value)
+				}
+				sv.TextAlignment = types.HorizontalTextAlignment(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentControlTitleFormatText(v **types.ControlTitleFormatText, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ControlTitleFormatText
+	if *v == nil {
+		sv = &types.ControlTitleFormatText{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PlainText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlTitlePlainText to be of type string, got %T instead", value)
+				}
+				sv.PlainText = ptr.String(jtv)
+			}
+
+		case "RichText":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ControlTitleRichText to be of type string, got %T instead", value)
+				}
+				sv.RichText = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -71337,6 +71449,11 @@ func awsRestjson1_deserializeDocumentDefaultFilterControlConfiguration(v **types
 				return err
 			}
 
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "Title":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -74900,6 +75017,11 @@ func awsRestjson1_deserializeDocumentFilterDateTimePickerControl(v **types.Filte
 				sv.CommitMode = types.CommitMode(jtv)
 			}
 
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentDateTimePickerControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -74988,6 +75110,11 @@ func awsRestjson1_deserializeDocumentFilterDropDownControl(v **types.FilterDropD
 
 		case "ControlSortConfigurations":
 			if err := awsRestjson1_deserializeDocumentControlSortConfigurationList(&sv.ControlSortConfigurations, value); err != nil {
+				return err
+			}
+
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
 				return err
 			}
 
@@ -75313,6 +75440,11 @@ func awsRestjson1_deserializeDocumentFilterListControl(v **types.FilterListContr
 				return err
 			}
 
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentListControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -75574,6 +75706,11 @@ func awsRestjson1_deserializeDocumentFilterRelativeDateTimeControl(v **types.Fil
 				sv.CommitMode = types.CommitMode(jtv)
 			}
 
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentRelativeDateTimeControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -75714,6 +75851,11 @@ func awsRestjson1_deserializeDocumentFilterSliderControl(v **types.FilterSliderC
 
 	for key, value := range shape {
 		switch key {
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentSliderControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -75938,6 +76080,11 @@ func awsRestjson1_deserializeDocumentFilterTextAreaControl(v **types.FilterTextA
 
 	for key, value := range shape {
 		switch key {
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "Delimiter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -76010,6 +76157,11 @@ func awsRestjson1_deserializeDocumentFilterTextFieldControl(v **types.FilterText
 
 	for key, value := range shape {
 		switch key {
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentTextFieldControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -76734,7 +76886,7 @@ func awsRestjson1_deserializeDocumentFont(v **types.Font, value interface{}) err
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LimitedString to be of type string, got %T instead", value)
 				}
 				sv.FontFamily = ptr.String(jtv)
 			}
@@ -76792,7 +76944,7 @@ func awsRestjson1_deserializeDocumentFontConfiguration(v **types.FontConfigurati
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected LimitedString to be of type string, got %T instead", value)
 				}
 				sv.FontFamily = ptr.String(jtv)
 			}
@@ -90740,6 +90892,15 @@ func awsRestjson1_deserializeDocumentOAuthParameters(v **types.OAuthParameters, 
 
 	for key, value := range shape {
 		switch key {
+		case "IdentityProviderCACertificatesBundleS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CACertificatesBundleS3Uri to be of type string, got %T instead", value)
+				}
+				sv.IdentityProviderCACertificatesBundleS3Uri = ptr.String(jtv)
+			}
+
 		case "IdentityProviderResourceUri":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -91518,6 +91679,11 @@ func awsRestjson1_deserializeDocumentParameterDateTimePickerControl(v **types.Pa
 
 	for key, value := range shape {
 		switch key {
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentDateTimePickerControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -91685,6 +91851,11 @@ func awsRestjson1_deserializeDocumentParameterDropDownControl(v **types.Paramete
 				return err
 			}
 
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentDropDownControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -91769,6 +91940,11 @@ func awsRestjson1_deserializeDocumentParameterListControl(v **types.ParameterLis
 
 		case "ControlSortConfigurations":
 			if err := awsRestjson1_deserializeDocumentControlSortConfigurationList(&sv.ControlSortConfigurations, value); err != nil {
+				return err
+			}
+
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
 				return err
 			}
 
@@ -91977,6 +92153,11 @@ func awsRestjson1_deserializeDocumentParameterSliderControl(v **types.ParameterS
 
 	for key, value := range shape {
 		switch key {
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentSliderControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -92142,6 +92323,11 @@ func awsRestjson1_deserializeDocumentParameterTextAreaControl(v **types.Paramete
 
 	for key, value := range shape {
 		switch key {
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "Delimiter":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -92214,6 +92400,11 @@ func awsRestjson1_deserializeDocumentParameterTextFieldControl(v **types.Paramet
 
 	for key, value := range shape {
 		switch key {
+		case "ControlTitleFormatText":
+			if err := awsRestjson1_deserializeDocumentControlTitleFormatText(&sv.ControlTitleFormatText, value); err != nil {
+				return err
+			}
+
 		case "DisplayOptions":
 			if err := awsRestjson1_deserializeDocumentTextFieldControlDisplayOptions(&sv.DisplayOptions, value); err != nil {
 				return err
@@ -115098,6 +115289,11 @@ func awsRestjson1_deserializeDocumentTypography(v **types.Typography, value inte
 
 		case "AxisTitleFontConfiguration":
 			if err := awsRestjson1_deserializeDocumentFontConfiguration(&sv.AxisTitleFontConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ControlTitleFontConfiguration":
+			if err := awsRestjson1_deserializeDocumentControlTitleFontConfiguration(&sv.ControlTitleFontConfiguration, value); err != nil {
 				return err
 			}
 

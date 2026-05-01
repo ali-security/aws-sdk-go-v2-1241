@@ -1,0 +1,8 @@
+{
+    "id": "d36ee923-a016-447e-b1c9-0dc1f7b771bf",
+    "type": "documentation",
+    "description": "Added guidance for CreateOpenIDConnectProvider to include multiple thumbprints when OIDC discovery and JWKS endpoints use different hosts or certificates",
+    "modules": [
+        "service/iam"
+    ]
+}

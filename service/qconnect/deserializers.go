@@ -28187,6 +28187,15 @@ func awsRestjson1_deserializeDocumentSpan(v **types.Span, value interface{}) err
 				sv.Status = types.SpanStatus(jtv)
 			}
 
+		case "statusDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.StatusDescription = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -28515,6 +28524,19 @@ func awsRestjson1_deserializeDocumentSpanAttributes(v **types.SpanAttributes, va
 					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "timeToFirstTokenMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeToFirstTokenMs = ptr.Int32(int32(i64))
 			}
 
 		case "topP":
@@ -28894,6 +28916,16 @@ loop:
 			continue
 		}
 		switch key {
+		case "reasoning":
+			var mv types.SpanReasoningValue
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentSpanReasoningValue(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.SpanMessageValueMemberReasoning{Value: mv}
+			break loop
+
 		case "text":
 			var mv types.SpanTextValue
 			destAddr := &mv
@@ -28963,6 +28995,46 @@ func awsRestjson1_deserializeDocumentSpanMessageValueList(v *[]types.SpanMessage
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSpanReasoningValue(v **types.SpanReasoningValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpanReasoningValue
+	if *v == nil {
+		sv = &types.SpanReasoningValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptySensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

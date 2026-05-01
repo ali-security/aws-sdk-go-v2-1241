@@ -1,0 +1,8 @@
+{
+    "id": "663e5280-44ff-4501-b7c1-b3fe14ce3dc8",
+    "type": "feature",
+    "description": "Adds support for filtering log groups by tags in the ListLogGroups API via the new logGroupTags parameter.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

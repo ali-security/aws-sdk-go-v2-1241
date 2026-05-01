@@ -1,0 +1,8 @@
+{
+    "id": "a007627b-bfcd-4a6d-8386-bcc54e7b5201",
+    "type": "feature",
+    "description": "Amazon WorkSpaces Applications now enables AI agents to securely operate desktop applications. Administrators configure stacks to provide agents access to WorkSpaces. Agents can click, type, and take screenshots. Agents authenticate with AWS IAM credentials with activity logged in AWS CloudTrail.",
+    "modules": [
+        "service/appstream"
+    ]
+}

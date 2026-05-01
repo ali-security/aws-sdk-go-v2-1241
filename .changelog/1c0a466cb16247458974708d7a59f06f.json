@@ -1,0 +1,8 @@
+{
+    "id": "1c0a466c-b162-4745-8974-708d7a59f06f",
+    "type": "feature",
+    "description": "Add IdentityProviderCACertificatesBundleS3Uri for private CA certs with OAuth datasources. 256-char limit for FontFamily in themes. ControlTitleFormatText on all 13 filters. ControlTitleFontConfiguration. ContextRegion for cross-region identity context. Story,scenario in CreateCustomCapability API.",
+    "modules": [
+        "service/quicksight"
+    ]
+}
