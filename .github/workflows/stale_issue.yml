@@ -1,13 +1,11 @@
-name: "Close stale issues"
+name: Close stale issues
 
 # Controls when the action will run.
 on:
-  schedule:
-  - cron: "0 0 * * *"
-
+  workflow_dispatch:
 jobs:
   cleanup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     name: Stale issue job
     steps:
     - uses: aws-actions/stale-issue-cleanup@v3

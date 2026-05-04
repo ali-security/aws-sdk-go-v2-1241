@@ -2,9 +2,9 @@ name: Codegen Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main, master]
   pull_request:
-    branches: [ main ]
+    branches: [main, master]
 
 env:
   # get owner of the repository. used by forks.
@@ -16,10 +16,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        go-version: ["1.20"]
+        os: [ubuntu-24.04]
+        go-version: ['1.20']
     env:
-      JAVA_TOOL_OPTIONS: "-Xmx2g"
+      JAVA_TOOL_OPTIONS: -Xmx2g
     steps:
     - uses: actions/checkout@v2
       with:
@@ -33,7 +33,7 @@ jobs:
     - name: Set up Coretto 17 JDK
       uses: actions/setup-java@v2
       with:
-        distribution: 'jdkfile'
+        distribution: jdkfile
         jdkFile: ${{ runner.temp }}/java_package.tar.gz
         java-version: 17
         architecture: x64
